@@ -138,4 +138,4 @@ class AddFields extends Plugin {
                    
     }
 }
-\new_three\admin\AddFields::get_instance();
+\<!-PLUGINPATH->\admin\AddFields::get_instance();
