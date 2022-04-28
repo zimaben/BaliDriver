@@ -192,7 +192,7 @@ EOF
 \$pp = "$classprefix";
 
 \$files = array(
-	'/library/admin/add-fields.php',
+	'/library/admin/add_fields.php',
     '/library/admin/ajax.php',
     '/library/api/endpoints.php',
 	'/library/api/methods.php',
