@@ -1,8 +1,8 @@
 <?php
-namespace tryFour\template;
+namespace <!-PLUGINPATH->\template;
 
 
-class View extends \tryFour\tryFour {
+class View extends \<!-PLUGINPATH->\<!-PLUGINNAME-> {
     private $file;
     private $args = array();
 
