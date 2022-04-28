@@ -1,7 +1,7 @@
 <?php
-namespace <!-PLUGINPATH->\admin;
+namespace <!PLUGINPATH->\admin;
 
-use \<!-PLUGINPATH->\<!-PLUGINNAME-> as Plugin;
+use \<!PLUGINPATH->\<!PLUGINNAME-> as Plugin;
 
 use \Carbon_Fields\Block;
 use \Carbon_Fields\Container;
@@ -138,4 +138,4 @@ class AddFields extends Plugin {
                    
     }
 }
-\<!-PLUGINPATH->\admin\AddFields::get_instance();
+\<!PLUGINPATH->\admin\AddFields::get_instance();
