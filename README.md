@@ -1,25 +1,30 @@
-This project was bootstrapped with [Create Guten Block](https://github.com/ahmadawais/create-guten-block).
+Welcome to the Kitely Tech Boilerplate Wordpress Plugin
 
-Below you will find some information on how to run scripts.
+Create a new plugin:
+You've already created new local folder for the plugin you want to create and downloaded the boilerplate repo.
+So let's pick up from there
 
->You can find the most recent version of this guide [here](https://github.com/ahmadawais/create-guten-block).
+## 👉  `bash buildplugin.sh`
+- This will ask you the name of your plugin plus the namespace or prefix
+- With that information it will build the boilerplate for the Plugin and install the front-end tooling
 
-## 👉  `npm start`
-- Use to compile and run the block in development mode.
-- Watches for any changes and reports back any errors in your code.
+Front-end Tooling
 
-## 👉  `npm run build`
-- Use to build production code for your block inside `dist` folder.
-- Runs once and reports back the gzip file sizes of the produced code.
+## 👉  `npm run dev`
+- Used to have Webpack watch your src folder and output the results to dist folder.
+- No need to run fancy builds, you should be bundled on-the-go
 
-## 👉  `npm run eject`
-- Use to eject your plugin out of `create-guten-block`.
-- Provides all the configurations so you can customize the project as you want.
-- It's a one-way street, `eject` and you have to maintain everything yourself.
-- You don't normally have to `eject` a project because by ejecting you lose the connection with `create-guten-block` and from there onwards you have to update and maintain all the dependencies on your own.
+Back-end Tooling
+- The backend structure looks like this:
+- - library
+- - - admin
+- - - api
+- - - blocks
+- - - core
+- - - schema
+- - - template
+- - src
+- - dist
+- - vendor
 
----
-
-###### Feel free to tweet and say 👋 at me [@MrAhmadAwais](https://twitter.com/mrahmadawais/)
-
-[![npm](https://img.shields.io/npm/v/create-guten-block.svg?style=flat-square)](https://www.npmjs.com/package/create-guten-block) [![npm](https://img.shields.io/npm/dt/create-guten-block.svg?style=flat-square&label=downloads)](https://www.npmjs.com/package/create-guten-block)  [![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/ahmadawais/create-guten-block) [![Tweet for help](https://img.shields.io/twitter/follow/mrahmadawais.svg?style=social&label=Tweet%20@MrAhmadAwais)](https://twitter.com/mrahmadawais/) [![GitHub stars](https://img.shields.io/github/stars/ahmadawais/create-guten-block.svg?style=social&label=Stars)](https://github.com/ahmadawais/create-guten-block/stargazers) [![GitHub followers](https://img.shields.io/github/followers/ahmadawais.svg?style=social&label=Follow)](https://github.com/ahmadawais?tab=followers)
+The back-end files within each library folder should be commented to show example use. More documentation on this to come

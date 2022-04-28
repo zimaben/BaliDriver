@@ -96,6 +96,8 @@ if ( ! class_exists( '$classprefix\\$classname' ) ) {
         private static function load_libraries() {
 
             //Carbon Fields
+			require_once self::get_plugin_path( 'vendor/autoload.php' );
+    		\Carbon_Fields\Carbon_Fields::boot();
             require_once self::get_plugin_path( 'admin/add_fields.php' );
 
 			#Templating (Backend PHP Templating)
