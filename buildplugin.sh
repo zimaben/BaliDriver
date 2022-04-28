@@ -244,7 +244,7 @@ fi
 if [ $? -eq 0 ] 
 then 
   echo "Successfully ran Plugin Installer"  
- # rm installer.php
+  rm installer.php
 else 
   echo "Could not create Plugin" >&2 
   rm installer.php
