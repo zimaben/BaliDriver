@@ -64,4 +64,4 @@ class Build extends Plugin{
 
 
 }
-<!PLUGINPATH->\core\Build::run();
+\<!PLUGINPATH->\core\Build::run();
