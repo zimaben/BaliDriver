@@ -51,7 +51,7 @@ if ( ! class_exists( '$classprefix\\$classname' ) ) {
 
         // Plugin Settings Generic
         const version = '1.0.0';
-        static $mode = 'development'; //development & production
+        static \$mode = 'development'; //development & production
         const textdomain = '$classprefix'; // for translation ##
 
         //Plugin Options
