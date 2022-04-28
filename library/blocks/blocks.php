@@ -10,7 +10,7 @@ class Blocks extends Plugin{
 
         \add_action( 'init', array(get_class(), 'theme_blocks'));
         add_action( 'enqueue_block_editor_assets', array(get_class(), 'plugin_blocks'));
-        \add_action( 'block_categories_all', array($this, 'register_theme_blocktype'));
+        \add_action( 'block_categories_all', array(get_class(), 'register_theme_blocktype'));
         #\add_action( 'init', array($this, 'plugin_blocks'));
 
     }
