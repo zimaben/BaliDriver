@@ -62,30 +62,30 @@ if ( ! class_exists( '$classprefix\\$classname' ) ) {
         {
             
             if ( 
-                null == self::$instance 
+                null == self::\$instance 
             ) {
 
-                self::$instance = new self;
+                self::\$instance = new self;
 
             }
 
-            return self::$instance;
+            return self::\$instance;
 
         }
         
         private function __construct() {
 
             // actvation ##
-            \register_activation_hook( __FILE__, array ( $this, 'register_activation_hook' ) );
+            \register_activation_hook( __FILE__, array ( \$this, 'register_activation_hook' ) );
 
             // deactivation ##
-            \register_deactivation_hook( __FILE__, array ( $this, 'register_deactivation_hook' ) );
+            \register_deactivation_hook( __FILE__, array ( \$this, 'register_deactivation_hook' ) );
 
             // set text domain ##
-            \add_action( 'init', array( $this, 'load_plugin_textdomain' ), 1 );
+            \add_action( 'init', array( \$this, 'load_plugin_textdomain' ), 1 );
 
             #execute deactivation options
-            \add_action( 'wp_ajax_deactivate', array( $this, 'deactivate_callback') );
+            \add_action( 'wp_ajax_deactivate', array( \$this, 'deactivate_callback') );
 
             // load libraries ##
             self::load_libraries();
@@ -98,7 +98,7 @@ if ( ! class_exists( '$classprefix\\$classname' ) ) {
             //Carbon Fields
 			require_once self::get_plugin_path( 'vendor/autoload.php' );
     		\Carbon_Fields\Carbon_Fields::boot();
-            require_once self::get_plugin_path( 'admin/add_fields.php' );
+            require_once self::get_plugin_path( 'library/admin/add_fields.php' );
 
 			#Templating (Backend PHP Templating)
             require_once self::get_plugin_path( 'library/template/view.php' );
@@ -106,8 +106,8 @@ if ( ! class_exists( '$classprefix\\$classname' ) ) {
 			//The Build File sets up plugin pages, taxonomies, & post types
 			require_once self::get_plugin_path( 'library/core/build.php' );
 
-			$has_plugin_run_setup = \get_option( self::textdomain . '-run-setup' );
-			if(!$has_plugin_run_setup) require_once self::get_plugin_path( 'library/core/setup.php');
+			\$has_plugin_run_setup = \get_option( self::textdomain . '-run-setup' );
+			if(!\$has_plugin_run_setup) require_once self::get_plugin_path( 'library/core/setup.php');
 
             #REST Api
             require_once self::get_plugin_path( 'library/api/endpoints.php');
@@ -121,18 +121,18 @@ if ( ! class_exists( '$classprefix\\$classname' ) ) {
 
         public static function register_activation_hook() {
 
-            $option = self::textdomain . '-version';
-            \update_option( $option, self::version );     
+            \$option = self::textdomain . '-version';
+            \update_option( \$option, self::version );     
 
             
             #Cron
 			/*
             if ( ! wp_next_scheduled( 'my_plugin_daily' ) ) {
-                if(self::$mode ==="development") error_log('schedule event fired for theme daily');
+                if(self::\$mode ==="development") error_log('schedule event fired for theme daily');
                 \wp_schedule_event( time(), 'daily', 'my_plugin_daily' );
               
             } else {
-                if(self::$mode === "development") error_log('Scheduled event already there: plugin daily');
+                if(self::\$mode === "development") error_log('Scheduled event already there: plugin daily');
             }
 			*/
 
@@ -141,10 +141,10 @@ if ( ! class_exists( '$classprefix\\$classname' ) ) {
         public function register_deactivation_hook() 
         {
             
-            $option = self::textdomain . '-version';
-			$setup = self::textdomain . '-run-setup';
-            \delete_option( $option );
-            \delete_option( $setup );
+            \$option = self::textdomain . '-version';
+			\$setup = self::textdomain . '-run-setup';
+            \delete_option( \$option );
+            \delete_option( \$setup );
 
 			#Cron
             #\wp_clear_scheduled_hook( 'my_plugin_daily' );
@@ -154,30 +154,30 @@ if ( ! class_exists( '$classprefix\\$classname' ) ) {
         {
             
             // set text-domain ##
-            $domain = self::textdomain;
+            \$domain = self::textdomain;
             
             // The "plugin_locale" filter is also used in load_plugin_textdomain()
-            $locale = apply_filters('plugin_locale', get_locale(), $domain);
+            \$locale = apply_filters('plugin_locale', get_locale(), \$domain);
 
             // try from global WP location first ##
-            \load_textdomain( $domain, WP_LANG_DIR.'/plugins/'.$domain.'-'.$locale.'.mo' );
+            \load_textdomain( \$domain, WP_LANG_DIR.'/plugins/'.\$domain.'-'.\$locale.'.mo' );
             
             // try from plugin last ##
-            \load_plugin_textdomain( $domain, FALSE, plugin_dir_path( __FILE__ ).'library/language/' );
+            \load_plugin_textdomain( \$domain, FALSE, plugin_dir_path( __FILE__ ).'library/language/' );
             
         }
 
-        public static function get_plugin_url( $path = '' ) 
+        public static function get_plugin_url( \$path = '' ) 
         {
 
-            return plugins_url( $path, __FILE__ );
+            return plugins_url( \$path, __FILE__ );
 
         }
         
-        public static function get_plugin_path( $path = '' ) 
+        public static function get_plugin_path( \$path = '' ) 
         {
 
-            return plugin_dir_path( __FILE__ ).$path;
+            return plugin_dir_path( __FILE__ ).\$path;
 
         }
     }
