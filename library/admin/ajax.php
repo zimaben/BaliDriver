@@ -32,4 +32,4 @@ class Ajax extends Plugin {
      
 }
 //spin it
-\<!PLUGINPATH->\api\Ajax::run();
+\<!PLUGINPATH->\ajax\Ajax::run();
