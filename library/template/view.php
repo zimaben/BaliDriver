@@ -1,8 +1,8 @@
 <?php
-namespace <!PLUGINNAME->\template;
+namespace tryFour\template;
 
 
-class View extends \<!PLUGINNAME->\<!PLUGINNAME-> {
+class View extends \tryFour\tryFour {
     private $file;
     private $args = array();
 
