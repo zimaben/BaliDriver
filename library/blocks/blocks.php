@@ -1,5 +1,5 @@
 <?php
-namespace <!PLUGINPATH->\api;
+namespace <!PLUGINPATH->\blocks;
 
 use \<!PLUGINPATH->\<!PLUGINNAME-> as Plugin;
 use \<!PLUGINPATH->\template\View as View;
@@ -47,4 +47,4 @@ class Blocks extends Plugin{
     }
 }
 //spin it
-\<!PLUGINNAME->\Blocks::run();
+\<!PLUGINPATH->\blocks\Blocks::run();
