@@ -3,12 +3,14 @@
  *
  * CSS for both Frontend+Backend.
  */
+@import './style';
 
 .wp-block-cgb-block-first  {
-  background: $red;
-  border: 0.2rem solid $black;
-  color: $black;
+  background: red;
+  border: 0.2rem solid #000;
+  color: #000;
   margin: 0 auto;
   max-width: 740px;
   padding: 2rem;
 }
+  

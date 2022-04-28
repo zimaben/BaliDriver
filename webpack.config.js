@@ -12,9 +12,7 @@ const entryPoints = {
   // you can have more than 1 entry point
 
 
-  '/blocks/header': jsPath + '/header.js',
-  'site-footer': './src/js/site-footer.js',
-  'site-header': './src/js/site-header.js',
+  '/blocks/block': jsPath + '/block.js',
   'style': cssPath + '/style.scss',
   'editor': cssPath + '/editor.scss'
 };

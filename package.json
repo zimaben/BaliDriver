@@ -1,5 +1,5 @@
 {
-  "name": "<!-PLUGINNAME->",
+  "name": "kitelyTechBlocks",
   "private": true,
   "dependencies": {
     "@babel/polyfill": "^7.11.5"
