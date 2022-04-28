@@ -1,8 +1,8 @@
 <?php
-namespace <!PLUGINNAME->PATH\template;
+namespace <!PLUGINNAME->\template;
 
 
-class View extends \<!PLUGINNAME->PATH\<!PLUGINNAME-> {
+class View extends \<!PLUGINNAME->\<!PLUGINNAME-> {
     private $file;
     private $args = array();
 
