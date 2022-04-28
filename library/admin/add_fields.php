@@ -1,7 +1,7 @@
 <?php
-namespace new_three\admin;
+namespace <!-PLUGINPATH->\admin;
 
-use \new_three\NewThree as Plugin;
+use \<!-PLUGINPATH->\<!-PLUGINNAME-> as Plugin;
 
 use \Carbon_Fields\Block;
 use \Carbon_Fields\Container;
