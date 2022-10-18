@@ -43,13 +43,13 @@ if( !class_exists( '\<!PLUGINPATH->\<!PLUGINNAME->')) {
             #CONFIG - Load theme constants and config
             require_once( \get_template_directory() . '/wp-theme-config.php');
            
-            require_once( \get_template_directory() . '/admin/setup/pages.php');
+            require_once( \get_template_directory() . '/library/admin/setup/pages.php');
             if(Config::POST_TYPES) :
-                require_once( \get_template_directory() . '/admin/setup/posttypes.php');
+                require_once( \get_template_directory() . '/library/admin/setup/posttypes.php');
             endif;
 
             if(Config::TAXONOMIES) : 
-                require_once( \get_template_directory() . '/admin/setup/taxonomies.php');
+                require_once( \get_template_directory() . '/library/admin/setup/taxonomies.php');
             endif;
 
             if(is_array(Config::MENUS)){
@@ -57,7 +57,7 @@ if( !class_exists( '\<!PLUGINPATH->\<!PLUGINNAME->')) {
                 foreach(Config::MENUS as $menu => $options){
                     if($options['bootstrap_markup'] === true) $bsmenu = true; break;
                 }
-                if($bsmenu) require_once( \get_template_directory() . '/admin/setup/bootstrap_navwalker.php');
+                if($bsmenu) require_once( \get_template_directory() . '/library/admin/setup/bootstrap_navwalker.php');
             }
 
             #custom theme actions
@@ -76,30 +76,30 @@ if( !class_exists( '\<!PLUGINPATH->\<!PLUGINNAME->')) {
             /* Carbon Fields - just boot it as soon as we can */
             require_once( 'vendor/autoload.php' );
             \Carbon_Fields\Carbon_Fields::boot();
-            require_once \get_template_directory() . '/admin/carbonfields.php';
+            require_once \get_template_directory() . '/library/admin/add_fields.php';
 
             #add themes, hooks, & libraries
 
             #LOAD CORE
             # - view templates accept arrays or objects as arguments and dynamically render the view
-            require_once \get_template_directory() . '/theme/core/view.php';
-            require_once \get_template_directory() . '/theme/core/methods.php';
-            require_once \get_template_directory() . '/theme/core/api/endpoints.php';
+            require_once \get_template_directory() . '/library/core/view.php';
+            require_once \get_template_directory() . '/library/core/methods.php';
+            require_once \get_template_directory() . '/library/core/api/endpoints.php';
 
             /* Customizer */
-            require_once \get_template_directory() . '/admin/customize.php';
+            require_once \get_template_directory() . '/library/admin/customize.php';
 
             #LOAD INTEGRATIONS
             if(Config::INTEGRATIONS){
                 foreach(Config::INTEGRATIONS as $filename => $enabled){
                     if($enabled){
-                        require_once \get_template_directory() . '/admin/integrations/' . $filename . '.php';
+                        require_once \get_template_directory() . '/library/admin/integrations/' . $filename . '.php';
                     }
                 }
             }
 
             #theme setup (menus, taxonomies, pages, page templates, etc.)
-            require_once \get_template_directory() . '/admin/setup/setup.php';
+            require_once \get_template_directory() . '/library/admin/setup/setup.php';
 
             if( \is_admin()){
                 \add_action( 'admin_enqueue_scripts', array($this, 'theme_admin_enqueue'));
@@ -113,7 +113,7 @@ if( !class_exists( '\<!PLUGINPATH->\<!PLUGINNAME->')) {
             endif;
 
             #LOAD THEME BLOCKS
-            require_once \get_template_directory() . '/admin/setup/blocks.php';
+            require_once \get_template_directory() . '/library/admin/setup/blocks.php';
 
 
 
@@ -149,8 +149,8 @@ if( !class_exists( '\<!PLUGINPATH->\<!PLUGINNAME->')) {
         /* THEME STATIC METHODS - MOST OF THESE ARE JUST SYNTAX SUGAR FOR INCLUDING FROM DIFFERENT
         FOLDERS  */
         public static function Assets( $filename, $path = 'icons'){
-            if( file_exists( \get_template_directory() . '/assets/' . $path . '/' . $filename)){
-                return \get_template_directory_uri() . '/assets/' . $path . '/' . $filename;
+            if( file_exists( \get_template_directory() . '/theme/assets/' . $path . '/' . $filename)){
+                return \get_template_directory_uri() . '/theme/assets/' . $path . '/' . $filename;
             }
             return false;
         }
@@ -163,7 +163,7 @@ if( !class_exists( '\<!PLUGINPATH->\<!PLUGINNAME->')) {
         public static function TemplatePartExists( $file ){
             if(strpos($file, '.php') === false) $file .= '.php';
             if(substr($file, 0,1) !== '/' ) $file = '/' . $file;
-            return file_exists( \get_template_directory() . $file );
+            return file_exists( \get_template_directory() . '/theme/template-parts/' . $file );
         }
         public static function StaticHeaderExists( $id ){
             return \file_exists( \get_template_directory() . '/theme/template-parts/static/header-' . $id . '.php');
@@ -174,15 +174,11 @@ if( !class_exists( '\<!PLUGINPATH->\<!PLUGINNAME->')) {
         public static function StaticFooterExists( $id ){
             return \file_exists( \get_template_directory() . '/theme/template-parts/static/footer-' . $id . '.php');
         }
-        public static function Optimization( $file ){
-            if(strpos($file, '.php') === false) $file .= '.php';
-            #load a template part
-            \get_template_part( 'theme/core/optimizations/' . $file );
-        }
+
         public static function Integration( $file ){
             if(strpos($file, '.php') === false) $file .= '.php';
             #load a template part
-            \get_template_part( 'admin/integrations/optimizations/' . $file );
+            \get_template_part( 'library/admin/integrations/' . $file );
         }
 
 
@@ -298,4 +294,4 @@ if( !class_exists( '\<!PLUGINPATH->\<!PLUGINNAME->')) {
 
     }
 }
-Theme::get_instance();
+<!PLUGINNAME->::get_instance();

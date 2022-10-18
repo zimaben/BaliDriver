@@ -1,7 +1,8 @@
 <?php
 namespace <!PLUGINPATH->\admin; 
-use \<!PLUGINPATH->\<!THEMENAME-> as Theme;
-use \Carbon_Fields\Field;
+use \<!PLUGINPATH->\<!PLUGINNAME-> as Theme;
+use \Carbon_Fields\Field as Field;
+use \Carbon_Fields\Container as Container;
 use \<!PLUGINPATH->\Config as Config;
 
 /* 
@@ -10,7 +11,7 @@ use \<!PLUGINPATH->\Config as Config;
  *
 */
     
-class AddFields extends \<!PLUGINPATH->\Theme {
+class AddFields extends Theme {
 
 
     private static $instance = null;

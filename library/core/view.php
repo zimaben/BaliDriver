@@ -2,7 +2,7 @@
 namespace <!PLUGINPATH->\template;
 
 
-class View extends \<!PLUGINPATH->\<!THEMENAME-> {
+class View extends \<!PLUGINPATH->\<!PLUGINNAME-> {
     private $file;
     private $args = array();
 

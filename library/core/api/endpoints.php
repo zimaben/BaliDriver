@@ -4,7 +4,7 @@ namespace <!PLUGINPATH->\api;
 use \<!PLUGINPATH->\<!PLUGINNAME-> as Theme;
 use \<!PLUGINPATH->\Config as Config;
 
-class Endpoints extends Plugin {
+class Endpoints extends Theme {
 
     public static function run(){
 

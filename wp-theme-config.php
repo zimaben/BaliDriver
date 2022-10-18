@@ -1,5 +1,5 @@
 <?php
-namespace tpt;
+namespace <!PLUGINPATH->;
 Class Config {
     const VERSION = "1.0.1";
     const MODE = "development";

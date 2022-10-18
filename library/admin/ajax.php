@@ -3,7 +3,7 @@ namespace <!PLUGINPATH->\ajax;
 
 use \<!PLUGINPATH->\<!PLUGINNAME-> as Theme;
 
-class Ajax extends Plugin {
+class Ajax extends Theme {
 
     public static function run(){
 

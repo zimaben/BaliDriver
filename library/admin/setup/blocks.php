@@ -19,7 +19,7 @@ class Blocks {
     private function __construct(){
         \add_action( 'init', array($this, 'theme_blocks'));
 
-        if( isset(Config::INTEGRATIONS['GoogleAnalytics']) && INTEGRATIONS['GoogleAnalytics']) == true )  : 
+        if( isset(Config::INTEGRATIONS['GoogleAnalytics']) && Config::INTEGRATIONS['GoogleAnalytics'] == true )  : 
             #Add Filter on Buttons and Paragraphs to push an Event to the Data Layer
             \add_filter( 'block_editor_settings_all', array($this,  'theme_block_settings_filters'), 10, 2 );
         endif;
@@ -59,19 +59,19 @@ class Blocks {
         );
         if($callback){
             \register_block_type(
-                '<!PLUGINPATH->/' . $handle,
-                'editor_script' => $handle,
+                'ktdamd/' . $handle,
+                array( 'editor_script' => $handle,
                 'editor_style' => 'theme_blocks_editor_css',
                 'style' => 'theme_blocks_global_css',
-                'render_callback' => '<!PLUGINPATH->\core\Methods::' . $callback,
-            );
+                'render_callback' => 'ktdamd\core\Methods::' . $callback,
+                ));
         } else {
             \register_block_type(
-                '<!PLUGINPATH->/' . $handle,
-                'editor_script' => $handle,
+                'ktdamd/' . $handle,
+                array( 'editor_script' => $handle,
                 'editor_style' => 'theme_blocks_editor_css',
                 'style' => 'theme_blocks_global_css',
-            );
+                ));
         }
         if(Config::MODE === "development") : 
             if(!file_exists( \get_template_directory() . '/theme/src/js/blocks/' . $handle . '.js' ) ){
@@ -129,7 +129,7 @@ class Blocks {
     }
     public static function theme_block_settings_filters(){
         #@TODO
-        error_log("IS STILL NEED TO ADD THEME BLOCK FILTERS IN THE TEMPLATE")
+        error_log("IS STILL NEED TO ADD THEME BLOCK FILTERS IN THE TEMPLATE");
     }
 
 

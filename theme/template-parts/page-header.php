@@ -14,7 +14,7 @@ use \<!PLUGINPATH->\<!PLUGINNAME-> as Theme;
     #critical inline styles
     if(Config::FEATURES['critical_css'] === true){
 
-        Theme::Optimization('inline-styles.php');
+        Theme::doCriticalCSS();
 
     }
 
