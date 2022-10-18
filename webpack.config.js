@@ -16,39 +16,17 @@
  //CSS Directory path.
  const CSS_DIR = path.resolve( __dirname, 'theme/src/css' );
 
+ const BLOCKLIST = [
 
+ ];
  const entry = {
      main: JS_DIR + '/head.js',
      footer: JS_DIR + '/foot.js',
      
      //I Still don't know how to do this a better way
-     'blocks/imagetext-twocol': JS_DIR + '/blocks/imagetext-twocol.js',
-     'blocks/numbered-step': JS_DIR + '/blocks/numbered-step.js',
-     'blocks/numbered-steps': JS_DIR + '/blocks/numbered-steps.js',
-     'blocks/icon-card': JS_DIR + '/blocks/icon-card.js',
-     'blocks/icon-cards': JS_DIR + '/blocks/icon-cards.js',
-     'blocks/info-card': JS_DIR + '/blocks/info-card.js',
-     'blocks/info-cards': JS_DIR + '/blocks/info-cards.js',
-     'blocks/square-card': JS_DIR + '/blocks/square-card.js',
-     'blocks/square-cards': JS_DIR + '/blocks/square-cards.js',
-     'blocks/complex-card': JS_DIR + '/blocks/complex-card.js',
-     'blocks/review-stars': JS_DIR + '/blocks/review-stars.js',
-     'blocks/faq': JS_DIR + '/blocks/faq.js',
-     'blocks/review-cards': JS_DIR + '/blocks/review-cards.js',
-     'blocks/contactus': JS_DIR + '/blocks/contactus.js',
-     'blocks/four-square': JS_DIR + '/blocks/four-square.js',
-     'blocks/four-square-left': JS_DIR + '/blocks/four-square-left.js',
-     'blocks/four-square-right': JS_DIR + '/blocks/four-square-right.js',
-     'blocks/branded-content': JS_DIR + '/blocks/branded-content.js',
-     /* components */
-     'blocks/checklist': JS_DIR + '/blocks/checklist.js',
-     'blocks/accordion': JS_DIR + '/blocks/accordion.js',
-     'blocks/accordions': JS_DIR + '/blocks/accordions.js',
-     'blocks/review': JS_DIR + '/blocks/review.js',
-     'blocks/beyond-headlinetag': JS_DIR + '/blocks/beyond-headlinetag.js',
+     'blocks/cta-cards': JS_DIR + '/blocks/cta-cards.js',
      //End Blocks
 
-     critical: CSS_DIR + '/critical.scss',
      admin: JS_DIR + '/admin.js',
      admin_css: CSS_DIR + '/admin.scss',
      style: CSS_DIR + '/style.scss',
@@ -87,8 +65,7 @@
          ]
      },
      {
-        // test: /\.(png|jpg|svg|jpeg|gif|ico)$/,
-         test: /\.(woff|woff2|eot|ttf)$/,
+         test: /\.(png|jpg|svg|jpeg|gif|ico)$/,
          exclude: /node_modules/,
          use: {
              loader: 'file-loader',
@@ -99,8 +76,7 @@
          }
      },
      {
-       // test: /\.(jpg|jpeg|png|gif|woff|woff2|eot|ttf|svg)$/i,
-        test: /\.(jpg|jpeg|png|gif|webp|svg|ico)$/i,
+        test: /\.(jpg|jpeg|png|gif|woff|woff2|eot|ttf|svg|json)$/i,
         use: 'url-loader?limit=1024'
       }
  ];

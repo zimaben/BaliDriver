@@ -1,10 +1,10 @@
 <?php
 namespace tpt;
 Class Config {
-    const VERSION = "1.0.2";
+    const VERSION = "1.0.1";
     const MODE = "development";
-    const TEXTDOMAIN = "beyond_menu";
-    const NICENAME = "Beyond Menu";
+    const TEXTDOMAIN = "<!PLUGINPATH->_<!PLUGINNAME->";
+    const NICENAME = "<!HUMANREADABLE->";
 
     const BREAKPOINTS = array(
         'phone' => 576,
@@ -28,19 +28,9 @@ Class Config {
 
     const TAXONOMIES = false;
 
+    const TABLES = false;
+
     const PAGES = array(
-        'phone-ordering' => array(
-            'title'=> 'Phone Ordering',
-            'type'=> 'page'
-        ),
-        'online-ordering' => array(
-            'title'=> 'Online Ordering',
-            'type'=> 'page'
-        ),
-        'qr-codes' => array(
-            'title'=> 'QR Codes',
-            'type'=> 'page'
-        ),
         'contact-us' => array(
             'title'=> 'Contact Us',
             'type'=> 'page'
@@ -48,31 +38,23 @@ Class Config {
     );
     const INTEGRATIONS = array( 
         'ActiveCampaign' => false,
-        'GoogleAnalytics' => true,
+        'GoogleAnalytics' => false,
         'MailChimp' => false,
         'GoogleMaps' => false,
         'Slack' => false,
-        'ContactForm7' => true,
+        'ContactForm7' => false,
     );
 
     const FEATURES = array(
-        'critical_css' => true,
-        'video_headers' => true,
-        'progressive_header' => false
+        'critical_css' => false,
+        'video_headers' => false,
+        'progressive_header' => false,
     );
 
     #const ROLES = false;
     const ROLES = false;
 
     const BLOCKS = array(
-        'twocolums' => 'Two Columns Image Right or Left',
-        'twocol-left' => 'Single Image and Text Two Columns',
-        'how-it-works' => 'How it Works',
-        'how-it-works-step' => 'How it Works Step',
-        'info-carts' => 'Info Cards',
-        'info-icons' => 'Info Icons',
-        'accordions' => 'Accordions',
-        'gallery-strip' => 'Gallery Strip',
         'cta-cards' => 'Call to Action Cards'
     );
     const MENUS = array(
@@ -117,5 +99,4 @@ Class Config {
     /* ROUTING */
 
     const TEMPLATES = false;
-    const HAS_DESKTOP_MENU_BUTTON = true;
 }
