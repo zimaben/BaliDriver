@@ -1,0 +1,7 @@
+1. Get first run to add sample pages to header and footer
+2. Get header and footer to render in template
+3. Get Add Fields working correctly and referenced
+4. Get wp-theme-config.php working correctly
+5. Get blocks to automatically create new block boilerplate within theme-config that adds
+SCSS files, JS files programatically
+6. Plugin that allows single block development mode as WP page with no header footer

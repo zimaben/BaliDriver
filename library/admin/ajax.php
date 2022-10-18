@@ -1,7 +1,7 @@
 <?php
 namespace <!PLUGINPATH->\ajax;
 
-use \<!PLUGINPATH->\<!PLUGINNAME-> as Plugin;
+use \<!PLUGINPATH->\<!PLUGINNAME-> as Theme;
 
 class Ajax extends Plugin {
 
@@ -9,6 +9,23 @@ class Ajax extends Plugin {
 
         \add_action( 'wp_ajax_ourAjaxFunction', array(get_class(), 'ourAjaxFunction'));
         \add_action( 'wp_ajax_nopriv_ourAjaxFunction', array(get_class(), 'ourAjaxFunction'));
+        if( \is_admin() ){
+            #Localize Admin 
+            \wp_localize_script( 'theme-admin-js', 'theme_admin', array(
+                'nonce' => \wp_create_nonce('theme-admin'),
+                'ajaxurl' => \admin_url('admin-ajax.php'),
+                'theme_root' => \get_template_directory_uri(),
+            ));
+        } else {
+            #Localize frontend
+            \wp_localize_script( 'sitehead', 'theme_vars', array(
+                'nonce' => \wp_create_nonce('theme_vars'),
+                'ajaxurl' => \admin_url('admin-ajax.php'),
+                'postid'  => \get_the_ID(),
+                'userid'  => \get_current_user_id(),
+                'theme_root' => \get_template_directory_uri(),
+            ));
+        }
 
     }
 

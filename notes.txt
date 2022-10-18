@@ -1,0 +1,3 @@
+/* webpack but reference image in asset folder */
+https://stackoverflow.com/questions/39358926/exclude-images-referenced-in-css-from-webpack
+

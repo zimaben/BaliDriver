@@ -1,0 +1,191 @@
+{
+    "version": 2,
+    "settings": {
+        "color": {
+            "palette": [
+                {
+                    "yellow": "Theme Yellow",
+                    "slug": "theme-yellow",
+                    "color": "#F4A340"
+                },
+                {
+                    "name": "Black",
+                    "slug": "black",
+                    "color": "#171717"
+                },
+                {
+                    "name": "White",
+                    "slug": "white",
+                    "color": "#FFFFFF"
+                },
+                {
+                    "name": "Primary",
+                    "slug": "primary",
+                    "color": "#E6623F"
+                },
+                {
+                    "name": "Primary Shade One",
+                    "slug": "primary-shade-one",
+                    "color": "#E98663"
+                },
+                {
+                    "name": "Primary Shade Two",
+                    "slug": "primary-shade-two",
+                    "color": "#F0AA8D"
+                },
+                {
+                    "name": "Primary Shade Three",
+                    "slug": "primary-shade-three",
+                    "color": "#F7D2C0"
+                },
+                {
+                    "name": "Dark Neutral",
+                    "slug": "dark-neutral",
+                    "color": "#25261D"
+                },
+                {
+                    "name": "Neutral One",
+                    "slug": "dark-one",
+                    "color": "#4B4942"
+                },
+                {
+                    "name": "Neutral Mid",
+                    "slug": "neutral-mid",
+                    "color": "#79756F"
+                },
+                {
+                    "name": "Light Neutral",
+                    "slug": "neutral-light",
+                    "color": "#B2AEAA"
+                },
+                {
+                    "name": "Tan",
+                    "slug": "tan",
+                    "color": "#EFE5D7"
+                },
+                {
+                    "name": "Tan One",
+                    "slug": "tan-one",
+                    "color": "#F4EADF"
+                },
+                {
+                    "name": "Tan Two",
+                    "slug": "tan-two",
+                    "color": "#F7F0E8"
+                },
+                {
+                    "name": "Tan Three",
+                    "slug": "tan-three",
+                    "color": "#FAF6F2"
+                },
+                {
+                    "name": "Yellow",
+                    "slug": "yellow",
+                    "color": "#F4A340"
+                },
+                {
+                    "name": "Yellow One",
+                    "slug": "yellow-one",
+                    "color": "#F7BA70"
+                },
+                {
+                    "name": "Yellow Two",
+                    "slug": "yellow-two",
+                    "color": "#FAD19F"
+                },
+                {
+                    "name": "Yellow Three",
+                    "slug": "yellow-three",
+                    "color": "#FCE8CF"
+                },
+                {
+                    "name": "Botanical",
+                    "slug": "botanical",
+                    "color": "#285A5F"
+                },
+                {
+                    "name": "Botanical One",
+                    "slug": "botanical-one",
+                    "color": "#5D8386"
+                },
+                {
+                    "name": "Botanical Two",
+                    "slug": "botanical-two",
+                    "color": "#93ACAF"
+                },
+                {
+                    "name": "Botanical Three",
+                    "slug": "botanical-three",
+                    "color": "#C9D5D7"
+                },
+                {
+                    "name": "Lavender",
+                    "slug": "lavender",
+                    "color": "#91758C"
+                },
+                {
+                    "name": "Lavender One",
+                    "slug": "lavender-one",
+                    "color": "#AD98A9"
+                },
+                {
+                    "name": "Lavender Two",
+                    "slug": "lavender-two",
+                    "color": "#C8BAC6"
+                },
+                {
+                    "name": "Lavender Three",
+                    "slug": "lavender-three",
+                    "color": "#E4DDE2"
+                }
+
+            ]
+        },
+        "typography":{
+            "fontFamilies": [
+                {
+                    "fontFamily": "Palatino, Georgia, serif",
+                    "slug": "palatino",
+                    "name": "Palatino"
+                },
+                {
+                    "fontFamily": "'Open Sans', sans-serif;",
+                    "slug":"open-sans",
+                    "name": "Open Sans"
+                }
+            ],
+            "fontSizes": [
+				{
+					"slug": "small",
+					"size": "16px",
+					"name": "Small"
+				},
+                {
+                    "slug": "medium",
+                    "size": "18px",
+                    "name": "Medium"
+                },
+                {
+                    "slug": "large",
+                    "size": "24px",
+                    "name": "Large"
+                },
+                {
+                    "slug": "x-large",
+                    "size": "32px",
+                    "name": "Extra Large"
+                }
+                
+			]
+
+        },
+        "custom": {
+            "breakpoints": {
+                "phone": 576,
+                "tablet": 768,
+                "laptop": 992,
+                "desktop": 1200
+            }
+        }
+    }
+}

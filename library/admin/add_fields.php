@@ -1,35 +1,33 @@
 <?php
 namespace <!PLUGINPATH->\admin; 
-
-use \<!PLUGINPATH->\<!PLUGINNAME-> as Plugin;
-
-use \Carbon_Fields\Block;
-use \Carbon_Fields\Container;
+use \<!PLUGINPATH->\<!THEMENAME-> as Theme;
 use \Carbon_Fields\Field;
+use \<!PLUGINPATH->\Config as Config;
 
-class AddFields extends Plugin {
+/* 
+ * The Builder is for Shared Resources like Options pages where 
+ * we need to assemble content types into a shared view.
+ *
+*/
+    
+class AddFields extends \<!PLUGINPATH->\Theme {
 
 
     private static $instance = null;
 
     public static function get_instance() {
 
-        if ( 
-            null == self::$instance 
-        ) {
+        if ( null == self::$instance ) {
 
             self::$instance = new self;
-
         }
 
         return self::$instance;
-
     }
     
     private function __construct() {
 
         \add_action('carbon_fields_register_fields', array( get_class(), 'add_meta_fields'), 1 ); //add fields
-      #S  \add_action('carbon_fields_register_fields', array( get_class(), 'add_carbon_blocks'), 1); //add blocks
 
     }
 
@@ -37,41 +35,60 @@ class AddFields extends Plugin {
 
         if( class_exists('\Carbon_Fields\Container')){
 
-           # \add_action('carbon_fields_register_fields', array(get_class(), 'add_options_menu_cf' ) );//add options page
-           # \add_action('carbon_fields_register_fields', array(get_class(), 'add_page_fields' ) );
+            \add_action('carbon_fields_register_fields', array(get_class(), 'add_options_menu_cf' ) );//add options page
+            \add_action('carbon_fields_register_fields', array(get_class(), 'add_page_fields' ) );
+
+            \add_action('carbon_fields_register_fields', array(get_class(), 'add_location_fields' ) );
+            \add_action('carbon_fields_register_fields', array(get_class(), 'add_events_fields'));
+            \add_action('carbon_fields_register_fields', array(get_class(), 'add_team_fields'));
+            \add_action('carbon_fields_register_fields', array(get_class(), 'add_services_fields'));
+            \add_action('carbon_fields_register_fields', array(get_class(), 'add_employment_fields'));
+            \add_action('carbon_fields_register_fields', array(get_class(), 'add_resource_fields'));
+            
 
         }
         
     }
-
-
     public static function add_page_fields(){
-        Container::make( 'post_meta', 'Featured Video' )
-        ->show_on_post_type(array('page','post'))
-        ->set_context('side')
-        ->add_fields( array(
-            Field::make( 'file', 'crb_featured_video', 'Featured Video' )
-                ->set_type( 'video' )
-                ->set_value_type( 'url' ),
-            Field::make( 'file', 'crb_mobile_featured_video', 'Mobile Featured Video' )
-            ->set_type( 'video' )
-            ->set_value_type( 'url' )
-        ));
+        if(
+            ( isset(Config::FEATURES['progressive_header']) && Config::FEATURES['progressive_header'] == true ) ||
+            ( isset(Config::FEATURES['video_header']) && Config::FEATURES['video_header'] == true ) ) : 
+  
+            Container::make( 'post_meta', 'Page Header Fields' )
+            ->show_on_post_type(array('page','post', 'locations'))
+            ->set_context('side')
+            ->add_fields( array(
+                Field::make( 'file', 'crb_featured_video', 'Featured Video' )
+                    ->set_type( 'video' )
+                    ->set_value_type( 'url' ),
+                Field::make( 'file', 'crb_mobile_featured_video', 'Mobile Featured Video' )
+                    ->set_type( 'video' )
+                    ->set_value_type( 'url' ),
+                Field::make( 'checkbox', 'crb_show_button', 'Show a CTA button over the Page Header' )
+                ->set_option_value( 'yes' ),
+                Field::make( 'text', 'crb_button_text', 'Button Text (Optional)'),
+                Field::make( 'text', 'crb_button_url', 'Button URL')
+                
+            ));
 
+        endif;
 
-        Container::make( 'post_meta', 'News Source' )
-        ->show_on_post_type('post')
+        Container::make( 'post_meta', 'Pre-Footer Contact Form' )
+        ->show_on_post_type(array('page','post', 'locations'))
         ->add_fields( array(
-            Field::make( 'text', 'crb_author_name', 'Name of the News Source' )
+            Field::make( 'text', 'prefooter_contactform', 'Pre-Footer Contact Form Shorcode' )
+                ->set_help_text( 'Paste the Shortcode for the Contact Form that you see in the Contact Form tab in the admin' ),
         ));
     }
     public static function add_options_menu_cf(){
 
-
-        Container::make( 'theme_options', __( 'Oak Creek Options', self::textdomain ) )
+       $optionsPage =  Container::make( 'theme_options', __( Config::NICENAME . ' Options', Config::TEXTDOMAIN ) )
         ->set_icon( 'dashicons-admin-generic' )
-        ->set_page_menu_title( 'themeblockhead' . ' API Options' )
-        ->add_tab( 'AWS Elastic Transcoder Settings', array(
+        ->set_page_menu_title( Config::NICENAME . ' Options' );
+
+        if( isset(Config::INTEGRATIONS['AWS']) && Config::INTEGRATIONS['AWS'] == true) : 
+
+        $optionsPage->add_tab( 'AWS Settings', array(
 
             Field::make( 'text', 'aws_etc_region', 'Region' )
                 ->set_help_text( 'Region key ( ex: us-east-1 )' ),
@@ -86,56 +103,86 @@ class AddFields extends Plugin {
                 ->set_help_text( 'Secret Key ' )
                 ->set_attribute( 'type', 'password' ),
 
-        ))
-
-        ->add_tab( 'Slack', array(
+        ));
+        endif;
+        if( isset(Config::INTEGRATIONS['Slack']) && Config::INTEGRATIONS['Slack'] == true) : 
+   
+        $optionsPage->add_tab( 'Slack', array(
 
             Field::make( 'complex', 'slack_bots', 'Slack Integrations' )
                 ->add_fields( array(
                     Field::make( 'text', 'slack_bot_name', 'Bot Name' )
-                    ->set_help_text('Example: Sorce License Bot-Customer'),
+                    ->set_help_text('Example: Sorce License Bot-Flexport'),
                     Field::make( 'text', 'slack_bot_channel', 'Channel to Post to')
                     ->set_help_text('Without the # please'),
-                    Field::make( 'text', 'slack_bot_customer_id', 'Customer ID'),
+                    Field::make( 'text', 'slack_bot_customer_id', 'Sorce Customer ID'),
                     Field::make( 'text', 'slack_bot_webhook', 'Webhook')
                 ) ),
  
-        ))
+        ));
+        endif;
+        if( isset(Config::INTEGRATIONS['ActiveCampaign']) && Config::INTEGRATIONS['ActiveCampaign'] == true) : 
+        $optionsPage->add_tab( 'Active Campaign', array(
 
-        ->add_tab( 'Dashboards', array(
-
-            Field::make( 'complex', 'dashboards_company', 'Companies' )
-                ->set_help_text( 'Add dashboard settings for each Company' )
-                    ->add_fields( array(
-                    Field::make( 'text', 'dashboards_company_id', 'Company ID (Must match database)' ),
-                    Field::make( 'text', 'dashboards_company_name', 'Company Name'),
-                    Field::make( 'text', 'dashboards_dashboard_url', 'URL to the Plotly Dashboard'),
-                ) ),
+            Field::make( 'text', 'ac_api_key', 'ActiveCampaign API Key')
+            ->set_attribute( 'type', 'password' ),
+            Field::make( 'text', 'ac_account_name', 'Account Name'),
+            Field::make( 'text', 'ac_custom_field_id', 'Custom Field ID (Leave Empty to Create)')
+                ->set_help_text( 'Leave this field empty and give Custom Field Title a value to create a new custom field' ),
+            Field::make( 'text', 'ac_custom_field_title', 'Custom Field Title'),
+            Field::make( 'textarea', 'ac_custom_field_description', 'Custom Field description (optional)'),
+            Field::make( 'text', 'ac_custom_field_default', 'Custom Field default value (optional)')
  
-        ))
-        ->add_tab( 'Utilities', array(
+        ));
 
+        endif;
+        if( isset(Config::INTEGRATIONS['Figma']) && Config::INTEGRATIONS['Figma'] == true) : 
+        $optionsPage->add_tab( 'Figma', array(
+            Field::make( 'text', 'figma_api_key', 'Figma API Key')
+            ->set_attribute( 'type', 'password' ),
+            Field::make( 'text', 'figma_design_id', 'Design File ID (text string inside URL)'),
+            Field::make('html', 'figma_test_connection')
+            ->set_help_text( 'Test Figma Connection' )
+            ->set_html( '<div class="buttonwrap"><div class="responsearea"></div><button type="button" class="adminbutton btn" id="figmatest">Test Connection</button></div>' ),
+        ));
+        endif;
+        if( isset(Config::INTEGRATIONS['GoogleAnalytics']) && Config::INTEGRATIONS['GoogleAnalytics'] == true) : 
+        $optionsPage->add_tab( 'GoogleAnalytics', array(
+            Field::make( 'text', 'ga_api_key', 'GoogleAnalytics API Key')
+            ->set_attribute( 'type', 'password' ),
+            Field::make( 'textarea', 'ga_code_snippet', 'Analytics Code Snippet'),
+        ));
+        endif;
 
-            Field::make('html', 'run_customer_categories')
-                ->set_help_text( 'Create Exclusive Content - Customer Categories (Run when we have new Customers)' )
-                ->set_html( '<button class="transcode_umeta" " onclick="create_customer_categories(event)">Create Customer Categories</button>' ),
+        if( isset(Config::INTEGRATIONS['GoogleMaps']) && Config::INTEGRATIONS['GoogleMaps'] == true) : 
+            $optionsPage->add_tab( 'GoogleMaps', array(
+                Field::make( 'text', 'gmap_api_key', 'GoogleMaps API Key')
+                ->set_attribute( 'type', 'password' ),
+                Field::make('html', 'figma_test_connection')
+                ->set_help_text( 'Sync maps data from the database to theme.json' )
+                ->set_html( '<div class="buttonwrap"><div class="responsearea"></div><button type="button" class="adminbutton btn" id="gmap_sync">Sync Map Info</button></div>' ),
+            ));
+            endif;
+
+        if( isset(Config::INTEGRATIONS['MailChimp']) && Config::INTEGRATIONS['MailChimp'] == true) :
+        $optionsPage->add_tab( 'MailChimp', array(
+            Field::make( 'text', 'mailchimp_api_key', 'MailChimp API Key')
+            ->set_attribute( 'type', 'password' ),
+            Field::make( 'textarea', 'gmaps_code_snippet', 'MailChimp Code Snippet'),
+        ));         
+        endif;
+
+        $optionsPage->add_tab( 'Utilities', array(
+
+            Field::make('html', 'run_first_setup')
+            ->set_help_text( 'Run First-time setup (create theme pages, menus, etc.)' )
+            ->set_html( '<div class="buttonwrap"><div class="responsearea"></div><button type="button" class="adminbutton btn" id="setupbutton">Run Setup</button></div>' ),
+
+            Field::make('html', 'run_critical_css')
+                ->set_help_text( 'Create inline Critical CSS files' )
+                ->set_html( '<div class="buttonwrap"><div class="responsearea"><button type="button" class="adminbutton btn" id="criticalcssbutton">Create Critical CSS</button></div>' ),
             
-            Field::make('html', 'create_meta_files')
-                ->set_help_text( 'Choose File Type to generate files for' )
-                ->set_html( '
-                    <div id="sorceapi_create_meta_wrap">
-                    <div id="sorceapi_create_meta_files_area" data-action="check_for_transcriptionfiles"></div>
-                    <div id="sorceapi_file_repo"></div>
-                      <p>Create Transcriptions and Audio/Video Meta:</p>
-                        <input type="radio" id="sorceapi_which_audio" name="sorceapi_which" value="audio">
-                        <label for="audio">Audio</label><br>
-                        <input type="radio" id="sorceapi_which_video" name="sorceapi_which" value="video">
-                        <label for="css">Video</label><br>
-                    <button class="transcode_umeta" " onclick="create_meta_files(event)">Create Files (will take a lot of time)</button></div>' )
-            
-
-        )); 
-                   
+        ));
     }
 }
-\<!PLUGINPATH->\admin\AddFields::get_instance();
+AddFields::get_instance();

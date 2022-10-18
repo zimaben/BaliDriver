@@ -1,0 +1,58 @@
+import kitely_icons from './icons.js';
+
+const { __ } = wp.i18n;
+const { registerBlockType } = wp.blocks; 
+const { RichText } = wp.blockEditor; 
+
+registerBlockType('[!PLUGINPATH!]/[!HANDLE!]', { 
+ 
+	title: 'Please Create Unique Title', 
+	icon: kitely_icons.kitelytech,
+    category: 'kitelytech', 
+    //attributes
+    attributes: {
+        title:{
+            type: 'string',
+            default: ''
+        },
+        text: {
+            type: 'string',
+            default: ''
+        },
+
+    },   
+
+	edit({attributes, setAttributes}){
+		const { title, text } = attributes;
+
+        function onTextChange(newtext){
+        	setAttributes({ text: newtext });
+        }
+        function onTitleChange(newtitle){
+            setAttributes({title:newtitle});
+        }
+        
+
+		return (
+
+            <div className="[!PLUGINPATH!]-[!HANDLE!]">
+                <RichText 
+                    tagName="h3"
+                    className="accordion"
+                    value={title}
+                    onChange={onTitleChange}
+                    placeholder={ 'Accordion Title' }
+                />
+                <RichText 
+                    tagName="div"
+                    className="tpt-accordion-panel"
+                    value = {text}
+                    onChange={onPanelChange}
+                    placeholder={ 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'} 
+                />   
+            </div>
+
+		);
+	},
+	save({attributes}) {}
+});
