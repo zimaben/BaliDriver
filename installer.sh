@@ -1,16 +1,10 @@
 #!/bin/bash
-echo "Database name for new project (with prefix)?"
-read databasename
-echo "Username?"
-read username
-echo "Database user password?"
-read password
 echo "project name? (Ex: KitelyTech Newsroom)"
 read humanreadable
-echo "text domain (Project name in lowercase without spaces or dashes)"
+echo "project name base Object? (Ex: KTNewsRoom)"
 read projectname
-echo "url (Ex: http://localhost/projectname)"
-read projecturl
+echo "prefix or namespace (Ex: ktnr [which would make a ktnr/KTNewsRoom root object in PHP and similar in JS])"
+read namespace
 echo "port offset? (Ex: 5 means localhost:8005, :8085)"
 read portoffset
 
@@ -88,7 +82,7 @@ EOF
 <?php
 \$hr = "$humanreadable";
 \$pn = "$projectname";
-\$pu = "$projecturl";
+\$pu = "$namespace";
 
 \$files = array(
 	'/admin/add_fields.php',
@@ -127,8 +121,8 @@ EOF
 );
 \$replacements = array(
 	'<!HUMANREADABLE->' => \$hr,
-	'<!PROJECTURL->' => \$pu,
-	'<!PROJECTNAME->'=> \$pn
+	'<!PLUGINPATH>' => \$pu,
+	'<!PLUGINNAME->'=> \$pn
 );
 
 function runsetup(\$files, \$replacements, \$pn){
