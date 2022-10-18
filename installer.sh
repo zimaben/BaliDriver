@@ -86,24 +86,24 @@ EOF
 \$pu = "$namespace";
 
 \$files = array(
-	'/admin/add_fields.php',
-	'/admin/ajax.php',
-	'/admin/customize.php',
-	'/admin/setup/blocks.php',
-	'/admin/setup/pages.php',
-	'/admin/setup/posttypes.php',
-	'/admin/setup/setup.php',
-	'/admin/setup/taxonomies.php',
-	'/admin/integrations/ActiveCampaign.php',
-	'/admin/integrations/ContactForm7.php',
-	'/admin/integrations/Figma.php',
-	'/admin/integrations/GoogleAnalytics.php',
-	'/admin/integrations/GoogleMaps.php',
-	'/admin/integrations/MailChimp.php',
-	'/admin/integrations/Slack.php',
-	'/core/api/endpoints.php',
-	'/core/methods.php',
-	'/core/view.php',
+	'/library/admin/add_fields.php',
+	'/library/admin/ajax.php',
+	'/library/admin/customize.php',
+	'/library/admin/setup/blocks.php',
+	'/library/admin/setup/pages.php',
+	'/library/admin/setup/posttypes.php',
+	'/library/admin/setup/setup.php',
+	'/library/admin/setup/taxonomies.php',
+	'/library/admin/integrations/ActiveCampaign.php',
+	'/library/admin/integrations/ContactForm7.php',
+	'/library/admin/integrations/Figma.php',
+	'/library/admin/integrations/GoogleAnalytics.php',
+	'/library/admin/integrations/GoogleMaps.php',
+	'/library/admin/integrations/MailChimp.php',
+	'/library/admin/integrations/Slack.php',
+	'/library/core/api/endpoints.php',
+	'/library/core/methods.php',
+	'/library/core/view.php',
 	'/theme/template-parts/404.php',
 	'/theme/template-parts/page-header.php',
 	'/theme/template-parts/page-static-header.php',
@@ -122,7 +122,7 @@ EOF
 );
 \$replacements = array(
 	'<!HUMANREADABLE->' => \$hr,
-	'<!PLUGINPATH>' => \$pu,
+	'<!PLUGINPATH->' => \$pu,
 	'<!PLUGINNAME->'=> \$pn
 );
 
@@ -142,12 +142,12 @@ function runsetup(\$files, \$replacements, \$pn){
 			}
 		}
 	}
-	include('wp-load.php');
+	#include('wp-load.php');
 }
 runsetup(\$files, \$replacements, \$pn);
 EOF
 PHP=`which php`
-$PHP installer.php
+$PHP site_$projectname/installer.php
 else 
   echo "Could not download Starter Theme" >&2 
 fi
@@ -155,7 +155,7 @@ fi
 if [ $? -eq 0 ] 
 then 
   echo "Successfully ran Theme Installer"  
-  cd wp-content/themes/$projectname
+  cd site_$projectname/wp-content/themes/$projectname
   echo "Changed Directory to new Theme"
 
 else 
