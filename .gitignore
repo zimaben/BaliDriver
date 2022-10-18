@@ -3,7 +3,6 @@ node_modules
 *.sql
 *.log
 
-
-## Uncomment line below if you prefer to
-## keep compiled files out of version control
-# dist/
+#the wp-content folder is the generated product of this automation
+#we keep it out of version control
+/wp-content

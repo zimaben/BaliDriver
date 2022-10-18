@@ -8,13 +8,14 @@ read namespace
 echo "port offset? (Ex: 5 means localhost:8005, :8085)"
 read portoffset
 
-if [ -z "$databasename" ] || [ -z "$username" ] || [ -z "$password" ] || [ -z "$humanreadable" ] || [ -z "$projecturl" ] 
+if [ -z "$humanreadable" ] || [ -z "$projectname" ] || [ -z "$namespace" ] || [ -z "$portoffset" ] 
 then echo "Missing required information. Aborted"
 exit 1
 else
-  mkdir wp-content
-  mkdir wp-content/themes
-  git clone git@github.com:zimaben/theme_blocks_starter.git wp-content/themes/$projectname
+  mkdir site_$projectname
+  mkdir site_$projectname/wp-content
+  mkdir site_$projectname/wp-content/themes
+  git clone git@github.com:zimaben/theme_blocks_starter.git site_$projectname/wp-content/themes/$projectname
 
 fi
 
@@ -22,8 +23,8 @@ if [ $? -eq 0 ]
 then 
   echo "Successfully added Starter Theme"  
 
-  cat > docker-compose.yml <<EOF
-  version: "3.9"
+  cat > site_$projectname/docker-compose.yml <<EOF
+version: "3.9"
     
 services:
   db:
@@ -78,7 +79,7 @@ EOF
 
 #create installer
 
-  cat > installer.php <<EOF
+  cat > site_$projectname/installer.php <<EOF
 <?php
 \$hr = "$humanreadable";
 \$pn = "$projectname";
