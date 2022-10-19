@@ -76,88 +76,532 @@ if ( ! class_exists( '\<!PLUGINPATH->\customizer\Theme_Customizer' ) ) {
 				)
 			);
 
-        // /* Global Consent Section */
-        // $wp_customize->add_panel( 'consent', array(
-		// 	'title'          => ucfirst(Config::NICENAME).' Consent Settings',
-		// 	'priority'       => 65,
-		// 	'description'	=>		__('Consent settings for the '.ucfirst(Config::NICENAME).' theme.', Config::TEXTDOMAIN ),
-		// ) );
-        // /* sections */
-        // $wp_customize->add_section( 'consent_one', array(
-        //     'title'          => 'Consent Options',
-        //     'priority'       => 30,
-        //     'panel'			 => 'consent'
-        // ) );
-        // /* settings */
-        // $wp_customize->add_setting( 'consent_add_gdpr_consent', array(
-        //     'default'           => false,
-        //     'sanitize_callback' => array( get_class(), 'sanitize_checkbox' ),
-        // ) );
-        // /* controls */
-        // $wp_customize->add_control(
-        //     'consent_add_gdpr_consent',
-        //     array(
-        //         'type'    => 'checkbox',
-        //         'section' => 'consent_one',
-        //         'label'   => esc_html__( 'Add GDPR Cookies Consent to first visit?', Config::TEXTDOMAIN ),
-        //         'description' => 'Privacy Page slug must be "privacy-policy" for link to be added.'
-        //     )
-        // );
+			/* HEADER settings */
+			if( Config::HEADER && is_array(Config::HEADER)) :
 
-		/* Global Menu SECTION */
-		$wp_customize->add_panel( 'additional_menus', array(
-			'title'          => ucfirst(Config::NICENAME).' Menu',
-			'priority'       => 65,
-			'description'	=>		__('Menu options for the '.ucfirst(Config::NICENAME).' theme.', Config::TEXTDOMAIN ),
-		) );
-		$wp_customize->add_section( 'menu_one', array(
-			'title'          => 'Menu Options',
-			'priority'       => 30,
-			'panel'			 => 'additional_menus'
-		) );
+				foreach(Config::HEADER as $section => $settings){	
+					error_log( $section );
+					switch( $section ){
+						case "logo" : 
+							#we use the default site Identity menu for this
+						break;
+						case "right" :
 
-		$wp_customize->add_setting( 'main_menu_style', array(
-			'default'           => 'hamburger',
-			'sanitize_callback' => array( get_class(), 'sanitize_radio' ),
-			'description' => 'What kind of main menu does the site use?',
+							$wp_customize->add_section( 'top_right', array(
+								'title'          => ucfirst(Config::NICENAME).' Top Right Menu',
+								'priority'       => 21,
+								'description'	=>		__('Top Right Menu options for the '.ucfirst(Config::NICENAME).' theme.', Config::TEXTDOMAIN ),
+							) );
+							$supported_settings = array('login', 'phone', 'cta');
+							if(is_array($settings)){
+								foreach($settings as $setting){
+									if(in_array($setting, $supported_settings)){
+										switch($setting){
+											case "login" : 
+											break;
+											case "phone" :
+												error_log("HIT FOR PHONE: " . $setting);
+												$wp_customize->add_setting( 'header_telephone', array(
+													'default'           => '',
+													'sanitize_callback' => 'wp_filter_nohtml_kses',
+													'description' => 'Telephone number to display in header',
+												) );
+												$wp_customize->add_control( 'header_telephone', array(
+													'type'    => 'text',
+													'section' => 'top_right',
+													'label'   => esc_html__( 'Telephone number to display in header', Config::TEXTDOMAIN ),
+												) );
+											break;
+											case "cta" : 
+												$wp_customize->add_setting( 'top_cta_text', array(
+													'default'           => '',
+													'sanitize_callback' => 'wp_filter_nohtml_kses',
+													'description' => 'Text to display in the CTA button',
+												) );
+												$wp_customize->add_setting( 'top_cta_url', array(
+													'default'           => '',
+													'sanitize_callback' => 'esc_url_raw',
+													'description' => 'Enter your LinkedIn URL.',
+												) );
+												$wp_customize->add_control( 'top_cta_text', array(
+													'type'    => 'text',
+													'section' => 'top_right',
+													'label'   => esc_html__( 'Button Text', Config::TEXTDOMAIN ),
+												) );
+												$wp_customize->add_control( 'top_cta_url', array(
+													'type'    => 'text',
+													'section' => 'top_right',
+													'label'   => esc_html__( 'Button URL', Config::TEXTDOMAIN ),
+												) );
+											break;
+										}
+									}
+								} 
+							} else {
+								if(in_array($settings, $supported_settings)){
+									switch($settings){
+										case "login" : 
+										break;
+										case "phone" :
+											error_log("HIT FOR PHONE: " . $setting);
+											$wp_customize->add_setting( 'header_telephone', array(
+												'default'           => '',
+												'sanitize_callback' => 'wp_filter_nohtml_kses',
+												'description' => 'Telephone number to display in header',
+											) );
+											$wp_customize->add_control( 'header_telephone', array(
+												'type'    => 'text',
+												'section' => 'top_right',
+												'label'   => esc_html__( 'Telephone number to display in header', Config::TEXTDOMAIN ),
+											) );
+										break;
+										case "cta" : 
+											$wp_customize->add_setting( 'top_cta_text', array(
+												'default'           => '',
+												'sanitize_callback' => 'wp_filter_nohtml_kses',
+												'description' => 'Text to display in the CTA button',
+											) );
+											$wp_customize->add_setting( 'top_cta_url', array(
+												'default'           => '',
+												'sanitize_callback' => 'esc_url_raw',
+												'description' => 'Enter your LinkedIn URL.',
+											) );
+											$wp_customize->add_control( 'top_cta_text', array(
+												'type'    => 'text',
+												'section' => 'top_right',
+												'label'   => esc_html__( 'Button Text', Config::TEXTDOMAIN ),
+											) );
+											$wp_customize->add_control( 'top_cta_url', array(
+												'type'    => 'text',
+												'section' => 'top_right',
+												'label'   => esc_html__( 'Button URL', Config::TEXTDOMAIN ),
+											) );
+										break;
+									}
+								}
+							}
+						break;
+						case "menu" : 
+							#menus are skipped by the customizer
+						break;
+						default : break;
+					}	
+				}
+			endif;
+			/* END HEADER SECTIONS */
 
-		) );
-		$wp_customize->add_setting( 'header_telephone', array(
-			'default'           => '',
-			'sanitize_callback' => 'wp_filter_nohtml_kses',
-			'description' => 'Telephone number to display in header',
-		) );
+			/* FOOTER */
 
-		$wp_customize->add_setting( 'menu_bootstrap_markup', array(
-			'default'           => true,
-			'sanitize_callback' => array( get_class(), 'sanitize_checkbox' ),
-			'description' => 'Should the menu use Bootstrap navigation markup? (default yes)',
-		) );
-		$wp_customize->add_control( 'header_telephone', array(
-			'type'    => 'text',
-			'section' => 'menu_one',
-			'label'   => esc_html__( 'Telephone number to display in header', Config::TEXTDOMAIN ),
-		) );
-		$wp_customize->add_control(
-			'menu_bootstrap_markup',
-			array(
-				'type'    => 'checkbox',
-				'section' => 'menu_one',
-				'label'   => esc_html__( 'Add Bootstrap Menu CSS & Markup?', Config::TEXTDOMAIN ),
-				'description' => 'Do you want Bootstrap markup in your nav menu? Note:This will override the wp-theme-config.php file.'
-			)
-		);
-		$wp_customize->add_control(
-			'main_menu_style', array(
-			'type' => 'radio',
-			'section' => 'menu_one',
-			'label' => __( 'What type of main menu?' ),
-			'choices' => array(
-			  'hamburger' => __( 'Always Hamburger (both Desktop and Mobile)' ),
-			  'top' => __( 'Horizontal (inline) top menu, mobile hamburger' ),
-			  'side' => __( 'Side menu Desktop, mobile hamburger' ),
-			))
-		);
+			if( Config::FOOTER && is_array(Config::FOOTER)) :
+
+				/* Global Footer SECTION */
+				$wp_customize->add_panel( 'footer', array(
+					'title'          => ucfirst(Config::NICENAME).' Footer',
+					'priority'       => 65,
+					'description'	=>		__('Footer options for the '.ucfirst(Config::NICENAME).' theme.', Config::TEXTDOMAIN ),
+				) );
+				$supported_sections = array( 'prefooter', 'bottom', 'columns' ) ;
+				#$sections = array();
+				foreach(Config::FOOTER as $section=>$settings){
+					switch ($section) {
+						case "prefooter":
+
+							$wp_customize->add_section( 'pre_footer', array(
+								'title'          => 'Pre Footer',
+								'priority'       => 10,
+								'description'	=>		__('Pre Footer options for the '.ucfirst(Config::NICENAME).' theme.', Config::TEXTDOMAIN ),
+								'panel'			=> 'footer',
+							) );
+							$supported_settings = array('title', 'image', 'text', 'textarea', 'shortcode');
+							if(is_array($settings)){
+								foreach($settings as $setting){
+									if(in_array($setting, $supported_settings)){				
+										if(!is_array($setting)){
+											switch($setting){
+												case "title" : 
+													$wp_customize->add_setting('prefooter_title', array(
+														'default'           => '',
+														'sanitize_callback' => 'wp_filter_nohtml_kses',
+													));
+													$wp_customize->add_control( 'prefooter_title', array(
+														'type'        => 'text',
+														'section'     => 'pre_footer',
+														'label'       => esc_html__('Pre Footer Title', Config::TEXTDOMAIN)
+													) );
+												break;
+
+												case "text" : 
+													$wp_customize->add_setting('prefooter_text', array(
+														'default'           => '',
+														'sanitize_callback' => 'wp_filter_nohtml_kses',
+													));
+													$wp_customize->add_control( 'prefooter_text', array(
+														'type'        => 'text',
+														'section'     => 'pre_footer',
+														'label'       => esc_html__('Pre Footer Text (Single Line)', Config::TEXTDOMAIN)
+													) );
+												break;
+
+												case "textarea" : 
+													$wp_customize->add_setting('prefooter_textarea', array(
+														'default'           => '',
+														'sanitize_callback' => 'wp_filter_nohtml_kses',
+													));
+													$wp_customize->add_control( 'prefooter_textarea', array(
+														'type'        => 'textarea',
+														'section'     => 'pre_footer',
+														'label'       => esc_html__('Pre Footer Text', Config::TEXTDOMAIN)
+													) );
+												break;
+
+												case "image" : 
+													$wp_customize->add_setting( 'prefooter_img', array(
+														'default'        => '',
+													) );
+													$wp_customize->add_control( new \WP_Customize_Image_Control( $wp_customize, 'prefooter_img', array(
+														'label'   => 'Pre Footer Image',
+														'section' => 'pre_footer',
+														'settings'   => 'prefooter_img',
+													) ) );
+												break;
+
+												case "shortcode" : 
+													$wp_customize->add_setting('prefooter_shortcode', array(
+														'default'           => '',
+														'sanitize_callback' => 'wp_filter_nohtml_kses',
+													));
+													$wp_customize->add_control( 'prefooter_shortcode', array(
+														'type'        => 'text',
+														'section'     => 'pre_footer',
+														'label'       => esc_html__('Shortcode to Execute in Pre Footer', Config::TEXTDOMAIN)
+													) );
+												break;
+
+												default: break;
+											}
+											
+										} else {
+											foreach($setting as $key=>$value){
+												switch($key){
+													case "title" : 
+														
+														$label = isset($value['label']) ? esc_html__($value['label'], Config::TEXTDOMAIN) : esc_html__('Pre Footer Title', Config::TEXTDOMAIN);
+														
+														$wp_customize->add_setting('prefooter_title', array(
+															'default'           => '',
+															'sanitize_callback' => 'wp_filter_nohtml_kses',
+														));
+														$wp_customize->add_control( 'prefooter_title', array(
+															'type'        => 'text',
+															'section'     => 'pre_footer',
+															'label'       => $label,
+														) );
+													break;
+
+													case "text" : 
+
+														$label = isset($value['label']) ? esc_html__($value['label'], Config::TEXTDOMAIN) : esc_html__('Pre Footer Text (Single Line)', Config::TEXTDOMAIN);
+
+														$wp_customize->add_setting('prefooter_text', array(
+															'default'           => '',
+															'sanitize_callback' => 'wp_filter_nohtml_kses',
+														));
+														$wp_customize->add_control( 'prefooter_text', array(
+															'type'        => 'text',
+															'section'     => 'pre_footer',
+															'label'       =>  $label
+														) );
+													break;
+
+													case "textarea" : 
+
+														$label = isset($value['label']) ? esc_html__($value['label'], Config::TEXTDOMAIN) : esc_html__('Pre Footer Text', Config::TEXTDOMAIN);
+
+														$wp_customize->add_setting('prefooter_textarea', array(
+															'default'           => '',
+															'sanitize_callback' => 'wp_filter_nohtml_kses',
+														));
+														$wp_customize->add_control( 'prefooter_textarea', array(
+															'type'        => 'textarea',
+															'section'     => 'pre_footer',
+															'label'       => $label
+														) );
+													break;
+
+													case "image" : 
+
+														$label = isset($value['label']) ? esc_html__($value['label'], Config::TEXTDOMAIN) : esc_html__('Pre Footer Image', Config::TEXTDOMAIN);
+
+														$wp_customize->add_setting( 'prefooter_img', array(
+															'default'        => '',
+														) );
+														$wp_customize->add_control( new \WP_Customize_Image_Control( $wp_customize, 'prefooter_img', array(
+															'label'   => $label,
+															'section' => 'pre_footer',
+															'settings'   => 'prefooter_img',
+														) ) );
+													break;
+
+													case "shortcode" : 
+
+														$label = isset($value['label']) ? esc_html__($value['label'], Config::TEXTDOMAIN) : esc_html__('Shortcode to Execute in Pre Footer', Config::TEXTDOMAIN);
+
+														$wp_customize->add_setting('prefooter_shortcode', array(
+															'default'           => '',
+															'sanitize_callback' => 'wp_filter_nohtml_kses',
+														));
+														$wp_customize->add_control( 'prefooter_shortcode', array(
+															'type'        => 'text',
+															'section'     => 'pre_footer',
+															'label'       => $label,
+														) );
+													break;
+
+													default: break;
+												}
+											}
+										}
+									}
+								}
+							}
+						break;
+						/* END PREFOOTER */
+
+						case "columns" :
+
+							$supported_sections = array('footer_one', 'footer_two', 'footer_three', 'footer_four');
+							if(is_array($settings)){
+								foreach($settings as $column => $settings){
+									$priority = 11;
+									if(in_array($column, $supported_sections )){
+										$name = ucwords( str_replace( '_', ' ', $column) );
+
+										$wp_customize->add_section( $column, array(
+											'title'          => $name,
+											'priority'       => $priority,
+											'panel'			=> 'footer',
+										) );
+										$supported_settings = array('logo', 'title', 'textarea', 'social_links', 'menu');
+										if(!is_array($settings)){
+											if(in_array($settings, $supported_settings)){
+												switch($settings){
+													case "logo" : 
+														$wp_customize->add_setting( $column . '_logo', array(
+															'default'        => '',
+														) );
+														$wp_customize->add_control( new \WP_Customize_Image_Control( $wp_customize, $column . '_logo', array(
+															'label'   => $name . ' Logo',
+															'section' => $column,
+															'settings'   => $column . '_logo',
+														) ) );
+													break;
+													case "title" : 
+														$wp_customize->add_setting($column . '_title', array(
+															'default'           => '',
+															'sanitize_callback' => 'wp_filter_nohtml_kses',
+														));
+														$wp_customize->add_control( $column . '_title', array(
+															'type'        => 'text',
+															'section'     => $column,
+															'label'       => esc_html__($name . ' Title', Config::TEXTDOMAIN)
+														) );
+													break;
+													case "textarea" : 
+														$wp_customize->add_setting($column . '_textarea', array(
+															'default'           => '',
+															'sanitize_callback' => 'wp_filter_nohtml_kses',
+														));
+														$wp_customize->add_control( $column . '_textarea', array(
+															'type'        => 'text',
+															'section'     => $column,
+															'label'       => esc_html__($name . ' Text', Config::TEXTDOMAIN)
+														) );
+													break;
+													case "social_links" : 
+														$wp_customize->add_setting( $column . '_social', array(
+															'default'           => true,
+															'sanitize_callback' => array( get_class(), 'sanitize_checkbox' ),
+														) );
+														$wp_customize->add_control( $column . '_social', array(
+															'type'    => 'checkbox',
+															'section'     => $column,
+															'label'   => esc_html__( 'Add Social Links to Footer '.$name.'?', Config::TEXTDOMAIN ),
+														) );
+													break;
+													case "menu" : 
+
+													break;
+
+													default: break;
+
+												}	
+											}
+
+										} else {
+											foreach($settings as $setting){
+												if(!is_array($setting)){
+													if(in_array($setting, $supported_settings)){
+														switch($setting){
+															case "logo" : 
+																$wp_customize->add_setting( $column . '_logo', array(
+																	'default'        => '',
+																) );
+																$wp_customize->add_control( new \WP_Customize_Image_Control( $wp_customize, $column . '_logo', array(
+																	'label'   => $name . ' Logo',
+																	'section' => $column,
+																	'settings'   => $column . '_logo',
+																) ) );
+															break;
+															case "title" : 
+																$wp_customize->add_setting($column . '_title', array(
+																	'default'           => '',
+																	'sanitize_callback' => 'wp_filter_nohtml_kses',
+																));
+																$wp_customize->add_control( $column . '_title', array(
+																	'type'        => 'text',
+																	'section'     => $column,
+																	'label'       => esc_html__($name . ' Title', Config::TEXTDOMAIN)
+																) );
+															break;
+															case "textarea" : 
+																$wp_customize->add_setting($column . '_textarea', array(
+																	'default'           => '',
+																	'sanitize_callback' => 'wp_filter_nohtml_kses',
+																));
+																$wp_customize->add_control( $column . '_textarea', array(
+																	'type'        => 'textarea',
+																	'section'     => $column,
+																	'label'       => esc_html__($name . ' Text', Config::TEXTDOMAIN)
+																) );
+															break;
+															case "social_links" : 
+																$wp_customize->add_setting( $column . '_social', array(
+																	'default'           => true,
+																	'sanitize_callback' => array( get_class(), 'sanitize_checkbox' ),
+																) );
+																$wp_customize->add_control( $column . '_social', array(
+																	'type'    => 'checkbox',
+																	'section'     => $column,
+																	'label'   => esc_html__( 'Add Social Links to Footer '.$name.'?', Config::TEXTDOMAIN ),
+																) );
+															break;
+
+															case "menu" : 
+	
+															break;
+	
+															default: break;
+	
+														}	
+													}
+												}
+											}
+										}
+
+										
+										$priority++;
+									}
+								}
+							}
+						break;
+						/* END COLUMNS */
+
+						case "bottom" : 
+
+							$wp_customize->add_section( 'footer_bottom', array(
+								'title'          => 'Footer Bottom',
+								'priority'       => 16,
+								'description'	=>		__('Footer Bottom options for the '.ucfirst(Config::NICENAME).' theme.', Config::TEXTDOMAIN ),
+								'panel'			=> 'footer',
+							) );
+							$supported_settings = array('copyright', 'sitemap', 'privacy', 'menu');
+							if(is_array($settings)){
+								foreach($settings as $setting){
+									if(!is_array($setting)){ #we are ignoring menus in the customizer
+										if(in_array($setting, $supported_settings)){
+											switch($setting){
+												case "copyright" :
+													$wp_customize->add_setting( 'footer_bottom_add_copyright', array(
+														'default'           => false,
+														'sanitize_callback' => array( get_class(), 'sanitize_checkbox'),
+													) );
+													$wp_customize->add_control(
+														'footer_bottom_add_copyright',
+														array(
+															'type'    => 'checkbox',
+															'section' => 'footer_bottom',
+															'label'   => esc_html__( 'Add a Copyright notice?', Config::TEXTDOMAIN ),
+															'description' => 'Example: ' . '©' . Date('Y') . ' ' . Config::NICENAME . ', all rights reserved.'
+														)
+													);
+												break;
+												case "sitemap" : 
+													if (!function_exists('is_plugin_active')) {
+														include_once(ABSPATH . 'wp-admin/includes/plugin.php');
+													}
+													
+													if( \is_plugin_active( 'wordpress-seo' )){
+														$wp_customize->add_setting( 'footer_bottom_add_sitemap', array(
+															'default'           => false,
+															'sanitize_callback' => array( get_class(), 'sanitize_checkbox' ),
+														) );
+														$wp_customize->add_control(
+															'footer_bottom_add_sitemap',
+															array(
+																'type'    => 'checkbox',
+																'section' => 'footer_bottom',
+																'label'   => esc_html__( 'Add a Sitemap link', Config::TEXTDOMAIN ),
+																'description' => 'Example: ' . '©' . Date('Y') . ' ' . Config::NICENAME . ', all rights reserved. | <a href="#" onclick="event.preventDefault()">Sitemap</a>',
+															)
+														);
+													} else {
+														$wp_customize->add_setting( 'footer_bottom_add_sitemap', array(
+															'default'           => 'The YOAST SEO plugin is required to display sitemap',
+														) );
+														$wp_customize->add_control(
+															'footer_bottom_add_sitemap',
+															array(
+																'type'    => 'text',
+																'section' => 'footer_bottom',
+																'label'   => esc_html__( 'Add a Sitemap link', Config::TEXTDOMAIN ),
+																'input_attrs' => array('disabled'=>'disabled'),
+																'description' => 'The YOAST SEO plugin is required to display sitemap',
+															)
+														);
+													}
+												break;
+												case "privacy" : 
+													$wp_customize->add_setting( 'footer_bottom_add_privacy_policy', array(
+														'default'           => true,
+														'sanitize_callback' => array( get_class(), 'sanitize_checkbox' ),
+													) );
+													$wp_customize->add_control(
+														'footer_bottom_add_privacy_policy',
+														array(
+															'type'    => 'checkbox',
+															'section' => 'footer_bottom',
+															'label'   => esc_html__( 'Add a Privacy Policy Link', Config::TEXTDOMAIN ),
+															'description' => 'Privacy Policy page must be selected in Theme Settings for link to be added.',
+														)
+													);
+												break;
+
+												default : break;
+											}
+										}
+									}
+								}
+							}
+						break;
+						/* END FOOTER BOTTOM */
+
+						default: break;
+					}
+				}
+				/* END CONFIG FOOTER FIELDS*/
+			endif;
+			/* END FOOTER SECTIONS */
+
 		/* Global Social Links */
 		$wp_customize->add_panel( 'social-links', array(
 			'title'          => ucfirst(Config::NICENAME).' Social Links',
@@ -299,200 +743,7 @@ if ( ! class_exists( '\<!PLUGINPATH->\customizer\Theme_Customizer' ) ) {
 		) ) );
 		/* End Social Links */
 
-		/* Global Footer SECTION */
-		$wp_customize->add_panel( 'footer', array(
-			'title'          => ucfirst(Config::NICENAME).' Footer',
-			'priority'       => 65,
-			'description'	=>		__('Footer options for the '.ucfirst(Config::NICENAME).' theme.', Config::TEXTDOMAIN ),
-		) );
-
-			/* sections */
-			// $wp_customize->add_section( 'pre_footer', array(
-			// 	'title'          => 'Pre Footer',
-			// 	'priority'       => 10,
-			// 	'description'	=>		__('Pre Footer options for the '.ucfirst(Config::NICENAME).' theme.', Config::TEXTDOMAIN ),
-			// 	'panel'			=> 'footer',
-			// ) );
-			$wp_customize->add_section( 'footer_one', array(
-				'title'          => 'Footer Column One',
-				'priority'       => 30,
-				'panel'			 => 'footer'
-			) );
-			$wp_customize->add_section( 'footer_two', array(
-				'title'          => 'Footer Column Two',
-				'priority'       => 30,
-				'panel'			 => 'footer'
-			) );
-			$wp_customize->add_section( 'footer_three', array(
-				'title'          => 'Footer Column Three',
-				'priority'       => 30,
-				'panel'			 => 'footer'
-			) );
-
-			$wp_customize->add_section( 'footer_four', array(
-				'title'          => 'Footer Column Four',
-				'priority'       => 30,
-				'panel'			 => 'footer'
-			) );
-
-			/* setting */
-
-			$wp_customize->add_setting( 'footer_img', array(
-				'default'        => '',
-			) );
-			// $wp_customize->add_setting( 'footer_is_bgcolor', array(
-			// 	'default'        => false,
-			// 	'sanitize_callback' => array( get_class(), 'sanitize_checkbox' ),
-			// ) );
-			// $wp_customize->add_setting( 'footer_bgcolor', array(
-			// 	'default'        => false,
-			// 	'sanitize_callback' => array( get_class(), 'sanitize_hexcolor' ),
-			// ) );
-
-			$wp_customize->add_setting( 'footer_add_copyright', array(
-                'default'           => false,
-                'sanitize_callback' => array( get_class(), 'sanitize_checkbox'),
-			) );
-
-			$wp_customize->add_setting( 'footer_text', array(
-				'default'           => '',
-				'sanitize_callback' => 'wp_filter_nohtml_kses',
-				'description' => 'Footer Text Below Logo',
-			) );
-
-
-			if (!function_exists('is_plugin_active')) {
-				include_once(ABSPATH . 'wp-admin/includes/plugin.php');
-			}
-			
-            if( \is_plugin_active( 'wordpress-seo' )){
-                $wp_customize->add_setting( 'footer_add_sitemap', array(
-                    'default'           => false,
-                    'sanitize_callback' => array( get_class(), 'sanitize_checkbox' ),
-                ) );
-            } else {
-                $wp_customize->add_setting( 'footer_add_sitemap', array(
-                    'default'           => 'The YOAST SEO plugin is required to display sitemap',
-                ) );
-            }
-            $wp_customize->add_setting( 'footer_add_privacy_policy', array(
-                'default'           => false,
-                'sanitize_callback' => array( get_class(), 'sanitize_checkbox' ),
-			) );
-
-			$wp_customize->add_setting( 'footer_add_social', array(
-                'default'           => false,
-                'sanitize_callback' => array( get_class(), 'sanitize_checkbox' ),
-			) );
-
-			$wp_customize->add_setting('footer_two_title', array(
-				'default'           => '',
-				'sanitize_callback' => 'wp_filter_nohtml_kses',
-			));
-			$wp_customize->add_setting('footer_three_title', array(
-				'default'           => '',
-				'sanitize_callback' => 'wp_filter_nohtml_kses',
-			));
-			$wp_customize->add_setting('footer_four_title', array(
-				'default'           => '',
-				'priority'       	=> 10,
-				'sanitize_callback' => 'wp_filter_nohtml_kses',
-			));
-			$wp_customize->add_setting( 'footer_default_contact_shortcode', array(
-				'default'        => '',
-				'sanitize_callback' => 'wp_specialchars_decode',
-			) );
-
-
-			/* controls */
-
-			$wp_customize->add_control( 'footer_two_title', array(
-				'type'        => 'text',
-				'section'     => 'footer_two',
-				'label'       => esc_html__('Footer Column Two Title', Config::TEXTDOMAIN)
-			) );
-			$wp_customize->add_control( 'footer_three_title', array(
-				'type'        => 'text',
-				'section'     => 'footer_three',
-				'label'       => esc_html__('Footer Column Three Title', Config::TEXTDOMAIN)
-			) );
-
-			$wp_customize->add_control( 'footer_four_title', array(
-				'type'        => 'text',
-				'section'     => 'footer_four',
-				'label'       => esc_html__('Footer Column Four Title', Config::TEXTDOMAIN)
-			) );
-
-			$wp_customize->add_control( new \WP_Customize_Image_Control( $wp_customize, 'footer_img', array(
-				'label'   => 'Use a Footer Image?',
-				'section' => 'footer_one',
-				'settings'   => 'footer_img',
-			) ) );
-
-            $wp_customize->add_control(
-				'footer_add_copyright',
-				array(
-					'type'    => 'checkbox',
-					'section' => 'footer_one',
-					'label'   => esc_html__( 'Add a Copyright notice?', Config::TEXTDOMAIN ),
-					'description' => 'Example: ' . '©' . Date('Y') . ' ' . \get_bloginfo( 'name' ) . ', all rights reserved.'
-				)
-			);
-
-            if( \is_plugin_active( 'wordpress-seo' )){
-                $wp_customize->add_control(
-                    'footer_add_sitemap',
-                    array(
-                        'type'    => 'checkbox',
-                        'section' => 'footer_one',
-                        'label'   => esc_html__( 'Add a Sitemap link', Config::TEXTDOMAIN ),
-                        'description' => 'Example: ' . '©' . Date('Y') . ' ' . \get_bloginfo( 'name' ) . ', all rights reserved. | <a href="#" onclick="event.preventDefault()">Sitemap</a>',
-                    )
-                );
-            } else {
-                $wp_customize->add_control(
-                    'footer_add_sitemap',
-                    array(
-                        'type'    => 'text',
-                        'section' => 'footer_one',
-                        'label'   => esc_html__( 'Add a Sitemap link', Config::TEXTDOMAIN ),
-                        'input_attrs' => array('disabled'=>'disabled'),
-                        'description' => 'Example: ' . '©' . Date('Y') . ' ' . \get_bloginfo( 'name' ) . ', all rights reserved. | <a href="#" onclick="event.preventDefault()">Sitemap</a>',
-                    )
-                );
-            }
-
-            $wp_customize->add_control(
-				'footer_add_privacy_policy',
-				array(
-					'type'    => 'checkbox',
-					'section' => 'footer_one',
-					'label'   => esc_html__( 'Add a Privacy Policy Link', Config::TEXTDOMAIN ),
-					'description' => 'Privacy Policy page must be selected in Theme Settings for link to be added.',
-				)
-			);
-
-			$wp_customize->add_control( 'footer_text', array(
-				'type'    => 'textarea',
-				'section' => 'footer_one',
-				'label'   => esc_html__( 'Footer Text', Config::TEXTDOMAIN )
-			) );
-
-			$wp_customize->add_control( 'footer_add_social', array(
-				'type'    => 'checkbox',
-				'section' => 'footer_one',
-				'label'   => esc_html__( 'Put the Social Links in the Footer?', Config::TEXTDOMAIN ),
-			) );
-
-			$wp_customize->add_control( 'footer_default_contact_shortcode', array(
-				'type'        => 'text',
-				'section'     => 'footer_four',
-				'label'       => esc_html__('Default Contact Shortcode', Config::TEXTDOMAIN),
-				'description' => 'Example: ' . '<code>[contact-form-7 id="123" title="Contact form 1"]</code>',
-			) );
-
-
-		/* END FOOTER SECTION */
+		
 
 		}
 		public static function sanitize_select( $input, $setting ) {

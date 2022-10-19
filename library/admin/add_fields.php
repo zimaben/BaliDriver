@@ -39,12 +39,6 @@ class AddFields extends Theme {
             \add_action('carbon_fields_register_fields', array(get_class(), 'add_options_menu_cf' ) );//add options page
             \add_action('carbon_fields_register_fields', array(get_class(), 'add_page_fields' ) );
 
-            \add_action('carbon_fields_register_fields', array(get_class(), 'add_location_fields' ) );
-            \add_action('carbon_fields_register_fields', array(get_class(), 'add_events_fields'));
-            \add_action('carbon_fields_register_fields', array(get_class(), 'add_team_fields'));
-            \add_action('carbon_fields_register_fields', array(get_class(), 'add_services_fields'));
-            \add_action('carbon_fields_register_fields', array(get_class(), 'add_employment_fields'));
-            \add_action('carbon_fields_register_fields', array(get_class(), 'add_resource_fields'));
             
 
         }
