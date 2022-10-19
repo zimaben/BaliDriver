@@ -114,7 +114,7 @@ if( !class_exists( '\<!PLUGINPATH->\<!PLUGINNAME->')) {
 
             #LOAD THEME BLOCKS
             require_once \get_template_directory() . '/library/admin/setup/blocks.php';
-
+            require_once \get_template_directory() . '/library/admin/ajax.php';
 
 
             /* THEME LOAD OPTIMIZATIONS BLOCK - PLEASE UNDERSTAND WHAT YOU ARE DOING BEFORE YOU TOUCH THIS 
@@ -217,6 +217,7 @@ if( !class_exists( '\<!PLUGINPATH->\<!PLUGINNAME->')) {
             $v =Config::MODE == "development" ? (string) bin2hex(random_bytes(2)) : Config::VERSION;
             \wp_enqueue_script ( 'footer', \get_template_directory_uri() . '/theme/dist/js/footer.js', array(), $v, true );
             \wp_enqueue_script ( 'sitehead', \get_template_directory_uri() . '/theme/dist/js/main.js', array(), $v, false );
+            \wp_enqueue_style( 'theme-css', \get_template_directory_uri() . '/theme/dist/style.css', array(), $v, 'all');
         }
 
         public static function theme_admin_enqueue(){

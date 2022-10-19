@@ -38,63 +38,88 @@ Class Config {
     );
     const INTEGRATIONS = array( 
         'ActiveCampaign' => false,
-        'GoogleAnalytics' => false,
+        'GoogleAnalytics' => true,
         'MailChimp' => false,
         'GoogleMaps' => false,
         'Slack' => false,
-        'ContactForm7' => false,
+        'ContactForm7' => true,
     );
 
     const FEATURES = array(
         'critical_css' => false,
         'video_headers' => false,
-        'progressive_header' => false,
+        'progressive_header' => true,
     );
+
+    #@TODO - CUSTOMIZER (PREFOOTER, HEADER, FOOTER fields)
 
     #const ROLES = false;
     const ROLES = false;
 
     const BLOCKS = array(
-        'cta-cards' => 'Call to Action Cards'
+       # 'cta-cards' => 'Call to Action Cards'
+    );
+    /* THIS WORKS WITH THE CUSTOMIZER MENU TO DESCRIBE THE SITE FOOTER */
+    const FOOTER = array(
+        'prefooter' => array('title', 'image', 'textarea','shortcode'),
+        'columns'=>array(
+            'footer_one'=> array('logo', 'textarea', 'social_links'),
+            'footer_two'=> array('title'),
+            'footer_three'=>array('title', array('menu'=>'footer_three') ),
+            'footer_four'=> array('title', 'textarea')
+        ),
+        'bottom' => array(
+            'copyright', 
+            array('menu'=> 'footer_bottom'), 
+            
+        ),
+    );
+    /* THIS WORKS WITH THE CUSTOMIZER CLASS TO DESCRIBE THE SITE HEADER */
+    const HEADER = array(
+        'logo' => true,
+        'menu' => array('primary', 'mobile'),
+        'right' => array('login', 'phone', 'cta'),
     );
     const MENUS = array(
         'primary' => array(
             'name'=> 'Top Menu',
             'location'=> 'primary',
-            'bootstrap_markup' => true,
+            'bootstrap_markup' => false,
             'fulltime_hamburger' => false,
             'depth' => 1,
             'header' => true,
             'footer' => false,
             'sidebar' => false
         ),
-        'footer' => array(
-            'name'=> 'Footer Menu',
-            'location'=> 'footer',
-            'bootstrap_markup' => true,
+        'mobile' => array(
+            'name'=> 'Mobile',
+            'location'=> 'mobile',
+            'bootstrap_markup' => false,
+            'fulltime_hamburger' => false,
             'depth' => 1,
-            'header'=> false,
-            'footer'=> true,
-            'sidebar'=> false
-        ),
-        'footer_two' => array(
-            'name'=> 'Footer Two',
-            'location'=> 'footer_two',
-            'bootstrap_markup' => true,
-            'depth' => 1,
-            'header'=> false,
-            'footer'=> true,
-            'sidebar'=> false
+            'header' => true,
+            'footer' => false,
+            'sidebar' => false
         ),
         'footer_three' => array(
             'name'=> 'Footer Three',
             'location'=> 'footer_three',
-            'bootstrap_markup' => true,
+            'bootstrap_markup' => false,
             'depth' => 1,
             'header'=> false,
             'footer'=> true,
             'sidebar'=> false
         ),
+        'footer_bottom' => array(
+            'name' => 'Footer Bottom',
+            'location'=> 'footer_bottom',
+            'bootstrap_markup' => false,
+            'depth' => 1,
+            'header'=> false,
+            'footer'=> true,
+            'sidebar'=> false
+        )
+
     );
     /* ROUTING */
 

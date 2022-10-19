@@ -8,6 +8,29 @@ footer.site-footer{
             max-height:100%;
         }
     }
+    .column{
+        ul.menu-wrapper{
+            list-style:none;        
+        }
+    }
+    
+}
+/* Footer Bottom */
+.row.footer-menu-bottom{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 50px;
+    padding-right: 50px;
+    ul.footerbottom{
+        list-style:none;
+        display:inline-flex;
+        gap:12px;
+    }
+    ul.menu-wrapper{
+        list-style:none;
+        display:inline-flex;
+        gap:12px;        
+    }
 }
 
 @media screen and (max-width:991px){

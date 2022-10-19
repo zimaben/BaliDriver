@@ -159,15 +159,18 @@ class Setup extends Theme {
                 $menu_id = \wp_create_nav_menu($props['name']);
                 if(!empty(Config::PAGES)){
                     foreach(Config::PAGES as $slug => $args){
-                        $page_object = \get_page_by_path($slug);
-                        \wp_update_nav_menu_item($menu_id, 0, array(
-                            'menu-item-title' => $args['title'],
-                            'menu-item-object' => 'page',
-                            'menu-item-object-id' => $page_object->ID,
-                            'menu-item-url' => \get_permalink($page_object->ID),
-                            'menu-item-type' => isset($args['type']) ? $args['type'] : 'page',
-                            'menu-item-status' => 'publish'
-                        ));
+                        if(isset($args['menu']) && $args['menu'] == $props['location'] ){
+                 
+                            $page_object = \get_page_by_path($slug);
+                            \wp_update_nav_menu_item($menu_id, 0, array(
+                                'menu-item-title' => $args['title'],
+                                'menu-item-object' => 'page',
+                                'menu-item-object-id' => $page_object->ID,
+                                'menu-item-url' => \get_permalink($page_object->ID),
+                                'menu-item-type' => isset($args['type']) ? $args['type'] : 'page',
+                                'menu-item-status' => 'publish'
+                            ));
+                        }
                     }
                 } else {
                     // Set up example menu items with pages WP ships with
@@ -185,12 +188,11 @@ class Setup extends Theme {
                     ) );
                 }
                  
-                if(isset($props['header']) && $props['header'] == true ) {
-                    $locations['primary'] = $menu_id;
-                    \set_theme_mod('nav_menu_locations', $locations);}
-                if(isset($props['footer']) && $props['footer'] == true ) {
-                    $locations['footer'] = $menu_id; 
-                    \set_theme_mod('nav_menu_locations', $locations);}
+                if(isset($props['location']) && $props['location'] ) {
+                    $location_name = $props['location'];
+                    $locations[$location_name] = $menu_id;
+                    \set_theme_mod('nav_menu_locations', $locations);
+                }
             }
 
         }

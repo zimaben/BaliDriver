@@ -1,174 +1,356 @@
 <?php 
 use \ktdamd\Config as Config;
+use \ktdamd\DoctorAtMyDoor as Theme;
 
-if(\get_theme_mod('footer_bgcolor') && \get_theme_mod('footer_is_bgcolor')){
-    $style = ' style="background-color: ' . \get_theme_mod('footer_bgcolor') .'"';
-} else {
-    $style = '';
+if(isset(Config::FOOTER['prefooter']) && Config::FOOTER['prefooter'] !== false ){
+    Theme::TemplatePart('prefooter.php');
 }
 ?>
-<footer id="pagefooter" class="site-footer"<?php echo $style; ?>>
-    <div class="column-one">
-        <!-- logo -->
-        <!-- start with Customizer -->
-        <?php 
-        $flogo = \get_theme_mod('footer_img');
-        if( $flogo ){
+<footer id="pagefooter" class="site-footer">
+<?php
+if(isset(Config::FOOTER['columns']) && is_array(Config::FOOTER['columns']) ) : 
 
-            echo '<div class="site-logo"><img src="' . $flogo . '" alt="' . \get_bloginfo('name') . '" /></div>';
-        
-        } else if( \has_custom_logo() ) {
-            echo '<div class="site-logo">' . the_custom_logo() . '</div>';
-        }
-
-        $text = \get_theme_mod('footer_text');
-
-        if($text){ echo '<div class="footer-copy">' . $text . '</div>'; }
-
-        if( \get_theme_mod('footer_add_social')) :
-            if(Config::SOCIAL && is_array(Config::SOCIAL)){
-                $social_link_list = array();
-                foreach(Config::SOCIAL as $name => $bool){
-                    if($bool) {
-                        $icon = \get_theme_mod($name . '_icon') ? \get_theme_mod($name . '_icon') : \get_template_directory_uri() . '/theme/assets/icons/' . $name . '.svg';
-                        $link = \get_theme_mod($name . '_url');
-                        if($link) $social_link_list[$name] = array('icon'=>$icon, 'link'=> $link);
+    if(isset(Config::FOOTER['columns']['footer_one']) && is_array(Config::FOOTER['columns']['footer_one']) ){
+        echo '<div class="column column-one">';
+        $footerone = Config::FOOTER['columns']['footer_one'];
+        foreach($footerone as $section ){
+            if(is_array($section)){
+                if(isset($section['menu']) && $section['menu'] !== false ){
+                    $menu = $section['menu'];
+                    if( \has_nav_menu( $menu ) ){
+                        \wp_nav_menu(
+                            array(
+                                'theme_location'  => $menu,
+                                'menu_class'      => 'menu-wrapper',
+                                'container_class' => 'footer-menu-container',
+                                'items_wrap'      => '<ul id="footer-one-menu-list" class="%2$s">%3$s</ul>',
+                                'fallback_cb'     => false,
+                            )
+                        );
                     }
                 }
-                if(!empty($social_link_list)){
-                    ?>
-                    <ul class="footer-social-links">
-                        <?php foreach($social_link_list as $name => $props){
-                            echo '<li class="' . $name . '"><a target="_blank" href="'. $props['link'] .'"><img class="social-icon" src="'.$props['icon'].'" alt="'.$name.' icon" /></a></li>';
-                        } ?>
-                    </ul>
-                    <?php
-                }
+            } else {
+                switch($section){
+                    
+                    case("logo") : 
+                        $flogo = \get_theme_mod('footer_one_logo');
+                        if( $flogo ){
                 
-            }
+                            echo '<div class="site-logo"><img src="' . $flogo . '" alt="' . Config::NICENAME . '" /></div>';
+                        
+                        } else if( \has_custom_logo() ) {
+                            echo '<div class="site-logo">' . the_custom_logo() . '</div>';
+                        }
+                    break;
+                    case("title") : 
+                        $title = \get_theme_mod('footer_one_title');
 
-        endif;
+                        if($title){ echo '<h3 class="footer-title">' . $title . '</h3>'; }
+                    break;
+                    case("textarea") : 
+                        $text = \get_theme_mod('footer_one_textarea');
 
-        ?>
-    </div>
-    <div class="column-two">
-        <div class="column-two-content">
-            <?php if(\get_theme_mod('footer_two_title')) echo '<h3>'. \get_theme_mod('footer_two_title') . '</h3>'; ?>
-            <!-- nav -->
-            <?php if ( \has_nav_menu( 'footer' ) ) : ?>
-            <nav class="footer-navigation">
-                <ul class="footer-navigation-list">
-                    <?php
-                        \wp_nav_menu(
-                            array(
-                                'theme_location' => 'footer',
-                                'items_wrap'     => '%3$s',
-                            #    'items_wrap'           => '<ul id="%1$s" class="%2$s">%3$s</ul>',
-                                'container'      => false,
-                                'depth'          => 1,
-                                'link_before'    => '<span>',
-                                'link_after'     => '</span>',
-                                'fallback_cb'    => false,
-                            )
-                        );
-                        ?>
-                </ul><!-- .footer-navigation-wrapper -->
-            </nav><!-- .footer-navigation -->
-            <?php endif; ?>
-        </div>
-
-    </div>
-    <div class="column-three">
-        <div class="column-three-content">
-        <?php if(\get_theme_mod('footer_three_title')) echo '<h3>'. \get_theme_mod('footer_three_title') . '</h3>'; ?>
-            <!-- nav -->
-            <?php if ( \has_nav_menu( 'footer_three' ) ) : ?>
-            <nav class="footer-navigation">
-                <ul class="footer-navigation-list">
-                    <?php
-                        \wp_nav_menu(
-                            array(
-                                'theme_location' => 'footer_three',
-                                'items_wrap'     => '%3$s',
-                            #    'items_wrap'           => '<ul id="%1$s" class="%2$s">%3$s</ul>',
-                                'container'      => false,
-                                'depth'          => 1,
-                                'link_before'    => '<span>',
-                                'link_after'     => '</span>',
-                                'fallback_cb'    => false,
-                            )
-                        );
-                        ?>
-                </ul><!-- .footer-navigation-wrapper -->
-            </nav><!-- .footer-navigation -->
-            <?php endif; ?>
-
-        </div>
-    </div>
-    <div class="column-four">
-        <div class="column-four-content">
-        <?php if(\get_theme_mod('footer_four_title')) echo '<h3>'. \get_theme_mod('footer_four_title') . '</h3>'; ?>
-            <!-- nav -->
-            <?php if ( \has_nav_menu( 'footer_four' ) ) : ?>
-            <nav class="footer-navigation">
-                <ul class="footer-navigation-list">
-                    <?php
-                        \wp_nav_menu(
-                            array(
-                                'theme_location' => 'footer_four',
-                                'items_wrap'     => '%3$s',
-                            #    'items_wrap'           => '<ul id="%1$s" class="%2$s">%3$s</ul>',
-                                'container'      => false,
-                                'depth'          => 1,
-                                'link_before'    => '<span>',
-                                'link_after'     => '</span>',
-                                'fallback_cb'    => false,
-                            )
-                        );
-                        ?>
-                </ul><!-- .footer-navigation-wrapper -->
-            </nav><!-- .footer-navigation -->
-            <?php endif;
-            #contact Form
-            $contactform = \get_theme_mod( 'footer_default_contact_shortcode', true);
-            
-            if( $contactform ) : 
-                $html = \do_shortcode($contactform);
-                if($html !== $contactform){ # if the shortcode produced markup, show it
-                    ?>
-                        <div class="contact">
-                            <?php echo \do_shortcode($contactform); ?>
-                        </div>
-                    <?php
+                        if($text){ echo '<div class="footer-text">' . $text . '</div>'; }
+                    break;
+                    case("social_links") :
+                        if( \get_theme_mod('footer_one_social')) :
+                            if(Config::SOCIAL && is_array(Config::SOCIAL)){
+                                $social_link_list = array();
+                                foreach(Config::SOCIAL as $name => $bool){
+                                    if($bool) {
+                                        $icon = \get_theme_mod($name . '_icon') ? \get_theme_mod($name . '_icon') : \get_template_directory_uri() . '/theme/assets/icons/' . $name . '.svg';
+                                        $link = \get_theme_mod($name . '_url');
+                                        if($link) $social_link_list[$name] = array('icon'=>$icon, 'link'=> $link);
+                                    }
+                                }
+                                if(!empty($social_link_list)){
+                                    ?>
+                                    <ul class="footer-social-links">
+                                        <?php foreach($social_link_list as $name => $props){
+                                            echo '<li class="' . $name . '"><a target="_blank" href="'. $props['link'] .'"><img class="social-icon" src="'.$props['icon'].'" alt="'.$name.' icon" /></a></li>';
+                                        } ?>
+                                    </ul>
+                                    <?php
+                                }
+                                
+                            }
+                    
+                        endif;
+                    break;
                 }
-            endif;
+            }
+        }
+        echo '</div>';
+        #End Column One
+    }
 
-            ?>
-        </div>
-    </div>
+    if(isset(Config::FOOTER['columns']['footer_two']) && is_array(Config::FOOTER['columns']['footer_two']) ){
+        echo '<div class="column column-two">';
+        $footertwo = Config::FOOTER['columns']['footer_two'];
+        foreach($footertwo as $section ){
+            if(is_array($section)){
+                if(isset($section['menu']) && $section['menu'] !== false ){
+                    $menu = $section['menu'];
+                    if( \has_nav_menu( $menu ) ){
+                        \wp_nav_menu(
+                            array(
+                                'theme_location'  => $menu,
+                                'menu_class'      => 'menu-wrapper',
+                                'container_class' => 'footer-menu-container',
+                                'items_wrap'      => '<ul id="footer-one-menu-list" class="%2$s">%3$s</ul>',
+                                'fallback_cb'     => false,
+                            )
+                        );
+                    }
+                }
+            } else {
+                switch($section){
+                    case("logo") : 
+                        $flogo = \get_theme_mod('footer_two_logo');
+                        if( $flogo ){
+                
+                            echo '<div class="site-logo"><img src="' . $flogo . '" alt="' . Config::NICENAME . '" /></div>';
+                        
+                        } else if( \has_custom_logo() ) {
+                            echo '<div class="site-logo">' . the_custom_logo() . '</div>';
+                        }
+                    break;
+                    case("title") : 
+                        $title = \get_theme_mod('footer_two_title');
+
+                        if($title){ echo '<h3 class="footer-title">' . $title . '</h3>'; }
+                    break;
+                    case("textarea") : 
+                        $text = \get_theme_mod('footer_two_textarea');
+
+                        if($text){ echo '<div class="footer-text">' . $text . '</div>'; }
+                    break;
+                    case("social_links") :
+                        if( \get_theme_mod('footer_two_social')) :
+                            if(Config::SOCIAL && is_array(Config::SOCIAL)){
+                                $social_link_list = array();
+                                foreach(Config::SOCIAL as $name => $bool){
+                                    if($bool) {
+                                        $icon = \get_theme_mod($name . '_icon') ? \get_theme_mod($name . '_icon') : \get_template_directory_uri() . '/theme/assets/icons/' . $name . '.svg';
+                                        $link = \get_theme_mod($name . '_url');
+                                        if($link) $social_link_list[$name] = array('icon'=>$icon, 'link'=> $link);
+                                    }
+                                }
+                                if(!empty($social_link_list)){
+                                    ?>
+                                    <ul class="footer-social-links">
+                                        <?php foreach($social_link_list as $name => $props){
+                                            echo '<li class="' . $name . '"><a target="_blank" href="'. $props['link'] .'"><img class="social-icon" src="'.$props['icon'].'" alt="'.$name.' icon" /></a></li>';
+                                        } ?>
+                                    </ul>
+                                    <?php
+                                }
+                                
+                            }
+                    
+                        endif;
+                    break;
+                }
+            }
+        }
+        echo '</div>';
+        #End Column Two
+    }
+
+    if(isset(Config::FOOTER['columns']['footer_three']) && is_array(Config::FOOTER['columns']['footer_three']) ){
+        echo '<div class="column column-three">';
+        $footerthree = Config::FOOTER['columns']['footer_three'];
+        foreach($footerthree as $section ){
+            if(is_array($section)){
+                if(isset($section['menu']) && $section['menu'] !== false ){
+                    $menu = $section['menu'];
+                    if( \has_nav_menu( $menu ) ){
+                        \wp_nav_menu(
+                            array(
+                                'theme_location'  => $menu,
+                                'menu_class'      => 'menu-wrapper',
+                                'container_class' => 'footer-menu-container',
+                                'items_wrap'      => '<ul id="footer-one-menu-list" class="%2$s">%3$s</ul>',
+                                'fallback_cb'     => false,
+                            )
+                        );
+                    }
+                }
+            } else {
+                switch($section){
+                    case("logo") : 
+                        $flogo = \get_theme_mod('footer_three_logo');
+                        if( $flogo ){
+                
+                            echo '<div class="site-logo"><img src="' . $flogo . '" alt="' . Config::NICENAME . '" /></div>';
+                        
+                        } else if( \has_custom_logo() ) {
+                            echo '<div class="site-logo">' . the_custom_logo() . '</div>';
+                        }
+                    break;
+                    case("title") : 
+                        $title = \get_theme_mod('footer_three_title');
+
+                        if($title){ echo '<h3 class="footer-title">' . $title . '</h3>'; }
+                    break;
+                    case("textarea") : 
+                        $text = \get_theme_mod('footer_three_textarea');
+
+                        if($text){ echo '<div class="footer-text">' . $text . '</div>'; }
+                    break;
+                    case("social_links") :
+                        if( \get_theme_mod('footer_three_social')) :
+                            if(Config::SOCIAL && is_array(Config::SOCIAL)){
+                                $social_link_list = array();
+                                foreach(Config::SOCIAL as $name => $bool){
+                                    if($bool) {
+                                        $icon = \get_theme_mod($name . '_icon') ? \get_theme_mod($name . '_icon') : \get_template_directory_uri() . '/theme/assets/icons/' . $name . '.svg';
+                                        $link = \get_theme_mod($name . '_url');
+                                        if($link) $social_link_list[$name] = array('icon'=>$icon, 'link'=> $link);
+                                    }
+                                }
+                                if(!empty($social_link_list)){
+                                    ?>
+                                    <ul class="footer-social-links">
+                                        <?php foreach($social_link_list as $name => $props){
+                                            echo '<li class="' . $name . '"><a target="_blank" href="'. $props['link'] .'"><img class="social-icon" src="'.$props['icon'].'" alt="'.$name.' icon" /></a></li>';
+                                        } ?>
+                                    </ul>
+                                    <?php
+                                }
+                                
+                            }
+                    
+                        endif;
+                    break;
+                }
+            }
+        }
+        echo '</div>';
+        #End Column Three
+    }
+    if(isset(Config::FOOTER['columns']['footer_four']) && is_array(Config::FOOTER['columns']['footer_four']) ){
+        echo '<div class="column column-four">';
+        $footerfour = Config::FOOTER['columns']['footer_four'];
+        foreach($footerfour as $section ){
+            if(is_array($section)){
+                if(isset($section['menu']) && $section['menu'] !== false ){
+                    $menu = $section['menu'];
+                    if( \has_nav_menu( $menu ) ){
+                        \wp_nav_menu(
+                            array(
+                                'theme_location'  => $menu,
+                                'menu_class'      => 'menu-wrapper',
+                                'container_class' => 'footer-menu-container',
+                                'items_wrap'      => '<ul id="footer-one-menu-list" class="%2$s">%3$s</ul>',
+                                'fallback_cb'     => false,
+                            )
+                        );
+                    }
+                }
+            } else {
+                switch($section){
+                    case("logo") : 
+                        $flogo = \get_theme_mod('footer_four_logo');
+                        if( $flogo ){
+                
+                            echo '<div class="site-logo"><img src="' . $flogo . '" alt="' . Config::NICENAME . '" /></div>';
+                        
+                        } else if( \has_custom_logo() ) {
+                            echo '<div class="site-logo">' . the_custom_logo() . '</div>';
+                        }
+                    break;
+                    case("title") : 
+                        $title = \get_theme_mod('footer_four_title');
+
+                        if($title){ echo '<h3 class="footer-title">' . $title . '</h3>'; }
+                    break;
+                    case("textarea") : 
+                        $text = \get_theme_mod('footer_four_textarea');
+
+                        if($text){ echo '<div class="footer-text">' . $text . '</div>'; }
+                    break;
+                    case("social_links") :
+                        if( \get_theme_mod('footer_four_social')) :
+                            if(Config::SOCIAL && is_array(Config::SOCIAL)){
+                                $social_link_list = array();
+                                foreach(Config::SOCIAL as $name => $bool){
+                                    if($bool) {
+                                        $icon = \get_theme_mod($name . '_icon') ? \get_theme_mod($name . '_icon') : \get_template_directory_uri() . '/theme/assets/icons/' . $name . '.svg';
+                                        $link = \get_theme_mod($name . '_url');
+                                        if($link) $social_link_list[$name] = array('icon'=>$icon, 'link'=> $link);
+                                    }
+                                }
+                                if(!empty($social_link_list)){
+                                    ?>
+                                    <ul class="footer-social-links">
+                                        <?php foreach($social_link_list as $name => $props){
+                                            echo '<li class="' . $name . '"><a target="_blank" href="'. $props['link'] .'"><img class="social-icon" src="'.$props['icon'].'" alt="'.$name.' icon" /></a></li>';
+                                        } ?>
+                                    </ul>
+                                    <?php
+                                }
+                                
+                            }
+                    
+                        endif;
+                    break;
+                }
+            }
+        }
+        echo '</div>';
+        #End Column Four
+    }
+    
+
+
+endif;
+?>
 </footer>
 <div class="row footer-menu-bottom">
     <ul class="footerbottom">
         <?php 
-        if( \get_theme_mod('footer_add_copyright')){
+        if( \get_theme_mod('footer_bottom_add_copyright')){
             echo '<li>Copyright ©' . Date('Y') . ' Beyond Menu</li>';
             # bloginfo( 'name' );
         }
         
-        if( \get_theme_mod( 'footer_add_privacy_policy' ) ) {
+        if( \get_theme_mod( 'footer_bottom_add_privacy_policy' ) ) {
             echo '<li><a href="' . \get_privacy_policy_url() . '">' . __( 'Privacy Policy', Config::TEXTDOMAIN ) . '</a></li>';
         }
         if (!function_exists('is_plugin_active')) {
             include_once(ABSPATH . 'wp-admin/includes/plugin.php');
         }
-        if( \is_plugin_active( 'wordpress-seo' )) : 
+        if( \is_plugin_active( 'wordpress-seo' )) {
 
-            if( \get_theme_mod( 'footer_add_sitemap' ) ){
+            if( \get_theme_mod( 'footer_bottom_add_sitemap' ) ){
                 echo '<li><a href="' . \get_home_url() . '/sitemap_index.xml">' . __( 'Sitemap', Config::TEXTDOMAIN ) . '</a></li>';
             }
-        
-        endif;
+        }
+        echo '</ul>';
+        #Check for Menus
+        if(isset(Config::FOOTER['bottom']) && is_array(Config::FOOTER['bottom']) ){
+            foreach(Config::FOOTER['bottom'] as $section ){
+                if(is_array($section)){
+                    if(isset($section['menu'])){
+                        $menu = $section['menu'];
+                        if($menu){
+                            if( \has_nav_menu( $menu ) ){
+                                \wp_nav_menu(
+                                    array(
+                                        'theme_location'  => $menu,
+                                        'menu_class'      => 'menu-wrapper',
+                                        'container_class' => 'footer-bottom-container',
+                                        'items_wrap'      => '<ul id="footer-bottom-menu-list" class="%2$s">%3$s</ul>',
+                                        'fallback_cb'     => false,
+                                    )
+                                );
+                            }                            
+                        }
+                    }
+                }
+            }
+        }
 
         ?>
-    </ul>
 </div>

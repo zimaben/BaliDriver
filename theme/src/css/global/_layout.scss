@@ -4,11 +4,21 @@ body{
     display:flex;
     flex-direction:column;
     width:100%;
-    max-width:100%;
+    width:100%;
+    position:relative;
     overflow-y:scroll;
+    
+}
+/* stick footer on the bottom */
+#page{
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    max-width:100%;
     overflow-x:hidden;
+    flex-grow:1;
 }
 footer.site-footer{
     display:flex;
-    margin-top:auto;
+
 }
