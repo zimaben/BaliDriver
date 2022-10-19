@@ -81,20 +81,54 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/css/style.scss");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./theme/src/js/foot.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/css/style.scss":
-/*!****************************!*\
-  !*** ./src/css/style.scss ***!
-  \****************************/
+/***/ "./theme/src/js/foot.js":
+/*!******************************!*\
+  !*** ./theme/src/js/foot.js ***!
+  \******************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./src/css/style.scss?");
+window.addEventListener('DOMContentLoaded', function (event) {
+  var processlist = document.querySelectorAll('[data-process]');
+  //do our process list - switch is fastest
+  processlist.forEach(function (item) {
+    var process = item.getAttribute('data-process');
+    switch (process) {
+      case "doProgressiveHeader":
+        doProgressiveHeader(item);
+        break;
+      default:
+        //she doesn't even go here
+        break;
+    }
+  });
+  window.doAccordionClicks();
+  window.onload_data_fetch();
+  window.doMobileMenuClick();
+  window.setupModals();
+});
+window.addEventListener('resize', function (event) {
+  var processlist = document.querySelectorAll('[data-process]');
+  //do our process list - switch is fastest
+  processlist.forEach(function (item) {
+    var process = item.getAttribute('data-process');
+    switch (process) {
+      case "doProgressiveHeader":
+        doProgressiveHeader(item);
+        break;
+      default:
+        //she doesn't even go here
+        break;
+    }
+  });
+});
 
 /***/ })
 
 /******/ });
+//# sourceMappingURL=footer.js.map

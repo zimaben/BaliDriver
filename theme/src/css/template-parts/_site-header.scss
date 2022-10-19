@@ -1,0 +1,37 @@
+$headerheight: 64px;
+$mobileheaderheight:48px;
+
+#site-header{
+    display:flex;
+    width:100%;
+    height:$headerheight;
+    position: relative;
+    .mobile-menu-button{
+        display:none;
+        background-image:url(../../assets/icons/hamburger-button.svg);
+        height: 100%;
+        aspect-ratio: 1/1;
+        display: inline-flex;
+        background-repeat: no-repeat;
+        background-position: center center;
+        cursor:pointer;
+    }
+    .top.menu-logo{
+        height:100%;
+        .site-branding{
+            height:100%;
+            img{
+                max-height:100%;
+            }
+        }
+    }
+}
+
+@media screen and (max-width:991px){
+    #site-header{
+        height:$mobileheaderheight;
+        .mobile-menu-button{
+            
+        }
+    }
+}

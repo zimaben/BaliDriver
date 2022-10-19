@@ -1,7 +1,90 @@
-/**
- * #.# Common SCSS
- *
- * Can include things like variables and mixins
- * that are used across the project.
-*/
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
 
+footer.site-footer {
+  display: flex;
+  margin-top: auto;
+}
+
+#site-header {
+  display: flex;
+  width: 100%;
+  height: 64px;
+  position: relative;
+}
+#site-header .mobile-menu-button {
+  display: none;
+  background-image: url(../../theme/assets/icons/hamburger-button.svg);
+  height: 100%;
+  aspect-ratio: 1/1;
+  display: inline-flex;
+  background-repeat: no-repeat;
+  background-position: center center;
+  cursor: pointer;
+}
+#site-header .top.menu-logo {
+  height: 100%;
+}
+#site-header .top.menu-logo .site-branding {
+  height: 100%;
+}
+#site-header .top.menu-logo .site-branding img {
+  max-height: 100%;
+}
+
+@media screen and (max-width: 991px) {
+  #site-header {
+    height: 48px;
+  }
+}
+footer.site-footer .custom-logo-link {
+  height: 120px;
+  position: relative;
+  display: flex;
+}
+footer.site-footer .custom-logo-link img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.simple-cta-wrap {
+  padding-left: clamp(33px, 13.23vw, 200px);
+  padding-right: clamp(33px, 13.23vw, 200px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.simple-cta-wrap h2 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 7px;
+}
+.simple-cta-wrap p {
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24.51px;
+  max-width: 45.83vw;
+  margin-top: 0;
+  text-align: center;
+  color: "black";
+}
+
+@media screen and (max-width: 991px) {
+  .simple-cta-wrap {
+    padding-left: 33px;
+    padding-right: 33px;
+  }
+  .simple-cta-wrap p {
+    max-width: unset;
+  }
+}
+
+/*# sourceMappingURL=style.css.map*/

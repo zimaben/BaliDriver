@@ -1,94 +1,52 @@
 <?php 
-use <!PLUGINPATH->\<!PLUGINNAME-> as Theme;
-use <!PLUGINPATH->\Config as Config;
+use ktdamd\DoctorAtMyDoor as Theme;
+use ktdamd\Config as Config;
 
 
 // print_r( $template );
 
 ?>
 <header id="site-header" class="site-header container at-top">
-	<div class="row">
-		<div class="mobile-menu-button" onclick="mobileExpand(event)">
+	<?php if ( has_nav_menu( 'mobile' ) ) : ?>
 
-		</div>
-		<div class="top menu-logo">
-			<div class="site-branding">
-				<?php
-				if ( has_custom_logo() ) {
-					?><a href="/" class="site-logo"><?php the_custom_logo(); ?></a><?php
-				} else {
-					?>
-					<h1 class="brand-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-					<?php
-				}
-				?>
-			</div>
-		</div>
-		<div class="top menu-container has-hamburger">
-			<div class="mobile-menu">
-			<div class="mobile-menu-header">
-				<div class="mobile-menu-button expanded" onclick="mobileExpand(event)"></div>
-				<?php if ( has_custom_logo() ){ echo wp_get_attachment_image( get_theme_mod( 'custom_logo' ), 'full' ); } ?>
-			</div>
+	<div class="mobile-menu-button" data-menu-target="site-mobile-menu-container" onclick="mobileExpand(event)">
+
+	</div>
+	<div class="mobile-menu-container" id="site-mobile-menu-container">
+		<div class="mobile-animation-wrap">
 			<?php
-			if ( has_nav_menu( 'primary' ) ) : 
+			wp_nav_menu(
+				array(
+					'theme_location'  => 'mobile',
+					'menu_class'      => 'menu-wrapper',
+					'container_class' => 'mobile-menu-container',
+					'items_wrap'      => '<ul id="mobile-menu-list" class="%2$s">%3$s</ul>',
+					'fallback_cb'     => false,
+				)
+			);
+			?>
+		</div>
+	</div>
 
-			$menutype = get_theme_mod('main_menu_style');
-			$isbootstrap = get_theme_mod('menu_bootstrap_markup');
-			switch( $menutype ) {
-				case "hamburger" : 
-					?>
-					<div data-target="site-navigation-mobile" class="hamburger-menu">
-						<span class="hamburger-menu-icon"></span>
-						<span class="hamburger-menu-close"></span>
-					</div>
-					<?php
-					break;
-				default :
-					?>
-					<div data-target="site-navigation-mobile" class="hamburger-menu mobile-only">
-						<span class="hamburger-menu-icon"></span>
-						<span class="hamburger-menu-close"></span>
-					</div>
-					<?php
-					break;
+	<?php endif; ?>
+
+	<div class="top menu-logo">
+		<div class="site-branding">
+			<?php
+			if ( has_custom_logo() ) {
+				?><a href="/" class="site-logo"><?php the_custom_logo(); ?></a><?php
+			} else {
+				?>
+				<h1 class="brand-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php echo Config::NICENAME; ?></a></h1>
+				<?php
 			}
 			?>
-			<?php # if mobile hamburger menu ?>
-			<nav id="site-navigation-mobile" class="primary-navigation" role="navigation">
-				<?php 
-				if($menutype === 'hamburger' || $menutype === 'top'){ $addclass = ' horizonal';}
-				else { $addclass = ' vertical';}
-				
-				if( $isbootstrap ) {
-					wp_nav_menu( array(
-						'items_wrap' 	  => '<ul id="%1$s" class="%2$s">%3$s</ul>',
-						'theme_location'  => 'primary',
-						'depth'           => 1, // 1 = no dropdowns, 2 = with dropdowns.
-						'container'       => 'div',
-						'container_class' => 'navbar navbar-expand-lg navbar-light',
-						'container_id'    => 'topmenu',
-						'menu_class'      => 'navbar-nav' . $addclass,
-						'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
-						'walker'          => new WP_Bootstrap_Navwalker(),
-					) );
-				} else {
-					wp_nav_menu(
-						array(
-							'theme_location'  => 'primary',
-							'menu_class'      => 'menu-wrapper' . $addclass,
-							'container_class' => 'primary-menu-container',
-							'items_wrap'      => '<ul id="primary-menu-list" class="%2$s">%3$s</ul>',
-							'fallback_cb'     => false,
-						)
-					);
-				}
-		?>
-			</nav>
 		</div>
+	</div>
+	<div class="top menu-container">
+		<?php if ( has_nav_menu( 'primary' ) ) : ?>
+
 		<div class="desktop-menu">	
-
-
 			<nav id="site-navigation" class="primary-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Primary menu', Config::TEXTDOMAIN ); ?>">
 				<?php
 				wp_nav_menu(
@@ -102,21 +60,41 @@ use <!PLUGINPATH->\Config as Config;
 				);
 				?>
 			</nav><!-- #site-navigation -->
-			<?php endif; ?>
-		</div>
+		<?php endif; ?>
+	</div>
+	<?php #check HEADER for top right
+	if(isset(Config::HEADER['right']) && Config::HEADER['right'] !== false) : ?>
 		<div class="top menu-right">
-			<?php if(\get_theme_mod('header_telephone')): ?>
-				<div class="header-telephone">
-					<a href="tel:<?php echo \get_theme_mod('header_telephone'); ?>"><?php echo \get_theme_mod('header_telephone'); ?></a>
-				<span class="telephone-icon">
-					<img src="<?php echo \get_template_directory_uri()?>/theme/assets/icons/phone.svg" alt="">
-				</span>
+			<?php if(isset(Config::HEADER['right']['login']) && Config::HEADER['right']['login'] !== false) : ?>
+				<div class="header-login wp-block-button">
+					<?php if( is_user_logged_in() ){
+						echo '<a class="wp-block-button__link" href="'. wp_logout_url( site_url() ) .'">Log Out</a>';
+					} else {
+						echo '<a class="wp-block-button__link" href="'. wp_login_url( ) .'">Log In</a>';
+					} ?>
 				</div>
 			<?php endif; ?>
-			<?php if(Config::HAS_DESKTOP_MENU_BUTTON === true) : ?>
-				<div class="wp-block-button"><a class="wp-block-button__link" style="background-color:#E6623F;" href="/contact-us">Get Started</a></div>
-
+			<?php if(\get_theme_mod('header_telephone')) : ?>
+				<div class="header-telephone">
+					<a href="tel:<?php echo \get_theme_mod('header_telephone'); ?>"><?php echo \get_theme_mod('header_telephone'); ?>
+						<span class="telephone-icon">
+							<img src="<?php echo \get_template_directory_uri()?>/theme/assets/icons/phone-grid.svg" alt="">
+						</span>
+					</a>
+				</div>
+			<?php endif; ?>
+			<?php if(isset(Config::HEADER['right']['cta']) && Config::HEADER['right']['cta'] !== false) : ?>
+				<div class="header-cta wp-block-button">
+					<?php 
+						$cta_text = \get_theme_mod('top_cta_text');
+						$cta_url = \get_theme_mod('top_cta_url');
+						if($cta_text && $cta_url){ ?>
+						
+							<a class="wp-block-button__link" href="<?php echo $cta_url ?>"><?php echo $cta_text ?></a>
+						
+					<?php } ?>
+				</div>
 			<?php endif; ?>
 		</div>
-	</div>
-</header><!-- #site-header -->
+	<?php endif;?>
+</header>

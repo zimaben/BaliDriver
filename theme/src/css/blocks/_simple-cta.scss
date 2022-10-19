@@ -1,0 +1,32 @@
+.simple-cta-wrap{
+    padding-left:clamp(33px, 13.23vw, 200px);
+    padding-right:clamp(33px, 13.23vw, 200px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    h2{
+        text-align:center;
+        margin-top:0;
+        margin-bottom:7px;
+    }
+    p {
+        font-family:inherit;
+        font-weight:400;
+        font-size:18px;
+        line-height:24.51px;
+        max-width:45.83vw;
+        margin-top:0;
+        text-align:center;
+        color:$primarytextcolor;
+    }
+}
+@media screen and (max-width:991px){
+    .simple-cta-wrap{
+        padding-left:33px;
+        padding-right:33px;
+        p{
+            max-width: unset;
+
+        }
+    }
+}

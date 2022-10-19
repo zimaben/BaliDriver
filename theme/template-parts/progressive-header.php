@@ -1,6 +1,6 @@
 <?php
-use \<!PLUGINPATH->\Config as Config;
-use \<!PLUGINPATH->\<!PLUGINNAME-> as Theme;
+use \ktdamd\Config as Config;
+use \ktdamd\DoctorAtMyDoor as Theme;
 global $post;
 
 /* When adapting this to new themes, if posts have different header width and height 

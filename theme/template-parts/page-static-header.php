@@ -1,6 +1,6 @@
 <?php
-use \<!PLUGINPATH->\Config as Config;
-use \<!PLUGINPATH->\<!PLUGINNAME-> as Theme;
+use \ktdamd\Config as Config;
+use \ktdamd\DoctorAtMyDoor as Theme;
 global $post;
 
 #BG-PAGE-FULL is the full size of the hero image in the designs, #FULL is the full size of the image in the media library

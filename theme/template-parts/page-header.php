@@ -1,6 +1,6 @@
 <?php
-use \<!PLUGINPATH->\Config as Config;
-use \<!PLUGINPATH->\<!PLUGINNAME-> as Theme;
+use \ktdamd\Config as Config;
+use \ktdamd\DoctorAtMyDoor as Theme;
    #page header
    if(Config::FEATURES['progressive_header'] === true){
 
@@ -14,7 +14,7 @@ use \<!PLUGINPATH->\<!PLUGINNAME-> as Theme;
     #critical inline styles
     if(Config::FEATURES['critical_css'] === true){
 
-        Theme::doCriticalCSS();
+        #Theme::TemplatePart('static/critical-css.php');
 
     }
 

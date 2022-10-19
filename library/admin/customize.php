@@ -80,7 +80,7 @@ if ( ! class_exists( '\<!PLUGINPATH->\customizer\Theme_Customizer' ) ) {
 			if( Config::HEADER && is_array(Config::HEADER)) :
 
 				foreach(Config::HEADER as $section => $settings){	
-					error_log( $section );
+				
 					switch( $section ){
 						case "logo" : 
 							#we use the default site Identity menu for this
@@ -100,7 +100,7 @@ if ( ! class_exists( '\<!PLUGINPATH->\customizer\Theme_Customizer' ) ) {
 											case "login" : 
 											break;
 											case "phone" :
-												error_log("HIT FOR PHONE: " . $setting);
+					
 												$wp_customize->add_setting( 'header_telephone', array(
 													'default'           => '',
 													'sanitize_callback' => 'wp_filter_nohtml_kses',

@@ -1,0 +1,14 @@
+
+body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    max-width:100%;
+    overflow-y:scroll;
+    overflow-x:hidden;
+}
+footer.site-footer{
+    display:flex;
+    margin-top:auto;
+}

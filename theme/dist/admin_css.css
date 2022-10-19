@@ -1,0 +1,34 @@
+.simple-cta-wrap {
+  padding-left: clamp(33px, 13.23vw, 200px);
+  padding-right: clamp(33px, 13.23vw, 200px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.simple-cta-wrap h2 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 7px;
+}
+.simple-cta-wrap p {
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24.51px;
+  max-width: 45.83vw;
+  margin-top: 0;
+  text-align: center;
+  color: "black";
+}
+
+@media screen and (max-width: 991px) {
+  .simple-cta-wrap {
+    padding-left: 33px;
+    padding-right: 33px;
+  }
+  .simple-cta-wrap p {
+    max-width: unset;
+  }
+}
+
+/*# sourceMappingURL=admin_css.css.map*/

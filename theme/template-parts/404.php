@@ -1,5 +1,5 @@
 <?php
-use <!PLUGINPATH->\<!PLUGINNAME-> as Theme;
+use ktdamd\DoctorAtMyDoor as Theme;
 /*
  *  Template Name: 404
  *  404 Template

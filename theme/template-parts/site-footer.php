@@ -1,5 +1,5 @@
 <?php 
-use \<!PLUGINPATH->\Config as Config;
+use \ktdamd\Config as Config;
 
 if(\get_theme_mod('footer_bgcolor') && \get_theme_mod('footer_is_bgcolor')){
     $style = ' style="background-color: ' . \get_theme_mod('footer_bgcolor') .'"';
