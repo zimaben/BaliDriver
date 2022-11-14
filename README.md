@@ -33,10 +33,8 @@ The back-end files within each library folder should be commented to show exampl
  - At the bottom of the document, a DOM query is made for the [data-process] data attribute. These data attributes are included in the base theme (depending on wp-theme-config.php) for things like Progressive Headers. If an element has a data-process="DoProgressiveHeader" the JS will be fired on that element.
  ## SCROLL
  - Data-process support is also built in for scroll events. The /frontend/scroll.js file has default javascript for adding an active class or callback to any element with appropriate data attributes. Example use:
-	<code>
-	<section class="myclass" data-process="atScroll">An "active" class will be inserted to this element when it scrolls into the viewport</section>
+    <section class="myclass" data-process="atScroll">An "active" class will be inserted to this element when it scrolls into the viewport</section>
+    <section class="myclass" data-process="atScroll" data-scroll-offset="-200px">An "active" class will be inserted to this element 200 pixels after it scrolls into the viewport</section>
 
-	<section class="myclass" data-process="atScroll" data-scroll-offset="-200px">An "active" class will be inserted to this element 200 pixels after it scrolls into the viewport</section>
+    <section class="myclass" data-process="atScroll" data-scroll-offset="-200px" data-callback="parallaxScroll">The callback function parallaxScroll will be called 200px after this element scrolls into the viewport. If a corresponding parallaxScroll function with export does not exist in frontend.scroll.js it will throw an error.</section>
 
-	<section class="myclass" data-process="atScroll" data-scroll-offset="-200px" data-callback="parallaxScroll">The callback function parallaxScroll will be called 200px after this element scrolls into the viewport. If a corresponding parallaxScroll function with export does not exist in frontend.scroll.js it will throw an error.</section>
-</code>
