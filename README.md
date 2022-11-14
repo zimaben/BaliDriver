@@ -31,8 +31,12 @@ The back-end files within each library folder should be commented to show exampl
 
 ## Builtin Javascript
  - At the bottom of the document, a DOM query is made for the [data-process] data attribute. These data attributes are included in the base theme (depending on wp-theme-config.php) for things like Progressive Headers. If an element has a data-process="DoProgressiveHeader" the JS will be fired on that element.
- ## SCROLL
- - Data-process support is also built in for scroll events. The /frontend/scroll.js file has default javascript for adding an active class or callback to any element with appropriate data attributes. Example use:
+ ## Progressive Header
+ - Data-process support is built in for progressive headers. add data-process="DoProgressiveHeader" on any element you want to fire progressive headers on. The markup needs to fit (@todo - finish with example) and the .aspect-ratio-fill element needs to be correctly set in CSS to the height/width (aspect-ratio css) in order for the progressive header to work correctly.
+ ## Scroll Triggers/Effects
+ - Data-process support is also built in for scroll events. The /frontend/scroll.js file has default javascript for adding an active class or callback to any element with appropriate data attributes. Use the "atScroll" data-process tag on any element that you want to animate or otherwise mess with when it enters the viewport.
+ 
+ - Example use:
  
     `<section class="myclass" data-process="atScroll">An "active" class will be inserted to this element when it scrolls into the viewport</section>`
  
