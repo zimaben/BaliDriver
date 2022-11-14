@@ -40,5 +40,5 @@ The back-end files within each library folder should be commented to show exampl
 	
 	
 
-`<section class="myclass" data-process="atScroll" data-scroll-offset="-200px" data-callback="parallaxScroll">The callback function parallaxScroll will be called 200px after this element scrolls into the viewport. If a corresponding parallaxScroll function with export does not exist in frontend.scroll.js it will throw an error.</section>`
+	`<section class="myclass" data-process="atScroll" data-scroll-offset="-200px" data-callback="parallaxScroll">The callback function parallaxScroll will be called 200px after this element scrolls into the viewport. If a corresponding parallaxScroll function with export does not exist in frontend.scroll.js it will throw an error.</section>`
 
