@@ -1,4 +1,4 @@
-Welcome to the Kitely Tech Boilerplate Wordpress Plugin
+Welcome to the KT Boilerplate Wordpress Theme
 
 Create a new plugin:
 You've already created new local folder for the plugin you want to create and downloaded the boilerplate repo.

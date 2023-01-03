@@ -121,6 +121,17 @@ footer.site-footer {
   width: 65%;
 }
 
+@media screen and (max-width: 991px) {
+  .postwrap .layout {
+    flex-wrap: wrap;
+  }
+  .postwrap .layout .left {
+    width: 100%;
+  }
+  .postwrap .layout .right {
+    width: 100%;
+  }
+}
 .wp-block-button__link,
 button.primary,
 .button.primary,
