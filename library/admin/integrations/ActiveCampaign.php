@@ -1,7 +1,7 @@
 <?php
 
-namespace <!PLUGINPATH->\admin;
-use <!PLUGINPATH->\Config as Config;
+namespace rbt\admin;
+use rbt\Config as Config;
 
 Class ActiveCampaignIntegration {
 

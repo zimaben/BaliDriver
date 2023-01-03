@@ -112,6 +112,7 @@ EOF
 	'/theme/template-parts/site-footer.php',
   '/theme/template-parts/prefooter.php',
   '/theme/src/js/blocks/simple-cta.js',
+  '/page.php',
 	'/footer.php',
 	'/front-page.php',
 	'/functions.php',

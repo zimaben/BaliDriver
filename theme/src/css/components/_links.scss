@@ -1,0 +1,24 @@
+@import '../global/variables';
+
+a {
+    color: $primary;
+    &:active,
+    &:hover {
+        /* Darken on click by 15% (down to 85%) */
+        filter: brightness(0.85);
+    }
+}
+
+.wp-block-button a,
+.button a,
+button a {
+    text-decoration:none;
+}
+.wp-block-button.primary-color,
+.button.primary-color,
+button.primary-color,
+.wp-block-button.accent-color,
+.button.accent-color,
+button.accent-color{
+    color:$white;
+}

@@ -1,0 +1,108 @@
+// $primary: #2DD3EB;
+// $accent: #FF4E4E;
+
+// $white: #fff;
+// $lightneutral: #D9D9D9;
+// $neutral: #969696;
+// $darkneutral:#323232;
+// $black: #212121;
+
+// $theme: "light"; //accepts "light" & "dark"
+.wp-block-button__link,
+button.primary,
+.button.primary, 
+.button, button {
+    background-color:$primary;
+    color: $white;
+    cursor:pointer;
+    padding-right:clamp(23.94px, 3.33vw, 47.88px);
+    padding-left:clamp(23.94px, 3.33vw, 47.88px);
+    padding-top:clamp(8.24px, 1.14vw, 16.47px);
+    padding-bottom:clamp(8.24px, 1.14vw, 16.47px);
+    font-size:clamp(16px, 1.25vw, 18px);
+    line-height:clamp(24px, 2.22vw, 32px);
+    width:fit-content;
+    border-radius:$borderradius;
+    text-align:center;
+    white-space:nowrap;
+    transition: all .33s ease;
+    &:hover{
+        /* Darken on click by 15% (down to 85%) */
+        filter: brightness(0.85);
+    }
+    &:focus,
+    &.focus{
+        filter:brightness(1.1);
+        border: 1px solid $primary;
+    }
+    &:disabled, 
+    &.disabled{
+        background-color:$neutral;
+        color:$white;
+    }
+    &.outline{
+        background-color:transparent;
+        outline:1px solid $primary;
+        color:$primary;
+        &:hover{
+            background-color:$primary;
+            color:$white;
+            
+        }
+        &:disabled{
+            border-color:$neutral;
+            color:$neutral;
+        }
+    }
+}
+.wp-block-button.outline .button,
+.wp-block-button.outline .wp-block-button__link{
+    background-color:transparent;
+    outline:1px solid $primary;
+    color:$primary;
+    &:hover{
+        /* Darken on click by 15% (down to 85%) */
+        filter: brightness(0.85);
+    }
+    &:focus,
+    &.focus{
+        filter:brightness(1.1);
+        border: 1px solid $primary;
+    }
+    &:disabled{
+        background-color:$neutral;
+        color:$white;
+    }
+}
+/* CONTACT FORM 7 */
+
+.wpcf7-form input[type=submit]{
+    background-color:$primary;
+    color: $white;
+    cursor:pointer;
+    padding-right:clamp(23.94px, 3.33vw, 47.88px);
+    padding-left:clamp(23.94px, 3.33vw, 47.88px);
+    padding-top:clamp(8.24px, 1.14vw, 16.47px);
+    padding-bottom:clamp(8.24px, 1.14vw, 16.47px);
+    font-size:clamp(16px, 1.25vw, 18px);
+    line-height:clamp(24px, 2.22vw, 32px);
+    width:fit-content;
+    border-radius:$borderradius;
+    text-align:center;
+    white-space:nowrap;
+    transition: all .33s ease;
+    &:hover{
+        /* Darken on click by 15% (down to 85%) */
+        filter: brightness(0.85);
+    }
+    &:focus,
+    &.focus{
+        filter:brightness(1.1);
+        border: 1px solid $primary;
+    }
+    &:disabled, 
+    &.disabled{
+        background-color:$neutral;
+        color:$white;
+    }
+}

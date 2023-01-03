@@ -1,9 +1,9 @@
 <?php 
-namespace <!PLUGINPATH->\setup;
-use \<!PLUGINPATH->\Config as Config;
+namespace rbt\setup;
+use \rbt\Config as Config;
 
 #move to bottom if not hoisted
-\<!PLUGINPATH->\setup\Blocks::get_instance();
+\rbt\setup\Blocks::get_instance();
 
 class Blocks {
 
@@ -77,19 +77,19 @@ class Blocks {
             if(!file_exists( \get_template_directory() . '/theme/src/js/blocks/' . $handle . '.js' ) ){
 				if ( $callback ) {
                     $template = file_get_contents( \get_template_directory() . '/library/core/block_script_callback_template.txt' );
-                    $content = preg_replace('/[!PLUGINPATH!]/s','<!PLUGINPATH->',$template);
+                    $content = preg_replace('/[!PLUGINPATH!]/s','rbt',$template);
                     $content = preg_replace('/[!HANDLE!]/s', $handle, $content);
                     file_put_contents( \get_template_directory() . '/theme/src/js/blocks/' . $handle . '.js' , $content);
                 } else {
                     $template = file_get_contents( \get_template_directory() . '/library/core/block_script_template.txt' );
-                    $content = preg_replace('/[!PLUGINPATH!]/s','<!PLUGINPATH->',$template);
+                    $content = preg_replace('/[!PLUGINPATH!]/s','rbt',$template);
                     $content = preg_replace('/[!HANDLE!]/s', $handle, $content);
                     file_put_contents( \get_template_directory() . '/theme/src/js/blocks/' . $handle . '.js' , $content);
                 }
             }
             if(!file_exists( \get_template_directory() . '/theme/src/css/blocks/_' . $handle . '.scss' ) ){
                 $template = file_get_contents( \get_template_directory() . '/library/core/block_style_template.txt' );
-                $content = preg_replace('/[!PLUGINPATH!]/s','<!PLUGINPATH->',$template);
+                $content = preg_replace('/[!PLUGINPATH!]/s','rbt',$template);
                 $content = preg_replace('/[!HANDLE!]/s', $handle, $content);
                 file_put_contents( \get_template_directory() . '/theme/src/css/blocks/_' . $handle . '.scss'  , $content);
                 $base_blocks_scss = file_get_contents( \get_template_directory() . '/theme/src/css/_blocks.scss' );
@@ -99,7 +99,7 @@ class Blocks {
 
             if(!file_exists( \get_template_directory() . '/theme/src/css/blocks/_' . $handle . '-editor.scss' ) ){
                 $template = file_get_contents( \get_template_directory() . '/library/core/block_style_template.txt' );
-                $content = preg_replace('/[!PLUGINPATH!]/s','<!PLUGINPATH->',$template);
+                $content = preg_replace('/[!PLUGINPATH!]/s','rbt',$template);
                 $content = preg_replace('/[!HANDLE!]/s', $handle, $content);
                 file_put_contents( \get_template_directory() . '/theme/src/css/blocks/_' . $handle . '-editor.scss'  , $content);
                 $base_blocks_scss = file_get_contents( \get_template_directory() . '/theme/src/css/editor.scss' );
@@ -127,10 +127,13 @@ class Blocks {
         #core hooks/filters 
         #\wp_enqueue_script ( 'hooksfilters-js', \get_template_directory_uri() . '/dist/global/core-filters.js', array('wp-blocks', 'wp-editor', 'wp-components'), $v, false );
     }
-    public static function theme_block_settings_filters(){
-        #@TODO
-        error_log("IS STILL NEED TO ADD THEME BLOCK FILTERS IN THE TEMPLATE");
+    public static function theme_block_settings_filters( $editor_settings, $editor_context ) {
+        // if ( ! empty( $editor_context->post ) ) {
+        //     $editor_settings['maxUploadFileSize'] = 12345;
+        // }
+        return $editor_settings;
     }
+    
 
 
 }

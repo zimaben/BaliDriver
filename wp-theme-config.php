@@ -1,10 +1,10 @@
 <?php
-namespace <!PLUGINPATH->;
+namespace rbt;
 Class Config {
     const VERSION = "1.0.1";
     const MODE = "development";
-    const TEXTDOMAIN = "<!PLUGINPATH->_<!PLUGINNAME->";
-    const NICENAME = "<!HUMANREADABLE->";
+    const TEXTDOMAIN = "rbt_FRStarter";
+    const NICENAME = "Starter";
 
     const BREAKPOINTS = array(
         'phone' => 576,
@@ -33,7 +33,13 @@ Class Config {
     const PAGES = array(
         'contact-us' => array(
             'title'=> 'Contact Us',
-            'type'=> 'page'
+            'type'=> 'page',
+            'menu' => array('primary', 'mobile', 'footer_two' ),
+        ),
+        'about' => array(
+            'title'=> 'About Us',
+            'type'=> 'page',
+            'menu' => array('primary', 'mobile', 'footer_two' )
         ),
     );
     const INTEGRATIONS = array( 
@@ -64,9 +70,9 @@ Class Config {
         'prefooter' => array('title', 'image', 'textarea','shortcode'),
         'columns'=>array(
             'footer_one'=> array('logo', 'textarea', 'social_links'),
-            'footer_two'=> array('title'),
+            'footer_two'=> array('title', array('menu'=>'footer_two') ),
             'footer_three'=>array('title', array('menu'=>'footer_three') ),
-            'footer_four'=> array('title', 'textarea')
+          #  'footer_four'=> array('title', 'textarea')
         ),
         'bottom' => array(
             'copyright', 
@@ -101,9 +107,9 @@ Class Config {
             'footer' => false,
             'sidebar' => false
         ),
-        'footer_three' => array(
-            'name'=> 'Footer Three',
-            'location'=> 'footer_three',
+        'footer_two' => array(
+            'name'=> 'Footer Two',
+            'location'=> 'footer_two',
             'bootstrap_markup' => false,
             'depth' => 1,
             'header'=> false,

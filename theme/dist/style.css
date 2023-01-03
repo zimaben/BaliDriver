@@ -1,3 +1,73 @@
+/* Typography */
+/* Layout */
+/*
+ * [Modified] Modern CSS Reset
+ * @link https://github.com/hankchizljaw/modern-css-reset
+*/
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  font-family: sans-serif;
+  font-size: 100%;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
+}
+
+/* Make images easier to work with */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  html {
+    scroll-behavior: initial;
+  }
+}
 body {
   min-height: 100vh;
   display: flex;
@@ -20,13 +90,200 @@ body {
 
 footer.site-footer {
   display: flex;
+  background-color: #2DD3EB;
 }
 
+/* index layouts */
+.postwrap {
+  padding-left: clamp(25px, 10.14vw, 146px);
+  padding-right: clamp(25px, 10.14vw, 146px);
+}
+.postwrap.alignwide {
+  padding-left: 0;
+  padding-right: 0;
+}
+.postwrap .layout {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+.postwrap .layout.reverse {
+  flex-direction: row-reverse;
+}
+.postwrap .layout .left {
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+}
+.postwrap .layout .right {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+}
+
+.wp-block-button__link,
+button.primary,
+.button.primary,
+.button, button {
+  background-color: #2DD3EB;
+  color: #fff;
+  cursor: pointer;
+  padding-right: clamp(23.94px, 3.33vw, 47.88px);
+  padding-left: clamp(23.94px, 3.33vw, 47.88px);
+  padding-top: clamp(8.24px, 1.14vw, 16.47px);
+  padding-bottom: clamp(8.24px, 1.14vw, 16.47px);
+  font-size: clamp(16px, 1.25vw, 18px);
+  line-height: clamp(24px, 2.22vw, 32px);
+  width: fit-content;
+  border-radius: 4px;
+  text-align: center;
+  white-space: nowrap;
+  transition: all 0.33s ease;
+}
+.wp-block-button__link:hover,
+button.primary:hover,
+.button.primary:hover,
+.button:hover, button:hover {
+  /* Darken on click by 15% (down to 85%) */
+  filter: brightness(0.85);
+}
+.wp-block-button__link:focus, .wp-block-button__link.focus,
+button.primary:focus,
+button.primary.focus,
+.button.primary:focus,
+.button.primary.focus,
+.button:focus,
+.button.focus, button:focus, button.focus {
+  filter: brightness(1.1);
+  border: 1px solid #2DD3EB;
+}
+.wp-block-button__link:disabled, .wp-block-button__link.disabled,
+button.primary:disabled,
+button.primary.disabled,
+.button.primary:disabled,
+.button.primary.disabled,
+.button:disabled,
+.button.disabled, button:disabled, button.disabled {
+  background-color: #969696;
+  color: #fff;
+}
+.wp-block-button__link.outline,
+button.primary.outline,
+.button.primary.outline,
+.button.outline, button.outline {
+  background-color: transparent;
+  outline: 1px solid #2DD3EB;
+  color: #2DD3EB;
+}
+.wp-block-button__link.outline:hover,
+button.primary.outline:hover,
+.button.primary.outline:hover,
+.button.outline:hover, button.outline:hover {
+  background-color: #2DD3EB;
+  color: #fff;
+}
+.wp-block-button__link.outline:disabled,
+button.primary.outline:disabled,
+.button.primary.outline:disabled,
+.button.outline:disabled, button.outline:disabled {
+  border-color: #969696;
+  color: #969696;
+}
+
+.wp-block-button.outline .button,
+.wp-block-button.outline .wp-block-button__link {
+  background-color: transparent;
+  outline: 1px solid #2DD3EB;
+  color: #2DD3EB;
+}
+.wp-block-button.outline .button:hover,
+.wp-block-button.outline .wp-block-button__link:hover {
+  /* Darken on click by 15% (down to 85%) */
+  filter: brightness(0.85);
+}
+.wp-block-button.outline .button:focus, .wp-block-button.outline .button.focus,
+.wp-block-button.outline .wp-block-button__link:focus,
+.wp-block-button.outline .wp-block-button__link.focus {
+  filter: brightness(1.1);
+  border: 1px solid #2DD3EB;
+}
+.wp-block-button.outline .button:disabled,
+.wp-block-button.outline .wp-block-button__link:disabled {
+  background-color: #969696;
+  color: #fff;
+}
+
+/* CONTACT FORM 7 */
+.wpcf7-form input[type=submit] {
+  background-color: #2DD3EB;
+  color: #fff;
+  cursor: pointer;
+  padding-right: clamp(23.94px, 3.33vw, 47.88px);
+  padding-left: clamp(23.94px, 3.33vw, 47.88px);
+  padding-top: clamp(8.24px, 1.14vw, 16.47px);
+  padding-bottom: clamp(8.24px, 1.14vw, 16.47px);
+  font-size: clamp(16px, 1.25vw, 18px);
+  line-height: clamp(24px, 2.22vw, 32px);
+  width: fit-content;
+  border-radius: 4px;
+  text-align: center;
+  white-space: nowrap;
+  transition: all 0.33s ease;
+}
+.wpcf7-form input[type=submit]:hover {
+  /* Darken on click by 15% (down to 85%) */
+  filter: brightness(0.85);
+}
+.wpcf7-form input[type=submit]:focus, .wpcf7-form input[type=submit].focus {
+  filter: brightness(1.1);
+  border: 1px solid #2DD3EB;
+}
+.wpcf7-form input[type=submit]:disabled, .wpcf7-form input[type=submit].disabled {
+  background-color: #969696;
+  color: #fff;
+}
+
+/* Typography */
+/* Layout */
+a {
+  color: #2DD3EB;
+}
+a:active, a:hover {
+  /* Darken on click by 15% (down to 85%) */
+  filter: brightness(0.85);
+}
+
+.wp-block-button a,
+.button a,
+button a {
+  text-decoration: none;
+}
+
+.wp-block-button.primary-color,
+.button.primary-color,
+button.primary-color,
+.wp-block-button.accent-color,
+.button.accent-color,
+button.accent-color {
+  color: #fff;
+}
+
+ul.menu-wrapper li a {
+  color: #212121;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Typography */
+/* Layout */
 #site-header {
   display: flex;
   width: 100%;
   height: 64px;
   position: relative;
+  padding-left: clamp(25px, 10.14vw, 146px);
+  padding-right: clamp(25px, 10.14vw, 146px);
+  background-color: #2DD3EB;
 }
 #site-header .mobile-menu-button {
   display: none;
@@ -37,11 +294,25 @@ footer.site-footer {
   background-position: center center;
   cursor: pointer;
 }
+#site-header .mobile-menu-container {
+  display: none;
+}
 #site-header .top.menu-logo {
   height: 100%;
 }
 #site-header .top.menu-logo .site-branding {
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#site-header .top.menu-logo .site-branding a {
+  color: #212121;
+  text-decoration: none;
+}
+#site-header .top.menu-logo .site-branding h1 {
+  margin: 0;
 }
 #site-header .top.menu-logo .site-branding img {
   max-height: 100%;
@@ -56,6 +327,9 @@ footer.site-footer {
   display: inline-flex;
   gap: 12px;
 }
+#site-header .top.menu-container .primary-menu-container {
+  padding-left: 11vw;
+}
 
 @media screen and (max-width: 991px) {
   #site-header {
@@ -63,6 +337,9 @@ footer.site-footer {
   }
   #site-header .mobile-menu-button {
     display: inline-flex;
+  }
+  #site-header .desktop-menu {
+    display: none;
   }
 }
 footer.site-footer .custom-logo-link {
@@ -74,6 +351,9 @@ footer.site-footer .custom-logo-link img {
   max-width: 100%;
   max-height: 100%;
 }
+footer.site-footer .column {
+  flex: 1;
+}
 footer.site-footer .column ul.menu-wrapper {
   list-style: none;
 }
@@ -84,6 +364,7 @@ footer.site-footer .column ul.menu-wrapper {
   justify-content: space-between;
   padding-left: 50px;
   padding-right: 50px;
+  background-color: #2DD3EB;
 }
 .row.footer-menu-bottom ul.footerbottom {
   list-style: none;
@@ -116,7 +397,7 @@ footer.site-footer .column ul.menu-wrapper {
   max-width: 45.83vw;
   margin-top: 0;
   text-align: center;
-  color: "black";
+  color: #212121;
 }
 
 @media screen and (max-width: 991px) {

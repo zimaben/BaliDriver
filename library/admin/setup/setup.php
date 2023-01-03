@@ -1,10 +1,10 @@
 <?php
-namespace <!PLUGINPATH->\admin;
-use \<!PLUGINPATH->\<!PLUGINNAME-> as Theme;
-use \<!PLUGINPATH->\admin\setup\PostTypes as PostTypes;
-use \<!PLUGINPATH->\admin\setup\Page as Page;
-use \<!PLUGINPATH->\admin\setup\Taxonomy as Taxonomy;
-use \<!PLUGINPATH->\Config as Config;
+namespace rbt\admin;
+use \rbt\FRStarter as Theme;
+use \rbt\admin\setup\PostTypes as PostTypes;
+use \rbt\admin\setup\Page as Page;
+use \rbt\admin\setup\Taxonomy as Taxonomy;
+use \rbt\Config as Config;
 
 /**
  * The setup file does two things. Class Setup runs on every page load and 
@@ -20,7 +20,7 @@ use \<!PLUGINPATH->\Config as Config;
  *  new site pages.
  * 
  * @package TPT
- * @subpackage <!PLUGINNAME->
+ * @subpackage FRStarter
  */
 class Setup extends Theme {
 
@@ -159,17 +159,27 @@ class Setup extends Theme {
                 $menu_id = \wp_create_nav_menu($props['name']);
                 if(!empty(Config::PAGES)){
                     foreach(Config::PAGES as $slug => $args){
-                        if(isset($args['menu']) && $args['menu'] == $props['location'] ){
-                 
-                            $page_object = \get_page_by_path($slug);
-                            \wp_update_nav_menu_item($menu_id, 0, array(
-                                'menu-item-title' => $args['title'],
-                                'menu-item-object' => 'page',
-                                'menu-item-object-id' => $page_object->ID,
-                                'menu-item-url' => \get_permalink($page_object->ID),
-                                'menu-item-type' => isset($args['type']) ? $args['type'] : 'page',
-                                'menu-item-status' => 'publish'
-                            ));
+                        if(isset($args['menu']) ){
+                            if(is_array($args['menu'])){
+                                $check = in_array($props['location'], $args['menu']);
+                            } else {
+                                $check = ($args['menu'] == $props['location']);
+                            }
+                            if($check) {
+                                $page_object = \get_page_by_path($slug);
+                                
+                                $menu_args = array(
+                                    'menu-item-title' => $args['title'],
+                                    'menu-item-type' => 'post_type',
+                                    'menu-item-object-id' => $page_object->ID,
+                                    'menu-item-object' => $page_object->post_type,
+                                    'menu-item-url' => \get_permalink($page_object->ID),     
+                                    'menu-item-status' => 'publish'
+                                );
+
+                                
+                                \wp_update_nav_menu_item($menu_id, 0, $menu_args );
+                            }
                         }
                     }
                 } else {
@@ -184,7 +194,8 @@ class Setup extends Theme {
                     wp_update_nav_menu_item( $menu_id, 0, array(
                         'menu-item-title'  =>  __( 'Sample Page', Theme::TEXTDOMAIN ),
                         'menu-item-url'    => home_url( '/sample-page/' ), 
-                        'menu-item-status' => 'publish'
+                        'menu-item-status' => 'publish',
+                        'menu-item-type' => 'page',
                     ) );
                 }
                  

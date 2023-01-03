@@ -1,6 +1,6 @@
 <?php
-use \ktdamd\Config as Config;
-use \ktdamd\DoctorAtMyDoor as Theme;
+use rbt\FRStarter as Theme;
+use rbt\Config as Config;
    #page header
    if(Config::FEATURES['progressive_header'] === true){
 

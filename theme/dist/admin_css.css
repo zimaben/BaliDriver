@@ -1,3 +1,5 @@
+/* Typography */
+/* Layout */
 .simple-cta-wrap {
   padding-left: clamp(33px, 13.23vw, 200px);
   padding-right: clamp(33px, 13.23vw, 200px);
@@ -18,7 +20,7 @@
   max-width: 45.83vw;
   margin-top: 0;
   text-align: center;
-  color: "black";
+  color: #212121;
 }
 
 @media screen and (max-width: 991px) {

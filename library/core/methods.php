@@ -1,8 +1,8 @@
 <?php
-namespace <!PLUGINPATH->\api;
+namespace rbt\api;
 
-use \<!PLUGINPATH->\<!PLUGINNAME-> as Theme;
-use \<!PLUGINPATH->\core\View as View;
+use \rbt\FRStarter as Theme;
+use \rbt\core\View as View;
 
 class Methods {
     /* 

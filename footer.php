@@ -1,5 +1,5 @@
 <?php
-use <!PLUGINPATH->\<!PLUGINNAME-> as Theme;
+use rbt\FRStarter as Theme;
 /**
  * The template for displaying the footer
  *

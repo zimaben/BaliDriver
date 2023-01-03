@@ -24,7 +24,7 @@
      footer: JS_DIR + '/foot.js',
      
      //I Still don't know how to do this a better way
-     'blocks/cta-cards': JS_DIR + '/blocks/cta-cards.js',
+     'blocks/simple-cta': JS_DIR + '/blocks/simple-cta.js',
      //End Blocks
 
      admin: JS_DIR + '/admin.js',

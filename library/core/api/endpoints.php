@@ -1,8 +1,8 @@
 <?php
-namespace <!PLUGINPATH->\api;
+namespace rbt\api;
 
-use \<!PLUGINPATH->\<!PLUGINNAME-> as Theme;
-use \<!PLUGINPATH->\Config as Config;
+use \rbt\FRStarter as Theme;
+use \rbt\Config as Config;
 
 class Endpoints extends Theme {
 
@@ -13,10 +13,10 @@ class Endpoints extends Theme {
     }
 
     public static function plugin_endpoints(){
-        $register_check = \register_rest_route( '<!PLUGINPATH->/v2', '/our-method/', array(
+        $register_check = \register_rest_route( 'rbt/v2', '/our-method/', array(
             'methods'=> 'GET',
-            'callback'=> '\<!PLUGINPATH->\api\Methods::our_method',
-            'permission_callback'=>'\<!PLUGINPATH->\api\Methods::checkPermission',
+            'callback'=> '\rbt\api\Methods::our_method',
+            'permission_callback'=>'\rbt\api\Methods::checkPermission',
         ));
         if(!$register_check && Config::MODE === 'development' ) {
     
@@ -26,4 +26,4 @@ class Endpoints extends Theme {
      
 }
 //spin it
-\<!PLUGINPATH->\api\Endpoints::run();
+\rbt\api\Endpoints::run();

@@ -1,6 +1,6 @@
 <?php
-namespace <!PLUGINPATH->\admin;
-use <!PLUGINPATH->\Config as Config;
+namespace rbt\admin;
+use rbt\Config as Config;
 
 /*/ 
  * The parent and child Classes for deferred loading of Google Maps. We'll load after the page 

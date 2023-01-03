@@ -1,8 +1,8 @@
 <?php
-namespace <!PLUGINPATH->;
+namespace rbt;
 use \Carbon_Fields\Container;
 use \Carbon_Fields\Field;
-use \<!PLUGINPATH->\Config as Config;
+use \rbt\Config as Config;
 
 #Theme::Assets
 #Theme::TemplatePart
@@ -22,9 +22,9 @@ use \<!PLUGINPATH->\Config as Config;
 
 defined( 'ABSPATH') OR exit;
 
-if( !class_exists( '\<!PLUGINPATH->\<!PLUGINNAME->')) {
+if( !class_exists( '\rbt\FRStarter')) {
 
-    class <!PLUGINNAME-> {
+    class FRStarter {
 
         private static $instance = null;
 
@@ -295,4 +295,4 @@ if( !class_exists( '\<!PLUGINPATH->\<!PLUGINNAME->')) {
 
     }
 }
-<!PLUGINNAME->::get_instance();
+FRStarter::get_instance();

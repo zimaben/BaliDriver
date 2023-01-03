@@ -1,1 +1,24 @@
-$primarytextcolor: 'black';
+$primary: #2DD3EB;
+$accent: #FF4E4E;
+
+$white: #fff;
+$lightneutral: #D9D9D9;
+$neutral: #969696;
+$darkneutral:#323232;
+$black: #212121;
+
+$theme: "light"; //accepts "light" & "dark"
+
+/* Typography */
+$headerfancy: 'Cabin', sans-serif;
+$header: 'Konnect', Konnect, sans-serif;
+$body: 'Fira Sans', Fira Sans, sans-serif;
+
+
+/* Layout */
+$grid: 1440;
+$edgeclamp: clamp(25px, 10.14vw, 146px);
+$borderradius: 4px;
+
+$indexleft: 35%;
+$indexright: 65%;

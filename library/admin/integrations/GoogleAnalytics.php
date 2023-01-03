@@ -1,8 +1,8 @@
 <?php
-namespace <!PLUGINPATH->\admin;
+namespace rbt\admin;
 use \Carbon_Fields\Container;
 use \Carbon_Fields\Field;
-use <!PLUGINPATH->\Config as Config;
+use rbt\Config as Config;
 
 /*/ 
  * Class for deferring ALL google analytics. This also plays nicely with 

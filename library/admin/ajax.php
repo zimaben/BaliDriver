@@ -1,7 +1,7 @@
 <?php
-namespace <!PLUGINPATH->\ajax;
+namespace rbt\ajax;
 
-use \<!PLUGINPATH->\<!PLUGINNAME-> as Theme;
+use \rbt\FRStarter as Theme;
 
 class Ajax extends Theme {
 
@@ -57,4 +57,4 @@ class Ajax extends Theme {
      
 }
 //spin it
-\<!PLUGINPATH->\ajax\Ajax::run();
+\rbt\ajax\Ajax::run();

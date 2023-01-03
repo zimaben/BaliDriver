@@ -1,5 +1,6 @@
 <?php
-use ktdamd\DoctorAtMyDoor as Theme;
+use rbt\FRStarter as Theme;
+
 /*
  *  Template Name: 404
  *  404 Template

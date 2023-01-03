@@ -217,9 +217,9 @@ var _wp$components = wp.components,
   PanelBody = _wp$components.PanelBody,
   SelectControl = _wp$components.SelectControl;
 var ALLOWED = ['core/buttons', 'core/button', 'core/paragraph', 'core/heading'];
-registerBlockType('<!PLUGINPATH->/simple-cta', {
+registerBlockType('rbt/simple-cta', {
   apiVersion: 2,
-  title: '<!HUMANREADABLE> Simple CTA',
+  title: 'FRStarter Simple CTA',
   icon: _icons_js__WEBPACK_IMPORTED_MODULE_0__["default"].kitelytech,
   category: 'kitelytech',
   //attributes

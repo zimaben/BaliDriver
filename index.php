@@ -1,6 +1,6 @@
 <?php
-use <!PLUGINPATH->\<!PLUGINNAME-> as Theme;
-use \<!PLUGINPATH->\Config as Config;
+use rbt\FRStarter as Theme;
+use \rbt\Config as Config;
 /**
  * The main template file - if it ain't broke...
  *
@@ -11,12 +11,10 @@ use \<!PLUGINPATH->\Config as Config;
  *
  *
  * @package TPT
- * @subpackage <!PLUGINNAME->
+ * @subpackage FRStarter
  */
 
 global $post;
-
-
 
 if ( have_posts() ) {
 

@@ -1,6 +1,6 @@
 <?php 
-use ktdamd\DoctorAtMyDoor as Theme;
-use ktdamd\Config as Config;
+use rbt\FRStarter as Theme;
+use rbt\Config as Config;
 
 
 // print_r( $template );

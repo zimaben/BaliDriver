@@ -5,9 +5,9 @@ const { registerBlockType }= wp.blocks;
 const { InspectorControls, RichText, InnerBlocks  } = wp.blockEditor;
 const {PanelBody, SelectControl } = wp.components
 const ALLOWED = ['core/buttons', 'core/button', 'core/paragraph', 'core/heading'];
-registerBlockType( '<!PLUGINPATH->/simple-cta', {
+registerBlockType( 'rbt/simple-cta', {
     apiVersion: 2,
-	title: '<!HUMANREADABLE> Simple CTA',  
+	title: 'FRStarter Simple CTA',  
 	icon: theme_icons.kitelytech,
     category: 'kitelytech', 
     //attributes

@@ -1,7 +1,7 @@
 <?php
-namespace <!PLUGINPATH->\customizer;
-use <!PLUGINPATH->\<!PLUGINNAME-> as Theme;
-use \<!PLUGINPATH->\Config as Config;
+namespace rbt\customizer;
+use rbt\FRStarter as Theme;
+use \rbt\Config as Config;
 /**
  * Customizer settings for this theme.
  *
@@ -12,8 +12,8 @@ use \<!PLUGINPATH->\Config as Config;
  * 
  */
 
-if ( ! class_exists( '\<!PLUGINPATH->\customizer\Theme_Customizer' ) ) {
-    add_action( 'init', array('\<!PLUGINPATH->\customizer\Theme_Customizer', 'get_instance'), 10 );
+if ( ! class_exists( '\rbt\customizer\Theme_Customizer' ) ) {
+    add_action( 'init', array('\rbt\customizer\Theme_Customizer', 'get_instance'), 10 );
 
 	class Theme_Customizer extends Theme {
         private static $instance = null;

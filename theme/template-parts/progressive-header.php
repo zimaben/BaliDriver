@@ -1,6 +1,6 @@
 <?php
-use \ktdamd\Config as Config;
-use \ktdamd\DoctorAtMyDoor as Theme;
+use rbt\FRStarter as Theme;
+use rbt\Config as Config;
 global $post;
 
 /* When adapting this to new themes, if posts have different header width and height 

@@ -1,5 +1,5 @@
 <?php
-namespace <!PLUGINPATH->\admin;
+namespace rbt\admin;
 
 
 /*/ 

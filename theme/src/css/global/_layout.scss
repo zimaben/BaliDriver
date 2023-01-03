@@ -20,5 +20,33 @@ body{
 }
 footer.site-footer{
     display:flex;
+    background-color:$primary;
 
+}
+/* index layouts */
+.postwrap{
+    padding-left:$edgeclamp;
+    padding-right:$edgeclamp;
+    &.alignwide{
+        padding-left:0;
+        padding-right:0;
+    }
+    .layout{
+        width:100%;
+        position:relative;
+        display:flex;
+        &.reverse{
+            flex-direction:row-reverse;
+        }
+        .left{
+            display:flex;
+            flex-direction:column;
+            width:$indexleft;
+        }
+        .right{
+            display:flex;
+            flex-direction:column;
+            width:$indexright;
+        }
+    }
 }

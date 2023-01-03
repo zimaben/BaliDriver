@@ -1,6 +1,6 @@
 <?php
-namespace <!PLUGINPATH->\admin;
-use <!PLUGINPATH->\Config as Config;
+namespace rbt\admin;
+use rbt\Config as Config;
 
 /*/ 
  * Class for Contact Form 7 Hooks and customizations. 

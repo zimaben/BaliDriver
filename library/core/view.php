@@ -1,8 +1,8 @@
 <?php
-namespace <!PLUGINPATH->\template;
+namespace rbt\template;
 
 
-class View extends \<!PLUGINPATH->\<!PLUGINNAME-> {
+class View extends \rbt\FRStarter {
     private $file;
     private $args = array();
 
