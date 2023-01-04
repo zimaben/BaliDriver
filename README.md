@@ -1,10 +1,10 @@
 Welcome to the KT Boilerplate Wordpress Theme
 
-Create a new plugin:
+Create a new theme:
 You've already created new local folder for the plugin you want to create and downloaded the boilerplate repo.
 So let's pick up from there
 
-## 👉  `bash buildplugin.sh`
+## 👉  `bash installer.sh`
 - This will ask you the name of your plugin plus the namespace or prefix
 - With that information it will build the boilerplate for the Plugin and install the front-end tooling
 

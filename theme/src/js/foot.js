@@ -1,3 +1,5 @@
+import * as global from './frontend/global.js';
+
 window.addEventListener('DOMContentLoaded', (event) => {
     
     let processlist = document.querySelectorAll('[data-process]');
@@ -13,10 +15,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 break;
         }      
     });
-    window.doAccordionClicks();
-    window.onload_data_fetch();
-    window.doMobileMenuClick();
-    window.setupModals();
+    global.doAccordionClicks();
+    //window.onload_data_fetch();
+    global.doMobileMenuClick();
+    //window.setupModals();
 });
 window.addEventListener('resize', (event) =>{
     let processlist = document.querySelectorAll('[data-process]');

@@ -7,3 +7,24 @@ ul.menu-wrapper{
         }
     }
 }
+#site-header{
+    .mobile-menu-container{
+        .mobile-menu{
+            ul.menu-wrapper{
+                padding:0;
+                list-style-type: none;
+                gap: 24px;
+                display: flex;
+                flex-direction: column;
+                font-size: 18px;
+                margin-top: 32px;
+                align-items:center;
+                justify-content:center;
+                li a {
+                    color:$primary;
+                    text-decoration:none;
+                }
+            } 
+        }
+    }
+}

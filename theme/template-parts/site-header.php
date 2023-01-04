@@ -14,16 +14,20 @@ use rbt\Config as Config;
 	</div>
 	<div class="mobile-menu-container" id="site-mobile-menu-container">
 		<div class="mobile-animation-wrap">
+		<span class="mobile-menu-close" data-menu-target="site-mobile-menu-container" onclick="mobileExpand(event)">
+		</span>
 			<?php
-			wp_nav_menu(
-				array(
-					'theme_location'  => 'mobile',
-					'menu_class'      => 'menu-wrapper',
-					'container_class' => 'mobile-menu-container',
-					'items_wrap'      => '<ul id="mobile-menu-list" class="%2$s">%3$s</ul>',
-					'fallback_cb'     => false,
-				)
-			);
+			
+				wp_nav_menu(
+					array(
+						'theme_location'  => 'mobile',
+						'menu_class'      => 'menu-wrapper',
+						'container_class' => 'mobile-menu',
+						'items_wrap'      => '<ul id="mobile-menu-list" class="%2$s">%3$s</ul>',
+						'fallback_cb'     => false,
+					)
+				);
+			
 			?>
 		</div>
 	</div>

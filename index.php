@@ -25,7 +25,7 @@ if ( have_posts() ) {
             } else {
                 get_header();
 
-               # Theme::TemplatePart('page-header');
+                Theme::TemplatePart('page-header');
             }
             // Load posts loop.
             while ( have_posts() ) {

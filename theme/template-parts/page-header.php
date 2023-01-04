@@ -14,7 +14,7 @@ use rbt\Config as Config;
     #critical inline styles
     if(Config::FEATURES['critical_css'] === true){
 
-        #Theme::TemplatePart('static/critical-css.php');
+        Theme::TemplatePart('static/critical-css.php');
 
     }
 

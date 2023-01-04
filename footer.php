@@ -13,7 +13,7 @@ use rbt\FRStarter as Theme;
 
 ?>		
 				
-			</main><!-- #main -->
+				</main><!-- #main -->
 		</section><!-- #primary -->
 	</div><!-- #content -->
 </div><!-- #page -->

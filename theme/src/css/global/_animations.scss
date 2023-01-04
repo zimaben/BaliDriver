@@ -1,0 +1,113 @@
+/* variables */
+$fadein: fadeIn .444s ease;
+$fadeout: fadeOut .444s ease;
+$slidein: slideIn .444s ease;
+$slideout: slideOut .444s ease;
+
+/* classes */
+.fadein {
+    animation:$fadein;
+}
+.fadeout {
+    animation:$fadeout;
+}
+.slidein {
+    animation:$slidein;
+}
+.slideout {
+    animation:$slideout;
+}
+/* Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@-webkit-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes fadeOut {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@-webkit-keyframes fadeOut {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes slideIn {
+    0% { left: -101vw; }
+    100% { left: 0; }
+}
+@-webkit-keyframes slideIn {
+    0% { left: -101vw; }
+    100% { left: 0; }
+}
+@keyframes slideOut {
+    0% { left: 0; }
+    100% { left: -101vw; }
+}
+@-webkit-keyframes slideOut {
+    0% { left: 0; }
+    100% { left: -101vw; }
+}
+
+/* SPINNER */
+//https://codepen.io/madebygus/pen/EjBvXR
+.logo-spinner{
+    position: absolute;
+    top: calc(50% - 87px);
+    left: calc(50% - 87px);
+    background-image: url( /theme/assets/icons/spinner-logo.svg );
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center center; 
+    z-index:1;
+}
+.spinner {
+    animation: rotate 1.4s linear infinite;
+    -webkit-animation: rotate 1.4s linear infinite;
+    -moz-animation: rotate 1.4s linear infinite;
+    width:174px;
+    height:174px;
+    position: relative;
+}
+
+.spinner {
+    animation: rotate 1.4s linear infinite;
+    -webkit-animation: rotate 1.4s linear infinite;
+    -moz-animation: rotate 1.4s linear infinite;
+    width:174px;
+    height:174px;
+    position: relative;
+  }
+  
+  .spinner-dot {
+    width:274px;
+    height:274px;
+    position: relative;
+    top: 0;
+  }
+  
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes rotate {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+} 
+
+.path {
+    stroke-dasharray: 170;
+    stroke-dashoffset: 20;
+}
+   

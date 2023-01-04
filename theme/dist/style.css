@@ -77,6 +77,9 @@ body {
   position: relative;
   overflow-y: scroll;
 }
+body.mobile-menu-expanded {
+  overflow: hidden;
+}
 
 /* stick footer on the bottom */
 #page {
@@ -132,6 +135,146 @@ footer.site-footer {
     width: 100%;
   }
 }
+/* variables */
+/* classes */
+.fadein {
+  animation: fadeIn 0.444s ease;
+}
+
+.fadeout {
+  animation: fadeOut 0.444s ease;
+}
+
+.slidein {
+  animation: slideIn 0.444s ease;
+}
+
+.slideout {
+  animation: slideOut 0.444s ease;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes slideIn {
+  0% {
+    left: -101vw;
+  }
+  100% {
+    left: 0;
+  }
+}
+@-webkit-keyframes slideIn {
+  0% {
+    left: -101vw;
+  }
+  100% {
+    left: 0;
+  }
+}
+@keyframes slideOut {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -101vw;
+  }
+}
+@-webkit-keyframes slideOut {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -101vw;
+  }
+}
+/* SPINNER */
+.logo-spinner {
+  position: absolute;
+  top: calc(50% - 87px);
+  left: calc(50% - 87px);
+  background-image: url(../../theme/assets/icons/spinner-logo.svg);
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  z-index: 1;
+}
+
+.spinner {
+  animation: rotate 1.4s linear infinite;
+  -webkit-animation: rotate 1.4s linear infinite;
+  -moz-animation: rotate 1.4s linear infinite;
+  width: 174px;
+  height: 174px;
+  position: relative;
+}
+
+.spinner {
+  animation: rotate 1.4s linear infinite;
+  -webkit-animation: rotate 1.4s linear infinite;
+  -moz-animation: rotate 1.4s linear infinite;
+  width: 174px;
+  height: 174px;
+  position: relative;
+}
+
+.spinner-dot {
+  width: 274px;
+  height: 274px;
+  position: relative;
+  top: 0;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes rotate {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-moz-keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.path {
+  stroke-dasharray: 170;
+  stroke-dashoffset: 20;
+}
+
 .wp-block-button__link,
 button.primary,
 .button.primary,
@@ -285,6 +428,22 @@ ul.menu-wrapper li a {
   white-space: nowrap;
 }
 
+#site-header .mobile-menu-container .mobile-menu ul.menu-wrapper {
+  padding: 0;
+  list-style-type: none;
+  gap: 24px;
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  margin-top: 32px;
+  align-items: center;
+  justify-content: center;
+}
+#site-header .mobile-menu-container .mobile-menu ul.menu-wrapper li a {
+  color: #2DD3EB;
+  text-decoration: none;
+}
+
 /* Typography */
 /* Layout */
 #site-header {
@@ -305,8 +464,37 @@ ul.menu-wrapper li a {
   background-position: center center;
   cursor: pointer;
 }
+#site-header .mobile-menu-close {
+  background-image: url(../../theme/assets/icons/star.svg);
+  content: "";
+  display: block;
+  top: 8px;
+  position: absolute;
+  z-index: 2;
+  height: 32px;
+  width: 32px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  cursor: pointer;
+}
 #site-header .mobile-menu-container {
   display: none;
+}
+#site-header .mobile-menu-container.active {
+  background-color: #323232;
+  color: #fff;
+  padding-left: clamp(25px, 10.42vw, 150px);
+  padding-right: clamp(25px, 10.42vw, 150px);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  min-height: 100vh;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
 }
 #site-header .top.menu-logo {
   height: 100%;
