@@ -30,10 +30,12 @@ class Blocks {
         \add_filter( 'image_size_names_choose', array($this, 'custom_image_sizes' ));
 
         #REGISTER BLOCKS HERE
-        /* 
-            $this->registerBlock('my-dope-block', array('wp-dependencies'), 'optional_callback_function' );
-        */
-
+        
+          #  $this->registerBlock('my-dope-block', array('wp-dependencies'), 'optional_callback_function' );
+            $this->registerBlock('simple-cta', array('wp-editor', 'wp-components', 'wp-blocks','wp-i18n'));
+            $this->registerBlock('left-right', array('wp-i18n', 'wp-blocks', 'wp-editor', 'wp-components' ));
+            $this->registerBlock('xaccordion', array('wp-i18n', 'wp-blocks', 'wp-editor', 'wp-components' ));
+            $this->registerBlock('xaccordions', array('wp-i18n', 'wp-blocks', 'wp-editor', 'wp-components' ));
     }
 
     public static function register_theme_blocktype( $categories ){
@@ -105,6 +107,64 @@ class Blocks {
                 $base_blocks_scss = file_get_contents( \get_template_directory() . '/theme/src/css/editor.scss' );
                 $base_blocks_updated = $base_blocks_scss . PHP_EOL . '@import \'./blocks/' . $handle . '-editor\';';
                 file_put_contents( \get_template_directory() . '/theme/src/css/editor.scss'  , $base_blocks_updated);
+            }
+            if(file_exists( \get_template_directory() . '/theme/src/js/block-list.js' ) ){
+               # $filestring = file_get_contents( \get_template_directory() . '/theme/src/js/block-list.js');
+                $filestring = file_get_contents( \get_template_directory() . '/theme/src/js/block-list-array.js');
+                if($filestring === false) return false;
+                if($filestring === ''){
+                  #  $filestring.="import './blocks/".$handle.".js';";
+                  #  file_put_contents( \get_template_directory() . '/theme/src/js/block-list.js', $filestring);
+                  $filestring = 'const list = ["' .$handle. '"] '. PHP_EOL . 'exports.list = list';
+                  file_put_contents( \get_template_directory() . '/theme/src/js/block-list-array.js', $filestring);
+                } else if($filestring){
+                        if(strpos($filestring, ',')){
+                            $header = 'const list = [';
+                            $footer = '] '. PHP_EOL . 'exports.list = list';
+                            $filestring = str_replace($header, '', $filestring);
+                            $filestring = str_replace($footer, '', $filestring);
+                            $filestring = trim(preg_replace('/\s\s+/', '', $filestring));
+                            $filestring = trim(preg_replace('/\n\$/', '', $filestring));
+                            $filestring = trim(preg_replace('/"/', '', $filestring));
+                            $filearray = explode(',', $filestring);
+                            if(!in_array($handle, $filearray)) array_push($filearray, $handle);
+                            $newfilestring = '"' . implode('","', $filearray) . '"';
+                            $newfilestring = $header . $newfilestring . $footer;
+                            file_put_contents( \get_template_directory() . '/theme/src/js/block-list-array.js', $newfilestring);
+                        } else {
+                            $header = 'const list = [';
+                            $footer = '] '. PHP_EOL . 'exports.list = list';
+                            $filestring = str_replace($header, '', $filestring);
+                            $filestring = str_replace($footer, '', $filestring);
+                            $filestring = trim(preg_replace('/\s\s+/', '', $filestring));
+                            $filestring = trim(preg_replace('/\n\$/', '', $filestring));
+                            $filestring = trim(preg_replace('/"/', '', $filestring));
+                            if($filestring){
+                                if($handle == $filestring){
+                                    $filearray = array($filestring);
+                                } else {
+                                    $filearray = array($filestring, $handle);
+                                }
+                                $newfilestring = '"' . implode('","', $filearray) . '"';
+                                $newfilestring = $header . $newfilestring . $footer;
+                                file_put_contents( \get_template_directory() . '/theme/src/js/block-list-array.js', $newfilestring);
+                            }
+
+                        } 
+                    }
+                    // $header = 'const list = [';
+                    // $footer = '] '. PHP_EOL . 'exports.list = list';
+                    // $_filestring = str_replace('const list = [', '', $filestring);
+                    // $closingBracket = strrpos($_filestring, ']');
+                    // if($closingBracket){
+                    //     $_filestring = substr($_filestring, 0, $closingBracket);
+                    //     $filearray = explode(',', $_filestring);
+                    //     $filearray = array_push($handle, $filearray);
+                    //     $_filestring = implode(',', $filearray);
+                    //     $newfilestring = $header . $_filestring . $footer;
+                    //     file_put_contents( \get_template_directory() . '/theme/src/js/block-list.js', $newfilestring);
+                    // }
+                //}
             }
 
         endif;

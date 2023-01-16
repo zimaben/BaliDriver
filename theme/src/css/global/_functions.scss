@@ -1,0 +1,8 @@
+@use 'sass:math';
+
+/* UTILITY */
+@function roundit($value, $fractionDigits: 0) {
+    $power: math.pow(10, $fractionDigits);
+    @return math.div(math.round($power * $value), $power);
+  }
+ 

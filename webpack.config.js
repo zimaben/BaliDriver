@@ -2,6 +2,7 @@
 /**
  * Webpack configuration.
  */
+ const blockList = require('./theme/src/js/block-list-array.js'); 
  const path = require( 'path' );
  const MiniCssExtractPlugin = require('mini-css-extract-plugin');
  const { CleanWebpackPlugin } = require( 'clean-webpack-plugin' );
@@ -16,21 +17,18 @@
  //CSS Directory path.
  const CSS_DIR = path.resolve( __dirname, 'theme/src/css' );
 
- const BLOCKLIST = [
-
- ];
  const entry = {
      main: JS_DIR + '/head.js',
      footer: JS_DIR + '/foot.js',
-     
-     //I Still don't know how to do this a better way
-     'blocks/simple-cta': JS_DIR + '/blocks/simple-cta.js',
      //End Blocks
-
+     blocks: path.resolve( __dirname, 'theme/src/js/block-list.js'),
      admin: JS_DIR + '/admin.js',
      admin_css: CSS_DIR + '/admin.scss',
      style: CSS_DIR + '/style.scss',
  };
+blockList.list.forEach(function(handle){
+    entry['/blocks/' + handle] = JS_DIR + '/blocks/' + handle + '.js';
+});
  const output = {
      path: path.resolve(__dirname, BUILD_DIR),
      //path: BUILD_DIR,

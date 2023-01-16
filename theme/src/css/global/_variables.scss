@@ -1,3 +1,5 @@
+@import "./functions";
+
 $primary: #2DD3EB;
 $accent: #FF4E4E;
 
@@ -22,8 +24,13 @@ $body: 'Fira Sans', Fira Sans, sans-serif;
 
 /* Layout */
 $grid: 1440;
-$edgeclamp: clamp(25px, 10.14vw, 146px);
+$gap: 25;
+$edge: 146;
+
+$mobileEdge:25;
+$edgeclamp: clamp($mobileEdge * 1px, roundit( calc($edge / $grid), 2) * 100vw, $edge * 1px);
 $borderradius: 4px;
+$standardgap: clamp( roundit($gap * .75, 2) * 1px,roundit( calc($gap / $grid), 2) * 100vw, ($gap * 1px) );
 
 $indexleft: 35%;
 $indexright: 65%;
@@ -31,3 +38,4 @@ $indexright: 65%;
 /* Please put custom global variables beneath this comment. 
    Styles above this line may be overwritten */
 /* CUSTOM */
+
