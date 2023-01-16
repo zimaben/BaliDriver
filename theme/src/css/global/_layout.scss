@@ -25,6 +25,17 @@ footer.site-footer{
     background-color:$primary;
 
 }
+/* page layouts */
+#content #main {
+    &>*{
+        padding-left:$edgeclamp;
+        padding-right:$edgeclamp;
+    }
+    .alignwide{
+        padding-left:0;
+        padding-right:0;
+    }
+}
 /* index layouts */
 .postwrap{
     padding-left:$edgeclamp;

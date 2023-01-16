@@ -9,6 +9,11 @@ $black: #212121;
 
 $theme: "light"; //accepts "light" & "dark"
 
+/* UX */
+$good: #fff;
+$bad: #fff;
+$neutral:#fff;
+
 /* Typography */
 $headerfancy: 'Cabin', sans-serif;
 $header: 'Konnect', Konnect, sans-serif;
@@ -22,3 +27,7 @@ $borderradius: 4px;
 
 $indexleft: 35%;
 $indexright: 65%;
+
+/* Please put custom global variables beneath this comment. 
+   Styles above this line may be overwritten */
+/* CUSTOM */

@@ -266,23 +266,21 @@ if( !class_exists( '\rbt\FRStarter')) {
 
             if(Config::FEATURES['progressive_header']){
                 #normal page header
-                $page_image_x = 1512; $page_image_y = 432;
-                \add_image_size('ph-page-one', floor($page_image_x / 4), floor($page_image_y / 4), array('top', 'center'));
-                \add_image_size('ph-page-two', floor($page_image_x / 2), floor($page_image_y / 2), array('top', 'center'));
-                \add_image_size('ph-page-three', floor($page_image_x * .75), floor($page_image_y * .75), array('top', 'center'));
-                \add_image_size('ph-page-full', $page_image_x, $page_image_y, array('top', 'center'));
-                #location header
-                $location_image_x = 1512; $location_image_y = 624;
-                \add_image_size('ph-locations-one', floor($page_image_x / 4), floor($page_image_y / 4), array('top', 'center'));
-                \add_image_size('ph-locations-one', floor($page_image_x / 4), floor($page_image_y / 4), array('top', 'center'));
-                \add_image_size('ph-locations-one', floor($page_image_x / 4), floor($page_image_y / 4), array('top', 'center'));
-                \add_image_size('ph-locations-one', floor($page_image_x / 4), floor($page_image_y / 4), array('top', 'center'));
+                $page_image_x = 1440; 
+                //$page_image_y = 796;
+                \add_image_size('ph-page-one', floor($page_image_x / 4) );
+                \add_image_size('ph-page-two', floor($page_image_x / 2) );
+                \add_image_size('ph-page-full', $page_image_x );
+
             }
-            	
-            \add_image_size( 'bm-square-lg', 545, 545, array('center', 'center') );
-            \add_image_size( 'bm-square-md', 480, 480, array('center', 'center') );
-            \add_image_size( 'bm-landscape-md', 505, 466, array('center', 'center') );
-            \add_image_size( 'bm-landscape-mobile', 375, 346, array('center', 'center') );
+
+            \add_image_size( 'thumbnail-md', 346, 346, array('center', 'center'));
+            \add_image_size( 'landscape-md', 656, 420, array('center', 'center') );
+            \add_image_size( 'landscape-mobile', 328, 210, array('center', 'center') );
+            \add_image_size( 'square-lg', 650, 650, array('center', 'center'));
+            \add_image_size( 'landscape-lg', 972, 547, array('center', 'center'));
+            \add_image_size( 'half', 500);
+            
 
         }
 

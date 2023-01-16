@@ -33,6 +33,42 @@ export const test_figma = async(e) =>{
         console.log("Tried to run first setup but could not find URL or Nonce");
     }
 }
+export const test_figma_item = async(e) => {
+    e.preventDefault();
+    /* This button should only live within the WP Admin Theme Options
+     - ajaxurl is already defined in the WP Admin, but I'm putting 
+     everything I need in one localized admin object */
+    let button = e.target.tagName === 'BUTTON' ? e.target : e.target.closest('button');
+    let url = theme_admin.ajaxurl + '/?action=test_figma_item';
+    let item = button.dataset.item;
+    let nonce = theme_admin.nonce;
+    let buttonwrap = button.closest('.buttonwrap');
+    let responsearea = buttonwrap ? buttonwrap.querySelector('.responsearea') : false;
+    if(!responsearea){ console.log("No form response area found"); return false; }
+    if(url && nonce){
+        console.log("doig test item");
+        let response = await postit(url, 'nonce=' + nonce + '&item=' + item);
+        if(response.status === 200){
+
+            responsearea.classList.remove('error', 'warning');
+            responsearea.classList.add('success');
+            responsearea.innerHTML = response.message; 
+            
+        } else {
+            if( response.message ){
+                responsearea.classList.remove('success', 'warning');
+                responsearea.classList.add('error');
+                responsearea.innerHTML = response.message; 
+            } else {
+                responsearea.classList.remove('success', 'warning');
+                responsearea.classList.add('error');
+                responsearea.innerHTML = "There was a problem with your request"; 
+            }
+        }
+    } else {
+        console.log("Tried to run first setup but could not find URL or Nonce");
+    }
+}
 export const gmap_sync = async(e) => {
     e.preventDefault();
     /* This button should only live within the WP Admin Theme Options

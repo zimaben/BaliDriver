@@ -1,5 +1,9 @@
+/* UX */
 /* Typography */
 /* Layout */
+/* Please put custom global variables beneath this comment. 
+   Styles above this line may be overwritten */
+/* CUSTOM */
 /*
  * [Modified] Modern CSS Reset
  * @link https://github.com/hankchizljaw/modern-css-reset
@@ -94,6 +98,16 @@ body.mobile-menu-expanded {
 footer.site-footer {
   display: flex;
   background-color: #2DD3EB;
+}
+
+/* page layouts */
+#content #main > * {
+  padding-left: clamp(25px, 10.14vw, 146px);
+  padding-right: clamp(25px, 10.14vw, 146px);
+}
+#content #main .alignwide {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /* index layouts */
@@ -318,7 +332,7 @@ button.primary.disabled,
 .button.primary.disabled,
 .button:disabled,
 .button.disabled, button:disabled, button.disabled {
-  background-color: #969696;
+  background-color: #fff;
   color: #fff;
 }
 .wp-block-button__link.outline,
@@ -340,8 +354,8 @@ button.primary.outline:hover,
 button.primary.outline:disabled,
 .button.primary.outline:disabled,
 .button.outline:disabled, button.outline:disabled {
-  border-color: #969696;
-  color: #969696;
+  border-color: #fff;
+  color: #fff;
 }
 
 .wp-block-button.outline .button,
@@ -363,7 +377,7 @@ button.primary.outline:disabled,
 }
 .wp-block-button.outline .button:disabled,
 .wp-block-button.outline .wp-block-button__link:disabled {
-  background-color: #969696;
+  background-color: #fff;
   color: #fff;
 }
 
@@ -393,12 +407,16 @@ button.primary.outline:disabled,
   border: 1px solid #2DD3EB;
 }
 .wpcf7-form input[type=submit]:disabled, .wpcf7-form input[type=submit].disabled {
-  background-color: #969696;
+  background-color: #fff;
   color: #fff;
 }
 
+/* UX */
 /* Typography */
 /* Layout */
+/* Please put custom global variables beneath this comment. 
+   Styles above this line may be overwritten */
+/* CUSTOM */
 a {
   color: #2DD3EB;
 }
@@ -444,8 +462,12 @@ ul.menu-wrapper li a {
   text-decoration: none;
 }
 
+/* UX */
 /* Typography */
 /* Layout */
+/* Please put custom global variables beneath this comment. 
+   Styles above this line may be overwritten */
+/* CUSTOM */
 #site-header {
   display: flex;
   width: 100%;
@@ -574,6 +596,16 @@ footer.site-footer .column ul.menu-wrapper {
   list-style: none;
   display: inline-flex;
   gap: 12px;
+}
+
+/* Page Header with no Featured Image */
+canvas#placeholder-0 {
+  display: none;
+}
+
+.aspectRatioPlaceholder .overlay-text {
+  padding-left: clamp(25px, 10.14vw, 146px);
+  padding-right: clamp(25px, 10.14vw, 146px);
 }
 
 .simple-cta-wrap {

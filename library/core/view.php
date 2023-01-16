@@ -6,19 +6,19 @@ class View extends \rbt\FRStarter {
     private $file;
     private $args = array();
 
-    public function __construct( $input, $file ) {//template only renders files in the templates filetree
+    public function __construct( $file, $input ) {//template only renders files in the templates filetree
         $this->args = is_array($input) ? $this->bring_array_params_into_self($input) : $this->bring_object_keys_into_self($input);
         $this->doesfileexist = $this->args ? $this->isfile( $file ) : false;
-        $this->file = $this->doesfileexist ? self::get_plugin_path() . '/library/template/templates/'. $file : false;
+        $this->file = $this->doesfileexist ? \get_template_directory()  . '/theme/template-parts/views/'. $file : false;
     }
-    public function __set( $key, $val) {
-        $this->{$key} = $val;
-    }
-    public function __get( $key ){
-         return (isset($this->{$key}) ) ? $this->{$key} : null;
-    }
+    // public function __set( $key, $val) {
+    //     $this->{$key} = $val;
+    // }
+    // public function __get( $key ){
+    //      return (isset($this->{$key}) ) ? $this->{$key} : null;
+    // }
     private function isfile( $file ){
-        return file_exists( self::get_plugin_path() . '/library/template/templates/'. $file );
+        return file_exists( \get_template_directory() . '/theme/template-parts/views/'. $file );
     }
     private function bring_array_params_into_self($args){
         #magic methods are insurance policy

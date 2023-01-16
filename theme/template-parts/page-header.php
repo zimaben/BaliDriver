@@ -2,24 +2,24 @@
 use rbt\FRStarter as Theme;
 use rbt\Config as Config;
    #page header
-   if(Config::FEATURES['progressive_header'] === true){
+   if(Config::FEATURES['progressive_header']){
 
-        Theme::TemplatePart('progressive-header.php');
+    Theme::TemplatePart('progressive-header.php');
 
-    } else {
+} else {
+   
+   Theme::TemplatePart('page-static-header.php');
 
-       Theme::TemplatePart('page-static-header.php');
+}  
+#critical inline styles
+if(Config::FEATURES['critical_css'] === true){
 
-    }  
-    #critical inline styles
-    if(Config::FEATURES['critical_css'] === true){
+    #Theme::TemplatePart('static/critical-css.php');
 
-        Theme::TemplatePart('static/critical-css.php');
+}
 
-    }
+?>
 
-    ?>
-
-    <div id="content" class="site-content">
-        <section id="primary" class="content-area">
-            <main id="main" class="site-main <?php echo ' ' .$wp_query->post->post_name ?>" role="main">
+<div id="content" class="site-content">
+    <section id="primary" class="content-area <?php echo $wp_query->post->post_type ?>">
+        <main id="main" class="site-main <?php echo $wp_query->post->post_name ?>" role="main">

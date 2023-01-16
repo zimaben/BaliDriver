@@ -1,6 +1,374 @@
 <?php
-namespace rbt\admin;
-use rbt\Config as Config;
+namespace ktdamd\admin;
+use ktdamd\Config as Config;
+use \ktdamd\admin\setup\Create_Media_File as Create_Media_File;
+
+/* 
+    Set up admin ajax request - this just bounces method requests between the WP admin ajax and
+    our FigmaRequest class. Admin Ajax can figure out Auth & Nonce.
+*/
+
+#Run function must be called to get Ajax requests on server request handle
+\ktdamd\admin\FigmaAdmin::run();
+
+class FigmaAdmin {
+    public static function run(){
+        \add_action( 'wp_ajax_test_figma', array(get_class(), 'test_figma' ));
+        \add_action( 'wp_ajax_test_figma_item', array(get_class(), 'test_figma_item'));
+        \add_action( 'wp_ajax_get_logo', array(get_class(), 'get_logo'));
+        \add_action( 'wp_ajax_get_colors', array(get_class(), 'get_colors'));
+        \add_action( 'wp_ajax_get_typography', array(get_class(), 'get_typography'));
+        \add_action( 'wp_ajax_run_setup', array(get_class(), 'run_setup'));
+    }
+    public static function test_figma_item(){
+        if( ! self::gatekeep_post() ) self::return_false('Missing or Invalid Nonce');
+        $item = isset($_POST['item']) ? $_POST['item'] : false;
+
+        switch ($item){
+            #$item = color
+            case("Colors") : 
+                #yeah
+                $document = new FigmaRequest( 'get_document' );
+                if($document->err){
+                    self::return_false($request->err);
+                }
+                if(!$document->response){
+                    self::return_false('No Server Response');
+                }
+                #to get the actual document node, you need to actually look at <response->
+                $document = json_decode($document->response);
+                $document = $document->document;
+               # error_log(print_r(\json_decode($document->response), true));
+                $PageNode = self::get_node('Page 1', 'CANVAS', $document);
+
+                $Colors = self::get_node('Colors', 'FRAME', $PageNode);
+                error_log(print_r($Colors, true));
+               # error_log(print_r($PageNode, true));
+                if(!$PageNode){ self::return_false('Could Not Parse Figma Page'); }
+                
+                break;
+            default: 
+            break;
+
+        }
+        echo json_encode(array('status'=>200, 'message'=>'Hi'));
+        die();
+
+    }
+    public static function test_figma(){
+        if( ! self::gatekeep_post() ) self::return_false('Missing or Invalid Nonce');
+        
+        $request = new FigmaRequest( 'test_figma' );
+        if($request->err){
+            self::return_false($request->err);
+        }
+        if(!$request->response){
+            self::return_false('No Server Response');
+        }
+
+        echo json_encode(array('status'=>200, 'message'=>$request->response));
+        die();
+    }
+
+    public static function get_logo(){
+        if( ! self::gatekeep_post() ) self::return_false('Missing or Invalid Nonce');
+
+        $document = new FigmaRequest( 'get_document' );
+        if($document->err){
+            self::return_false($request->err);
+        }
+        if(!$document->response){
+            self::return_false('No Server Response');
+        }
+
+        #Get Document to Parse in associative array, if return node is specified set Document to return node
+        $parse_document = json_decode($document->response, true );
+        if($document->return_node && isset($document->return_node) && isset($parse_document[$document->return_node]) ) $parse_document = $parse_document[$document->return_node];
+
+        $logo_node_id = false;
+        
+        #Get Page
+        $PageNode = self::get_node('Page 1', 'CANVAS', $parse_document);
+        if(!$PageNode){ self::return_false('Could Not Parse Figma Page'); }
+
+        #Now find our target nodes
+        $LogoNode = self::get_node('Logo', 'FRAME', $PageNode);
+        if(!$LogoNode){ self::return_false('Could Not Find Figma Logo'); }
+
+        $logo_node_id = $LogoNode['id'];
+        #Now we have everything we need to get the image
+        $image = new FigmaRequest('images/' . $document->connection->file . '?ids=' . $logo_node_id . '&format=svg', 'GET' );
+        #https://api.figma.com/v1/images/N5EdgAhAjPuSaygdRG2KFD?ids=4:4'
+        
+        #CHECK
+        $imgresponse = json_decode($image->response, true);
+        if(isset($imgresponse['images'][$logo_node_id])){
+            
+            $url = $imgresponse['images'][$logo_node_id];
+            $file_name = 'theme-logo.svg';
+                
+            // Use file_get_contents() function to get the file
+            // from url and use file_put_contents() function to
+            // save the file 
+            if (\file_put_contents( \get_template_directory() . '/theme/assets/' . $file_name, file_get_contents($url)))
+            {
+                echo json_encode( array('status'=>200, 'message'=>'Successfully Saved Logo to ' . \get_template_directory_uri() . '/theme/assets/' . $file_name ) );
+                die();
+            }
+            else
+            {
+                self::return_false('Could not save Logo.');
+            }  
+        }
+        self::return_false('Could Not Find Image for that Node.');
+
+
+        echo json_encode(array('status'=>200, 'message'=>'Could not find what you were looking for'));
+        die();
+        
+    }
+
+    public static function get_colors(){
+        if( ! self::gatekeep_post() ) self::return_false('Missing or Invalid Nonce');
+        
+    }
+    public static function get_typography(){
+        if( ! self::gatekeep_post() ) self::return_false('Missing or Invalid Nonce');
+
+        $document = new FigmaRequest( 'get_document' );
+        if($document->err){
+            self::return_false($request->err);
+        }
+        if(!$document->response){
+            self::return_false('No Server Response');
+        }
+
+        #Get Document to Parse in associative array, if return node is specified set Document to return node
+        $parse_document = json_decode($document->response, true );
+        if($document->return_node && isset($document->return_node) && isset($parse_document[$document->return_node]) ) $parse_document = $parse_document[$document->return_node];
+        
+        #Get Page
+        $PageNode = self::get_node('Page 1', 'CANVAS', $parse_document);
+        if(!$PageNode){ self::return_false('Could Not Parse Figma Page'); }
+
+        $TypographyGroup = self::get_node('Typography', 'GROUP', $PageNode);
+        if(!$TypographyGroup){ self::return_false('Could not find Typography');}
+
+       # error_log(print_r($TypographyGroup, true));
+
+        $filtered_typography_nodes = self::get_nodes( array('style'=> '*'), array('name', 'style'), $TypographyGroup);
+
+        error_log("FILTERED");
+        error_log(print_r( $filtered_typography_nodes, true));
+        #this kicks Ass
+
+        die();
+
+    }
+    public static function run_setup(){
+
+        if( ! self::gatekeep_post() ) self::return_false('Missing or Invalid Nonce');
+
+        $document = new FigmaRequest( 'get_document' );
+        if($document->err){
+            self::return_false($request->err);
+        }
+        if(!$document->response){
+            self::return_false('No Server Response');
+        }
+
+        #Get Document to Parse in associative array, if return node is specified set Document to return node
+        $parse_document = json_decode($document->response, true );
+        if($document->return_node && isset($document->return_node) && isset($parse_document[$document->return_node]) ) $parse_document = $parse_document[$document->return_node];
+        
+        #Get Page
+        $PageNode = self::get_node('Page 1', 'CANVAS', $parse_document);
+        if(!$PageNode){ self::return_false('Could Not Parse Figma Page'); }
+
+        #From PageNode we can do everything we need;
+        #Logo
+        $added_theme_logo = self::setup_logo( $PageNode );
+        
+        #Typography
+
+
+        
+    }
+
+    #High Level Function Rips Logo from Figma file containing FRAME node named Logo and sets it as the Theme Logo
+    private static function setup_logo( $PageNode = null ){
+
+        if(!$PageNode) return false;
+
+        #We will add or overwrite theme-logo.svg under theme/assets.
+        $logo_node_id = false;
+
+        #Now find our target nodes
+        $LogoNode = self::get_node('Logo', 'FRAME', $PageNode);
+        if(!$LogoNode){ return false; }
+
+        $logo_node_id = $LogoNode['id'];
+        $image = new FigmaRequest('images/' . $document->connection->file . '?ids=' . $logo_node_id . '&format=svg', 'GET' );
+        
+        #CHECK
+        $imgresponse = json_decode($image->response, true);
+        if( ! isset($imgresponse['images'][$logo_node_id]) ) { return false; }
+            
+        $url = $imgresponse['images'][$logo_node_id];
+        $file_name = 'theme-logo.svg';
+            
+        // Use file_get_contents() function to get the file
+        // from url and use file_put_contents() function to
+        // save the file 
+        if (\file_put_contents( \get_template_directory() . '/theme/assets/' . $file_name, file_get_contents($url))) {
+            #new file is in theme/assets/theme-logo
+            require_once( get_template_directory() . '/library/admin/setup/images.php');
+
+            $logo_url = \get_template_directory_uri() . '/theme/assets/' . $file_name;
+            $media_image = new Create_Media_File( $logo_url );
+            if($media_image->attachment_id){
+                $ret_value = \set_theme_mod( 'custom_logo', $media_image->attachment_id);
+
+                #Check if we have set screenshot.png yet
+                $checkSSPNG = get_option( 'theme_set_screenshot');
+                if(!$checkSSPNG){   
+                    #do another image request for PNG - avoids library dependency
+                    $image = new FigmaRequest('images/' . $document->connection->file . '?ids=' . $logo_node_id . '&format=png&scale=2', 'GET' );
+                    $imgresponse = json_decode($image->response, true);
+                    $url = $imgresponse['images'][$logo_node_id];
+
+                    $rewriteSS = file_put_contents( \get_template_directory() . 'screenshot.png', file_get_contents($url));
+                    if($rewriteSS) \update_option( 'theme_set_screenshot', 'set' );
+                }
+
+                return $ret_value;
+
+            } else { return false; }
+        } else { return false; }  
+
+        #end of the road - impossible to get here
+        return false;
+    }
+    /* 
+    * High level function takes a filtered list of Typography nodes and writes a 
+    * /theme/src/css/typography/typography.scss file
+
+    */
+    private static function create_typography_file( $nodes ){
+        $importfonts = array();
+        $headlines = array();
+        foreach($nodes as $node){
+
+        }
+        $printstring = '';
+        foreach($importfonts as $fontfamily){
+            $fontfamily=str_replace(' ', '+', $fontfamily);
+            $printstring.= '@import url(//fonts.googleapis.com/css?family='.$fontfamily.');' . PHP_EOL;
+        };
+
+       /*
+            [name] => Body Mobile
+            [style] => Array
+                (
+                    [fontFamily] => Merriweather Sans
+                    [fontPostScriptName] => MerriweatherSans-Regular
+                    [fontWeight] => 400
+                    [fontSize] => 12
+                    [textAlignHorizontal] => LEFT
+                    [textAlignVertical] => TOP
+                    [letterSpacing] => 0
+                    [lineHeightPx] => 15.083999633789
+                    [lineHeightPercent] => 100
+                    [lineHeightUnit] => INTRINSIC_%
+                )
+
+                
+       */
+    }
+    # UTILITY FUNCTIONS BELOW - These are less abstract walking/parsing helpers #
+    /*
+    Recursively brute force through document looking for FIRST node match on name & type 
+    */
+    private static function get_node( $name, $type, $root ){
+        error_log("MATCH CALLED ON " . $name . ' ' . $type);
+        if( is_object($root) ){
+            error_log("ITS AN OBJECT");
+            $root = (array) $root;
+        } 
+        if( isset( $root['name'] ) && isset( $root['type'] )){
+            error_log("MATCHABLE");
+            #check that node is matchable
+            if($root['name'] === $name && $root['type'] === $type){
+                error_log("FOUNDIT");
+                return $root;
+            }
+            if(isset($root['children'])){
+                foreach( $root['children'] as $idx => $child){
+                    $check = self::get_node($name, $type, $child);
+                    if($check){
+                        return $check;
+                    }
+                }
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    /* Were morbin up in here */
+    /* Were morbiun here recursive function returns ALL matches on args in the structure of returnfields */
+    private static function get_nodes( $args = null, $returnfields = null, $root){
+        if(!$args) return false;
+
+        $return_array = array();
+
+        $this_node = self::check_node($args, $root);
+        if($this_node){
+            $built_array = array();
+            foreach($returnfields as $field){
+                if(isset($this_node[$field])) $built_array[$field] = $this_node[$field];
+            }
+            $return_array[] = $built_array;
+        }
+        if(isset($root['children'])){
+            foreach($root['children'] as $idx => $child ){
+                $check_child = self::get_nodes($args, $returnfields, $child);
+                if($check_child) $return_array = array_merge($return_array, $check_child);
+            }
+        }
+        return count($return_array) ? $return_array : false;
+
+    }
+
+    private static function check_node( $args = null, $node ){
+        if(!$args || !is_array($args)) return false;
+
+        $return_node = true;
+        foreach( $args as $k=>$v){
+            if(!isset($node[$k])){ 
+                $return_node = false;
+                break;
+            }
+            if($v !== '*' ){
+                # * value returns any node with the key set to something
+                if($node[$k] !== $v){
+                    $return_node = false;
+                    break;
+                }
+            }
+
+        }
+        return $return_node ? $node : false;
+    }
+    private static function return_false( $error ){
+        echo json_encode(array('status'=>400, 'message'=>$error));
+        die();
+    }
+    private static function gatekeep_post(){
+        if(!isset($_POST['nonce'])) return false;
+        return \wp_verify_nonce( $_POST['nonce'], 'theme-admin');
+    }
+}
 
 class FigmaRequest{
     /* This class sends a Request to a Figma document
@@ -16,31 +384,59 @@ class FigmaRequest{
     public $err = false;
     public $response = false;
     public $supported_requests = array(
-        'test' => array('string'=> 'me', 'method'=> 'GET'),
-        'get_logo' => array('string'=>'files')
+        'test_figma' => array('string'=> 'me', 'method'=> 'GET'),
+        'get_document' => array('string'=>'files', 'method'=>'GET', 'return_node'=>'document'),
+        'get_node' => array('string'=>'files', 'method'=>'GET', 'return_node'=>'document'),
+        
     );
+    public $request = null;
+    public $method = null;
+    public $returnvalue = null;
+    public $return_node = null;
     public function __construct($request, $method = null){
         $this->connection = new FigmaConnection();
         if($this->connection->err) $this->err = $this->connection->err;
+        $this->request = $this->checkRequest( $request, $method );
         $this->response = $this->err ? false : $this->doRequest($request, $method);
-        error_log(print_r($this,true));
-
+        $this->returnvalue = $this->response ? $this->doReturnValue() : false;
+        // error_log("FIGMAREQUEST CLASS");
+        // error_log(print_r($this,true));
+    }
+    private function checkRequest($request, $method){
+        if(isset($this->supported_requests[$request])){
+            
+            $this->method = $this->supported_requests[$request]['method'];
+            $this->return_node = isset($this->supported_requests[$request]['return_node']) ? $this->supported_requests[$request]['return_node'] : null;
+            return $request;
+        }
+    }
+    private function doReturnValue(){
+        if( isset($this->response) && 
+            $this->response && 
+            isset($this->return_node) && 
+            $this->return_node ){
+            
+            return isset($this->response[$this->return_node]) ? $this->response[$this->return_node] : false;
+        } else {
+            return false;
+        }
     }
     private function doRequest($request, $method){
         #if supported request
-        if(isset($this->supported_requests[$request])){
+        if($this->request){
             $this->connection->setMethod( $this->supported_requests[$request]['method']);
             $this->connection->setRequest($this->supported_requests[$request]['string']);
             if($this->connection->err){
                 $this->err = $this->connection->err;
                 return false;
             }
+
             $sent = $this->connection->doRequest();
             if($sent) return $this->connection->response;
             #for some reason we didn't send and 
             #no error was caught
-            error_log(print_r($this, true));
-            $this->err = 'Something went wrong with the request';
+            // error_log(print_r($this, true));
+            // $this->err = 'Something went wrong with the request';
             return false;
         } else {
             #unsupported request
@@ -122,13 +518,16 @@ class FigmaConnection {
 
         if(!$this->ready) return false;
 
-        $url = $this->base . $this->request;error_log("URL: " . $url);
+        $req = $this->request;
+        if($req === 'files' ) $req .= '/' . $this->file;
+
+        $url = $this->base . $req;
         $curl = curl_init();
         
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $this->headers); 
-        if($this->method === "POST") curl_setopt($ch, CURLOPT_POST, 1);
+        if($this->method === "POST") curl_setopt($curl, CURLOPT_POST, 1);
         $this->response = curl_exec($curl);
         curl_close($curl);
         return true;

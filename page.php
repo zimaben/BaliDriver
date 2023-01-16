@@ -9,8 +9,7 @@ if(Theme::StaticHeaderExists( $post->ID )){
 	Theme::TemplatePart('static/header-' . $post->ID);
 } else {
 	get_header();
-
-#	Theme::TemplatePart('page-header');
+	Theme::TemplatePart('page-header');
 }
 ?>
 

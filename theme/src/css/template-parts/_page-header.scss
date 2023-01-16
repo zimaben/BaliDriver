@@ -1,0 +1,11 @@
+/* Page Header with no Featured Image */
+canvas#placeholder-0 {
+    display: none;
+}
+
+.aspectRatioPlaceholder{
+    .overlay-text{
+        padding-left:$edgeclamp;
+        padding-right:$edgeclamp;
+    }
+}

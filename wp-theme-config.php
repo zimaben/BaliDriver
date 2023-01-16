@@ -49,12 +49,19 @@ Class Config {
         'GoogleMaps' => false,
         'Slack' => false,
         'ContactForm7' => true,
+        'Figma' => true,
     );
 
+    #Progressive Header needs aspect ratio w & h and minimum mobile height
     const FEATURES = array(
         'critical_css' => false,
-        'video_headers' => false,
-        'progressive_header' => true,
+        'video_headers' => true,
+        'progressive_header' => array(
+            'home' => array('w' =>360, 'h'=>199, 'minHeight'=>500),
+            'page' => array('w'=>480, 'h'=>161, 'minHeight'=>200),
+            'post' => array('w'=>480, 'h'=>161, 'minHeight'=>200),
+            'default' => array('w'=>480, 'h'=>'auto', 'minHeight'=>400),
+        )
     );
 
     #@TODO - CUSTOMIZER (PREFOOTER, HEADER, FOOTER fields)

@@ -1,5 +1,9 @@
+/* UX */
 /* Typography */
 /* Layout */
+/* Please put custom global variables beneath this comment. 
+   Styles above this line may be overwritten */
+/* CUSTOM */
 .simple-cta-wrap {
   padding-left: clamp(33px, 13.23vw, 200px);
   padding-right: clamp(33px, 13.23vw, 200px);

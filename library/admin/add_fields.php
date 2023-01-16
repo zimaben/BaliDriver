@@ -46,27 +46,66 @@ class AddFields extends Theme {
     }
     public static function add_page_fields(){
         if(
-            ( isset(Config::FEATURES['progressive_header']) && Config::FEATURES['progressive_header'] == true ) ||
+            ( isset(Config::FEATURES['progressive_header']) && Config::FEATURES['progressive_header'] !== false ) ||
             ( isset(Config::FEATURES['video_header']) && Config::FEATURES['video_header'] == true ) ) : 
   
             Container::make( 'post_meta', 'Page Header Fields' )
-            ->show_on_post_type(array('page','post', 'locations'))
+            ->show_on_post_type(array('page'))
             ->set_context('side')
             ->add_fields( array(
+                Field::make( 'checkbox', 'crb_prefooter', 'Add The PreFooter Form?' )
+                ->set_option_value( 'yes' ),
+                Field::make( 'image', 'crb_mobile_image', 'Mobile Featured Image'), 
                 Field::make( 'file', 'crb_featured_video', 'Featured Video' )
                     ->set_type( 'video' )
                     ->set_value_type( 'url' ),
                 Field::make( 'file', 'crb_mobile_featured_video', 'Mobile Featured Video' )
                     ->set_type( 'video' )
                     ->set_value_type( 'url' ),
-                Field::make( 'checkbox', 'crb_show_button', 'Show a CTA button over the Page Header' )
-                ->set_option_value( 'yes' ),
+                Field::make( 'textarea', 'crb_header_text', 'Header Overlay'),
+
                 Field::make( 'text', 'crb_button_text', 'Button Text (Optional)'),
-                Field::make( 'text', 'crb_button_url', 'Button URL')
+                Field::make( 'text', 'crb_button_url', 'Button URL'),
+                
                 
             ));
 
         endif;
+
+        Container::make( 'post_meta', 'Reviews' )
+        ->show_on_post_type(array('page','post'))
+        ->add_fields( array(
+            Field::make( 'complex', 'page_review', 'Review Module' )
+            ->add_fields( array(
+                Field::make( 'text', 'reviewer_name', 'Reviewer Name' )
+                ->set_help_text('Full Name - Ex: Dr. Howard MD'),
+                Field::make( 'text', 'reviewer_title', 'Job Title'),
+                Field::make( 'image', 'reviewer_photo', 'Photo' )
+                ->set_value_type( 'url' ),
+                Field::make( 'text', 'review_title', 'Review Title'),
+                Field::make( 'select', 'review_stars', 'Stars' )
+                ->add_options( array(
+                    'one' => '1 Star',
+                    'two' => '2 Star',
+                    'three' => '3 Star',
+                    'four' => '4 Star',
+                    'five' => '5 Star',
+                ) ),
+                Field::make( 'textarea', 'review_body', 'Review'),
+            ))
+        ));
+
+        Container::make( 'post_meta', 'Scroll Links' )
+        ->show_on_post_type(array('page','post'))
+        ->add_fields( array(
+            Field::make( 'complex', 'page_scroll_links', 'Scroll Links' )
+            ->add_fields( array(
+                Field::make( 'text', 'scroll_link_title', 'Link Title' ),
+                Field::make( 'text', 'scroll_anchor', 'Link Anchor')
+                ->set_help_text('Ex: #about-us'),
+
+            ))
+        ));
 
         Container::make( 'post_meta', 'Pre-Footer Contact Form' )
         ->show_on_post_type(array('page','post', 'locations'))
@@ -139,6 +178,9 @@ class AddFields extends Theme {
             Field::make('html', 'figma_test_connection')
             ->set_help_text( 'Test Figma Connection' )
             ->set_html( '<div class="buttonwrap"><div class="responsearea"></div><button type="button" class="adminbutton btn" id="figmatest">Test Connection</button></div>' ),
+            Field::make('html', 'figma_test_colors')
+            ->set_help_text( 'Test Colors' )
+            ->set_html( '<div class="buttonwrap"><div class="responsearea"></div><button type="button" class="adminbutton btn" id="figmatestitem" data-item="Colors">Test Colors</button></div>' ),
         ));
         endif;
         if( isset(Config::INTEGRATIONS['GoogleAnalytics']) && Config::INTEGRATIONS['GoogleAnalytics'] == true) : 
