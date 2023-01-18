@@ -40,7 +40,7 @@ class Blocks {
 
     public static function register_theme_blocktype( $categories ){
         return array_merge(
-            $categories, array( array('slug'=>'kitelytech', 'title'=>'KitelyTech Blocks', 'icon' => 'kitely'))
+            $categories, array( array('slug'=>'friendlyrobot', 'title'=>'Friendly Robot Blocks', 'icon' => 'friendlyrobot'))
         );
     }
     public static function custom_image_sizes( $size_names ) {
@@ -54,22 +54,28 @@ class Blocks {
         return array_merge( $size_names, $theme_sizes );
     }
     public function registerBlock( $handle, $dependencies = array('wp-blocks', 'wp-editor', 'wp-i18n'), $callback = null ){
-        \wp_register_script(
-            $handle, 
-            \get_template_directory_uri() . '/theme/dist/js/blocks/' . $handle . 'js', 
-            $dependencies
-        );
+        #if you don't register through wp_enqueue_scripts hook you get a warning but it doesn't work 
+        #this double-enqueue bypasses the warning but will probably be fixed in the future
+        \add_action('enqueue_block_assets', function() use ($handle, $dependencies){
+            \wp_register_script(
+                $handle, 
+                \get_template_directory_uri() . '/theme/dist/js/blocks/' . $handle . '.js', 
+                $dependencies
+            );
+            
+        });
+
         if($callback){
             \register_block_type(
-                'ktdamd/' . $handle,
+                'rbt/' . $handle,
                 array( 'editor_script' => $handle,
                 'editor_style' => 'theme_blocks_editor_css',
                 'style' => 'theme_blocks_global_css',
-                'render_callback' => 'ktdamd\core\Methods::' . $callback,
+                'render_callback' => 'rbt\core\Methods::' . $callback,
                 ));
         } else {
             \register_block_type(
-                'ktdamd/' . $handle,
+                'rbt/' . $handle,
                 array( 'editor_script' => $handle,
                 'editor_style' => 'theme_blocks_editor_css',
                 'style' => 'theme_blocks_global_css',
@@ -79,20 +85,20 @@ class Blocks {
             if(!file_exists( \get_template_directory() . '/theme/src/js/blocks/' . $handle . '.js' ) ){
 				if ( $callback ) {
                     $template = file_get_contents( \get_template_directory() . '/library/core/block_script_callback_template.txt' );
-                    $content = preg_replace('/[!PLUGINPATH!]/s','rbt',$template);
-                    $content = preg_replace('/[!HANDLE!]/s', $handle, $content);
+                    $content = preg_replace('/\[\!PLUGINPATH\!\]/m','rbt',$template);
+                    $content = preg_replace('/\[\!HANDLE\!\]/m', $handle, $content);
                     file_put_contents( \get_template_directory() . '/theme/src/js/blocks/' . $handle . '.js' , $content);
                 } else {
                     $template = file_get_contents( \get_template_directory() . '/library/core/block_script_template.txt' );
-                    $content = preg_replace('/[!PLUGINPATH!]/s','rbt',$template);
-                    $content = preg_replace('/[!HANDLE!]/s', $handle, $content);
+                    $content = preg_replace('/\[\!PLUGINPATH\!\]/m','rbt',$template);
+                    $content = preg_replace('/\[\!HANDLE\!\]/m', $handle, $content);
                     file_put_contents( \get_template_directory() . '/theme/src/js/blocks/' . $handle . '.js' , $content);
                 }
             }
             if(!file_exists( \get_template_directory() . '/theme/src/css/blocks/_' . $handle . '.scss' ) ){
                 $template = file_get_contents( \get_template_directory() . '/library/core/block_style_template.txt' );
-                $content = preg_replace('/[!PLUGINPATH!]/s','rbt',$template);
-                $content = preg_replace('/[!HANDLE!]/s', $handle, $content);
+                $content = preg_replace('/\[\!PLUGINPATH\!\]/m','rbt',$template);
+                $content = preg_replace('/\[\!HANDLE\!\]/m', $handle, $content);
                 file_put_contents( \get_template_directory() . '/theme/src/css/blocks/_' . $handle . '.scss'  , $content);
                 $base_blocks_scss = file_get_contents( \get_template_directory() . '/theme/src/css/_blocks.scss' );
                 $base_blocks_updated = $base_blocks_scss . PHP_EOL . '@import \'./blocks/' . $handle . '\';';
@@ -101,8 +107,8 @@ class Blocks {
 
             if(!file_exists( \get_template_directory() . '/theme/src/css/blocks/_' . $handle . '-editor.scss' ) ){
                 $template = file_get_contents( \get_template_directory() . '/library/core/block_style_template.txt' );
-                $content = preg_replace('/[!PLUGINPATH!]/s','rbt',$template);
-                $content = preg_replace('/[!HANDLE!]/s', $handle, $content);
+                $content = preg_replace('/\[\!PLUGINPATH\!\]/m','rbt',$template);
+                $content = preg_replace('/\[\!HANDLE\!\]/m', $handle, $content);
                 file_put_contents( \get_template_directory() . '/theme/src/css/blocks/_' . $handle . '-editor.scss'  , $content);
                 $base_blocks_scss = file_get_contents( \get_template_directory() . '/theme/src/css/editor.scss' );
                 $base_blocks_updated = $base_blocks_scss . PHP_EOL . '@import \'./blocks/' . $handle . '-editor\';';

@@ -36,8 +36,8 @@ $mobileheaderheight:48px;
     .mobile-menu-container{
         display:none;
         &.active{
-            background-color:$darkneutral;
-            color:$white;
+            background-color:$dark-neutral;
+            color:$light;
             padding-left: clamp(25px, 10.42vw, 150px);
             padding-right: clamp(25px, 10.42vw, 150px);
             display: flex;
@@ -64,7 +64,7 @@ $mobileheaderheight:48px;
             align-items: center;
             justify-content: center;
             a{
-                color:$black;
+                color:$dark;
                 text-decoration:none;
             }
             h1{margin:0;}

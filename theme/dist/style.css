@@ -1,6 +1,15 @@
-/* UTILITY */
+/* UTILITY */ /*<! START COLORS !>*/
+/*         'UI' => array('good'=>'#5B8C5A', 'bad'=>'#E3655B', 'warning'=>'#F2ED6F'),
+        'Primary' => '#7D8CC4',
+        'Accent' => '#A0D2DB',
+        'Dark' => array('color'=>'#2B363B', 'neutral'=>'#718C98', 'half'=>'#9CAFB7'),
+        'Light' => array('color'=>'#FFFFFF', 'neutral'=>'#CCCCCC', 'half'=>'#D1D1D1'),
+*/
 /* UX */
+/*<! END COLORS !>*/
+/*<! START TYPOGRAPHY !>*/
 /* Typography */
+/*<! END TYPOGRAPHY !>*/
 /* Layout */
 /* Please put custom global variables beneath this comment. 
    Styles above this line may be overwritten */
@@ -350,7 +359,7 @@ button.primary.disabled,
 .button.primary.disabled,
 .button:disabled,
 .button.disabled, button:disabled, button.disabled {
-  background-color: #fff;
+  background-color: #D9D9D9;
   color: #fff;
 }
 .wp-block-button__link.outline,
@@ -372,8 +381,8 @@ button.primary.outline:hover,
 button.primary.outline:disabled,
 .button.primary.outline:disabled,
 .button.outline:disabled, button.outline:disabled {
-  border-color: #fff;
-  color: #fff;
+  border-color: #D9D9D9;
+  color: #D9D9D9;
 }
 
 .wp-block-button.outline .button,
@@ -395,7 +404,7 @@ button.primary.outline:disabled,
 }
 .wp-block-button.outline .button:disabled,
 .wp-block-button.outline .wp-block-button__link:disabled {
-  background-color: #fff;
+  background-color: #D9D9D9;
   color: #fff;
 }
 
@@ -425,13 +434,22 @@ button.primary.outline:disabled,
   border: 1px solid #2DD3EB;
 }
 .wpcf7-form input[type=submit]:disabled, .wpcf7-form input[type=submit].disabled {
-  background-color: #fff;
+  background-color: #D9D9D9;
   color: #fff;
 }
 
-/* UTILITY */
+/* UTILITY */ /*<! START COLORS !>*/
+/*         'UI' => array('good'=>'#5B8C5A', 'bad'=>'#E3655B', 'warning'=>'#F2ED6F'),
+        'Primary' => '#7D8CC4',
+        'Accent' => '#A0D2DB',
+        'Dark' => array('color'=>'#2B363B', 'neutral'=>'#718C98', 'half'=>'#9CAFB7'),
+        'Light' => array('color'=>'#FFFFFF', 'neutral'=>'#CCCCCC', 'half'=>'#D1D1D1'),
+*/
 /* UX */
+/*<! END COLORS !>*/
+/*<! START TYPOGRAPHY !>*/
 /* Typography */
+/*<! END TYPOGRAPHY !>*/
 /* Layout */
 /* Please put custom global variables beneath this comment. 
    Styles above this line may be overwritten */
@@ -460,7 +478,7 @@ button.accent-color {
 }
 
 ul.menu-wrapper li a {
-  color: #212121;
+  color: #FF4E4E;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -481,9 +499,18 @@ ul.menu-wrapper li a {
   text-decoration: none;
 }
 
-/* UTILITY */
+/* UTILITY */ /*<! START COLORS !>*/
+/*         'UI' => array('good'=>'#5B8C5A', 'bad'=>'#E3655B', 'warning'=>'#F2ED6F'),
+        'Primary' => '#7D8CC4',
+        'Accent' => '#A0D2DB',
+        'Dark' => array('color'=>'#2B363B', 'neutral'=>'#718C98', 'half'=>'#9CAFB7'),
+        'Light' => array('color'=>'#FFFFFF', 'neutral'=>'#CCCCCC', 'half'=>'#D1D1D1'),
+*/
 /* UX */
+/*<! END COLORS !>*/
+/*<! START TYPOGRAPHY !>*/
 /* Typography */
+/*<! END TYPOGRAPHY !>*/
 /* Layout */
 /* Please put custom global variables beneath this comment. 
    Styles above this line may be overwritten */

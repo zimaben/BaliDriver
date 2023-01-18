@@ -1,7 +1,8 @@
 <?php
-namespace ktdamd\admin;
-use ktdamd\Config as Config;
-use \ktdamd\admin\setup\Create_Media_File as Create_Media_File;
+namespace rbt\admin;
+use rbt\Config as Config;
+use \rbt\admin\setup\Create_Media_File as Create_Media_File;
+use rbt\setup\ColorPalette as ColorPalette;
 
 /* 
     Set up admin ajax request - this just bounces method requests between the WP admin ajax and
@@ -9,16 +10,160 @@ use \ktdamd\admin\setup\Create_Media_File as Create_Media_File;
 */
 
 #Run function must be called to get Ajax requests on server request handle
-\ktdamd\admin\FigmaAdmin::run();
+\rbt\admin\FigmaAdmin::run();
 
 class FigmaAdmin {
     public static function run(){
         \add_action( 'wp_ajax_test_figma', array(get_class(), 'test_figma' ));
         \add_action( 'wp_ajax_test_figma_item', array(get_class(), 'test_figma_item'));
+        \add_action( 'wp_ajax_get_figma_item', array(get_class(), 'get_figma_item'));
         \add_action( 'wp_ajax_get_logo', array(get_class(), 'get_logo'));
         \add_action( 'wp_ajax_get_colors', array(get_class(), 'get_colors'));
         \add_action( 'wp_ajax_get_typography', array(get_class(), 'get_typography'));
         \add_action( 'wp_ajax_run_setup', array(get_class(), 'run_setup'));
+
+        require_once( get_template_directory() . '/library/admin/setup/colorpalette.php' );
+    }
+    private static function color_rectangle_to_hex( $node ){
+        error_log("Fills:");
+        error_log(print_r($node['fills'][0],true));
+        $fill = isset($node['fills'][0]->color) ? $node['fills'][0]->color : false;
+        $color = $fill ? (Array) $fill : false;
+        error_log("Color");
+        error_log(print_r($color,true));
+        $hex = $color ? ColorPalette::FigmaRGBArrayToHex( $color ) : false;
+        error_log("Hex: " . $hex);
+        return $hex;
+    }
+    private static function get_color_palette(){
+
+        $document = new FigmaRequest( 'get_document' );
+        if($document->err){
+            self::return_false($request->err);
+        }
+        if(!$document->response){
+            self::return_false('No Server Response');
+        }
+        #to get the actual document node, you need to actually look at <response->
+        $document = json_decode($document->response);
+        $document = $document->document;
+        # error_log(print_r(\json_decode($document->response), true));
+        $PageNode = self::get_node('Page 1', 'CANVAS', $document);
+        $Colors = $PageNode ? self::get_node('Colors', 'FRAME', $PageNode) : false;
+        if($Colors){         
+            $Palette = new ColorPalette();
+            #Get Primary and Accent Colors
+            $primaryNode = self::get_node('primary color', 'ELLIPSE', $Colors);
+            if($primaryNode ){
+                error_log("Found Primary Node");
+            } else {
+                error_log("No Primary Node found");
+            }
+            $primaryHex = self::color_rectangle_to_hex( $primaryNode );
+            if($primaryHex) {
+                error_log("Found Primary Hex: " . $primaryHex );
+            
+                $Palette->setPrimary($primaryHex);
+                if(Config::MODE == "development" && $Palette->warning) error_log($Palette->warning);
+            }
+            $accentNode = self::get_node('accent color', 'ELLIPSE', $Colors);
+            $accentHex = self::color_rectangle_to_hex( $accentNode );
+            if($accentHex) {
+                error_log("Found Accent Hex: " . $accentHex );
+                $Palette->setAccent($accentHex);
+                if(Config::MODE == "development" && $Palette->warning) error_log($Palette->warning);
+            }
+            #Set UI Colors
+            $UI = self::get_node('User Experience', 'GROUP', $Colors);
+            $UI_badHex = false;
+            $UI_goodHex = false;
+            $UI_warning = false;
+            $UI_badNode = $UI ? self::get_node('bad', 'ELLIPSE', $UI) : false;
+            $UI_goodNode = $UI ? self::get_node('good', 'ELLIPSE', $UI) : false;
+            $UI_warningNode = $UI ? self::get_node('warning', 'ELLIPSE', $UI) : false;
+            if($UI_badNode && $UI_goodNode && $UI_warningNode){
+                $UI_badHex = self::color_rectangle_to_hex( $UI_badNode );
+                $UI_goodHex = self::color_rectangle_to_hex( $UI_goodNode );
+                $UI_warningHex = self::color_rectangle_to_hex( $UI_warningNode );
+                if($UI_badHex && $UI_goodHex && $UI_warningHex){
+                    $Palette->setUI( array('good' => $UI_goodHex, 'bad' => $UI_badHex, 'warning' => $UI_warningHex));
+                    if(Config::MODE == "development" && $Palette->warning) error_log($Palette->warning);
+                }
+            }
+            #Set Light Colors
+            $Light = self::get_node('Light', 'GROUP', $Colors);
+            $LightColor = false;
+            $LightHalf= false;
+            $LightNeutral = false;
+            $LightColorNode = $Light ? self::get_node('color', 'RECTANGLE', $Light) : false;
+            $LightHalfNode = $Light ? self::get_node('half', 'RECTANGLE', $Light) : false;
+            $LightNeutralNode = $Light ? self::get_node('neutral', 'RECTANGLE', $Light) : false;
+            if($LightColorNode && $LightHalfNode && $LightNeutralNode){
+                $LightColorHex = self::color_rectangle_to_hex( $LightColorNode );
+                $LightHalfHex = self::color_rectangle_to_hex( $LightHalfNode );
+                $LightNeutralHex = self::color_rectangle_to_hex( $LightNeutralNode );
+                if($LightColorHex && $LightHalfHex && $LightNeutralHex){
+                    $Palette->setLight( array('color' => $LightColorHex, 'half' => $LightHalfHex, 'neutral' => $LightNeutralHex));
+                    if(Config::MODE == "development" && $Palette->warning) error_log($Palette->warning);
+                } else if($LightColorHex){
+                    #if 3 tones aren't available you can set Light tones with a single color instead of an array
+                    $Palette->setLight( $LightColorHex );
+                    if(Config::MODE == "development" && $Palette->warning) error_log($Palette->warning);
+                }
+            } else if($LightColorNode){
+                $LightColorHex = self::color_rectangle_to_hex( $LightColorNode );
+                if($LightColorHex)$Palette->setLight( $LightColorHex );
+                if(Config::MODE == "development" && $Palette->warning) error_log($Palette->warning);
+            }
+            #Set Dark Colors
+            $Dark = self::get_node('Dark', 'GROUP', $Colors);
+            $DarkColor = false;
+            $DarkHalf= false;
+            $DarkNeutral = false;
+            $DarkColorNode = $Dark ? self::get_node('color', 'RECTANGLE', $Dark) : false;
+            $DarkHalfNode = $Dark ? self::get_node('half', 'RECTANGLE', $Dark) : false;
+            $DarkNeutralNode = $Dark ? self::get_node('neutral', 'RECTANGLE', $Dark) : false;
+            if($DarkColorNode && $DarkHalfNode && $DarkNeutralNode){
+                $DarkColorHex = self::color_rectangle_to_hex( $DarkColorNode );
+                $DarkHalfHex = self::color_rectangle_to_hex( $DarkHalfNode );
+                $DarkNeutralHex = self::color_rectangle_to_hex( $DarkNeutralNode );
+                if($DarkColorHex && $DarkHalfHex && $DarkNeutralHex){
+                    $Palette->setDark( array('color' => $DarkColorHex, 'half' => $DarkHalfHex, 'neutral' => $DarkNeutralHex));
+                    if(Config::MODE == "development" && $Palette->warning) error_log($Palette->warning);
+                } else if($DarkColorHex){
+                    #if 3 tones aren't available you can set Dark tones with a single color instead of an array
+                    $Palette->setDark( $DarkColorHex );
+                    if(Config::MODE == "development" && $Palette->warning) error_log($Palette->warning);
+                }
+            } else if($DarkColorNode){
+                $DarkColorHex = self::color_rectangle_to_hex( $DarkColorNode );
+                if($DarkColorHex)$Palette->setDark( $DarkColorHex );
+                if(Config::MODE == "development" && $Palette->warning) error_log($Palette->warning);
+            }
+            #Set theme.json colors
+            $Palette->printToThemeJSON();
+            echo json_encode(array('status'=>200, 'message'=>'Setting theme.json colors'));
+            die();
+        }
+        #Else no Colors
+        echo json_encode(array('status'=>404, 'message'=>'Could not find Colors in Figma File'));
+        die();
+
+    }
+    public static function get_figma_item(){
+        if( ! self::gatekeep_post() ) self::return_false('Missing or Invalid Nonce');
+        $item = isset($_POST['item']) ? $_POST['item'] : false;
+
+        switch ($item){
+            #$item = color
+            case("Colors") : 
+                self::get_color_palette();
+            break;
+            default: 
+                echo json_encode(array('status'=>404, 'message'=>'Could not find Item in Figma File'));
+                die();
+            break;
+        }
     }
     public static function test_figma_item(){
         if( ! self::gatekeep_post() ) self::return_false('Missing or Invalid Nonce');
@@ -290,16 +435,13 @@ class FigmaAdmin {
     Recursively brute force through document looking for FIRST node match on name & type 
     */
     private static function get_node( $name, $type, $root ){
-        error_log("MATCH CALLED ON " . $name . ' ' . $type);
+        #error_log("MATCH CALLED ON " . $name . ' ' . $type);
         if( is_object($root) ){
-            error_log("ITS AN OBJECT");
             $root = (array) $root;
         } 
         if( isset( $root['name'] ) && isset( $root['type'] )){
-            error_log("MATCHABLE");
             #check that node is matchable
             if($root['name'] === $name && $root['type'] === $type){
-                error_log("FOUNDIT");
                 return $root;
             }
             if(isset($root['children'])){

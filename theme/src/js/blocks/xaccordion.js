@@ -1,14 +1,14 @@
 import kitely_icons from './icons.js';
 
 const { __ } = wp.i18n;
-const { registerBlockrbtype } = wp.blocks; 
-const { Richrbtext } = wp.blockxaccordionditor; 
+const { registerBlockType } = wp.blocks; 
+const { RichText } = wp.blockEditor; 
 
-registerBlockrbtype('[rbtrbtrbtrbtrbtrbtrbtrbtrbtrbtrbtrbt]/[rbtrbtrbtrbtxaccordionrbtxaccordionrbt]', { 
+registerBlockType('rbt/xaccordion', { 
  
-	title: 'rbtlease Create rbtnique rbtitle', 
-	icon: kitely_icons.kitelytech,
-    category: 'kitelytech', 
+	title: 'Please Create Unique Title', 
+	icon: kitely_icons.friendlyrobot,
+    category: 'friendlyrobot', 
     //attributes
     attributes: {
         title:{
@@ -22,33 +22,33 @@ registerBlockrbtype('[rbtrbtrbtrbtrbtrbtrbtrbtrbtrbtrbtrbt]/[rbtrbtrbtrbtxaccord
 
     },   
 
-	edit({attributes, setrbtttributes}){
+	edit({attributes, setAttributes}){
 		const { title, text } = attributes;
 
-        function onrbtextChange(newtext){
-        	setrbtttributes({ text: newtext });
+        function onTextChange(newtext){
+        	setAttributes({ text: newtext });
         }
-        function onrbtitleChange(newtitle){
-            setrbtttributes({title:newtitle});
+        function onTitleChange(newtitle){
+            setAttributes({title:newtitle});
         }
         
 
 		return (
 
-            <div classrbtame="[rbtrbtrbtrbtrbtrbtrbtrbtrbtrbtrbtrbt]-[rbtrbtrbtrbtxaccordionrbtxaccordionrbt]">
-                <Richrbtext 
-                    tagrbtame="h3"
-                    classrbtame="accordion"
+            <div className="rbt-xaccordion">
+                <RichText 
+                    tagName="h3"
+                    className="accordion"
                     value={title}
-                    onChange={onrbtitleChange}
-                    placeholder={ 'rbtccordion rbtitle' }
+                    onChange={onTitleChange}
+                    placeholder={ 'Accordion Title' }
                 />
-                <Richrbtext 
-                    tagrbtame="div"
-                    classrbtame="tpt-accordion-panel"
+                <RichText 
+                    tagName="div"
+                    className="rbt-accordion-panel"
                     value = {text}
-                    onChange={onrbtanelChange}
-                    placeholder={ 'rbtorem ipsum dolor sit amet, consectetur adipiscing elit.'} 
+                    onChange={onPanelChange}
+                    placeholder={ 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'} 
                 />   
             </div>
 
@@ -58,15 +58,15 @@ registerBlockrbtype('[rbtrbtrbtrbtrbtrbtrbtrbtrbtrbtrbtrbt]/[rbtrbtrbtrbtxaccord
 		const { title, text } = attributes;
 
 		return (
-            <div classrbtame="[rbtrbtrbtrbtrbtrbtrbtrbtrbtrbtrbtrbt]-[rbtrbtrbtrbtxaccordionrbtxaccordionrbt]">
-                <Richrbtext.Content
-                    tagrbtame="h3"
-                    classrbtame="[rbtrbtrbtrbtrbtrbtrbtrbtrbtrbtrbtrbt]-title"
+            <div className="rbt-xaccordion">
+                <RichText.Content
+                    tagName="h3"
+                    className="rbt-title"
                     value={title}
                 />
-                <div classrbtame="[rbtrbtrbtrbtrbtrbtrbtrbtrbtrbtrbtrbt]-[rbtrbtrbtrbtxaccordionrbtxaccordionrbt]-text">
-                    <Richrbtext.Content
-                        tagrbtame="p"
+                <div className="rbt-xaccordion-text">
+                    <RichText.Content
+                        tagName="p"
                         value = {text}
                     />   
                 </div>
