@@ -25,18 +25,12 @@ class FigmaAdmin {
         require_once( get_template_directory() . '/library/admin/setup/colorpalette.php' );
     }
     private static function color_rectangle_to_hex( $node ){
-        error_log("Fills:");
-        error_log(print_r($node['fills'][0],true));
         $fill = isset($node['fills'][0]->color) ? $node['fills'][0]->color : false;
         $color = $fill ? (Array) $fill : false;
-        error_log("Color");
-        error_log(print_r($color,true));
         $hex = $color ? ColorPalette::FigmaRGBArrayToHex( $color ) : false;
-        error_log("Hex: " . $hex);
         return $hex;
     }
-    private static function get_color_palette(){
-
+    private static function getPageNode(){
         $document = new FigmaRequest( 'get_document' );
         if($document->err){
             self::return_false($request->err);
@@ -49,6 +43,51 @@ class FigmaAdmin {
         $document = $document->document;
         # error_log(print_r(\json_decode($document->response), true));
         $PageNode = self::get_node('Page 1', 'CANVAS', $document);
+        return $PageNode ? $PageNode : false;
+    }
+    private static function get_typography(){
+        $PageNode = self::getPageNode();
+        $Typography = $PageNode ? self::get_node('Typography', 'FRAME', $PageNode) : false;
+        $TypographyGroup = $Typography ? self::get_node('Typography', 'GROUP', $Typography) : false;
+        if($TypographyGroup){
+            $Header = self::get_node('Header', 'GROUP', $TypographyGroup);
+            error_log(print_r($Header, true));
+            $H1 = self::get_node('H1 Desktop', 'TEXT', $Header);
+            $H2 = self::get_node('H2 Desktop', 'TEXT', $Header);
+            $H3 = self::get_node('H3 Desktop', 'TEXT', $Header);
+            $H4 = self::get_node('H4 Desktop', 'TEXT', $Header);
+            $H5 = self::get_node('H5 Desktop', 'TEXT', $Header);
+            $H6 = self::get_node('H6 Desktop', 'TEXT', $Header);
+            
+            $H1Mobile = self::get_node('H6 Mobile', 'TEXT', $Header);
+            $H2Mobile = self::get_node('H6 Mobile', 'TEXT', $Header);
+            $H3Mobile = self::get_node('H6 Mobile', 'TEXT', $Header);
+            $H4Mobile = self::get_node('H6 Mobile', 'TEXT', $Header);
+            $H5Mobile = self::get_node('H6 Mobile', 'TEXT', $Header);
+            $H6Mobile = self::get_node('H6 Mobile', 'TEXT', $Header);
+
+            $Body = self::get_node('Body', 'GROUP', $TypographyGroup);
+            #Desktop Body & Mobile Body
+            // $TypographyGroup = self::get_node('Typography', 'GROUP', $PageNode);
+            // if(!$TypographyGroup){ self::return_false('Could not find Typography');}
+
+            // # error_log(print_r($TypographyGroup, true));
+
+            // $filtered_typography_nodes = self::get_nodes( array('style'=> '*'), array('name', 'style'), $TypographyGroup);
+
+            // error_log("FILTERED");
+            // error_log(print_r( $filtered_typography_nodes, true));
+            #this kicks Ass
+
+            die();
+        }
+        #Else no Typography
+        echo json_encode(array('status'=>404, 'message'=>'Could not find Typography in Figma File'));
+        die();
+    }
+    private static function get_color_palette(){
+
+        $PageNode = self::getPageNode();
         $Colors = $PageNode ? self::get_node('Colors', 'FRAME', $PageNode) : false;
         if($Colors){         
             $Palette = new ColorPalette();
@@ -142,6 +181,7 @@ class FigmaAdmin {
             }
             #Set theme.json colors
             $Palette->printToThemeJSON();
+            $Palette->printToGlobalCSS();
             echo json_encode(array('status'=>200, 'message'=>'Setting theme.json colors'));
             die();
         }
@@ -159,6 +199,8 @@ class FigmaAdmin {
             case("Colors") : 
                 self::get_color_palette();
             break;
+            case("Typography") : 
+                self::get_typography();
             default: 
                 echo json_encode(array('status'=>404, 'message'=>'Could not find Item in Figma File'));
                 die();
@@ -273,43 +315,6 @@ class FigmaAdmin {
         
     }
 
-    public static function get_colors(){
-        if( ! self::gatekeep_post() ) self::return_false('Missing or Invalid Nonce');
-        
-    }
-    public static function get_typography(){
-        if( ! self::gatekeep_post() ) self::return_false('Missing or Invalid Nonce');
-
-        $document = new FigmaRequest( 'get_document' );
-        if($document->err){
-            self::return_false($request->err);
-        }
-        if(!$document->response){
-            self::return_false('No Server Response');
-        }
-
-        #Get Document to Parse in associative array, if return node is specified set Document to return node
-        $parse_document = json_decode($document->response, true );
-        if($document->return_node && isset($document->return_node) && isset($parse_document[$document->return_node]) ) $parse_document = $parse_document[$document->return_node];
-        
-        #Get Page
-        $PageNode = self::get_node('Page 1', 'CANVAS', $parse_document);
-        if(!$PageNode){ self::return_false('Could Not Parse Figma Page'); }
-
-        $TypographyGroup = self::get_node('Typography', 'GROUP', $PageNode);
-        if(!$TypographyGroup){ self::return_false('Could not find Typography');}
-
-       # error_log(print_r($TypographyGroup, true));
-
-        $filtered_typography_nodes = self::get_nodes( array('style'=> '*'), array('name', 'style'), $TypographyGroup);
-
-        error_log("FILTERED");
-        error_log(print_r( $filtered_typography_nodes, true));
-        #this kicks Ass
-
-        die();
-
-    }
     public static function run_setup(){
 
         if( ! self::gatekeep_post() ) self::return_false('Missing or Invalid Nonce');

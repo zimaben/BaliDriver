@@ -1,0 +1,395 @@
+/* UTILITY */ /*<! START COLORS !>*/
+/*<! END COLORS !>*/
+/*<! START TYPOGRAPHY !>*/
+/* Typography */
+/*<! END TYPOGRAPHY !>*/
+/*<! START LAYOUT !>*/
+/* Layout */
+/*<! END LAYOUT !>*/
+/* Please put custom global variables beneath this comment. 
+   Styles above this line may be overwritten */
+/* CUSTOM */
+/*
+ * [Modified] Modern CSS Reset
+ * @link https://github.com/hankchizljaw/modern-css-reset
+*/
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  font-family: sans-serif;
+  font-size: 100%;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
+}
+
+/* Make images easier to work with */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  html {
+    scroll-behavior: initial;
+  }
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  width: 100%;
+  position: relative;
+  overflow-y: scroll;
+}
+body.mobile-menu-expanded {
+  overflow: hidden;
+}
+
+/* stick footer on the bottom */
+#page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  flex-grow: 1;
+}
+
+footer.site-footer {
+  display: flex;
+  background-color: #feee62;
+}
+
+/* page layouts */
+#content #main > * {
+  padding-left: clamp(25px, 10vw, 146px);
+  padding-right: clamp(25px, 10vw, 146px);
+}
+#content #main .alignwide {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* index layouts */
+.postwrap {
+  padding-left: clamp(25px, 10vw, 146px);
+  padding-right: clamp(25px, 10vw, 146px);
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+.postwrap:first-of-type {
+  padding-top: 0;
+}
+.postwrap:last-of-type {
+  padding-bottom: 100px;
+}
+.postwrap.alignwide {
+  padding-left: 0;
+  padding-right: 0;
+}
+.postwrap .layout {
+  width: 100%;
+  position: relative;
+  display: flex;
+  gap: clamp(37.5px, 3vw, 50px);
+}
+.postwrap .layout.reverse {
+  flex-direction: row-reverse;
+}
+.postwrap .layout .left {
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+}
+.postwrap .layout .right {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+}
+
+@media screen and (max-width: 991px) {
+  .postwrap .layout {
+    flex-wrap: wrap;
+  }
+  .postwrap .layout .left {
+    width: 100%;
+  }
+  .postwrap .layout .right {
+    width: 100%;
+  }
+}
+/* UTILITY */ /*<! START COLORS !>*/
+/*<! END COLORS !>*/
+/*<! START TYPOGRAPHY !>*/
+/* Typography */
+/*<! END TYPOGRAPHY !>*/
+/*<! START LAYOUT !>*/
+/* Layout */
+/*<! END LAYOUT !>*/
+/* Please put custom global variables beneath this comment. 
+   Styles above this line may be overwritten */
+/* CUSTOM */
+a {
+  color: #feee62;
+}
+a:active, a:hover {
+  /* Darken on click by 15% (down to 85%) */
+  filter: brightness(0.85);
+}
+
+.wp-block-button a,
+.button a,
+button a {
+  text-decoration: none;
+}
+
+.wp-block-button.primary-color,
+.button.primary-color,
+button.primary-color,
+.wp-block-button.accent-color,
+.button.accent-color,
+button.accent-color {
+  color: #ffffff;
+}
+
+ul.menu-wrapper li a {
+  color: #97dc40;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+#site-header .mobile-menu-container .mobile-menu ul.menu-wrapper {
+  padding: 0;
+  list-style-type: none;
+  gap: 24px;
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  margin-top: 32px;
+  align-items: center;
+  justify-content: center;
+}
+#site-header .mobile-menu-container .mobile-menu ul.menu-wrapper li a {
+  color: #feee62;
+  text-decoration: none;
+}
+
+/* UTILITY */ /*<! START COLORS !>*/
+/*<! END COLORS !>*/
+/*<! START TYPOGRAPHY !>*/
+/* Typography */
+/*<! END TYPOGRAPHY !>*/
+/*<! START LAYOUT !>*/
+/* Layout */
+/*<! END LAYOUT !>*/
+/* Please put custom global variables beneath this comment. 
+   Styles above this line may be overwritten */
+/* CUSTOM */
+/* Typography Rules */
+h1 {
+  font-family: "Cabin", sans-serif;
+  font-size: clamp(24px, 2vw, 32px);
+  line-height: clamp(32px, 3vw, 40px);
+  font-weight: 700;
+  color: #242e42;
+}
+
+h2 {
+  font-family: "Cabin", sans-serif;
+  font-size: clamp(24px, 2vw, 32px);
+  line-height: clamp(32px, 3vw, 40px);
+  font-weight: 500;
+  color: #242e42;
+}
+
+h3 {
+  font-family: "Cabin", sans-serif;
+  font-size: clamp(24px, 2vw, 32px);
+  line-height: clamp(32px, 3vw, 40px);
+  font-weight: 600;
+  color: #242e42;
+}
+
+h4 {
+  font-family: "Cabin", sans-serif;
+  font-size: clamp(24px, 2vw, 32px);
+  line-height: clamp(32px, 3vw, 40px);
+  font-weight: 500;
+  color: #242e42;
+}
+
+h5 {
+  font-family: "Cabin", sans-serif;
+  font-size: clamp(24px, 2vw, 32px);
+  line-height: clamp(32px, 3vw, 40px);
+  font-weight: 500;
+  color: #242e42;
+}
+
+h6 {
+  font-family: "Cabin", sans-serif;
+  font-size: clamp(14px, 1vw, 18px);
+  line-height: clamp(18px, 2vw, 23px);
+  font-weight: 700;
+  color: #242e42;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+  text-decoration: none;
+}
+
+a:has(> h1), a:has(> h2), a:has(> h3), a:has(> h4), a:has(> h5), a:has(> h6) {
+  text-decoration: none !important;
+}
+
+#site-header {
+  display: flex;
+  width: 100%;
+  height: 64px;
+  position: relative;
+  padding-left: clamp(25px, 10vw, 146px);
+  padding-right: clamp(25px, 10vw, 146px);
+  background-color: #feee62;
+}
+#site-header .mobile-menu-button {
+  display: none;
+  background-image: url(../../theme/assets/icons/hamburger-button.svg);
+  height: 100%;
+  aspect-ratio: 1/1;
+  background-repeat: no-repeat;
+  background-position: center center;
+  cursor: pointer;
+}
+#site-header .mobile-menu-close {
+  background-image: url(../../theme/assets/icons/star.svg);
+  content: "";
+  display: block;
+  top: 8px;
+  position: absolute;
+  z-index: 2;
+  height: 32px;
+  width: 32px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  cursor: pointer;
+}
+#site-header .mobile-menu-container {
+  display: none;
+}
+#site-header .mobile-menu-container.active {
+  background-color: #7b8fb7;
+  color: #ffffff;
+  padding-left: clamp(25px, 10.42vw, 150px);
+  padding-right: clamp(25px, 10.42vw, 150px);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  min-height: 100vh;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+}
+#site-header .top.menu-logo {
+  height: 100%;
+}
+#site-header .top.menu-logo .site-branding {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#site-header .top.menu-logo .site-branding a {
+  color: #242e42;
+  text-decoration: none;
+}
+#site-header .top.menu-logo .site-branding h1 {
+  margin: 0;
+}
+#site-header .top.menu-logo .site-branding img {
+  max-height: 100%;
+}
+#site-header .top.menu-container {
+  display: flex;
+  align-items: center;
+}
+#site-header .top.menu-container ul {
+  list-style-type: none;
+  margin: 0;
+  display: inline-flex;
+  gap: 12px;
+}
+#site-header .top.menu-container .primary-menu-container {
+  padding-left: 11vw;
+}
+
+@media screen and (max-width: 991px) {
+  #site-header {
+    height: 48px;
+  }
+  #site-header .mobile-menu-button {
+    display: inline-flex;
+  }
+  #site-header .desktop-menu {
+    display: none;
+  }
+}
+/* Page Header with no Featured Image */
+canvas#placeholder-0 {
+  display: none;
+}
+
+.aspectRatioPlaceholder .overlay-text {
+  padding-left: clamp(25px, 10vw, 146px);
+  padding-right: clamp(25px, 10vw, 146px);
+}
+
+/*# sourceMappingURL=critical.css.map*/

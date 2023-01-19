@@ -1,16 +1,11 @@
 /* UTILITY */ /*<! START COLORS !>*/
-/*         'UI' => array('good'=>'#5B8C5A', 'bad'=>'#E3655B', 'warning'=>'#F2ED6F'),
-        'Primary' => '#7D8CC4',
-        'Accent' => '#A0D2DB',
-        'Dark' => array('color'=>'#2B363B', 'neutral'=>'#718C98', 'half'=>'#9CAFB7'),
-        'Light' => array('color'=>'#FFFFFF', 'neutral'=>'#CCCCCC', 'half'=>'#D1D1D1'),
-*/
-/* UX */
 /*<! END COLORS !>*/
 /*<! START TYPOGRAPHY !>*/
 /* Typography */
 /*<! END TYPOGRAPHY !>*/
+/*<! START LAYOUT !>*/
 /* Layout */
+/*<! END LAYOUT !>*/
 /* Please put custom global variables beneath this comment. 
    Styles above this line may be overwritten */
 /* CUSTOM */
@@ -34,7 +29,7 @@
   max-width: 45.83vw;
   margin-top: 0;
   text-align: center;
-  color: #212121;
+  color: #242e42;
 }
 
 @media screen and (max-width: 991px) {

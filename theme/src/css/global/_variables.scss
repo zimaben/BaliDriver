@@ -1,48 +1,53 @@
-@import "./functions";
+@import "functions";
 
 /*<! START COLORS !>*/
 
-/*         'UI' => array('good'=>'#5B8C5A', 'bad'=>'#E3655B', 'warning'=>'#F2ED6F'),
-        'Primary' => '#7D8CC4',
-        'Accent' => '#A0D2DB',
-        'Dark' => array('color'=>'#2B363B', 'neutral'=>'#718C98', 'half'=>'#9CAFB7'),
-        'Light' => array('color'=>'#FFFFFF', 'neutral'=>'#CCCCCC', 'half'=>'#D1D1D1'),
-*/
-$primary: #2DD3EB;
-$accent: #FF4E4E;
-$light: #fff;
-$light-neutral: #D9D9D9;
-$light-half: #969696;
-$dark: #212121;
-$dark-neutral:#323232;
-$dark-half: #4F4F4F;
-$good: #97DC40;
-$bad: #FF7B7B;
-$warning: #F2ED6F;
-
-
-$theme: "light"; //accepts "light" & "dark"
-
-/* UX */
-$good: #fff;
-$bad: #fff;
-$neutral:#fff;
+$primary:#feee62;
+$accent:#97dc40;
+$light:#ffffff;
+$light-neutral:#d1d1d1;
+$light-half:#bbbbbb;
+$dark:#242e42;
+$dark-neutral:#7b8fb7;
+$dark-half:#bbbbbb;
+$good:#97dc40;
+$bad:#ff7b7b;
+$warning:#feee62;
 
 /*<! END COLORS !>*/
+
 /*<! START TYPOGRAPHY !>*/
 /* Typography */
-$headerfancy: 'Cabin', sans-serif;
-$header: 'Konnect', Konnect, sans-serif;
+$header-family: 'Cabin', sans-serif;
+$body-family: 'Konnect', Konnect, sans-serif;
 $body: 'Fira Sans', Fira Sans, sans-serif;
+$h1size: 32;
+$h2size: 28;
+$h3size: 24;
+$h4size: 20;
+$h5size: 18;
+$h6size: 18;
+$mh1size:26;
+$mh2size:24;
+$mh3size:22;
+$mh4size:20;
+$mh5size:18;
+$mh6size:16;
+$bodysize: 16;
+$mbodysize: 14;
 
 /*<! END TYPOGRAPHY !>*/
-
+/*<! START LAYOUT !>*/
 /* Layout */
 $grid: 1440;
-$gap: 25;
+//$gap: 25;
+$gap: 50;
 $edge: 146;
-
 $mobileEdge:25;
+/*<! END LAYOUT !>*/
+
+
+
 $edgeclamp: clamp($mobileEdge * 1px, roundit( calc($edge / $grid), 2) * 100vw, $edge * 1px);
 $borderradius: 4px;
 $standardgap: clamp( roundit($gap * .75, 2) * 1px,roundit( calc($gap / $grid), 2) * 100vw, ($gap * 1px) );

@@ -184,6 +184,9 @@ class AddFields extends Theme {
             Field::make('html', 'figma_get_colors')
             ->set_help_text( 'Get Colors' )
             ->set_html( '<div class="buttonwrap"><div class="responsearea"></div><button type="button" class="adminbutton btn" id="figmagetitem" data-item="Colors">Get Colors</button></div>' ),
+            Field::make('html', 'figma_get_typography')
+            ->set_help_text( 'Get Typography' )
+            ->set_html( '<div class="buttonwrap"><div class="responsearea"></div><button type="button" class="adminbutton btn" id="temptypographybutton" data-item="Typography">Get Typography</button></div>' ),
         ));
         endif;
         if( isset(Config::INTEGRATIONS['GoogleAnalytics']) && Config::INTEGRATIONS['GoogleAnalytics'] == true) : 

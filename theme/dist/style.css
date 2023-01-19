@@ -1,16 +1,11 @@
 /* UTILITY */ /*<! START COLORS !>*/
-/*         'UI' => array('good'=>'#5B8C5A', 'bad'=>'#E3655B', 'warning'=>'#F2ED6F'),
-        'Primary' => '#7D8CC4',
-        'Accent' => '#A0D2DB',
-        'Dark' => array('color'=>'#2B363B', 'neutral'=>'#718C98', 'half'=>'#9CAFB7'),
-        'Light' => array('color'=>'#FFFFFF', 'neutral'=>'#CCCCCC', 'half'=>'#D1D1D1'),
-*/
-/* UX */
 /*<! END COLORS !>*/
 /*<! START TYPOGRAPHY !>*/
 /* Typography */
 /*<! END TYPOGRAPHY !>*/
+/*<! START LAYOUT !>*/
 /* Layout */
+/*<! END LAYOUT !>*/
 /* Please put custom global variables beneath this comment. 
    Styles above this line may be overwritten */
 /* CUSTOM */
@@ -107,7 +102,7 @@ body.mobile-menu-expanded {
 
 footer.site-footer {
   display: flex;
-  background-color: #2DD3EB;
+  background-color: #feee62;
 }
 
 /* page layouts */
@@ -124,14 +119,14 @@ footer.site-footer {
 .postwrap {
   padding-left: clamp(25px, 10vw, 146px);
   padding-right: clamp(25px, 10vw, 146px);
-  padding-top: 12.5px;
-  padding-bottom: 12.5px;
+  padding-top: 25px;
+  padding-bottom: 25px;
 }
 .postwrap:first-of-type {
   padding-top: 0;
 }
 .postwrap:last-of-type {
-  padding-bottom: 50px;
+  padding-bottom: 100px;
 }
 .postwrap.alignwide {
   padding-left: 0;
@@ -141,7 +136,7 @@ footer.site-footer {
   width: 100%;
   position: relative;
   display: flex;
-  gap: clamp(18.75px, 2vw, 25px);
+  gap: clamp(37.5px, 3vw, 50px);
 }
 .postwrap .layout.reverse {
   flex-direction: row-reverse;
@@ -308,6 +303,66 @@ footer.site-footer {
   stroke-dashoffset: 20;
 }
 
+/* UTILITY */ /*<! START COLORS !>*/
+/*<! END COLORS !>*/
+/*<! START TYPOGRAPHY !>*/
+/* Typography */
+/*<! END TYPOGRAPHY !>*/
+/*<! START LAYOUT !>*/
+/* Layout */
+/*<! END LAYOUT !>*/
+/* Please put custom global variables beneath this comment. 
+   Styles above this line may be overwritten */
+/* CUSTOM */
+/* Typography Rules */
+h1 {
+  font-family: "Cabin", sans-serif;
+  font-size: clamp(24px, 2vw, 32px);
+  line-height: clamp(32px, 3vw, 40px);
+  font-weight: 700;
+  color: #242e42;
+}
+
+h2 {
+  font-family: "Cabin", sans-serif;
+  font-size: clamp(24px, 2vw, 32px);
+  line-height: clamp(32px, 3vw, 40px);
+  font-weight: 500;
+  color: #242e42;
+}
+
+h3 {
+  font-family: "Cabin", sans-serif;
+  font-size: clamp(24px, 2vw, 32px);
+  line-height: clamp(32px, 3vw, 40px);
+  font-weight: 600;
+  color: #242e42;
+}
+
+h4 {
+  font-family: "Cabin", sans-serif;
+  font-size: clamp(24px, 2vw, 32px);
+  line-height: clamp(32px, 3vw, 40px);
+  font-weight: 500;
+  color: #242e42;
+}
+
+h5 {
+  font-family: "Cabin", sans-serif;
+  font-size: clamp(24px, 2vw, 32px);
+  line-height: clamp(32px, 3vw, 40px);
+  font-weight: 500;
+  color: #242e42;
+}
+
+h6 {
+  font-family: "Cabin", sans-serif;
+  font-size: clamp(14px, 1vw, 18px);
+  line-height: clamp(18px, 2vw, 23px);
+  font-weight: 700;
+  color: #242e42;
+}
+
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   text-decoration: none;
 }
@@ -320,8 +375,8 @@ a:has(> h1), a:has(> h2), a:has(> h3), a:has(> h4), a:has(> h5), a:has(> h6) {
 button.primary,
 .button.primary,
 .button, button {
-  background-color: #2DD3EB;
-  color: #fff;
+  background-color: #feee62;
+  color: #ffffff;
   cursor: pointer;
   padding-right: clamp(23.94px, 3.33vw, 47.88px);
   padding-left: clamp(23.94px, 3.33vw, 47.88px);
@@ -350,7 +405,7 @@ button.primary.focus,
 .button:focus,
 .button.focus, button:focus, button.focus {
   filter: brightness(1.1);
-  border: 1px solid #2DD3EB;
+  border: 1px solid #feee62;
 }
 .wp-block-button__link:disabled, .wp-block-button__link.disabled,
 button.primary:disabled,
@@ -359,37 +414,37 @@ button.primary.disabled,
 .button.primary.disabled,
 .button:disabled,
 .button.disabled, button:disabled, button.disabled {
-  background-color: #D9D9D9;
-  color: #fff;
+  background-color: #d1d1d1;
+  color: #ffffff;
 }
 .wp-block-button__link.outline,
 button.primary.outline,
 .button.primary.outline,
 .button.outline, button.outline {
   background-color: transparent;
-  outline: 1px solid #2DD3EB;
-  color: #2DD3EB;
+  outline: 1px solid #feee62;
+  color: #feee62;
 }
 .wp-block-button__link.outline:hover,
 button.primary.outline:hover,
 .button.primary.outline:hover,
 .button.outline:hover, button.outline:hover {
-  background-color: #2DD3EB;
-  color: #fff;
+  background-color: #feee62;
+  color: #ffffff;
 }
 .wp-block-button__link.outline:disabled,
 button.primary.outline:disabled,
 .button.primary.outline:disabled,
 .button.outline:disabled, button.outline:disabled {
-  border-color: #D9D9D9;
-  color: #D9D9D9;
+  border-color: #d1d1d1;
+  color: #d1d1d1;
 }
 
 .wp-block-button.outline .button,
 .wp-block-button.outline .wp-block-button__link {
   background-color: transparent;
-  outline: 1px solid #2DD3EB;
-  color: #2DD3EB;
+  outline: 1px solid #feee62;
+  color: #feee62;
 }
 .wp-block-button.outline .button:hover,
 .wp-block-button.outline .wp-block-button__link:hover {
@@ -400,18 +455,18 @@ button.primary.outline:disabled,
 .wp-block-button.outline .wp-block-button__link:focus,
 .wp-block-button.outline .wp-block-button__link.focus {
   filter: brightness(1.1);
-  border: 1px solid #2DD3EB;
+  border: 1px solid #feee62;
 }
 .wp-block-button.outline .button:disabled,
 .wp-block-button.outline .wp-block-button__link:disabled {
-  background-color: #D9D9D9;
-  color: #fff;
+  background-color: #d1d1d1;
+  color: #ffffff;
 }
 
 /* CONTACT FORM 7 */
 .wpcf7-form input[type=submit] {
-  background-color: #2DD3EB;
-  color: #fff;
+  background-color: #feee62;
+  color: #ffffff;
   cursor: pointer;
   padding-right: clamp(23.94px, 3.33vw, 47.88px);
   padding-left: clamp(23.94px, 3.33vw, 47.88px);
@@ -431,31 +486,26 @@ button.primary.outline:disabled,
 }
 .wpcf7-form input[type=submit]:focus, .wpcf7-form input[type=submit].focus {
   filter: brightness(1.1);
-  border: 1px solid #2DD3EB;
+  border: 1px solid #feee62;
 }
 .wpcf7-form input[type=submit]:disabled, .wpcf7-form input[type=submit].disabled {
-  background-color: #D9D9D9;
-  color: #fff;
+  background-color: #d1d1d1;
+  color: #ffffff;
 }
 
 /* UTILITY */ /*<! START COLORS !>*/
-/*         'UI' => array('good'=>'#5B8C5A', 'bad'=>'#E3655B', 'warning'=>'#F2ED6F'),
-        'Primary' => '#7D8CC4',
-        'Accent' => '#A0D2DB',
-        'Dark' => array('color'=>'#2B363B', 'neutral'=>'#718C98', 'half'=>'#9CAFB7'),
-        'Light' => array('color'=>'#FFFFFF', 'neutral'=>'#CCCCCC', 'half'=>'#D1D1D1'),
-*/
-/* UX */
 /*<! END COLORS !>*/
 /*<! START TYPOGRAPHY !>*/
 /* Typography */
 /*<! END TYPOGRAPHY !>*/
+/*<! START LAYOUT !>*/
 /* Layout */
+/*<! END LAYOUT !>*/
 /* Please put custom global variables beneath this comment. 
    Styles above this line may be overwritten */
 /* CUSTOM */
 a {
-  color: #2DD3EB;
+  color: #feee62;
 }
 a:active, a:hover {
   /* Darken on click by 15% (down to 85%) */
@@ -474,11 +524,11 @@ button.primary-color,
 .wp-block-button.accent-color,
 .button.accent-color,
 button.accent-color {
-  color: #fff;
+  color: #ffffff;
 }
 
 ul.menu-wrapper li a {
-  color: #FF4E4E;
+  color: #97dc40;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -495,26 +545,81 @@ ul.menu-wrapper li a {
   justify-content: center;
 }
 #site-header .mobile-menu-container .mobile-menu ul.menu-wrapper li a {
-  color: #2DD3EB;
+  color: #feee62;
   text-decoration: none;
 }
 
 /* UTILITY */ /*<! START COLORS !>*/
-/*         'UI' => array('good'=>'#5B8C5A', 'bad'=>'#E3655B', 'warning'=>'#F2ED6F'),
-        'Primary' => '#7D8CC4',
-        'Accent' => '#A0D2DB',
-        'Dark' => array('color'=>'#2B363B', 'neutral'=>'#718C98', 'half'=>'#9CAFB7'),
-        'Light' => array('color'=>'#FFFFFF', 'neutral'=>'#CCCCCC', 'half'=>'#D1D1D1'),
-*/
-/* UX */
 /*<! END COLORS !>*/
 /*<! START TYPOGRAPHY !>*/
 /* Typography */
 /*<! END TYPOGRAPHY !>*/
+/*<! START LAYOUT !>*/
 /* Layout */
+/*<! END LAYOUT !>*/
 /* Please put custom global variables beneath this comment. 
    Styles above this line may be overwritten */
 /* CUSTOM */
+/* UTILITY */ /*<! START COLORS !>*/
+/*<! END COLORS !>*/
+/*<! START TYPOGRAPHY !>*/
+/* Typography */
+/*<! END TYPOGRAPHY !>*/
+/*<! START LAYOUT !>*/
+/* Layout */
+/*<! END LAYOUT !>*/
+/* Please put custom global variables beneath this comment. 
+   Styles above this line may be overwritten */
+/* CUSTOM */
+/* Typography Rules */
+h1 {
+  font-family: "Cabin", sans-serif;
+  font-size: clamp(24px, 2vw, 32px);
+  line-height: clamp(32px, 3vw, 40px);
+  font-weight: 700;
+  color: #242e42;
+}
+
+h2 {
+  font-family: "Cabin", sans-serif;
+  font-size: clamp(24px, 2vw, 32px);
+  line-height: clamp(32px, 3vw, 40px);
+  font-weight: 500;
+  color: #242e42;
+}
+
+h3 {
+  font-family: "Cabin", sans-serif;
+  font-size: clamp(24px, 2vw, 32px);
+  line-height: clamp(32px, 3vw, 40px);
+  font-weight: 600;
+  color: #242e42;
+}
+
+h4 {
+  font-family: "Cabin", sans-serif;
+  font-size: clamp(24px, 2vw, 32px);
+  line-height: clamp(32px, 3vw, 40px);
+  font-weight: 500;
+  color: #242e42;
+}
+
+h5 {
+  font-family: "Cabin", sans-serif;
+  font-size: clamp(24px, 2vw, 32px);
+  line-height: clamp(32px, 3vw, 40px);
+  font-weight: 500;
+  color: #242e42;
+}
+
+h6 {
+  font-family: "Cabin", sans-serif;
+  font-size: clamp(14px, 1vw, 18px);
+  line-height: clamp(18px, 2vw, 23px);
+  font-weight: 700;
+  color: #242e42;
+}
+
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   text-decoration: none;
 }
@@ -530,7 +635,7 @@ a:has(> h1), a:has(> h2), a:has(> h3), a:has(> h4), a:has(> h5), a:has(> h6) {
   position: relative;
   padding-left: clamp(25px, 10vw, 146px);
   padding-right: clamp(25px, 10vw, 146px);
-  background-color: #2DD3EB;
+  background-color: #feee62;
 }
 #site-header .mobile-menu-button {
   display: none;
@@ -558,8 +663,8 @@ a:has(> h1), a:has(> h2), a:has(> h3), a:has(> h4), a:has(> h5), a:has(> h6) {
   display: none;
 }
 #site-header .mobile-menu-container.active {
-  background-color: #323232;
-  color: #fff;
+  background-color: #7b8fb7;
+  color: #ffffff;
   padding-left: clamp(25px, 10.42vw, 150px);
   padding-right: clamp(25px, 10.42vw, 150px);
   display: flex;
@@ -584,7 +689,7 @@ a:has(> h1), a:has(> h2), a:has(> h3), a:has(> h4), a:has(> h5), a:has(> h6) {
   justify-content: center;
 }
 #site-header .top.menu-logo .site-branding a {
-  color: #212121;
+  color: #242e42;
   text-decoration: none;
 }
 #site-header .top.menu-logo .site-branding h1 {
@@ -640,7 +745,7 @@ footer.site-footer .column ul.menu-wrapper {
   justify-content: space-between;
   padding-left: 50px;
   padding-right: 50px;
-  background-color: #2DD3EB;
+  background-color: #feee62;
 }
 .row.footer-menu-bottom ul.footerbottom {
   list-style: none;
@@ -683,7 +788,7 @@ canvas#placeholder-0 {
   max-width: 45.83vw;
   margin-top: 0;
   text-align: center;
-  color: #212121;
+  color: #242e42;
 }
 
 @media screen and (max-width: 991px) {

@@ -15,6 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if(figmagetitembutton){ 
         figmagetitembutton.addEventListener('click', get_figma_item ); 
     }
+    const temptypographybutton = document.getElementById('temptypographybutton');
+    if(temptypographybutton){ 
+        temptypographybutton.addEventListener('click', get_figma_item ); 
+    }
     const syncmapbutton = document.getElementById('gmap_sync');
     if(syncmapbutton) syncmapbutton.addEventListener('click', gmap_sync);
 })

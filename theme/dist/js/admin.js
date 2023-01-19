@@ -119,6 +119,10 @@ document.addEventListener('DOMContentLoaded', function () {
   if (figmagetitembutton) {
     figmagetitembutton.addEventListener('click', _admin_adminhead_js__WEBPACK_IMPORTED_MODULE_0__["get_figma_item"]);
   }
+  var temptypographybutton = document.getElementById('temptypographybutton');
+  if (temptypographybutton) {
+    temptypographybutton.addEventListener('click', _admin_adminhead_js__WEBPACK_IMPORTED_MODULE_0__["get_figma_item"]);
+  }
   var syncmapbutton = document.getElementById('gmap_sync');
   if (syncmapbutton) syncmapbutton.addEventListener('click', gmap_sync);
 });

@@ -22,6 +22,7 @@
      footer: JS_DIR + '/foot.js',
      //End Blocks
      //blocks: path.resolve( __dirname, 'theme/src/js/block-list.js'),
+     critical: CSS_DIR + '/critical.scss',
      admin: JS_DIR + '/admin.js',
      admin_css: CSS_DIR + '/admin.scss',
      style: CSS_DIR + '/style.scss',
