@@ -54,7 +54,6 @@ class ColorPalette {
         if( isset($rgbArray['r']) && 
             isset($rgbArray['g']) && 
             isset($rgbArray['b'] )){
-            error_log("found Figma Fill Array");
             
             $returnString = sprintf("#%02x%02x%02x", round($rgbArray['r'] * 255),round($rgbArray['g'] * 255),round($rgbArray['b'] * 255) );
 
@@ -202,7 +201,6 @@ class ColorPalette {
 
     }
     private static function isValidHex( string $string = '' ){
-        error_log("isValidHex called on: " . $string);
         if(!strlen($string)) return false;
         if(substr($string, 0, 1) !== '#') $string = '#' . $string;
         return preg_match('/^#([0-9A-F]{3}){1,2}$/i', $string);

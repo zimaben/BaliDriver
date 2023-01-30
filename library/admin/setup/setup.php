@@ -68,7 +68,7 @@ class Setup extends Theme {
     public static function set_up_home_page( $archetype = null){
         $HomeContentString = '<!-- wp:latest-posts {"postsToShow":3,"displayPostContent":true,"excerptLength":30,"displayPostDate":true,"postLayout":"grid","displayFeaturedImage":true,"featuredImageSizeSlug":"large","align":"wide","className":"tw-mt-8 tw-img-ratio-3-2 tw-stretched-link is-style-default"} /-->';
         $HomePageContent = \do_blocks($HomeContentString);
-        echo do_blocks($block_content);
+        if($HomePageContent) echo $HomePageContent;
         #add the new page if it doesn't already exist
         $HomePage = new Page( array('title'=>'Home', 'type'=>'page', 'content'=>$HomePageContent ));
         #set the new page to home page;

@@ -332,7 +332,7 @@ class FigmaAdmin {
 
         #From PageNode we can do everything we need;
         #Logo
-        $added_theme_logo = self::setup_logo( $PageNode );
+        $added_theme_logo = self::setup_logo( $document );
         
         #Typography
 
@@ -341,8 +341,14 @@ class FigmaAdmin {
     }
 
     #High Level Function Rips Logo from Figma file containing FRAME node named Logo and sets it as the Theme Logo
-    private static function setup_logo( $PageNode = null ){
+    private static function setup_logo( $document ){
 
+        #Get Document to Parse in associative array, if return node is specified set Document to return node
+        $parse_document = json_decode($document->response, true );
+        if($document->return_node && isset($document->return_node) && isset($parse_document[$document->return_node]) ) $parse_document = $parse_document[$document->return_node];
+
+        $PageNode = self::get_node('Page 1', 'CANVAS', $parse_document);
+        
         if(!$PageNode) return false;
 
         #We will add or overwrite theme-logo.svg under theme/assets.

@@ -15,7 +15,7 @@ else
   mkdir site_$projectname
   mkdir site_$projectname/wp-content
   mkdir site_$projectname/wp-content/themes
-  git clone git@github.com:zimaben/theme_blocks_starter.git site_$projectname/wp-content/themes/$projectname
+  git clone git@github.com:zimaben/WorkingStarter.git site_$projectname/wp-content/themes/$projectname
 
 fi
 
@@ -111,7 +111,7 @@ EOF
 	'/theme/template-parts/page-header.php',
 	'/theme/template-parts/page-static-header.php',
 	'/theme/template-parts/progressive-header.php',
-  '/theme/template-parts/components/porgressive-header.php',
+  '/theme/template-parts/components/progressive-header.php',
 	'/theme/template-parts/site-header.php',
 	'/theme/template-parts/site-footer.php',
   '/theme/template-parts/prefooter.php',
