@@ -94,7 +94,7 @@ EOF
 	'/library/admin/setup/posttypes.php',
 	'/library/admin/setup/setup.php',
 	'/library/admin/setup/taxonomies.php',
-  '/library/admin/setup/colorpalette.php',
+  '/library/admin/setup/colorpalette.php', 
   '/library/admin/setup/images.php',
   '/library/admin/setup/typography.php',
 	'/library/admin/integrations/ActiveCampaign.php',
