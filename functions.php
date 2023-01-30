@@ -1,5 +1,5 @@
 <?php
-namespace rbt;
+namespace <!PLUGINPATH->;
 use \Carbon_Fields\Container;
 use \Carbon_Fields\Field;
 use \<!PLUGINPATH->\Config as Config;
