@@ -1,10 +1,10 @@
 <?php
-namespace rbt\admin;
-use \rbt\FRStarter as Theme;
-use \rbt\admin\setup\PostTypes as PostTypes;
-use \rbt\admin\setup\Page as Page;
-use \rbt\admin\setup\Taxonomy as Taxonomy;
-use \rbt\Config as Config;
+namespace <!PLUGINPATH->\admin;
+use \<!PLUGINPATH->\<!PLUGINNAME-> as Theme;
+use \<!PLUGINPATH->\admin\setup\PostTypes as PostTypes;
+use \<!PLUGINPATH->\admin\setup\Page as Page;
+use \<!PLUGINPATH->\admin\setup\Taxonomy as Taxonomy;
+use \<!PLUGINPATH->\Config as Config;
 
 /**
  * The setup file does two things. Class Setup runs on every page load and 
@@ -20,7 +20,7 @@ use \rbt\Config as Config;
  *  new site pages.
  * 
  * @package TPT
- * @subpackage FRStarter
+ * @subpackage <!PLUGINNAME->
  */
 class Setup extends Theme {
 

@@ -1,4 +1,4 @@
-import kitely_icons from './icons.js';
+import theme_icons from './icons.js';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks; 
@@ -7,7 +7,7 @@ const { RichText } = wp.blockEditor;
 registerBlockType('rbt/xaccordions', { 
  
 	title: 'Please Create Unique Title', 
-	icon: kitely_icons.friendlyrobot,
+	icon: theme_icons.friendlyrobot,
     category: 'friendlyrobot', 
     //attributes
     attributes: {

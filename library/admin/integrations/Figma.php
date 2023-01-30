@@ -1,10 +1,10 @@
 <?php
-namespace rbt\admin;
-use rbt\Config as Config;
-use rbt\admin\ Setup as Setup;
-use rbt\setup\ColorPalette as ColorPalette;
-use rbt\setup\FigmaTypography as FigmaTypography;
-use rbt\admin\setup\MediaImage as MediaImage;
+namespace <!PLUGINPATH->\admin;
+use <!PLUGINPATH->\Config as Config;
+use <!PLUGINPATH->\admin\ Setup as Setup;
+use <!PLUGINPATH->\setup\ColorPalette as ColorPalette;
+use <!PLUGINPATH->\setup\FigmaTypography as FigmaTypography;
+use <!PLUGINPATH->\admin\setup\MediaImage as MediaImage;
 
 /* 
     Set up admin ajax request - this just bounces method requests between the WP admin ajax and
@@ -12,7 +12,7 @@ use rbt\admin\setup\MediaImage as MediaImage;
 */
 
 #Run function must be called to get Ajax requests on server request handle
-\rbt\admin\FigmaAdmin::run();
+\<!PLUGINPATH->\admin\FigmaAdmin::run();
 
 class FigmaAdmin {
     public static function run(){

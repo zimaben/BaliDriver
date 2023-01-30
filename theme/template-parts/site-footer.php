@@ -1,6 +1,6 @@
 <?php 
-use rbt\FRStarter as Theme;
-use rbt\Config as Config;
+use <!PLUGINPATH->\<!PLUGINNAME-> as Theme;
+use <!PLUGINPATH->\Config as Config;
 
 if(isset(Config::FOOTER['prefooter']) && Config::FOOTER['prefooter'] !== false ){
     Theme::TemplatePart('prefooter.php');

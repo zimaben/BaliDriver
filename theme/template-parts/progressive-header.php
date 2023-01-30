@@ -1,6 +1,6 @@
 <?php
-use rbt\FRStarter as Theme;
-use rbt\Config as Config;
+use <!PLUGINPATH->\<!PLUGINNAME-> as Theme;
+use <!PLUGINPATH->\Config as Config;
 global $post;
  
 if(Config::FEATURES['progressive_header'] && is_array(Config::FEATURES['progressive_header'])){
@@ -13,7 +13,7 @@ if(Config::FEATURES['progressive_header'] && is_array(Config::FEATURES['progress
         //if post type specifically set to false, no page header
         if( Config::FEATURES['progressive_header'] && Config::FEATURES['progressive_header'][$type] !== false){
             $header_args = isset( Config::FEATURES['progressive_header'][$type] ) ? Config::FEATURES['progressive_header'][$type] : Config::FEATURES['progressive_header']['default'];
-            $canvas = new \rbt\ProgressiveHeader($post, $header_args['w'],$header_args['h'],$header_args['minHeight'] );
+            $canvas = new \<!PLUGINPATH->\ProgressiveHeader($post, $header_args['w'],$header_args['h'],$header_args['minHeight'] );
                 
             if($canvas->html) {echo $canvas->render();}
         }

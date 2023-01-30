@@ -4,12 +4,12 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package tpt
- * @subpackage FRStarter
+ * @package <!HUMANREADABLE->
+ * @subpackage TPT
  */
 
- use rbt\FRStarter as Theme;
-use rbt\Config as Config;
+ use <!PLUGINPATH->\<!PLUGINNAME-> as Theme;
+use <!PLUGINPATH->\Config as Config;
 
 
 global $post;

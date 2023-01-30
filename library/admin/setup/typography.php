@@ -1,7 +1,7 @@
 <?php 
-namespace rbt\setup;
-use \rbt\Config as Config;
-use \rbt\setup\ColorPalette as ColorPalette;
+namespace <!PLUGINPATH->\setup;
+use \<!PLUGINPATH->\Config as Config;
+use \<!PLUGINPATH->\setup\ColorPalette as ColorPalette;
 
 class FigmaTypography {
     #structureless object to build your default css for typography purposes. It could be used to build any CSS I suppose.
@@ -89,7 +89,7 @@ class FigmaTypography {
     );
 
     public function __construct( $FigmaRoot = array() ){
-        $this->grid = (defined('\rbt\Config::GRID') && Config::GRID > 0) ? Config::GRID : 1440;
+        $this->grid = (defined('\<!PLUGINPATH->\Config::GRID') && Config::GRID > 0) ? Config::GRID : 1440;
     }
     public function setMobileStyle( String $tag, Array $style){
         if(!in_array( strtolower( $tag ), self::$settable )) return false;

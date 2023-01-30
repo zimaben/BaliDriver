@@ -405,7 +405,7 @@ a:has(> h1), a:has(> h2), a:has(> h3), a:has(> h4), a:has(> h5), a:has(> h6) {
 }
 #site-header .mobile-menu-button {
   display: none;
-  background-image: url(http://localhost:8005/wp-content/themes/FRStarter/theme/assets/icons/hamburger-button-white.svg);
+  background-image: url(http://localhost:8005/wp-content/themes/<!PLUGINNAME->/theme/assets/icons/hamburger-button-white.svg);
   height: 100%;
   aspect-ratio: 1/1;
   background-repeat: no-repeat;
@@ -413,7 +413,7 @@ a:has(> h1), a:has(> h2), a:has(> h3), a:has(> h4), a:has(> h5), a:has(> h6) {
   cursor: pointer;
 }
 #site-header .mobile-menu-close {
-  background-image: url(http://localhost:8005/wp-content/themes/FRStarter/theme/assets/icons/close-white.svg);
+  background-image: url(http://localhost:8005/wp-content/themes/<!PLUGINNAME->/theme/assets/icons/close-white.svg);
   content: "";
   display: block;
   top: 18px;

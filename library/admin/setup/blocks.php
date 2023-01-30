@@ -1,9 +1,9 @@
 <?php 
-namespace rbt\setup;
-use \rbt\Config as Config;
+namespace <!PLUGINPATH->\setup;
+use \<!PLUGINPATH->\Config as Config;
 
 #move to bottom if not hoisted
-\rbt\setup\Blocks::get_instance();
+\<!PLUGINPATH->\setup\Blocks::get_instance();
 
 class Blocks {
 
@@ -71,7 +71,7 @@ class Blocks {
                 array( 'editor_script' => $handle,
                 'editor_style' => 'theme_blocks_editor_css',
                 'style' => 'theme_blocks_global_css',
-                'render_callback' => 'rbt\core\Methods::' . $callback,
+                'render_callback' => '<!PLUGINPATH->\core\Methods::' . $callback,
                 ));
         } else {
             \register_block_type(

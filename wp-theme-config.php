@@ -3,7 +3,7 @@ namespace rbt;
 Class Config {
     const VERSION = "1.0.1";
     const MODE = "development";
-    const TEXTDOMAIN = "rbt_FRStarter";
+    const TEXTDOMAIN = "rbt_<!PLUGINNAME->";
     const NICENAME = "Starter";
 
     const BREAKPOINTS = array(

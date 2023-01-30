@@ -1,10 +1,10 @@
 <?php
-namespace rbt\admin\setup;
-use \rbt\Robot as Theme;
-use \rbt\admin\setup\PostTypes as PostTypes;
-use \rbt\admin\setup\Page as Page;
-use \rbt\admin\setup\Taxonomy as Taxonomy;
-use \rbt\Config as Config;
+namespace <!PLUGINPATH->\admin\setup;
+use \<!PLUGINPATH->\<!PLUGINNAME-> as Theme;
+use \<!PLUGINPATH->\admin\setup\PostTypes as PostTypes;
+use \<!PLUGINPATH->\admin\setup\Page as Page;
+use \<!PLUGINPATH->\admin\setup\Taxonomy as Taxonomy;
+use \<!PLUGINPATH->\Config as Config;
 
 /**
  * https://gist.github.com/joshuadavidnelson/164a0a0744f0693d5746
@@ -21,7 +21,7 @@ use \rbt\Config as Config;
  * $image_id = $create_image->attachment_id;
  * 
  * @package RBT
- * @subpackage Robot
+ * @subpackage <!PLUGINNAME->
  */
 class MediaImage {
 	

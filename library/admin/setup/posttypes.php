@@ -1,6 +1,6 @@
 <?php
-namespace rbt\admin\setup;
-use \rbt\Config as Config;
+namespace <!PLUGINPATH->\admin\setup;
+use \<!PLUGINPATH->\Config as Config;
 
 /**
  * Class PostTypes accepts $plural, (optional) $singular, (optional) $args.
@@ -12,7 +12,7 @@ use \rbt\Config as Config;
  *
  *
  * @package TPT
- * @subpackage FRStarter
+ * @subpackage <!PLUGINNAME->
  */
 class PostType {
     public static function add_posttype( $plural, $singular, $args = null ){

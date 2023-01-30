@@ -1,6 +1,6 @@
 <?php 
 
-use rbt\Config as Config;
+use <!PLUGINPATH->\Config as Config;
 /* Global Prefooter */
 $has_image = (isset(Config::FOOTER['prefooter']['image']) && Config::FOOTER['prefooter']['image'] !== false ) ? true : false;
 ?>

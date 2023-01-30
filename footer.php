@@ -1,5 +1,5 @@
 <?php
-use rbt\FRStarter as Theme;
+use <!PLUGINPATH->\<!PLUGINNAME-> as Theme;
 /**
  * The template for displaying the footer
  *
@@ -7,8 +7,8 @@ use rbt\FRStarter as Theme;
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package TPT
- * @subpackage TPT_Beyond_Menu
+ * @package <!HUMANREADABLE->
+ * @subpackage RBT
  */
 
 ?>		

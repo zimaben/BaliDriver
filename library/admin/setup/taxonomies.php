@@ -1,7 +1,7 @@
 <?php
-namespace rbt\admin\setup;
+namespace <!PLUGINPATH->\admin\setup;
 
-use \rbt\Config as Config;
+use \<!PLUGINPATH->\Config as Config;
 
 /**
  * Class PostTypes accepts ucfirst($plural), (optional) ucfirst($singular), (optional) $args.
@@ -13,7 +13,7 @@ use \rbt\Config as Config;
  *
  *
  * @package TPT
- * @subpackage FRStarter
+ * @subpackage <!PLUGINNAME->
  */
 class Taxonomy {
     public function __construct( $plural, $singular, $args = null ){

@@ -1,5 +1,5 @@
 {
-    "name": "FRStarter",
+    "name": "<!PLUGINNAME->",
     "private": true,
     "devDependencies": {
         "@babel/preset-env": "^7.18.10",

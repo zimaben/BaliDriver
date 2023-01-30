@@ -1,5 +1,5 @@
 <?php
-use rbt\FRStarter as Theme;
+use <!PLUGINPATH->\<!PLUGINNAME-> as Theme;
 
 /*
  *  Template Name: 404

@@ -1,6 +1,6 @@
 <?php
 
-namespace rbt\admin;
+namespace <!PLUGINPATH->\admin;
 
 Class SlackIntegration {
 

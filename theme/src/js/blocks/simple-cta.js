@@ -1,4 +1,4 @@
-import kitely_icons from './icons.js';
+import theme_icons from './icons.js';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks; 
@@ -7,7 +7,7 @@ const { RichText } = wp.blockEditor;
 registerBlockType('rbt/simple-cta', { 
  
 	title: 'Please Create Unique Title', 
-	icon: kitely_icons.kitelytech,
+	icon: theme_icons.friendlyrobot,
     category: 'kitelytech', 
     //attributes
     attributes: {

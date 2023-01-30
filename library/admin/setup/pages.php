@@ -1,6 +1,6 @@
 <?php
-namespace rbt\admin\setup;
-use \rbt\FRStarter as Theme;
+namespace <!PLUGINPATH->\admin\setup;
+use \<!PLUGINPATH->\<!PLUGINNAME-> as Theme;
 /*
  * Page Class to wrap a simple create page function. If the $args['force_create'] is not
  * set or set to true a new page will be created with a slug like my-page-2.

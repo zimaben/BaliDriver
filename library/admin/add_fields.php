@@ -1,9 +1,9 @@
 <?php
-namespace rbt\admin; 
-use \rbt\FRStarter as Theme;
+namespace <!PLUGINPATH->\admin; 
+use \<!PLUGINPATH->\<!PLUGINNAME-> as Theme;
 use \Carbon_Fields\Field as Field;
 use \Carbon_Fields\Container as Container;
-use \rbt\Config as Config;
+use \<!PLUGINPATH->\Config as Config;
 
 /* 
  * The Builder is for Shared Resources like Options pages where 

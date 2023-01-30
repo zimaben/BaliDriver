@@ -1,7 +1,7 @@
 <?php
 /* Template Name: Page Template */
-use rbt\FRStarter as Theme;
-use rbt\Config as Config;
+use <!PLUGINPATH->\<!PLUGINNAME-> as Theme;
+use <!PLUGINPATH->\Config as Config;
 global $post;
 
 /* If we have a static header, use it. It saves us dozens of queries. */
