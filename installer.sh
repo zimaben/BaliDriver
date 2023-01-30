@@ -1,9 +1,9 @@
 #!/bin/bash
-echo "project name? (Ex: KitelyTech Newsroom)"
+echo "project name? (Ex: Robot Newsroom)"
 read humanreadable
-echo "project name base Object? (Ex: KTNewsRoom)"
+echo "project name base Object? (Ex: RoboNewsRoom)"
 read projectname
-echo "prefix or namespace (Ex: ktnr [which would make a ktnr/KTNewsRoom root object in PHP and similar in JS])"
+echo "prefix or namespace (Ex: rbt [which would make a rbt/RoboNewsRoom root object in PHP and similar in JS])"
 read namespace
 echo "port offset? (Ex: 5 means localhost:8005, :8085)"
 read portoffset
