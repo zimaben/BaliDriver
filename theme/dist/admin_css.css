@@ -1,10 +1,121 @@
-/* UTILITY */ /*<! START COLORS !>*/
+@import url(https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap);
+/* UTILITY */
+/*<! START COLORS !>*/
 /*<! END COLORS !>*/
 /*<! START TYPOGRAPHY !>*/
-/* Typography */
+H1 {
+  font-family: Permanent Marker;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: clamp(36px, 3.33vw, 48px);
+  letter-spacing: 0rem;
+  line-height: clamp(52px, 4.86vw, 69.9375px);
+}
+
+H2 {
+  font-family: Permanent Marker;
+  font-weight: 400;
+  font-size: clamp(27px, 2.5vw, 36px);
+  letter-spacing: 0.12rem;
+  line-height: clamp(39px, 3.64vw, 52.453125px);
+}
+
+H3 {
+  font-family: Permanent Marker;
+  font-weight: 400;
+  font-size: clamp(23px, 2.15vw, 31px);
+  letter-spacing: 0.15rem;
+  line-height: clamp(34px, 3.14vw, 45.16796875px);
+}
+
+H4 {
+  font-family: Permanent Marker;
+  font-weight: 400;
+  font-size: clamp(21px, 1.94vw, 28px);
+  letter-spacing: 0.15rem;
+  line-height: clamp(31px, 2.83vw, 40.796875px);
+}
+
+H5 {
+  font-family: Permanent Marker;
+  font-weight: 400;
+  font-size: clamp(18px, 1.67vw, 24px);
+  letter-spacing: 0.15rem;
+  line-height: clamp(26px, 2.43vw, 34.96875px);
+}
+
+H6 {
+  font-family: Permanent Marker;
+  font-weight: 400;
+  font-size: clamp(14px, 1.25vw, 18px);
+  letter-spacing: 0.13rem;
+  line-height: clamp(20px, 1.82vw, 26.2265625px);
+}
+
+body {
+  font-family: Merriweather Sans;
+  font-weight: 400;
+  font-size: clamp(16px, 1.11vw, 24px);
+  letter-spacing: 0rem;
+  line-height: clamp(20.109375px, 1.4vw, 30.16px);
+}
+
+@media screen and (max-width: 991px) {
+  H1 {
+    font-family: Permanent Marker;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.12rem;
+    line-height: 17.484375px;
+  }
+  H2 {
+    font-family: Permanent Marker;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.12rem;
+    line-height: 17.484375px;
+  }
+  H3 {
+    font-family: Permanent Marker;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.12rem;
+    line-height: 17.484375px;
+  }
+  H4 {
+    font-family: Permanent Marker;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.12rem;
+    line-height: 17.484375px;
+  }
+  H5 {
+    font-family: Permanent Marker;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.12rem;
+    line-height: 17.484375px;
+  }
+  H6 {
+    font-family: Permanent Marker;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.12rem;
+    line-height: 17.484375px;
+  }
+  body {
+    font-family: Merriweather Sans;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0rem;
+    line-height: 15.0839996338px;
+  }
+}
 /*<! END TYPOGRAPHY !>*/
 /*<! START LAYOUT !>*/
 /* Layout */
+/* Space variable is a seed for how much padding in the layout */
 /*<! END LAYOUT !>*/
 /* Please put custom global variables beneath this comment. 
    Styles above this line may be overwritten */
@@ -40,6 +151,9 @@
   .simple-cta-wrap p {
     max-width: unset;
   }
+}
+.editor-styles-wrapper {
+  padding: 3%;
 }
 
 /*# sourceMappingURL=admin_css.css.map*/

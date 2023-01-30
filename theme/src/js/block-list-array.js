@@ -1,2 +1,2 @@
-const list = ["xaccordion","xaccordions","simple-cta","left-right"] 
+const list = ["simple-cta","left-right","xaccordion","xaccordions"] 
 exports.list = list

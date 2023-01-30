@@ -1,8 +1,10 @@
+
 /* variables */
-$fadein: fadeIn .444s ease;
-$fadeout: fadeOut .444s ease;
-$slidein: slideIn .444s ease;
-$slideout: slideOut .444s ease;
+$animationspeed: .22s;
+$fadein: fadeIn $animationspeed ease;
+$fadeout: fadeOut $animationspeed ease;
+$slidein: slideIn $animationspeed ease;
+$slideout: slideOut $animationspeed ease;
 
 /* classes */
 .fadein {
@@ -16,6 +18,7 @@ $slideout: slideOut .444s ease;
 }
 .slideout {
     animation:$slideout;
+    animation-fill-mode: forwards;
 }
 /* Animations */
 @keyframes fadeIn {

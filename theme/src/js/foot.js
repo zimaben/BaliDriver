@@ -35,3 +35,4 @@ window.addEventListener('resize', (event) =>{
         }      
     });
 });
+window.onscroll = function(){global.stickyNav();}

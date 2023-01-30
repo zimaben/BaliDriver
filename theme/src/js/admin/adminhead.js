@@ -33,6 +33,41 @@ export const test_figma = async(e) =>{
         console.log("Tried to run first setup but could not find URL or Nonce");
     }
 }
+export const run_figma_import = async(e) => {
+    e.preventDefault();
+    /* This button should only live within the WP Admin Theme Options
+     - ajaxurl is already defined in the WP Admin, but I'm putting 
+     everything I need in one localized admin object */
+    let button = e.target.tagName === 'BUTTON' ? e.target : e.target.closest('button');
+    let url = theme_admin.ajaxurl + '/?action=import_figma_styleguide';
+    let item = button.dataset.item;
+    let nonce = theme_admin.nonce;
+    let buttonwrap = button.closest('.buttonwrap');
+    let responsearea = buttonwrap ? buttonwrap.querySelector('.responsearea') : false;
+    if(!responsearea){ console.log("No form response area found"); return false; }
+    if(url && nonce){
+        let response = await postit(url, 'nonce=' + nonce + '&item=' + item);
+        if(response.status === 200){
+
+            responsearea.classList.remove('error', 'warning');
+            responsearea.classList.add('success');
+            responsearea.innerHTML = response.message; 
+            
+        } else {
+            if( response.message ){
+                responsearea.classList.remove('success', 'warning');
+                responsearea.classList.add('error');
+                responsearea.innerHTML = response.message; 
+            } else {
+                responsearea.classList.remove('success', 'warning');
+                responsearea.classList.add('error');
+                responsearea.innerHTML = "There was a problem with your request"; 
+            }
+        }
+    } else {
+        console.log("Tried to run Figma import but could not find URL or Nonce");
+    }
+}
 export const get_figma_item = async(e) => {
     e.preventDefault();
     /* This button should only live within the WP Admin Theme Options
@@ -46,7 +81,6 @@ export const get_figma_item = async(e) => {
     let responsearea = buttonwrap ? buttonwrap.querySelector('.responsearea') : false;
     if(!responsearea){ console.log("No form response area found"); return false; }
     if(url && nonce){
-        console.log("doig get item");
         let response = await postit(url, 'nonce=' + nonce + '&item=' + item);
         if(response.status === 200){
 
@@ -173,8 +207,36 @@ export const run_first_setup = async(e) => {
         console.log("Tried to run first setup but could not find URL or Nonce");
     }
 }
-export const run_critical_css = (e) => {
-    console.log("clicked run critical css");
+export const run_critical_css = async(e) => {
+    e.preventDefault();
+    let button = e.target.tagName === 'BUTTON' ? e.target : e.target.closest('button');
+    let url = theme_admin.ajaxurl + '/?action=run_critical_css';
+    let nonce = theme_admin.nonce;
+    let buttonwrap = button.closest('.buttonwrap');
+    let responsearea = buttonwrap ? buttonwrap.querySelector('.responsearea') : false;
+    if(!responsearea){ console.log("No form response area found"); return false; }
+    if(url && nonce){
+        let response = await postit(url, 'nonce=' + nonce);
+        if(response.status === 200){
+
+            responsearea.classList.remove('error', 'warning');
+            responsearea.classList.add('success');
+            responsearea.innerHTML = response.message; 
+            
+        } else {
+            if( response.message ){
+                responsearea.classList.remove('success', 'warning');
+                responsearea.classList.add('error');
+                responsearea.innerHTML = response.message; 
+            } else {
+                responsearea.classList.remove('success', 'warning');
+                responsearea.classList.add('error');
+                responsearea.innerHTML = "There was a problem with your request"; 
+            }
+        }
+    } else {
+        console.log("Tried to create Critical CSS but could not find URL or Nonce");
+    }
 }
 
 /* Standard Wordpress POST request via native fetch using form-urlencoded data */

@@ -54,7 +54,7 @@ Class Config {
 
     #Progressive Header needs aspect ratio w & h and minimum mobile height
     const FEATURES = array(
-        'critical_css' => false,
+        'critical_css' => true,
         'video_headers' => true,
         'progressive_header' => array(
             'home' => array('w' =>360, 'h'=>199, 'minHeight'=>500),

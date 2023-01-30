@@ -31,6 +31,12 @@ use rbt\Config as Config;
             Theme::Integration('GoogleMaps', 'deferredGoogleMaps');
         
         }
+        #critical inline styles
+        if(Config::FEATURES['critical_css'] === true){
+
+            Theme::TemplatePart('static/critical-css.php');
+
+        }
     ?>
 </head>
 

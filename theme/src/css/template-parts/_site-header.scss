@@ -12,7 +12,7 @@ $mobileheaderheight:48px;
 
     .mobile-menu-button{
         display:none;
-        background-image:url(../../assets/icons/hamburger-button.svg);
+        background-image:url(/theme/assets/icons/hamburger-button-white.svg);
         height: 100%;
         aspect-ratio: 1/1;
         background-repeat: no-repeat;
@@ -20,10 +20,10 @@ $mobileheaderheight:48px;
         cursor:pointer;
     }
     .mobile-menu-close{
-        background-image:url(../../assets/icons/star.svg);
+        background-image:url(/theme/assets/icons/close-white.svg); 
         content:'';
         display:block;
-        top:8px;
+        top:18px;
         position:absolute;
         z-index:2;
         height:32px;
@@ -38,13 +38,13 @@ $mobileheaderheight:48px;
         &.active{
             background-color:$dark-neutral;
             color:$light;
-            padding-left: clamp(25px, 10.42vw, 150px);
-            padding-right: clamp(25px, 10.42vw, 150px);
+            padding-left: 25px;
+            padding-right: 25px;
             display: flex;
             flex-direction: column;
             position: fixed;
             min-height:100vh;
-            z-index:1;
+            z-index:2;
             top: 0;
             left: 0;
             bottom: 0;
@@ -61,11 +61,13 @@ $mobileheaderheight:48px;
             height: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
+            padding:1%;
             a{
                 color:$dark;
                 text-decoration:none;
+                max-height:100%;
             }
             h1{margin:0;}
             img{
@@ -80,10 +82,10 @@ $mobileheaderheight:48px;
             list-style-type:none;
             margin:0;
             display: inline-flex;
-            gap: 12px;
+            gap: $gap * .5px;   
         }
         .primary-menu-container{
-            padding-left:11vw;
+          //  padding-left:11vw;
         }
     }
 }
@@ -91,8 +93,22 @@ $mobileheaderheight:48px;
 @media screen and (max-width:991px){
     #site-header{
         height:$mobileheaderheight;
+        padding-left:13px !important;
+        padding-right:13px !important;
         .mobile-menu-button{
             display: inline-flex;
+            position: relative;
+            z-index: 1;
+        }
+        .top.menu-logo{
+            .site-branding{
+                position:absolute;
+                display:flex;
+                left:0;
+                z-index:0;
+                align-items:center;
+                width:100%;
+            }
         }
         .desktop-menu{
             display:none;

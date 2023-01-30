@@ -11,8 +11,7 @@ if(Config::FEATURES['progressive_header'] && is_array(Config::FEATURES['progress
         $type = \is_front_page() ? 'home' : $post->post_type;
         
         //if post type specifically set to false, no page header
-        if( Config::FEATURES['progressive_header'][$type] !== false){
-            error_log("GOT TO HERE");
+        if( Config::FEATURES['progressive_header'] && Config::FEATURES['progressive_header'][$type] !== false){
             $header_args = isset( Config::FEATURES['progressive_header'][$type] ) ? Config::FEATURES['progressive_header'][$type] : Config::FEATURES['progressive_header']['default'];
             $canvas = new \rbt\ProgressiveHeader($post, $header_args['w'],$header_args['h'],$header_args['minHeight'] );
                 

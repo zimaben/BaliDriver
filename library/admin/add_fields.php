@@ -178,15 +178,21 @@ class AddFields extends Theme {
             Field::make('html', 'figma_test_connection')
             ->set_help_text( 'Test Figma Connection' )
             ->set_html( '<div class="buttonwrap"><div class="responsearea"></div><button type="button" class="adminbutton btn" id="figmatest">Test Connection</button></div>' ),
-            Field::make('html', 'figma_test_colors')
-            ->set_help_text( 'Test Colors' )
-            ->set_html( '<div class="buttonwrap"><div class="responsearea"></div><button type="button" class="adminbutton btn" id="figmatestitem" data-item="Colors">Test Colors</button></div>' ),
-            Field::make('html', 'figma_get_colors')
-            ->set_help_text( 'Get Colors' )
-            ->set_html( '<div class="buttonwrap"><div class="responsearea"></div><button type="button" class="adminbutton btn" id="figmagetitem" data-item="Colors">Get Colors</button></div>' ),
-            Field::make('html', 'figma_get_typography')
-            ->set_help_text( 'Get Typography' )
-            ->set_html( '<div class="buttonwrap"><div class="responsearea"></div><button type="button" class="adminbutton btn" id="temptypographybutton" data-item="Typography">Get Typography</button></div>' ),
+            Field::make('html', 'figma_import_styleguide')
+            ->set_help_text( 'Import Figma Design File' )
+            ->set_html( '<div class="buttonwrap"><div class="responsearea"></div><button type="button" class="adminbutton btn" id="figmaimportbutton" data-item="Colors">Import File</button></div>' ),
+            // Field::make('html', 'figma_test_colors')
+            // ->set_help_text( 'Test Colors' )
+            // ->set_html( '<div class="buttonwrap"><div class="responsearea"></div><button type="button" class="adminbutton btn" id="figmatestitem" data-item="Colors">Test Colors</button></div>' ),
+            // Field::make('html', 'figma_get_colors')
+            // ->set_help_text( 'Get Colors' )
+            // ->set_html( '<div class="buttonwrap"><div class="responsearea"></div><button type="button" class="adminbutton btn" id="figmagetitem" data-item="Colors">Get Colors</button></div>' ),
+            // Field::make('html', 'figma_get_typography')
+            // ->set_help_text( 'Get Typography' )
+            // ->set_html( '<div class="buttonwrap"><div class="responsearea"></div><button type="button" class="adminbutton btn" id="temptypographybutton" data-item="Typography">Get Typography</button></div>' ),
+            // Field::make('html', 'figma_get_logo')
+            // ->set_help_text( 'Get Logo' )
+            // ->set_html( '<div class="buttonwrap"><div class="responsearea"></div><button type="button" class="adminbutton btn" id="templogobutton" data-item="Logo">Get Logo</button></div>' ),
         ));
         endif;
         if( isset(Config::INTEGRATIONS['GoogleAnalytics']) && Config::INTEGRATIONS['GoogleAnalytics'] == true) : 

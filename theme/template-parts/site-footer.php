@@ -311,7 +311,7 @@ endif;
     <ul class="footerbottom">
         <?php 
         if( \get_theme_mod('footer_bottom_add_copyright')){
-            echo '<li>Copyright ©' . Date('Y') . ' Beyond Menu</li>';
+            echo '<li>Copyright ©' . Date('Y') . ' Starter</li>';
             # bloginfo( 'name' );
         }
         

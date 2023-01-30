@@ -17,7 +17,7 @@
  //CSS Directory path.
  const CSS_DIR = path.resolve( __dirname, 'theme/src/css' );
 
- const entry = {
+ var entry = {
      main: JS_DIR + '/head.js',
      footer: JS_DIR + '/foot.js',
      //End Blocks

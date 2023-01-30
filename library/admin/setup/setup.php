@@ -25,7 +25,7 @@ use \rbt\Config as Config;
 class Setup extends Theme {
 
     public static function run(){
-        \add_action('after_setup_theme', array(get_class(), 'theme_setup'));
+        \add_action('after_setup_theme', array(get_class(), 'theme_setup'), 99);
 
         \add_action('init', array(get_class(), 'register_taxonomies'));
         \add_action('init', array(get_class(), 'register_post_types'));
@@ -33,15 +33,19 @@ class Setup extends Theme {
 
         #WP AJAX FOR SETUP WORK NOT DONE ON EACH PAGE LOAD
         \add_action('wp_ajax_run_setup', array(get_class(), 'run_setup'));
+        \add_action('wp_ajax_run_critical_css', array(get_class(), 'run_critical_css'));
     }
     public static function theme_setup(){
-
         # \add_theme_support( 'custom-header' );
         \add_theme_support( 'menus' );
+        \add_theme_support( 'align-wide' );
         # do dimensions
         \add_theme_support( 'custom-logo' );
         \add_theme_support( 'post-thumbnails' );
         \add_theme_support( 'title_tag');
+        \add_theme_support( 'wp-block-styles' );
+
+        \add_theme_support( 'responsive-embeds' );
         \add_theme_support( 'html5', array(
             // Any or all of these.
             # 'comment-list', 
@@ -50,7 +54,6 @@ class Setup extends Theme {
             'gallery',
             'caption',
         ) );
-        \add_post_type_support( 'locations', 'excerpt' );
          
     }
 
@@ -61,6 +64,49 @@ class Setup extends Theme {
                 \register_nav_menu($menu, __($props['name'], Config::TEXTDOMAIN));
             }
        }
+    }
+    public static function set_up_home_page( $archetype = null){
+        $HomeContentString = '<!-- wp:latest-posts {"postsToShow":3,"displayPostContent":true,"excerptLength":30,"displayPostDate":true,"postLayout":"grid","displayFeaturedImage":true,"featuredImageSizeSlug":"large","align":"wide","className":"tw-mt-8 tw-img-ratio-3-2 tw-stretched-link is-style-default"} /-->';
+        $HomePageContent = \do_blocks($HomeContentString);
+        echo do_blocks($block_content);
+        #add the new page if it doesn't already exist
+        $HomePage = new Page( array('title'=>'Home', 'type'=>'page', 'content'=>$HomePageContent ));
+        #set the new page to home page;
+        $HomePage->setToHomePage();
+        #return the home page ID or false;
+        return $HomePage->ID;
+    }
+    private static function set_critical_css(){
+        $string = file_get_contents( get_template_directory() . '/theme/dist/critical.css');
+        $replacement_array = explode("../../theme/", $string);
+        $filestring = '<style type="text/css" id="inlinecss">';
+        #replace webpack-abbreviated image paths with correct absolute paths
+        for($i=0;$i < count($replacement_array); $i++){
+            $chunk = $replacement_array[$i];
+            if(isset($replacement_array[$i + 1])){
+                $chunk.= \get_template_directory_uri() . '/theme/';
+            }
+            $filestring.=$chunk;
+
+        }
+
+        $filestring.='</style>';
+        return file_put_contents( get_template_directory() . '/theme/template-parts/static/critical-css.php', $filestring);
+    }
+    public static function run_critical_css(){
+        if(!isset($_POST['nonce']) || false === \wp_verify_nonce($_POST['nonce'], 'theme-admin')){
+            echo json_encode(array('status' => 400, 'message'=>'Missing or Invalid nonce'));
+            die();
+        }
+        //do critical CSS above
+        if( self::set_critical_css() ) {
+            echo json_encode(array('status' => 200, 'message'=>'Updated Critical CSS'));
+            die();
+        } else {
+            echo json_encode(array('status' => 500, 'message'=>'Something went wrong writing the file'));
+            die();
+        }
+
     }
     public static function run_setup(){
         /* The standard one-time setup routine. This creates pages, adds user roles, 

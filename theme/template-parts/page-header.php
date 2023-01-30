@@ -11,12 +11,6 @@ use rbt\Config as Config;
    Theme::TemplatePart('page-static-header.php');
 
 }  
-#critical inline styles
-if(Config::FEATURES['critical_css'] === true){
-
-    #Theme::TemplatePart('static/critical-css.php');
-
-}
 
 ?>
 

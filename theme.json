@@ -1,1 +1,112 @@
-{"version":2,"settings":{"color":{"palette":[{"name":"Light Neutral","slug":"light-neutral","color":"#d1d1d1"},{"name":"Light Half","slug":"light-half","color":"#bbbbbb"},{"name":"Dark Neutral","slug":"dark-neutral","color":"#7b8fb7"},{"name":"Dark Half","slug":"dark-half","color":"#bbbbbb"},{"name":"Good","slug":"good","color":"#97dc40"},{"name":"Bad","slug":"bad","color":"#ff7b7b"},{"name":"Warning","slug":"warning","color":"#feee62"},{"name":"Primary","slug":"primary","color":"#feee62"},{"name":"Accent","slug":"accent","color":"#97dc40"},{"name":"Light","slug":"light","color":"#ffffff"},{"name":"Dark","slug":"dark","color":"#242e42"}]},"typography":{"fontFamilies":[{"fontFamily":"Palatino, Georgia, serif","slug":"palatino","name":"Palatino"},{"fontFamily":"'Open Sans', sans-serif;","slug":"open-sans","name":"Open Sans"}],"fontSizes":[{"slug":"small","size":"16px","name":"Small"},{"slug":"medium","size":"18px","name":"Medium"},{"slug":"large","size":"24px","name":"Large"},{"slug":"x-large","size":"32px","name":"Extra Large"}]},"custom":{"breakpoints":{"phone":576,"tablet":768,"laptop":992,"desktop":1200}}}}
+{
+    "version": 2,
+    "settings": {
+        "layout": {
+            "contentSize": "1280px",
+            "wideSize": "1440px"
+        },
+        "color": {
+            "palette": [
+                {
+                    "name": "Light Neutral",
+                    "slug": "light-neutral",
+                    "color": "#d1d1d1"
+                },
+                {
+                    "name": "Light Half",
+                    "slug": "light-half",
+                    "color": "#bbbbbb"
+                },
+                {
+                    "name": "Dark Neutral",
+                    "slug": "dark-neutral",
+                    "color": "#7b8fb7"
+                },
+                {
+                    "name": "Dark Half",
+                    "slug": "dark-half",
+                    "color": "#bbbbbb"
+                },
+                {
+                    "name": "Good",
+                    "slug": "good",
+                    "color": "#97dc40"
+                },
+                {
+                    "name": "Bad",
+                    "slug": "bad",
+                    "color": "#ff7b7b"
+                },
+                {
+                    "name": "Warning",
+                    "slug": "warning",
+                    "color": "#feee62"
+                },
+                {
+                    "name": "Primary",
+                    "slug": "primary",
+                    "color": "#242e42"
+                },
+                {
+                    "name": "Accent",
+                    "slug": "accent",
+                    "color": "#ff6700"
+                },
+                {
+                    "name": "Light",
+                    "slug": "light",
+                    "color": "#ffffff"
+                },
+                {
+                    "name": "Dark",
+                    "slug": "dark",
+                    "color": "#242e42"
+                }
+            ]
+        },
+        "typography": {
+            "fontFamilies": [
+                {
+                    "fontFamily": "Palatino, Georgia, serif",
+                    "slug": "palatino",
+                    "name": "Palatino"
+                },
+                {
+                    "fontFamily": "'Open Sans', sans-serif;",
+                    "slug": "open-sans",
+                    "name": "Open Sans"
+                }
+            ],
+            "fontSizes": [
+                {
+                    "slug": "small",
+                    "size": "16px",
+                    "name": "Small"
+                },
+                {
+                    "slug": "medium",
+                    "size": "18px",
+                    "name": "Medium"
+                },
+                {
+                    "slug": "large",
+                    "size": "24px",
+                    "name": "Large"
+                },
+                {
+                    "slug": "x-large",
+                    "size": "32px",
+                    "name": "Extra Large"
+                }
+            ]
+        },
+        "custom": {
+            "breakpoints": {
+                "phone": 576,
+                "tablet": 768,
+                "laptop": 992,
+                "desktop": 1200
+            }
+        }
+    }
+}

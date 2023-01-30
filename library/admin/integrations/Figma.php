@@ -1,8 +1,10 @@
 <?php
 namespace rbt\admin;
 use rbt\Config as Config;
-use \rbt\admin\setup\Create_Media_File as Create_Media_File;
+use rbt\admin\ Setup as Setup;
 use rbt\setup\ColorPalette as ColorPalette;
+use rbt\setup\FigmaTypography as FigmaTypography;
+use rbt\admin\setup\MediaImage as MediaImage;
 
 /* 
     Set up admin ajax request - this just bounces method requests between the WP admin ajax and
@@ -17,12 +19,14 @@ class FigmaAdmin {
         \add_action( 'wp_ajax_test_figma', array(get_class(), 'test_figma' ));
         \add_action( 'wp_ajax_test_figma_item', array(get_class(), 'test_figma_item'));
         \add_action( 'wp_ajax_get_figma_item', array(get_class(), 'get_figma_item'));
+        \add_action( 'wp_ajax_import_figma_styleguide', array(get_class(), 'import_figma_styleguide'));
         \add_action( 'wp_ajax_get_logo', array(get_class(), 'get_logo'));
         \add_action( 'wp_ajax_get_colors', array(get_class(), 'get_colors'));
         \add_action( 'wp_ajax_get_typography', array(get_class(), 'get_typography'));
         \add_action( 'wp_ajax_run_setup', array(get_class(), 'run_setup'));
 
         require_once( get_template_directory() . '/library/admin/setup/colorpalette.php' );
+        require_once( get_template_directory() . '/library/admin/setup/typography.php' );
     }
     private static function color_rectangle_to_hex( $node ){
         $fill = isset($node['fills'][0]->color) ? $node['fills'][0]->color : false;
@@ -30,34 +34,86 @@ class FigmaAdmin {
         $hex = $color ? ColorPalette::FigmaRGBArrayToHex( $color ) : false;
         return $hex;
     }
-    private static function getPageNode(){
-        $document = new FigmaRequest( 'get_document' );
-        if($document->err){
+    private static function getPageNode( FigmaRequest $RootDocument ){
+        
+        if($RootDocument->err){
             self::return_false($request->err);
         }
-        if(!$document->response){
+        if(!$RootDocument->response){
             self::return_false('No Server Response');
         }
         #to get the actual document node, you need to actually look at <response->
-        $document = json_decode($document->response);
+        $document = json_decode($RootDocument->response);
         $document = $document->document;
-        # error_log(print_r(\json_decode($document->response), true));
         $PageNode = self::get_node('Page 1', 'CANVAS', $document);
         return $PageNode ? $PageNode : false;
     }
-    private static function get_typography(){
-        $PageNode = self::getPageNode();
+    public static function import_figma_styleguide(){
+        $document = new FigmaRequest( 'get_document' );
+        $logo = self::get_logo( $document );
+        $pageNode = self::getPageNode( $document );
+        $typography = self::get_typography( $pageNode );
+        $colors = self::get_color_palette( $pageNode );
+        $message = '';
+        $message.= $logo ? 'Imported Logo...' . PHP_EOL : '';
+        $message.= $typography? 'Imported Typography...'. PHP_EOL : '';
+        $message.= $colors? 'Imported Color Palette...'. PHP_EOL : '';
+        # Set Home Page to Static Home Template
+        $HomePageID = Setup::set_up_home_page(); 
+        if($message === '') $message = 'Could not import Figma Styleguide';
+        echo json_encode(array('status'=>200, 'message'=>$message));
+        die();
+
+    }
+    private static function get_logo( FigmaRequest $RootDocument){
+
+        require_once( get_template_directory() . '/library/admin/setup/images.php' );
+        #to get the actual document node, you need to actually look at <response->
+        $obj_document = json_decode($RootDocument->response);
+        $array_document = $obj_document->document;
+        $PageNode = self::get_node('Page 1', 'CANVAS', $array_document);
+        $LogoFrame = self::get_node('Logo', 'FRAME', $PageNode);
+        $LogoNode = self::get_node('Logo', 'COMPONENT', $LogoFrame);
+        if(!$LogoNode){ return false; }
+
+        $logo_node_id = $LogoNode['id'];
+        $format = 'svg';
+        $image = new FigmaRequest('images/' . $RootDocument->connection->file . '?ids=' . $logo_node_id . '&format=' . $format, 'GET' );
+        
+        $response = json_decode($image->response);
+        if($response->err ){
+            self::return_false($response->err);
+            die();
+        }
+        $imgresponse = (Array) $response->images;
+        $imgurl = $imgresponse[ array_keys($imgresponse)[0] ];
+        $resource = file_get_contents( $imgurl );
+        $upload_image = new MediaImage($resource, 'site-logo-figma.' . $format);
+        $upload_image->set_logo();
+        return true;
+ 
+    }
+    private static function get_typography( $PageNode ){
+       # $PageNode = self::getPageNode();
         $Typography = $PageNode ? self::get_node('Typography', 'FRAME', $PageNode) : false;
         $TypographyGroup = $Typography ? self::get_node('Typography', 'GROUP', $Typography) : false;
         if($TypographyGroup){
             $Header = self::get_node('Header', 'GROUP', $TypographyGroup);
-            error_log(print_r($Header, true));
+            $BaseTypography = new FigmaTypography();
+            
             $H1 = self::get_node('H1 Desktop', 'TEXT', $Header);
             $H2 = self::get_node('H2 Desktop', 'TEXT', $Header);
             $H3 = self::get_node('H3 Desktop', 'TEXT', $Header);
             $H4 = self::get_node('H4 Desktop', 'TEXT', $Header);
             $H5 = self::get_node('H5 Desktop', 'TEXT', $Header);
             $H6 = self::get_node('H6 Desktop', 'TEXT', $Header);
+
+            $BaseTypography->setStyle('H1', (Array) $H1['style']);
+            $BaseTypography->setStyle('H2', (Array) $H2['style']);
+            $BaseTypography->setStyle('H3', (Array) $H3['style']);
+            $BaseTypography->setStyle('H4', (Array) $H4['style']);
+            $BaseTypography->setStyle('H5', (Array) $H5['style']);
+            $BaseTypography->setStyle('H6', (Array) $H6['style']);
             
             $H1Mobile = self::get_node('H6 Mobile', 'TEXT', $Header);
             $H2Mobile = self::get_node('H6 Mobile', 'TEXT', $Header);
@@ -66,41 +122,37 @@ class FigmaAdmin {
             $H5Mobile = self::get_node('H6 Mobile', 'TEXT', $Header);
             $H6Mobile = self::get_node('H6 Mobile', 'TEXT', $Header);
 
-            $Body = self::get_node('Body', 'GROUP', $TypographyGroup);
+            $BaseTypography->setMobileStyle('H1', (Array) $H1Mobile['style']);
+            $BaseTypography->setMobileStyle('H2', (Array) $H2Mobile['style']);
+            $BaseTypography->setMobileStyle('H3', (Array) $H3Mobile['style']);
+            $BaseTypography->setMobileStyle('H4', (Array) $H4Mobile['style']);
+            $BaseTypography->setMobileStyle('H5', (Array) $H5Mobile['style']);
+            $BaseTypography->setMobileStyle('H6', (Array) $H6Mobile['style']);
+
+            $BodyGroup = self::get_node('Body', 'GROUP', $TypographyGroup);
             #Desktop Body & Mobile Body
-            // $TypographyGroup = self::get_node('Typography', 'GROUP', $PageNode);
-            // if(!$TypographyGroup){ self::return_false('Could not find Typography');}
-
-            // # error_log(print_r($TypographyGroup, true));
-
-            // $filtered_typography_nodes = self::get_nodes( array('style'=> '*'), array('name', 'style'), $TypographyGroup);
-
-            // error_log("FILTERED");
-            // error_log(print_r( $filtered_typography_nodes, true));
+            $Body = self::get_node('Body Desktop', 'TEXT', $BodyGroup);
+            $MobileBody = self::get_node('Body Mobile', 'TEXT', $BodyGroup);
+            $BaseTypography->setStyle('body', (Array) $Body['style']);
+            $BaseTypography->setMobileStyle('body', (Array) $MobileBody['style']);
+            $BaseTypography->printToGlobalCSS();
             #this kicks Ass
-
-            die();
+            return true;
         }
         #Else no Typography
         echo json_encode(array('status'=>404, 'message'=>'Could not find Typography in Figma File'));
         die();
     }
-    private static function get_color_palette(){
+    private static function get_color_palette( $PageNode ){
 
-        $PageNode = self::getPageNode();
+        #$PageNode = self::getPageNode();
         $Colors = $PageNode ? self::get_node('Colors', 'FRAME', $PageNode) : false;
         if($Colors){         
             $Palette = new ColorPalette();
             #Get Primary and Accent Colors
             $primaryNode = self::get_node('primary color', 'ELLIPSE', $Colors);
-            if($primaryNode ){
-                error_log("Found Primary Node");
-            } else {
-                error_log("No Primary Node found");
-            }
             $primaryHex = self::color_rectangle_to_hex( $primaryNode );
             if($primaryHex) {
-                error_log("Found Primary Hex: " . $primaryHex );
             
                 $Palette->setPrimary($primaryHex);
                 if(Config::MODE == "development" && $Palette->warning) error_log($Palette->warning);
@@ -108,7 +160,6 @@ class FigmaAdmin {
             $accentNode = self::get_node('accent color', 'ELLIPSE', $Colors);
             $accentHex = self::color_rectangle_to_hex( $accentNode );
             if($accentHex) {
-                error_log("Found Accent Hex: " . $accentHex );
                 $Palette->setAccent($accentHex);
                 if(Config::MODE == "development" && $Palette->warning) error_log($Palette->warning);
             }
@@ -182,8 +233,7 @@ class FigmaAdmin {
             #Set theme.json colors
             $Palette->printToThemeJSON();
             $Palette->printToGlobalCSS();
-            echo json_encode(array('status'=>200, 'message'=>'Setting theme.json colors'));
-            die();
+            return true;
         }
         #Else no Colors
         echo json_encode(array('status'=>404, 'message'=>'Could not find Colors in Figma File'));
@@ -198,9 +248,13 @@ class FigmaAdmin {
             #$item = color
             case("Colors") : 
                 self::get_color_palette();
-            break;
+                break;
             case("Typography") : 
                 self::get_typography();
+                break;
+            case("Logo") : 
+                self::get_logo();
+                break;
             default: 
                 echo json_encode(array('status'=>404, 'message'=>'Could not find Item in Figma File'));
                 die();
@@ -225,12 +279,9 @@ class FigmaAdmin {
                 #to get the actual document node, you need to actually look at <response->
                 $document = json_decode($document->response);
                 $document = $document->document;
-               # error_log(print_r(\json_decode($document->response), true));
                 $PageNode = self::get_node('Page 1', 'CANVAS', $document);
 
                 $Colors = self::get_node('Colors', 'FRAME', $PageNode);
-                error_log(print_r($Colors, true));
-               # error_log(print_r($PageNode, true));
                 if(!$PageNode){ self::return_false('Could Not Parse Figma Page'); }
                 
                 break;
@@ -257,63 +308,7 @@ class FigmaAdmin {
         die();
     }
 
-    public static function get_logo(){
-        if( ! self::gatekeep_post() ) self::return_false('Missing or Invalid Nonce');
 
-        $document = new FigmaRequest( 'get_document' );
-        if($document->err){
-            self::return_false($request->err);
-        }
-        if(!$document->response){
-            self::return_false('No Server Response');
-        }
-
-        #Get Document to Parse in associative array, if return node is specified set Document to return node
-        $parse_document = json_decode($document->response, true );
-        if($document->return_node && isset($document->return_node) && isset($parse_document[$document->return_node]) ) $parse_document = $parse_document[$document->return_node];
-
-        $logo_node_id = false;
-        
-        #Get Page
-        $PageNode = self::get_node('Page 1', 'CANVAS', $parse_document);
-        if(!$PageNode){ self::return_false('Could Not Parse Figma Page'); }
-
-        #Now find our target nodes
-        $LogoNode = self::get_node('Logo', 'FRAME', $PageNode);
-        if(!$LogoNode){ self::return_false('Could Not Find Figma Logo'); }
-
-        $logo_node_id = $LogoNode['id'];
-        #Now we have everything we need to get the image
-        $image = new FigmaRequest('images/' . $document->connection->file . '?ids=' . $logo_node_id . '&format=svg', 'GET' );
-        #https://api.figma.com/v1/images/N5EdgAhAjPuSaygdRG2KFD?ids=4:4'
-        
-        #CHECK
-        $imgresponse = json_decode($image->response, true);
-        if(isset($imgresponse['images'][$logo_node_id])){
-            
-            $url = $imgresponse['images'][$logo_node_id];
-            $file_name = 'theme-logo.svg';
-                
-            // Use file_get_contents() function to get the file
-            // from url and use file_put_contents() function to
-            // save the file 
-            if (\file_put_contents( \get_template_directory() . '/theme/assets/' . $file_name, file_get_contents($url)))
-            {
-                echo json_encode( array('status'=>200, 'message'=>'Successfully Saved Logo to ' . \get_template_directory_uri() . '/theme/assets/' . $file_name ) );
-                die();
-            }
-            else
-            {
-                self::return_false('Could not save Logo.');
-            }  
-        }
-        self::return_false('Could Not Find Image for that Node.');
-
-
-        echo json_encode(array('status'=>200, 'message'=>'Could not find what you were looking for'));
-        die();
-        
-    }
 
     public static function run_setup(){
 
@@ -440,7 +435,7 @@ class FigmaAdmin {
     Recursively brute force through document looking for FIRST node match on name & type 
     */
     private static function get_node( $name, $type, $root ){
-        #error_log("MATCH CALLED ON " . $name . ' ' . $type);
+
         if( is_object($root) ){
             $root = (array) $root;
         } 
@@ -546,8 +541,7 @@ class FigmaRequest{
         $this->request = $this->checkRequest( $request, $method );
         $this->response = $this->err ? false : $this->doRequest($request, $method);
         $this->returnvalue = $this->response ? $this->doReturnValue() : false;
-        // error_log("FIGMAREQUEST CLASS");
-        // error_log(print_r($this,true));
+
     }
     private function checkRequest($request, $method){
         if(isset($this->supported_requests[$request])){
@@ -582,8 +576,7 @@ class FigmaRequest{
             if($sent) return $this->connection->response;
             #for some reason we didn't send and 
             #no error was caught
-            // error_log(print_r($this, true));
-            // $this->err = 'Something went wrong with the request';
+
             return false;
         } else {
             #unsupported request
@@ -605,7 +598,7 @@ class FigmaRequest{
             if($sent) return $this->connection->response;
             #for some reason we didn't send and 
             #no error was caught
-            error_log(print_r($this, true));
+            // error_log(print_r($this, true));
             $this->err = 'Something went wrong with the unsupported request';
             return false;
         }

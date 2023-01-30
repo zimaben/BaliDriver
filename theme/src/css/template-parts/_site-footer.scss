@@ -10,6 +10,7 @@ footer.site-footer{
     }
     .column{
         flex:1;
+        padding:1%;
         ul.menu-wrapper{
             list-style:none;        
         }
@@ -26,12 +27,12 @@ footer.site-footer{
     ul.footerbottom{
         list-style:none;
         display:inline-flex;
-        gap:12px;
+        gap:$gap * .5px;
     }
     ul.menu-wrapper{
         list-style:none;
         display:inline-flex;
-        gap:12px;        
+        gap:$gap * .5px;        
     }
 }
 

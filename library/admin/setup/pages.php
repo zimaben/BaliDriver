@@ -93,6 +93,10 @@ use \rbt\FRStarter as Theme;
         return $new_page_id;
         
     }
+    public function setToHomePage(){
+        if( \get_option('show_on_front') === 'posts') \update_option( 'show_on_front', 'page' );
+        \update_option( 'page_for_posts', $this->slug );
+    }
     public function setCarbonMeta( $field, $value){
         return \carbon_set_post_meta( $this->ID, $field, $value );
     }

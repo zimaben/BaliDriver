@@ -10,12 +10,12 @@ class ProgressiveHeader {
         $this->min_height = $minHeight;
         $this->featured_img_id = \get_post_thumbnail_id( $post->ID );
         $this->mobile_img_id = \carbon_get_post_meta($post->ID, 'crb_mobile_image');
-        $this->full = \wp_get_attachment_image_src( $this->featured_img_id, 'full', false )[0];
-        $this->sm_mobile = \wp_get_attachment_image_src( $this->mobile_img_id, 'thumbnail', false );
-        $this->lg_mobile = \wp_get_attachment_image_src( $this->mobile_img_id, 'half', false );
-        $this->sm_landscape = \wp_get_attachment_image_src( $this->featured_img_id, 'ph-page-one', false )[0];
-        $this->md_landscape = \wp_get_attachment_image_src( $this->featured_img_id, 'ph-page-two', false )[0];
-        $this->lg_landscape = \wp_get_attachment_image_src( $this->featured_img_id, 'ph-page-full', false )[0];
+        $this->full = $this->featured_img_id ? \wp_get_attachment_image_src( $this->featured_img_id, 'full', false )[0] : false;
+        $this->sm_mobile = $this->mobile_img_id ? \wp_get_attachment_image_src( $this->mobile_img_id, 'thumbnail', false )[0] : false;
+        $this->lg_mobile = $this->mobile_img_id ? \wp_get_attachment_image_src( $this->mobile_img_id, 'half', false )[0] : false;
+        $this->sm_landscape = $this->featured_img_id ? \wp_get_attachment_image_src( $this->featured_img_id, 'ph-page-one', false )[0] : false;
+        $this->md_landscape = $this->featured_img_id ? \wp_get_attachment_image_src( $this->featured_img_id, 'ph-page-two', false )[0] : false;
+        $this->lg_landscape = $this->featured_img_id ? \wp_get_attachment_image_src( $this->featured_img_id, 'ph-page-full', false )[0] : false;
         // $this->desktop_video = \carbon_get_post_meta($post->ID, 'crb_featured_video');
         // $this->mobile_video = \carbon_get_post_meta($post->ID, 'crb_mobile_featured_video');
 ;

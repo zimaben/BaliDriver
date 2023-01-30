@@ -111,6 +111,19 @@ export const doDismiss = (event) => {
       }
     }
   }
+
+  export const stickyNav = () => {
+    // Get the navbar
+    let navbar = document.getElementById("site-header");
+    // Get the offset position of the navbar
+    let sticky = navbar.offsetTop;
+
+    if (window.pageYOffset >= sticky){
+      navbar.classList.add("sticky")
+    } else {
+      navbar.classList.remove("sticky");
+    }
+  }
   
   export const sendit = async(location, senddata ) => {
     const settings = {

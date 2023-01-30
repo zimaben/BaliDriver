@@ -6,7 +6,7 @@ use rbt\Config as Config;
 // print_r( $template );
 
 ?>
-<header id="site-header" class="site-header container at-top">
+<header id="site-header" class="site-header container">
 	<?php if ( has_nav_menu( 'mobile' ) ) : ?>
 
 	<div class="mobile-menu-button" data-menu-target="site-mobile-menu-container" onclick="mobileExpand(event)">
