@@ -3,8 +3,8 @@ namespace rbt;
 Class Config {
     const VERSION = "1.0.1";
     const MODE = "development";
-    const TEXTDOMAIN = "rbt_<!PLUGINNAME->";
-    const NICENAME = "Starter";
+    const TEXTDOMAIN = "<!PLUGINPATH->_<!PLUGINNAME->";
+    const NICENAME = "<!HUMANREADABLE->";
 
     const BREAKPOINTS = array(
         'phone' => 576,
