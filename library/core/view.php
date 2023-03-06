@@ -1,8 +1,8 @@
 <?php
-namespace <!PLUGINPATH->\template;
+namespace rbtddb\template;
 
 
-class View extends \<!PLUGINPATH->\<!PLUGINNAME-> {
+class View extends \rbtddb\DDBali {
     private $file;
     private $args = array();
 

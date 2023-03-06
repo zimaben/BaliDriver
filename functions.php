@@ -1,8 +1,8 @@
 <?php
-namespace <!PLUGINPATH->;
+namespace rbtddb;
 use \Carbon_Fields\Container;
 use \Carbon_Fields\Field;
-use \<!PLUGINPATH->\Config as Config;
+use \rbtddb\Config as Config;
 
 #Theme::Assets
 #Theme::TemplatePart
@@ -22,9 +22,9 @@ use \<!PLUGINPATH->\Config as Config;
 
 defined( 'ABSPATH') OR exit;
 
-if( !class_exists( '\<!PLUGINPATH->\<!PLUGINNAME->')) {
+if( !class_exists( '\rbtddb\DDBali')) {
 
-    class <!PLUGINNAME-> {
+    class DDBali {
 
         private static $instance = null;
 
@@ -215,10 +215,14 @@ if( !class_exists( '\<!PLUGINPATH->\<!PLUGINNAME->')) {
 
         public static function theme_enqueue(){
             $v =Config::MODE == "development" ? (string) bin2hex(random_bytes(2)) : Config::VERSION;
+            #Dependencies
+            //\wp_enqueue_style( 'flatpickr', 'https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css', array(), $v, 'all');
+            \wp_enqueue_style( 'flatpickr', 'https://npmcdn.com/flatpickr/dist/themes/dark.css', array(), $v, 'all');
+            
             \wp_enqueue_script ( 'footer', \get_template_directory_uri() . '/theme/dist/js/footer.js', array(), $v, true );
             \wp_enqueue_script ( 'sitehead', \get_template_directory_uri() . '/theme/dist/js/main.js', array(), $v, false );
            # \wp_enqueue_script ( 'blocks', \get_template_directory_uri() . '/theme/dist/js/blocks.js', array(), $v, false );
-            \wp_enqueue_style( 'theme-css', \get_template_directory_uri() . '/theme/dist/style.css', array(), $v, 'all');
+            \wp_enqueue_style( 'theme-css', \get_template_directory_uri() . '/theme/dist/style.css', array('flatpickr'), $v, 'all');
         }
 
         public static function theme_admin_enqueue(){
@@ -294,4 +298,4 @@ if( !class_exists( '\<!PLUGINPATH->\<!PLUGINNAME->')) {
 
     }
 }
-<!PLUGINNAME->::get_instance();
+DDBali::get_instance();

@@ -138,6 +138,7 @@ export const doOnloadQuery = (elem, scrollto = false) => {
         let postin = elem.hasAttribute('data-post-in') ? elem.dataset.postIn : false;
         if(postin && postin.length) senddata+='&postin='+encodeURIComponent(postin);
         console.log(senddata);
+        
         sendit(url, senddata).then( (r)=>{
             var wrap = elem.closest('.querywrap');
             let html;

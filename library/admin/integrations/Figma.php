@@ -1,10 +1,10 @@
 <?php
-namespace <!PLUGINPATH->\admin;
-use <!PLUGINPATH->\Config as Config;
-use <!PLUGINPATH->\admin\ Setup as Setup;
-use <!PLUGINPATH->\setup\ColorPalette as ColorPalette;
-use <!PLUGINPATH->\setup\FigmaTypography as FigmaTypography;
-use <!PLUGINPATH->\admin\setup\MediaImage as MediaImage;
+namespace rbtddb\admin;
+use rbtddb\Config as Config;
+use rbtddb\admin\Setup as Setup;
+use rbtddb\setup\ColorPalette as ColorPalette;
+use rbtddb\setup\FigmaTypography as FigmaTypography;
+use rbtddb\admin\setup\MediaImage as MediaImage;
 
 /* 
     Set up admin ajax request - this just bounces method requests between the WP admin ajax and
@@ -12,7 +12,7 @@ use <!PLUGINPATH->\admin\setup\MediaImage as MediaImage;
 */
 
 #Run function must be called to get Ajax requests on server request handle
-\<!PLUGINPATH->\admin\FigmaAdmin::run();
+\rbtddb\admin\FigmaAdmin::run();
 
 class FigmaAdmin {
     public static function run(){
@@ -45,7 +45,7 @@ class FigmaAdmin {
         #to get the actual document node, you need to actually look at <response->
         $document = json_decode($RootDocument->response);
         $document = $document->document;
-        $PageNode = self::get_node('Page 1', 'CANVAS', $document);
+        $PageNode = self::get_node($document, 'Page 1', 'CANVAS');
         return $PageNode ? $PageNode : false;
     }
     public static function import_figma_styleguide(){
@@ -71,9 +71,9 @@ class FigmaAdmin {
         #to get the actual document node, you need to actually look at <response->
         $obj_document = json_decode($RootDocument->response);
         $array_document = $obj_document->document;
-        $PageNode = self::get_node('Page 1', 'CANVAS', $array_document);
-        $LogoFrame = self::get_node('Logo', 'FRAME', $PageNode);
-        $LogoNode = self::get_node('Logo', 'COMPONENT', $LogoFrame);
+        $PageNode = self::get_node($array_document, 'Page 1', 'CANVAS');
+        $LogoFrame = self::get_node($PageNode, 'Logo', 'FRAME');
+        $LogoNode = self::get_node($LogoFrame, 'Logo', 'COMPONENT');
         if(!$LogoNode){ return false; }
 
         $logo_node_id = $LogoNode['id'];
@@ -90,23 +90,32 @@ class FigmaAdmin {
         $resource = file_get_contents( $imgurl );
         $upload_image = new MediaImage($resource, 'site-logo-figma.' . $format);
         $upload_image->set_logo();
+        #Set Screenshot.png to Branded Logo
+        $format = 'png';
+        $image = new FigmaRequest('images/' . $RootDocument->connection->file . '?ids=' . $logo_node_id . '&format=' . $format, 'GET' );
+        $response = json_decode($image->response);
+        $imgresponse = (Array) $response->images;
+        $imgurl = $imgresponse[ array_keys($imgresponse)[0] ];
+        //copy( \get_template_directory() . '/screenshot.png', $imgurl);
+        $resource = file_get_contents( $imgurl );
+        file_put_contents(\get_template_directory() . '/screenshot.png', $resource);
         return true;
  
     }
     private static function get_typography( $PageNode ){
        # $PageNode = self::getPageNode();
-        $Typography = $PageNode ? self::get_node('Typography', 'FRAME', $PageNode) : false;
-        $TypographyGroup = $Typography ? self::get_node('Typography', 'GROUP', $Typography) : false;
+        $Typography = $PageNode ? self::get_node($PageNode, 'Typography', 'FRAME') : false;
+        $TypographyGroup = $Typography ? self::get_node($Typography, 'Typography', 'GROUP') : false;
         if($TypographyGroup){
-            $Header = self::get_node('Header', 'GROUP', $TypographyGroup);
+            $Header = self::get_node($TypographyGroup, 'Header', 'GROUP');
             $BaseTypography = new FigmaTypography();
             
-            $H1 = self::get_node('H1 Desktop', 'TEXT', $Header);
-            $H2 = self::get_node('H2 Desktop', 'TEXT', $Header);
-            $H3 = self::get_node('H3 Desktop', 'TEXT', $Header);
-            $H4 = self::get_node('H4 Desktop', 'TEXT', $Header);
-            $H5 = self::get_node('H5 Desktop', 'TEXT', $Header);
-            $H6 = self::get_node('H6 Desktop', 'TEXT', $Header);
+            $H1 = self::get_node($Header, 'H1 Desktop', 'TEXT' );
+            $H2 = self::get_node($Header, 'H2 Desktop', 'TEXT');
+            $H3 = self::get_node($Header, 'H3 Desktop', 'TEXT');
+            $H4 = self::get_node($Header, 'H4 Desktop', 'TEXT');
+            $H5 = self::get_node($Header, 'H5 Desktop', 'TEXT' );
+            $H6 = self::get_node($Header, 'H6 Desktop', 'TEXT');
 
             $BaseTypography->setStyle('H1', (Array) $H1['style']);
             $BaseTypography->setStyle('H2', (Array) $H2['style']);
@@ -115,12 +124,12 @@ class FigmaAdmin {
             $BaseTypography->setStyle('H5', (Array) $H5['style']);
             $BaseTypography->setStyle('H6', (Array) $H6['style']);
             
-            $H1Mobile = self::get_node('H6 Mobile', 'TEXT', $Header);
-            $H2Mobile = self::get_node('H6 Mobile', 'TEXT', $Header);
-            $H3Mobile = self::get_node('H6 Mobile', 'TEXT', $Header);
-            $H4Mobile = self::get_node('H6 Mobile', 'TEXT', $Header);
-            $H5Mobile = self::get_node('H6 Mobile', 'TEXT', $Header);
-            $H6Mobile = self::get_node('H6 Mobile', 'TEXT', $Header);
+            $H1Mobile = self::get_node($Header, 'H6 Mobile', 'TEXT');
+            $H2Mobile = self::get_node($Header, 'H6 Mobile', 'TEXT');
+            $H3Mobile = self::get_node($Header,'H6 Mobile', 'TEXT');
+            $H4Mobile = self::get_node($Header,'H6 Mobile', 'TEXT');
+            $H5Mobile = self::get_node($Header,'H6 Mobile', 'TEXT');
+            $H6Mobile = self::get_node($Header,'H6 Mobile', 'TEXT');
 
             $BaseTypography->setMobileStyle('H1', (Array) $H1Mobile['style']);
             $BaseTypography->setMobileStyle('H2', (Array) $H2Mobile['style']);
@@ -129,10 +138,10 @@ class FigmaAdmin {
             $BaseTypography->setMobileStyle('H5', (Array) $H5Mobile['style']);
             $BaseTypography->setMobileStyle('H6', (Array) $H6Mobile['style']);
 
-            $BodyGroup = self::get_node('Body', 'GROUP', $TypographyGroup);
+            $BodyGroup = self::get_node($TypographyGroup, 'Body', 'GROUP');
             #Desktop Body & Mobile Body
-            $Body = self::get_node('Body Desktop', 'TEXT', $BodyGroup);
-            $MobileBody = self::get_node('Body Mobile', 'TEXT', $BodyGroup);
+            $Body = self::get_node($BodyGroup, 'Body Desktop', 'TEXT');
+            $MobileBody = self::get_node($BodyGroup, 'Body Mobile', 'TEXT');
             $BaseTypography->setStyle('body', (Array) $Body['style']);
             $BaseTypography->setMobileStyle('body', (Array) $MobileBody['style']);
             $BaseTypography->printToGlobalCSS();
@@ -146,31 +155,31 @@ class FigmaAdmin {
     private static function get_color_palette( $PageNode ){
 
         #$PageNode = self::getPageNode();
-        $Colors = $PageNode ? self::get_node('Colors', 'FRAME', $PageNode) : false;
+        $Colors = $PageNode ? self::get_node($PageNode, 'Colors', 'FRAME') : false;
         if($Colors){         
             $Palette = new ColorPalette();
             #Get Primary and Accent Colors
-            $primaryNode = self::get_node('primary color', 'ELLIPSE', $Colors);
+            $primaryNode = self::get_node($Colors, 'primary color', 'ELLIPSE');
             $primaryHex = self::color_rectangle_to_hex( $primaryNode );
             if($primaryHex) {
             
                 $Palette->setPrimary($primaryHex);
                 if(Config::MODE == "development" && $Palette->warning) error_log($Palette->warning);
             }
-            $accentNode = self::get_node('accent color', 'ELLIPSE', $Colors);
+            $accentNode = self::get_node($Colors, 'accent color', 'ELLIPSE');
             $accentHex = self::color_rectangle_to_hex( $accentNode );
             if($accentHex) {
                 $Palette->setAccent($accentHex);
                 if(Config::MODE == "development" && $Palette->warning) error_log($Palette->warning);
             }
             #Set UI Colors
-            $UI = self::get_node('User Experience', 'GROUP', $Colors);
+            $UI = self::get_node($Colors, 'User Experience', 'GROUP', );
             $UI_badHex = false;
             $UI_goodHex = false;
             $UI_warning = false;
-            $UI_badNode = $UI ? self::get_node('bad', 'ELLIPSE', $UI) : false;
-            $UI_goodNode = $UI ? self::get_node('good', 'ELLIPSE', $UI) : false;
-            $UI_warningNode = $UI ? self::get_node('warning', 'ELLIPSE', $UI) : false;
+            $UI_badNode = $UI ? self::get_node($UI, 'bad', 'ELLIPSE') : false;
+            $UI_goodNode = $UI ? self::get_node($UI, 'good', 'ELLIPSE') : false;
+            $UI_warningNode = $UI ? self::get_node($UI, 'warning', 'ELLIPSE') : false;
             if($UI_badNode && $UI_goodNode && $UI_warningNode){
                 $UI_badHex = self::color_rectangle_to_hex( $UI_badNode );
                 $UI_goodHex = self::color_rectangle_to_hex( $UI_goodNode );
@@ -181,13 +190,13 @@ class FigmaAdmin {
                 }
             }
             #Set Light Colors
-            $Light = self::get_node('Light', 'GROUP', $Colors);
+            $Light = self::get_node($Colors, 'Light', 'GROUP');
             $LightColor = false;
             $LightHalf= false;
             $LightNeutral = false;
-            $LightColorNode = $Light ? self::get_node('color', 'RECTANGLE', $Light) : false;
-            $LightHalfNode = $Light ? self::get_node('half', 'RECTANGLE', $Light) : false;
-            $LightNeutralNode = $Light ? self::get_node('neutral', 'RECTANGLE', $Light) : false;
+            $LightColorNode = $Light ? self::get_node($Light, 'color', 'RECTANGLE') : false;
+            $LightHalfNode = $Light ? self::get_node($Light, 'half', 'RECTANGLE') : false;
+            $LightNeutralNode = $Light ? self::get_node($Light, 'neutral', 'RECTANGLE') : false;
             if($LightColorNode && $LightHalfNode && $LightNeutralNode){
                 $LightColorHex = self::color_rectangle_to_hex( $LightColorNode );
                 $LightHalfHex = self::color_rectangle_to_hex( $LightHalfNode );
@@ -206,13 +215,13 @@ class FigmaAdmin {
                 if(Config::MODE == "development" && $Palette->warning) error_log($Palette->warning);
             }
             #Set Dark Colors
-            $Dark = self::get_node('Dark', 'GROUP', $Colors);
+            $Dark = self::get_node($Colors, 'Dark', 'GROUP');
             $DarkColor = false;
             $DarkHalf= false;
             $DarkNeutral = false;
-            $DarkColorNode = $Dark ? self::get_node('color', 'RECTANGLE', $Dark) : false;
-            $DarkHalfNode = $Dark ? self::get_node('half', 'RECTANGLE', $Dark) : false;
-            $DarkNeutralNode = $Dark ? self::get_node('neutral', 'RECTANGLE', $Dark) : false;
+            $DarkColorNode = $Dark ? self::get_node($Dark, 'color', 'RECTANGLE') : false;
+            $DarkHalfNode = $Dark ? self::get_node($Dark, 'half', 'RECTANGLE') : false;
+            $DarkNeutralNode = $Dark ? self::get_node($Dark, 'neutral', 'RECTANGLE') : false;
             if($DarkColorNode && $DarkHalfNode && $DarkNeutralNode){
                 $DarkColorHex = self::color_rectangle_to_hex( $DarkColorNode );
                 $DarkHalfHex = self::color_rectangle_to_hex( $DarkHalfNode );
@@ -279,9 +288,9 @@ class FigmaAdmin {
                 #to get the actual document node, you need to actually look at <response->
                 $document = json_decode($document->response);
                 $document = $document->document;
-                $PageNode = self::get_node('Page 1', 'CANVAS', $document);
+                $PageNode = self::get_node($document, 'Page 1', 'CANVAS');
 
-                $Colors = self::get_node('Colors', 'FRAME', $PageNode);
+                $Colors = self::get_node($PageNode, 'Colors', 'FRAME');
                 if(!$PageNode){ self::return_false('Could Not Parse Figma Page'); }
                 
                 break;
@@ -316,7 +325,7 @@ class FigmaAdmin {
 
         $document = new FigmaRequest( 'get_document' );
         if($document->err){
-            self::return_false($request->err);
+            self::return_false($document->err);
         }
         if(!$document->response){
             self::return_false('No Server Response');
@@ -327,7 +336,7 @@ class FigmaAdmin {
         if($document->return_node && isset($document->return_node) && isset($parse_document[$document->return_node]) ) $parse_document = $parse_document[$document->return_node];
         
         #Get Page
-        $PageNode = self::get_node('Page 1', 'CANVAS', $parse_document);
+        $PageNode = self::get_node($parse_document, 'Page 1', 'CANVAS');
         if(!$PageNode){ self::return_false('Could Not Parse Figma Page'); }
 
         #From PageNode we can do everything we need;
@@ -347,7 +356,7 @@ class FigmaAdmin {
         $parse_document = json_decode($document->response, true );
         if($document->return_node && isset($document->return_node) && isset($parse_document[$document->return_node]) ) $parse_document = $parse_document[$document->return_node];
 
-        $PageNode = self::get_node('Page 1', 'CANVAS', $parse_document);
+        $PageNode = self::get_node($parse_document, 'Page 1', 'CANVAS');
         
         if(!$PageNode) return false;
 
@@ -355,7 +364,7 @@ class FigmaAdmin {
         $logo_node_id = false;
 
         #Now find our target nodes
-        $LogoNode = self::get_node('Logo', 'FRAME', $PageNode);
+        $LogoNode = self::get_node($PageNode, 'Logo', 'FRAME');
         if(!$LogoNode){ return false; }
 
         $logo_node_id = $LogoNode['id'];
@@ -376,7 +385,7 @@ class FigmaAdmin {
             require_once( get_template_directory() . '/library/admin/setup/images.php');
 
             $logo_url = \get_template_directory_uri() . '/theme/assets/' . $file_name;
-            $media_image = new Create_Media_File( $logo_url );
+            $media_image = new MediaImage( $logo_url );
             if($media_image->attachment_id){
                 $ret_value = \set_theme_mod( 'custom_logo', $media_image->attachment_id);
 
@@ -440,7 +449,7 @@ class FigmaAdmin {
     /*
     Recursively brute force through document looking for FIRST node match on name & type 
     */
-    private static function get_node( $name, $type, $root ){
+    private static function get_node($root, $name, $type ){
 
         if( is_object($root) ){
             $root = (array) $root;
@@ -452,7 +461,7 @@ class FigmaAdmin {
             }
             if(isset($root['children'])){
                 foreach( $root['children'] as $idx => $child){
-                    $check = self::get_node($name, $type, $child);
+                    $check = self::get_node($child, $name, $type);
                     if($check){
                         return $check;
                     }
@@ -463,14 +472,13 @@ class FigmaAdmin {
             return false;
         }
     }
-    /* Were morbin up in here */
-    /* Were morbiun here recursive function returns ALL matches on args in the structure of returnfields */
-    private static function get_nodes( $args = null, $returnfields = null, $root){
+    /* Were recursive function returns ALL matches on args in the structure of returnfields */
+    private static function get_nodes($root, $args = null, $returnfields = null ){
         if(!$args) return false;
 
         $return_array = array();
 
-        $this_node = self::check_node($args, $root);
+        $this_node = self::check_node($root, $args);
         if($this_node){
             $built_array = array();
             foreach($returnfields as $field){
@@ -480,7 +488,7 @@ class FigmaAdmin {
         }
         if(isset($root['children'])){
             foreach($root['children'] as $idx => $child ){
-                $check_child = self::get_nodes($args, $returnfields, $child);
+                $check_child = self::get_nodes($child, $args, $returnfields);
                 if($check_child) $return_array = array_merge($return_array, $check_child);
             }
         }
@@ -488,7 +496,7 @@ class FigmaAdmin {
 
     }
 
-    private static function check_node( $args = null, $node ){
+    private static function check_node( $node, $args = null ){
         if(!$args || !is_array($args)) return false;
 
         $return_node = true;

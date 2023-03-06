@@ -1,5 +1,5 @@
 <?php
-use <!PLUGINPATH->\<!PLUGINNAME-> as Theme;
+use rbtddb\DDBali as Theme;
 
 /*
  *  Template Name: 404

@@ -1,5 +1,5 @@
 <?php
-use <!PLUGINPATH->\<!PLUGINNAME-> as Theme;
+use rbtddb\DDBali as Theme;
 /**
  * The template for displaying the footer
  *
@@ -7,7 +7,7 @@ use <!PLUGINPATH->\<!PLUGINNAME-> as Theme;
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package <!HUMANREADABLE->
+ * @package Daily Driver Bali
  * @subpackage RBT
  */
 

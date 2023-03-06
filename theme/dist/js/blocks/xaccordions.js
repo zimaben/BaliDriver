@@ -97,7 +97,7 @@
 __webpack_require__.r(__webpack_exports__);
 var theme_icons = {};
 
-//branded Kitely icons
+//branded FR icons
 theme_icons.friendlyrobot = /*#__PURE__*/React.createElement("svg", {
   version: "1.1",
   id: "Layer_1",
@@ -200,69 +200,53 @@ __webpack_require__.r(__webpack_exports__);
 
 var __ = wp.i18n.__;
 var registerBlockType = wp.blocks.registerBlockType;
-var RichText = wp.blockEditor.RichText;
+var _wp$blockEditor = wp.blockEditor,
+  InnerBlocks = _wp$blockEditor.InnerBlocks,
+  InspectorControls = _wp$blockEditor.InspectorControls;
+var _wp$components = wp.components,
+  PanelBody = _wp$components.PanelBody,
+  TextControl = _wp$components.TextControl;
+var ALLOWED = ['rbt/ktaccordion'];
 registerBlockType('rbt/xaccordions', {
-  title: 'Please Create Unique Title',
-  icon: _icons_js__WEBPACK_IMPORTED_MODULE_0__["default"].friendlyrobot,
+  title: 'Accordions List',
+  icon: _icons_js__WEBPACK_IMPORTED_MODULE_0__["default"].kitelytech,
   category: 'friendlyrobot',
   //attributes
   attributes: {
-    title: {
+    scrollLink: {
       type: 'string',
-      "default": ''
-    },
-    text: {
-      type: 'string',
-      "default": ''
+      "default": null
     }
   },
   edit: function edit(_ref) {
     var attributes = _ref.attributes,
       setAttributes = _ref.setAttributes;
-    var title = attributes.title,
-      text = attributes.text;
-    function onTextChange(newtext) {
+    var scrollLink = attributes.scrollLink;
+    function onUpdateScrollLink(newtext) {
       setAttributes({
-        text: newtext
+        scrollLink: newtext
       });
     }
-    function onTitleChange(newtitle) {
-      setAttributes({
-        title: newtitle
-      });
-    }
-    return /*#__PURE__*/React.createElement("div", {
-      className: "rbt-xaccordions"
-    }, /*#__PURE__*/React.createElement(RichText, {
-      tagName: "h3",
-      className: "accordion",
-      value: title,
-      onChange: onTitleChange,
-      placeholder: 'Accordion Title'
-    }), /*#__PURE__*/React.createElement(RichText, {
-      tagName: "div",
-      className: "rbt-accordion-panel",
-      value: text,
-      onChange: onPanelChange,
-      placeholder: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-    }));
+    return [/*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, null, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Add a Scroll Link?")), /*#__PURE__*/React.createElement("p", null, "(No # character please)"), /*#__PURE__*/React.createElement(TextControl, {
+      label: "Scroll Link",
+      value: scrollLink,
+      onChange: onUpdateScrollLink,
+      placeholder: "scroll-here"
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "rbt-accordionslist"
+    }, /*#__PURE__*/React.createElement(InnerBlocks, {
+      allowedBlocks: ALLOWED,
+      templateLock: false
+    }))];
   },
   save: function save(_ref2) {
     var attributes = _ref2.attributes;
-    var title = attributes.title,
-      text = attributes.text;
+    var scrollLink = attributes.scrollLink;
     return /*#__PURE__*/React.createElement("div", {
-      className: "rbt-xaccordions"
-    }, /*#__PURE__*/React.createElement(RichText.Content, {
-      tagName: "h3",
-      className: "rbt-title",
-      value: title
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "rbt-xaccordions-text"
-    }, /*#__PURE__*/React.createElement(RichText.Content, {
-      tagName: "p",
-      value: text
-    })));
+      className: "rbt-accordionslist"
+    }, scrollLink && /*#__PURE__*/React.createElement("a", {
+      id: scrollLink
+    }), /*#__PURE__*/React.createElement(InnerBlocks.Content, null));
   }
 });
 

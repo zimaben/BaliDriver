@@ -1,15 +1,18 @@
-$headerheight: 64px;
-$mobileheaderheight:48px;
+$headerheight: 86px;
+$mobileheaderheight:52px;
 
 #site-header{
     display:flex;
     width:100%;
     height:$headerheight;
+    padding: 8px;
+    align-self: center;
     position: relative;
     padding-left:$edgeclamp;
     padding-right:$edgeclamp;
-    background-color:$primary;
-
+    background-color:$dark-neutral;
+    transition: width .2s ease, border-radius .2s ease, opacity .2s ease;
+    border: 1px solid $dark-half;
     .mobile-menu-button{
         display:none;
         background-image:url(/theme/assets/icons/hamburger-button-white.svg);
@@ -67,7 +70,9 @@ $mobileheaderheight:48px;
             a{
                 color:$dark;
                 text-decoration:none;
+                height:100%;
                 max-height:100%;
+                width:150px;
             }
             h1{margin:0;}
             img{
@@ -78,15 +83,27 @@ $mobileheaderheight:48px;
     .top.menu-container{
         display: flex;
         align-items: center;
+        width: 100%;
+        justify-content: space-between;
         ul{
+            padding-left:3vw;
             list-style-type:none;
             margin:0;
             display: inline-flex;
-            gap: $gap * .5px;   
+            gap: 44px;   
         }
         .primary-menu-container{
           //  padding-left:11vw;
         }
+    }
+    .desktop-menu{
+
+    }
+    .top.menu-right{
+        display: flex;
+        gap: 44px;
+        margin-right: 5vw;
+        align-items: center;
     }
 }
 
@@ -105,9 +122,17 @@ $mobileheaderheight:48px;
                 position:absolute;
                 display:flex;
                 left:0;
+                top:0;
                 z-index:0;
                 align-items:center;
                 width:100%;
+                a{
+                    display:flex;
+                    position: relative;
+                    align-self: center;
+                    justify-content: center;
+                    align-items: center;
+                }
             }
         }
         .desktop-menu{

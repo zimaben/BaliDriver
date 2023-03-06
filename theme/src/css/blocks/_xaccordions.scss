@@ -1,9 +1,106 @@
-.wp-block-rbt-accordions  {
+.rbt-accordionslist {
+ 
+    /* scope it */
+    padding-left:clamp(33px, 13.23vw, 150px);
+    padding-right:clamp(33px, 13.23vw, 150px);
+    padding-top:clamp(18.5px, 2.45vw, 37px);
+    padding-bottom:clamp(25px, 3.31vw, 50px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px 0;
+    width: 75% !important;
+    align-self: center;
+    .rbt-accordion{
+        display:flex;
+        flex-direction:column;
+        gap:0;
+        border-right: 4px solid $accent;
+        border-radius:10px;
+        background-color: $dark-neutral;
+        .accordion {
+            color: white;
+            cursor: pointer;
+            padding-top: clamp(17.5px, 2.43vw, 35px);
+            padding-bottom: clamp(17.5px, 2.43vw, 35px);
+            padding-left: clamp(30px, 4.17vw, 60px);
+            padding-right: clamp(30px, 4.17vw, 60px);
+            width: 100%;
+            text-align: left;
+            outline: none;
+            display:flex;
+            position:relative;
+            margin:0;
+            border-radius:10px;
+            &:after{
+                content:'';
+                position:absolute;
+                right:clamp(10px, 1.39vw, 20px);
+                //top: clamp(11px, 1.46vw, 21px);
+                display:flex;
+                align-self:center;
+                background-image: url(/theme/assets/icons/arrow-down.svg);
+                background-size:contain;
+                width:clamp(23px, 3.04vw, 46px);
+                height:clamp(23px, 3.04vw, 46px);
+                background-repeat:no-repeat;
+                transition: all .2s ease;
+                background-position: center center;
+                background-size: 20px;
+                transform-origin: center;
+            }
+            &.expanded{
+                border-radius:10px 10px 0 0;
+                
+                &:after{
+                    transform:rotate(180deg);
+                }
+            }
+        }
+        h4.accordion{
+            font-weight:700;
+            color:#fff;
+            font-size:clamp(15px, 1.39vw, 20px);
+            line-height:clamp(21px, 1.94vw, 28px);
+            border: 1px solid $dark-half;
+            &.expanded{
+                border-bottom:none;
+            }
+        }
+        .rbt-accordion-panel{
+            width:100%;
+            padding-bottom:0;
+            padding-left: clamp(30px, 4.17vw, 60px);
+            padding-right: clamp(30px, 4.17vw, 60px);
+            // padding-top:15px;
+            // top: -15px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.15s;
+            position:relative;
+            font-size:clamp(15px, 1.39vw, 20px);
+            line-height:clamp(21px, 1.94vw, 28px);
+            border-radius:0 0 10px 10px;
+            &.expanded{
+                border-bottom:1px solid $dark-half;
+                border-left:1px solid $dark-half;
+            }
+            &.block-editor-rich-text__editable{
+                max-height:10000px;
+                color:#ccc;
+            }
+            p{
+                margin-top:0;
+                font-weight:400;
+                font-size:clamp(15px, 1.39vw, 20px);
+                line-height:clamp(21px, 1.94vw, 28px);
+            }
 
+        }
+    }
 }
 
 @media screen and (max-width:991px){
-    .wp-block-rbt-accordions  {
+    .wp-block-rbt-accordions {
 
     }
 }

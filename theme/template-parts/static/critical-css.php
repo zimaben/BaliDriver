@@ -1,7 +1,6 @@
 <style type="text/css" id="inlinecss">@import url(https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap);
-/* UTILITY */
-/*<! START COLORS !>*/
+/* UTILITY */ /*<! START COLORS !>*/
 /*<! END COLORS !>*/
 /*<! START TYPOGRAPHY !>*/
 H1 {
@@ -196,6 +195,7 @@ body {
   width: 100%;
   position: relative;
   overflow-y: scroll;
+  background: #000011;
 }
 body.mobile-menu-expanded {
   overflow: hidden;
@@ -218,7 +218,7 @@ ol li {
 
 footer.site-footer {
   display: flex;
-  background-color: #242e42;
+  background-color: #28666E;
   padding-left: clamp(25px, 10vw, 146px);
   padding-right: clamp(25px, 10vw, 146px);
   padding-top: 37.5px;
@@ -297,7 +297,7 @@ div.prefooter {
   margin-left: auto;
   margin-right: auto;
   padding: 3%;
-  color: #242e42;
+  color: #28666E;
 }
 
 @media screen and (max-width: 991px) {
@@ -312,7 +312,7 @@ div.prefooter {
   }
 }
 a {
-  color: #242e42;
+  color: #28666E;
 }
 a:active, a:hover {
   /* Darken on click by 15% (down to 85%) */
@@ -375,7 +375,7 @@ ul.menu-wrapper li a {
   justify-content: center;
 }
 #site-header .mobile-menu-container .mobile-animation-wrap .mobile-menu ul.menu-wrapper li a {
-  color: #242e42;
+  color: #28666E;
   text-decoration: none;
 }
 
@@ -401,11 +401,11 @@ a:has(> h1), a:has(> h2), a:has(> h3), a:has(> h4), a:has(> h5), a:has(> h6) {
   position: relative;
   padding-left: clamp(25px, 10vw, 146px);
   padding-right: clamp(25px, 10vw, 146px);
-  background-color: #242e42;
+  background-color: #28666E;
 }
 #site-header .mobile-menu-button {
   display: none;
-  background-image: url(http://localhost:8005/wp-content/themes/<!PLUGINNAME->/theme/assets/icons/hamburger-button-white.svg);
+  background-image: url(http://localhost:8006/wp-content/themes/DDBali/theme/assets/icons/hamburger-button-white.svg);
   height: 100%;
   aspect-ratio: 1/1;
   background-repeat: no-repeat;
@@ -413,7 +413,7 @@ a:has(> h1), a:has(> h2), a:has(> h3), a:has(> h4), a:has(> h5), a:has(> h6) {
   cursor: pointer;
 }
 #site-header .mobile-menu-close {
-  background-image: url(http://localhost:8005/wp-content/themes/<!PLUGINNAME->/theme/assets/icons/close-white.svg);
+  background-image: url(http://localhost:8006/wp-content/themes/DDBali/theme/assets/icons/close-white.svg);
   content: "";
   display: block;
   top: 18px;

@@ -1,7 +1,7 @@
 <?php
-namespace <!PLUGINPATH->\admin\setup;
+namespace rbtddb\admin\setup;
 
-use \<!PLUGINPATH->\Config as Config;
+use \rbtddb\Config as Config;
 
 /**
  * Class PostTypes accepts ucfirst($plural), (optional) ucfirst($singular), (optional) $args.
@@ -13,7 +13,7 @@ use \<!PLUGINPATH->\Config as Config;
  *
  *
  * @package TPT
- * @subpackage <!PLUGINNAME->
+ * @subpackage DDBali
  */
 class Taxonomy {
     public function __construct( $plural, $singular, $args = null ){

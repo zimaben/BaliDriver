@@ -1,9 +1,9 @@
 <?php 
-namespace <!PLUGINPATH->\setup;
-use \<!PLUGINPATH->\Config as Config;
+namespace rbtddb\setup;
+use \rbtddb\Config as Config;
 
 #move to bottom if not hoisted
-\<!PLUGINPATH->\setup\Blocks::get_instance();
+\rbtddb\setup\Blocks::get_instance();
 
 class Blocks {
 
@@ -36,6 +36,12 @@ class Blocks {
             $this->registerBlock('left-right', array('wp-i18n', 'wp-blocks', 'wp-editor', 'wp-components' ));
             $this->registerBlock('xaccordion', array('wp-i18n', 'wp-blocks', 'wp-editor', 'wp-components' ));
             $this->registerBlock('xaccordions', array('wp-i18n', 'wp-blocks', 'wp-editor', 'wp-components' ));
+            $this->registerBlock('carousel-slide', array('wp-i18n', 'wp-blocks', 'wp-editor', 'wp-components' ));
+            // $this->registerBlock('carousel-slide-canvas', array('wp-i18n', 'wp-blocks', 'wp-editor', 'wp-components' ));
+            // $this->registerBlock('carousel-slides', array('wp-i18n', 'wp-blocks', 'wp-editor', 'wp-components' ));
+            $this->registerBlock('carousel-slider', array('wp-i18n', 'wp-blocks', 'wp-editor', 'wp-components' ));
+            $this->registerBlock('testimonial-card', array('wp-i18n', 'wp-blocks', 'wp-editor', 'wp-components' ));
+            $this->registerBlock('testimonials', array('wp-i18n', 'wp-blocks', 'wp-editor', 'wp-components' ));
     }
 
     public static function register_theme_blocktype( $categories ){
@@ -71,7 +77,7 @@ class Blocks {
                 array( 'editor_script' => $handle,
                 'editor_style' => 'theme_blocks_editor_css',
                 'style' => 'theme_blocks_global_css',
-                'render_callback' => '<!PLUGINPATH->\core\Methods::' . $callback,
+                'render_callback' => 'rbtddb\core\Methods::' . $callback,
                 ));
         } else {
             \register_block_type(
@@ -129,7 +135,6 @@ class Blocks {
                             $footer = '] '. PHP_EOL . 'exports.list = list';
                             $filestring = str_replace($header, '', $filestring);
                             $filestring = str_replace($footer, '', $filestring);
-                            $filestring = trim(preg_replace('/\s\s+/', '', $filestring));
                             $filestring = trim(preg_replace('/\n\$/', '', $filestring));
                             $filestring = trim(preg_replace('/"/', '', $filestring));
                             $filearray = explode(',', $filestring);

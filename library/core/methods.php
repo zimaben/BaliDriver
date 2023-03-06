@@ -1,8 +1,8 @@
 <?php
-namespace <!PLUGINPATH->\api;
+namespace rbtddb\api;
 
-use \<!PLUGINPATH->\<!PLUGINNAME-> as Theme;
-use \<!PLUGINPATH->\core\View as View;
+use \rbtddb\DDBali as Theme;
+use \rbtddb\core\View as View;
 
 class Methods {
     /* 

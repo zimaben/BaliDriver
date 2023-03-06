@@ -4,7 +4,7 @@ const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks; 
 const { RichText } = wp.blockEditor; 
 
-registerBlockType('[!PLUGINPATH!]/[!HANDLE!]', { 
+registerBlockType('rbt/sales-form', { 
  
 	title: 'Please Create Unique Title', 
 	icon: theme_icons.friendlyrobot,
@@ -35,7 +35,7 @@ registerBlockType('[!PLUGINPATH!]/[!HANDLE!]', {
 
 		return (
 
-            <div className="[!PLUGINPATH!]-[!HANDLE!]">
+            <div className="rbt-sales-form">
                 <RichText 
                     tagName="h3"
                     className="accordion"
@@ -45,7 +45,7 @@ registerBlockType('[!PLUGINPATH!]/[!HANDLE!]', {
                 />
                 <RichText 
                     tagName="div"
-                    className="[!PLUGINPATH!]-accordion-panel"
+                    className="rbt-accordion-panel"
                     value = {text}
                     onChange={onPanelChange}
                     placeholder={ 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'} 
@@ -54,5 +54,23 @@ registerBlockType('[!PLUGINPATH!]/[!HANDLE!]', {
 
 		);
 	},
-	save({attributes}) {}
+	save({attributes}) {
+		const { title, text } = attributes;
+
+		return (
+            <div className="rbt-sales-form">
+                <RichText.Content
+                    tagName="h3"
+                    className="rbt-title"
+                    value={title}
+                />
+                <div className="rbt-sales-form-text">
+                    <RichText.Content
+                        tagName="p"
+                        value = {text}
+                    />   
+                </div>
+            </div>
+		)
+	}
 });

@@ -1,7 +1,7 @@
 <?php
-namespace <!PLUGINPATH->\ajax;
+namespace rbtddb\ajax;
 
-use \<!PLUGINPATH->\<!PLUGINNAME-> as Theme;
+use \rbtddb\DDBali as Theme;
 
 class Ajax extends Theme {
 
@@ -24,6 +24,7 @@ class Ajax extends Theme {
             'nonce' => \wp_create_nonce('theme-admin'),
             'ajaxurl' => \admin_url('admin-ajax.php'),
             'theme_root' => \get_template_directory_uri(),
+            'siteurl' => \get_site_url(),
         ));
     }
     public static function theme_localize(){ 
@@ -34,6 +35,7 @@ class Ajax extends Theme {
             'postid'  => \get_the_ID(),
             'userid'  => \get_current_user_id(),
             'theme_root' => \get_template_directory_uri(),
+            'siteurl' => \get_site_url(),
         ));
         
     }
@@ -57,4 +59,4 @@ class Ajax extends Theme {
      
 }
 //spin it
-\<!PLUGINPATH->\ajax\Ajax::run();
+\rbtddb\ajax\Ajax::run();

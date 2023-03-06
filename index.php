@@ -1,6 +1,6 @@
 <?php
-use <!PLUGINPATH->\<!PLUGINNAME-> as Theme;
-use \<!PLUGINPATH->\Config as Config;
+use rbtddb\DDBali as Theme;
+use \rbtddb\Config as Config;
 /**
  * The main template file - if it ain't broke...
  *
@@ -11,7 +11,7 @@ use \<!PLUGINPATH->\Config as Config;
  *
  *
  * @package TPT
- * @subpackage <!PLUGINNAME->
+ * @subpackage DDBali
  */
 
 global $post;

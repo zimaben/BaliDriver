@@ -1,10 +1,10 @@
 <?php
-namespace <!PLUGINPATH->;
+namespace rbtddb;
 Class Config {
     const VERSION = "1.0.1";
     const MODE = "development";
-    const TEXTDOMAIN = "<!PLUGINPATH->_<!PLUGINNAME->";
-    const NICENAME = "<!HUMANREADABLE->";
+    const TEXTDOMAIN = "rbt_ddb_DDBali";
+    const NICENAME = "Daily Driver Bali";
 
     const BREAKPOINTS = array(
         'phone' => 576,
@@ -15,7 +15,11 @@ Class Config {
 
 
     /* CONFIG */
-    const POST_TYPES = false;
+    const POST_TYPES = array(
+        'Trips' => array(
+            'singular'=> 'trip'
+        )
+    );
 
     const SOCIAL = array(
         'facebook' => true,
@@ -50,16 +54,17 @@ Class Config {
         'Slack' => false,
         'ContactForm7' => true,
         'Figma' => true,
+        'WhatsApp'=> true,
     );
 
     #Progressive Header needs aspect ratio w & h and minimum mobile height
+
     const FEATURES = array(
-        'critical_css' => true,
+        'critical_css' => false,
         'video_headers' => true,
         'progressive_header' => array(
-            'home' => array('w' =>360, 'h'=>199, 'minHeight'=>500),
+            'home' => array('w' =>480, 'h'=>227, 'minHeight'=>400),
             'page' => array('w'=>480, 'h'=>161, 'minHeight'=>200),
-            'post' => array('w'=>480, 'h'=>161, 'minHeight'=>200),
             'default' => array('w'=>480, 'h'=>'auto', 'minHeight'=>400),
         )
     );
@@ -91,7 +96,8 @@ Class Config {
     const HEADER = array(
         'logo' => true,
         'menu' => array('primary', 'mobile'),
-        'right' => array('login', 'phone', 'cta'),
+       // 'right' => array('login', 'phone', 'cta'),
+       'right' => array('cta'=>true),
     );
     const MENUS = array(
         'primary' => array(

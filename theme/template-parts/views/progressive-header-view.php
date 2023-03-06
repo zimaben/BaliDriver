@@ -13,7 +13,6 @@
             data-min-height="<?php echo $this->min_height ?>">
         </canvas> 
 
-        <span class="left-gradient"></span>
     <?php 
 
         $headertext = \carbon_get_post_meta( $this->post->ID, 'crb_header_text' );
@@ -21,13 +20,18 @@
         $mobile_video = \carbon_get_post_meta( $this->post->ID, 'crb_mobile_featured_video' );
         $button1_text = \carbon_get_post_meta( $this->post->ID, 'crb_button_text' );
         $button1_url = \carbon_get_post_meta( $this->post->ID, 'crb_button_url' );
+        $cta_price = \carbon_get_post_meta( $this->post->ID, 'crb_button_price');
 
     ?>
     <div class="overlay-text">
     <!-- <h1><?php echo ($this->post->post_type === "page") ? \get_the_title($this->post->ID) : ''; ?></h1> -->
     <h1><?php echo \get_the_title( $post->ID )?></h1>
     <?php 
-        if($headertext) echo '<h5 class="headertext">'. $headertext . '</h5>';
+        if($headertext && $cta_price){ 
+            echo '<h5 class="headertext">'. $headertext . '<span class="price idr showprice" data-currency="idr" data-default-price="'.$cta_price .'">'.$cta_price .'</span></h5>';
+        } else if($headertext){
+            echo '<h5 class="headertext">'. $headertext .'</h5>';
+        }
         echo '<div class="buttons">';
         if($button1_text && $button1_url) {
             echo '<a class="wp-block-button__link" href="'.$button1_url.'">'.$button1_text.'</a>';

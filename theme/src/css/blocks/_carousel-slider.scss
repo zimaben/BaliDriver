@@ -1,0 +1,267 @@
+.wp-block-rbt-carousel-slider {
+    display:block;
+    width:100%;
+    height:100%;
+    .rbt-carousel-background{
+        display:flex;
+        overflow:hidden;
+        width:100%;
+        height:100%;
+        position:relative;
+        span.rbt-carousel-stripe{
+            height: 55%;
+            width: 100%;
+            content: '';
+            display: block;
+            align-self: center;
+            position: absolute;
+            z-index: 0;
+        }
+        /* no controls - fed by form choices */
+        .rbt-carousel-control{
+            display:flex;
+            display:none;
+            width:clamp(33px, 4%, 75px);
+            height:100%;
+
+            flex:1;
+            top:0;
+            flex-direction:column;
+            align-items:stretch;
+            position:absolute;
+            z-index:2;
+            &.left{
+                left:0;
+            }
+            &.right{
+                right:0;
+            }
+            span{
+                width:100%;
+                height:100%;
+                cursor:pointer;
+                background-size:55%;
+                background-repeat:no-repeat;
+                background-position:center center;
+                &.control-left{
+                    /* left arrow */
+                    background-image: url('/theme/assets/icons/chevron-left-solid.svg');
+                }
+                &.control-right{
+                    /* right arrow */
+                    background-image: url('/theme/assets/icons/chevron-right-solid.svg');
+                }
+            }
+        }
+        .rbt-carousel-left{
+            width:44%;
+            height: auto;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            position:relative;
+            z-index:1;
+            padding: clamp(44px, 5%, 66px);
+
+        }
+        .rbt-carousel-right{
+            width:56%;
+            height: auto;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            z-index:1;
+            position:relative;
+            .carousel-title{
+                position: absolute;
+                top: 10%;
+                left: 5%;
+                max-width: 80%;
+                z-index: 3;
+                font-size: 61px;
+                font-family: 'Acme';
+                color: black;
+            }
+            .header {
+                width:100%;
+                margin: 0 auto;
+                top: 3vw;
+                z-index:1;
+                padding: 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: fit-content;
+                position:absolute
+            }       
+            h1, h2{
+                -webkit-text-stroke: 1px $primary;
+                -webkit-text-fill-color: transparent;
+                -webkit-background-clip: text;
+            }
+            .carousel-tagline{
+                position: absolute;
+                bottom: 5%;
+                width: 100%;
+                padding: 0 10%;
+                text-align: center;
+                display: block;
+                margin: 0 auto;
+                -webkit-text-stroke: 1px white;
+                -webkit-text-fill-color: transparent;
+                -webkit-background-clip: text;
+            }
+            .price-pop{
+                font-family: Acme, 'Acme';
+                font-size: clamp(45px, 4.69vw, 90px);
+                color: $primary;
+                white-space: nowrap;
+                height: 30%;
+                width: 30%;
+                top: 50%;
+                left: 56%;
+                z-index: 2;
+                position: absolute;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: 100%;
+                background-image: url(/theme/assets/icons/pow.svg);
+                &:after, &:before{
+                    font-size: 33px;
+                }
+                &.idr::after{
+                    content:'k';
+                    display:inline;
+                    //font-size:clamp(36px, 3.75vw, 72px);
+                    font-size:clamp(28px, 2.92vw, 56px);
+                    line-height: clamp(28px, 2.92vw, 56px);
+                    top:clamp(-14px, -1.46vw, -28px);
+                    position: relative;
+                }
+                &.ru::after{
+                    content:'₽';
+                    display:inline;
+                    //font-size:clamp(36px, 3.75vw, 72px);
+                    font-size:clamp(28px, 2.92vw, 56px);
+                    line-height: clamp(28px, 2.92vw, 56px);
+                }
+                &.usd::before, 
+                &.aud::before{
+                    content:'$';
+                    display:inline;
+                    //font-size:clamp(36px, 3.75vw, 72px);
+                    font-size:clamp(28px, 2.92vw, 56px);
+                    line-height: clamp(28px, 2.92vw, 56px);
+                    top:clamp(-14px, -1.46vw, -28px);
+                    position: relative;
+                }
+                &.eur::before{
+                    content:'€';
+                    display:inline;
+                    //font-size:clamp(36px, 3.75vw, 72px);
+                    font-size:clamp(28px, 2.92vw, 56px);
+                    line-height: clamp(28px, 2.92vw, 56px);
+                }
+            } 
+
+            .rbt-carousel-slide{
+                display:none;
+                position:relative;
+                width:100%;
+                max-width: 100%;
+                .foreground{
+                    position:absolute;
+                    left:0;
+                    top:0;
+                    transform: translateX(-20%);
+                }
+                .rbt-carousel-animated{
+                    max-width:100%;
+                    border-radius:10px;
+                }
+                &.active{
+                    display:flex;
+                }
+            }
+        }
+        /* no indicators for this one */
+        .control-indicators{
+            display:none;
+            position: absolute;
+            bottom: calc(22% - (44px / 2));
+            width: 100%;
+            ul.rbt-indicators{
+                display:flex;
+                height:fit-content;
+                gap:44px;
+                list-style: none;
+                text-align: center;
+                li{
+                    display: block;
+                    cursor:pointer;
+                    background-color: #f7f7f7;
+                    background-image: -webkit-gradient(linear, left top, left bottom, from(#f7f7f7), to(#e7e7e7));
+                    background-image: -webkit-linear-gradient(top, #f7f7f7, #e7e7e7); 
+                    background-image: -moz-linear-gradient(top, #f7f7f7, #e7e7e7); 
+                    background-image: -ms-linear-gradient(top, #f7f7f7, #e7e7e7); 
+                    background-image: -o-linear-gradient(top, #f7f7f7, #e7e7e7); 
+                    color: #a7a7a7;
+                    width: 32px;
+                    height: 32px;
+                    position: relative;
+                    text-align: center;
+                    line-height: 32px;
+                    border-radius: 50%;
+                    box-shadow: 0px 3px 8px #aaa, inset 0px 2px 3px #fff;
+                    &.active, 
+                    &:active{
+                        background-image: -webkit-gradient(linear, left bottom, left top, from(#f4f4f4, to(#e7e7e7)) );
+                        background-image: -webkit-linear-gradient(bottom, #f4f4f4, #e7e7e7); 
+                        background-image: -moz-linear-gradient(bottom, #f4f4f4, #e7e7e7); 
+                        background-image: -ms-linear-gradient(bottom, #f4f4f4, #e7e7e7); 
+                        background-image: -o-linear-gradient(bottom, #f4f4f4, #e7e7e7); 
+                        box-shadow:unset;
+                    }
+                    &:before{
+                        content: "";
+                        display: block;
+                        border-top: 1px solid #ddd;
+                        border-bottom: 1px solid #fff;
+                        width: 100%;
+                        height: 1px;
+                        position: absolute;
+                        top: 50%;
+                        z-index: -1;
+                    }
+                    &:after{
+                        content: "";
+                        display: block;
+                        background: #fff;
+                        border-top: 2px solid #ddd;
+                        position: absolute;
+                        top: -9px;
+                        left: -9px;
+                        bottom: -9px;
+                        right: -9px;
+                        z-index: -1;
+                        border-radius: 50%;
+                        box-shadow: inset 0px 8px 48px #ddd;
+                        
+                    }
+                }
+            }
+        }
+        &.reversed{
+            flex-direction:row-reverse;
+        }
+    }
+}
+
+@media screen and (max-width:991px){
+    .wp-block-rbt-carousel-slider {
+
+    }
+}

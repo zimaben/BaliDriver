@@ -1,6 +1,6 @@
 <?php
-use <!PLUGINPATH->\<!PLUGINNAME-> as Theme;
-use <!PLUGINPATH->\Config as Config;
+use rbtddb\DDBali as Theme;
+use rbtddb\Config as Config;
    #page header
    if(Config::FEATURES['progressive_header']){
 

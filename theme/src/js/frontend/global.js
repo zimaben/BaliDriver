@@ -89,21 +89,23 @@ export const doDismiss = (event) => {
   export const accordionClick = (event) => {
     //just in case the plus icon is clicked on this event should cover both with bubbling
     let title = event.target.tagName === "H4" ? event.target : event.target.closest("H4");
-    let parent = title.closest(".tpt-accordion");
-    let panel = parent ? parent.querySelector(".tpt-accordion-panel") : false;
+    let parent = title.closest(".rbt-accordion");
+    let panel = parent ? parent.querySelector(".rbt-accordion-panel") : false;
     if(title && panel){
   
       title.classList.toggle("expanded");
       if(panel.style.maxHeight){
         panel.style.maxHeight = null;
+        panel.classList.toggle("expanded");
       } else {
         panel.style.maxHeight = panel.scrollHeight + "px";
+        panel.classList.toggle("expanded");
       }
     }
   }
   
   export const doAccordionClicks = () => {
-    let accordions = document.getElementsByClassName("tpt-accordion");
+    let accordions = document.getElementsByClassName("rbt-accordion");
     if(accordions.length){
       for(let accordion of accordions){
         let title = accordion.querySelector(".accordion");
@@ -116,7 +118,7 @@ export const doDismiss = (event) => {
     // Get the navbar
     let navbar = document.getElementById("site-header");
     // Get the offset position of the navbar
-    let sticky = navbar.offsetTop;
+    let sticky = navbar.clientHeight + 20;
 
     if (window.pageYOffset >= sticky){
       navbar.classList.add("sticky")

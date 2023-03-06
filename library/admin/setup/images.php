@@ -1,10 +1,10 @@
 <?php
-namespace <!PLUGINPATH->\admin\setup;
-use \<!PLUGINPATH->\<!PLUGINNAME-> as Theme;
-use \<!PLUGINPATH->\admin\setup\PostTypes as PostTypes;
-use \<!PLUGINPATH->\admin\setup\Page as Page;
-use \<!PLUGINPATH->\admin\setup\Taxonomy as Taxonomy;
-use \<!PLUGINPATH->\Config as Config;
+namespace rbtddb\admin\setup;
+use \rbtddb\DDBali as Theme;
+use \rbtddb\admin\setup\PostTypes as PostTypes;
+use \rbtddb\admin\setup\Page as Page;
+use \rbtddb\admin\setup\Taxonomy as Taxonomy;
+use \rbtddb\Config as Config;
 
 /**
  * https://gist.github.com/joshuadavidnelson/164a0a0744f0693d5746
@@ -21,7 +21,7 @@ use \<!PLUGINPATH->\Config as Config;
  * $image_id = $create_image->attachment_id;
  * 
  * @package RBT
- * @subpackage <!PLUGINNAME->
+ * @subpackage DDBali
  */
 class MediaImage {
 	

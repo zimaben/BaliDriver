@@ -2,74 +2,56 @@ import theme_icons from './icons.js';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks; 
-const { RichText } = wp.blockEditor; 
+const { InnerBlocks, InspectorControls } = wp.blockEditor; 
+const {PanelBody, TextControl } = wp.components;
+
+const ALLOWED = [ 'rbt/ktaccordion' ];
 
 registerBlockType('rbt/xaccordions', { 
  
-	title: 'Please Create Unique Title', 
-	icon: theme_icons.friendlyrobot,
+	title: 'Accordions List', 
+	icon: theme_icons.kitelytech,
     category: 'friendlyrobot', 
+    
     //attributes
     attributes: {
-        title:{
+        scrollLink: {
             type: 'string',
-            default: ''
-        },
-        text: {
-            type: 'string',
-            default: ''
-        },
-
+            default:null
+        }
     },   
-
 	edit({attributes, setAttributes}){
-		const { title, text } = attributes;
-
-        function onTextChange(newtext){
-        	setAttributes({ text: newtext });
+		const { scrollLink  } = attributes;
+        function onUpdateScrollLink(newtext){
+            setAttributes({scrollLink:newtext});
         }
-        function onTitleChange(newtitle){
-            setAttributes({title:newtitle});
-        }
-        
 
-		return (
-
-            <div className="rbt-xaccordions">
-                <RichText 
-                    tagName="h3"
-                    className="accordion"
-                    value={title}
-                    onChange={onTitleChange}
-                    placeholder={ 'Accordion Title' }
-                />
-                <RichText 
-                    tagName="div"
-                    className="rbt-accordion-panel"
-                    value = {text}
-                    onChange={onPanelChange}
-                    placeholder={ 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'} 
-                />   
+		return ([
+            <InspectorControls>
+                <PanelBody>
+                    <p><strong>Add a Scroll Link?</strong></p>
+                    <p>(No # character please)</p>
+                    <TextControl 
+                        label="Scroll Link"
+                        value={scrollLink}
+                        onChange={onUpdateScrollLink}
+                        placeholder="scroll-here"
+                    />
+                </PanelBody>
+            </InspectorControls>,
+            <div className="rbt-accordionslist"> 
+                <InnerBlocks allowedBlocks={ALLOWED} templateLock={false}  />
             </div>
 
-		);
+        ]);
 	},
 	save({attributes}) {
-		const { title, text } = attributes;
+		const { scrollLink } = attributes;
 
 		return (
-            <div className="rbt-xaccordions">
-                <RichText.Content
-                    tagName="h3"
-                    className="rbt-title"
-                    value={title}
-                />
-                <div className="rbt-xaccordions-text">
-                    <RichText.Content
-                        tagName="p"
-                        value = {text}
-                    />   
-                </div>
+            <div className="rbt-accordionslist">
+                {scrollLink && <a id={scrollLink}></a> }
+                <InnerBlocks.Content  />
             </div>
 		)
 	}

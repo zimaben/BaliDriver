@@ -245,19 +245,21 @@ var doMobileMenuClick = function doMobileMenuClick() {
 var accordionClick = function accordionClick(event) {
   //just in case the plus icon is clicked on this event should cover both with bubbling
   var title = event.target.tagName === "H4" ? event.target : event.target.closest("H4");
-  var parent = title.closest(".tpt-accordion");
-  var panel = parent ? parent.querySelector(".tpt-accordion-panel") : false;
+  var parent = title.closest(".rbt-accordion");
+  var panel = parent ? parent.querySelector(".rbt-accordion-panel") : false;
   if (title && panel) {
     title.classList.toggle("expanded");
     if (panel.style.maxHeight) {
       panel.style.maxHeight = null;
+      panel.classList.toggle("expanded");
     } else {
       panel.style.maxHeight = panel.scrollHeight + "px";
+      panel.classList.toggle("expanded");
     }
   }
 };
 var doAccordionClicks = function doAccordionClicks() {
-  var accordions = document.getElementsByClassName("tpt-accordion");
+  var accordions = document.getElementsByClassName("rbt-accordion");
   if (accordions.length) {
     var _iterator6 = _createForOfIteratorHelper(accordions),
       _step6;
@@ -278,7 +280,7 @@ var stickyNav = function stickyNav() {
   // Get the navbar
   var navbar = document.getElementById("site-header");
   // Get the offset position of the navbar
-  var sticky = navbar.offsetTop;
+  var sticky = navbar.clientHeight + 20;
   if (window.pageYOffset >= sticky) {
     navbar.classList.add("sticky");
   } else {
@@ -428,7 +430,6 @@ var pageHeaderVideo = function pageHeaderVideo() {
     Boolean FALSE or canvas - DOMElement 
 /*/
 var progressiveHeaderCheck = function progressiveHeaderCheck(canvas) {
-  console.log("checking", canvas);
   if (!canvas.tagName || canvas.tagName !== "CANVAS") {
     canvas = canvas.querySelector('canvas');
     if (!canvas) {

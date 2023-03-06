@@ -1,7 +1,7 @@
 <?php
 /* Template Name: Page Template */
-use <!PLUGINPATH->\<!PLUGINNAME-> as Theme;
-use <!PLUGINPATH->\Config as Config;
+use rbtddb\DDBali as Theme;
+use rbtddb\Config as Config;
 global $post;
 
 /* If we have a static header, use it. It saves us dozens of queries. */

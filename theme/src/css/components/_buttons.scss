@@ -8,11 +8,11 @@ button.primary,
     background-color:$primary;
     color: $light;
     cursor:pointer;
-    padding-right:clamp(23.94px, 3.33vw, 47.88px);
-    padding-left:clamp(23.94px, 3.33vw, 47.88px);
-    padding-top:clamp(8.24px, 1.14vw, 16.47px);
-    padding-bottom:clamp(8.24px, 1.14vw, 16.47px);
-    font-size:clamp(16px, 1.25vw, 18px);
+    padding-right:clamp(14px, 1.94vw, 28px);
+    padding-left:clamp(14px, 1.94vw, 28px);
+    padding-top:clamp(6px, .83vw, 12px);
+    padding-bottom:clamp(6px, .83vw, 12px);
+    font-size:16px;
     line-height:clamp(24px, 2.22vw, 32px);
     width:fit-content;
     border-radius:$borderradius;

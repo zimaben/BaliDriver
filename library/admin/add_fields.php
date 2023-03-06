@@ -1,9 +1,9 @@
 <?php
-namespace <!PLUGINPATH->\admin; 
-use \<!PLUGINPATH->\<!PLUGINNAME-> as Theme;
+namespace rbtddb\admin;
+use \rbtddb\DDBali as Theme;
 use \Carbon_Fields\Field as Field;
 use \Carbon_Fields\Container as Container;
-use \<!PLUGINPATH->\Config as Config;
+use \rbtddb\Config as Config;
 
 /* 
  * The Builder is for Shared Resources like Options pages where 
@@ -53,47 +53,16 @@ class AddFields extends Theme {
             ->show_on_post_type(array('page'))
             ->set_context('side')
             ->add_fields( array(
-                Field::make( 'checkbox', 'crb_prefooter', 'Add The PreFooter Form?' )
-                ->set_option_value( 'yes' ),
                 Field::make( 'image', 'crb_mobile_image', 'Mobile Featured Image'), 
-                Field::make( 'file', 'crb_featured_video', 'Featured Video' )
-                    ->set_type( 'video' )
-                    ->set_value_type( 'url' ),
-                Field::make( 'file', 'crb_mobile_featured_video', 'Mobile Featured Video' )
-                    ->set_type( 'video' )
-                    ->set_value_type( 'url' ),
                 Field::make( 'textarea', 'crb_header_text', 'Header Overlay'),
 
                 Field::make( 'text', 'crb_button_text', 'Button Text (Optional)'),
                 Field::make( 'text', 'crb_button_url', 'Button URL'),
-                
+                Field::make( 'text', 'crb_button_price', 'Featured Product Price (in WC Default Currency)'),
                 
             ));
 
         endif;
-
-        Container::make( 'post_meta', 'Reviews' )
-        ->show_on_post_type(array('page','post'))
-        ->add_fields( array(
-            Field::make( 'complex', 'page_review', 'Review Module' )
-            ->add_fields( array(
-                Field::make( 'text', 'reviewer_name', 'Reviewer Name' )
-                ->set_help_text('Full Name - Ex: Dr. Howard MD'),
-                Field::make( 'text', 'reviewer_title', 'Job Title'),
-                Field::make( 'image', 'reviewer_photo', 'Photo' )
-                ->set_value_type( 'url' ),
-                Field::make( 'text', 'review_title', 'Review Title'),
-                Field::make( 'select', 'review_stars', 'Stars' )
-                ->add_options( array(
-                    'one' => '1 Star',
-                    'two' => '2 Star',
-                    'three' => '3 Star',
-                    'four' => '4 Star',
-                    'five' => '5 Star',
-                ) ),
-                Field::make( 'textarea', 'review_body', 'Review'),
-            ))
-        ));
 
         Container::make( 'post_meta', 'Scroll Links' )
         ->show_on_post_type(array('page','post'))
@@ -107,12 +76,7 @@ class AddFields extends Theme {
             ))
         ));
 
-        Container::make( 'post_meta', 'Pre-Footer Contact Form' )
-        ->show_on_post_type(array('page','post', 'locations'))
-        ->add_fields( array(
-            Field::make( 'text', 'prefooter_contactform', 'Pre-Footer Contact Form Shorcode' )
-                ->set_help_text( 'Paste the Shortcode for the Contact Form that you see in the Contact Form tab in the admin' ),
-        ));
+
     }
     public static function add_options_menu_cf(){
 
@@ -220,6 +184,28 @@ class AddFields extends Theme {
             Field::make( 'textarea', 'gmaps_code_snippet', 'MailChimp Code Snippet'),
         ));         
         endif;
+        if( isset(Config::INTEGRATIONS['WhatsApp']) && Config::INTEGRATIONS['WhatsApp'] == true) : 
+   
+            $optionsPage->add_tab( 'WhatsApp', array(
+                Field::make( 'text', 'whatsapp_name', 'Name'),
+                Field::make( 'image', 'whatsapp_logo', 'Widget Logo')
+                ->set_value_type( 'url' ),
+                Field::make( 'text', 'whatsapp_color', 'Branding Color'),
+                Field::make( 'text', 'whatsapp_phone', 'Phone'),
+     
+            ));
+        endif;
+
+        // $optionsPage->add_tab( 'WooCommerce', array(
+
+        //     Field::make('text', 'header_price', 'Featured Product Price')
+        //     ->set_help_text( 'Set Featured Product Price (In WC Default Currency)' ),
+
+        //     Field::make('html', 'run_critical_css')
+        //         ->set_help_text( 'Create inline Critical CSS files' )
+        //         ->set_html( '<div class="buttonwrap"><div class="responsearea"><button type="button" class="adminbutton btn" id="criticalcssbutton">Create Critical CSS</button></div>' ),
+            
+        // ));
 
         $optionsPage->add_tab( 'Utilities', array(
 

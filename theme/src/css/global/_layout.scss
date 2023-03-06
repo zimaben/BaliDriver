@@ -6,9 +6,12 @@ body{
     width:100%;
     position:relative;
     overflow-y:scroll;
+    //new
+    background:$dark;  
     &.mobile-menu-expanded{
         overflow:hidden;
     }
+    
 }
 /* stick footer on the bottom */
 #page{
@@ -23,20 +26,7 @@ ul li,
 ol li{
     padding-bottom:$space * 0.25px;
 }
-footer.site-footer{
-    display:flex;
-    background-color:$primary;
-    padding-left:$edgeclamp;
-    padding-right:$edgeclamp;
-    padding-top:$space * .75px;
-    padding-bottom:$space * 1px;
-    justify-content:space-between;
 
-}
-div.prefooter{
-    padding-left:$edgeclamp;
-    padding-right:$edgeclamp;
-}
 /* utility */
 .centered {
     text-align:center !important;
@@ -44,18 +34,26 @@ div.prefooter{
     justify-self:center;
 }
 /* page layouts */
-#content #main>.page-content {
+#content #main>.page-content,
+#content #main>.home {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
     &>*{
-        margin-left:$edgeclamp;
-        margin-right:$edgeclamp;
+        padding-left:$edgeclamp;
+        padding-right:$edgeclamp;
+        width:100%;
     }
     .alignwide{
-        margin-left:0;
-        margin-right:0;
+        padding-left:0;
+        padding-right:0;
     }
     .alignfull{
-        margin-left:0;
-        margin-right:0;
+        padding-left:0;
+        padding-right:0;
     }
 }
 /* index layouts */
@@ -78,6 +76,7 @@ div.prefooter{
         width:100%;
         position:relative;
         display:flex;
+        justify-content: center;
         gap: $standardgap;
         &.reverse{
             flex-direction:row-reverse;

@@ -6,9 +6,10 @@ const { RichText } = wp.blockEditor;
 
 registerBlockType('rbt/xaccordion', { 
  
-	title: 'Please Create Unique Title', 
+	title: 'Accordion', 
 	icon: theme_icons.friendlyrobot,
     category: 'friendlyrobot', 
+    parent: [ 'rbt/xaccordions' ], 
     //attributes
     attributes: {
         title:{
@@ -25,19 +26,18 @@ registerBlockType('rbt/xaccordion', {
 	edit({attributes, setAttributes}){
 		const { title, text } = attributes;
 
-        function onTextChange(newtext){
+        function onPanelChange(newtext){
         	setAttributes({ text: newtext });
         }
         function onTitleChange(newtitle){
             setAttributes({title:newtitle});
         }
         
-
 		return (
 
-            <div className="rbt-xaccordion">
+            <div className="rbt-accordion">
                 <RichText 
-                    tagName="h3"
+                    tagName="h4"
                     className="accordion"
                     value={title}
                     onChange={onTitleChange}
@@ -58,13 +58,13 @@ registerBlockType('rbt/xaccordion', {
 		const { title, text } = attributes;
 
 		return (
-            <div className="rbt-xaccordion">
+            <div className="rbt-accordion">
                 <RichText.Content
-                    tagName="h3"
-                    className="rbt-title"
+                    tagName="h4"
+                    className="accordion"
                     value={title}
                 />
-                <div className="rbt-xaccordion-text">
+                <div className="rbt-accordion-panel">
                     <RichText.Content
                         tagName="p"
                         value = {text}

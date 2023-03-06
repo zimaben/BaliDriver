@@ -85,7 +85,7 @@ export const pageHeaderVideo = () => {
     Boolean FALSE or canvas - DOMElement 
 /*/
 export const progressiveHeaderCheck = (canvas) =>{
-  console.log("checking", canvas);
+
   if(!canvas.tagName || canvas.tagName !== "CANVAS") {
       canvas = canvas.querySelector('canvas');
       if(!canvas){

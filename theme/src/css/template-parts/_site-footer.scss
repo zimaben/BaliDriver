@@ -1,4 +1,16 @@
 footer.site-footer{
+    display:flex;
+    background-color:$dark-neutral;
+    padding-left:$edgeclamp;
+    padding-right:$edgeclamp;
+    padding-top:$space * .75px;
+    padding-bottom:$space * 1px;
+    justify-content:space-between;
+
+    div.prefooter{
+        padding-left:$edgeclamp;
+        padding-right:$edgeclamp;
+    }
     .custom-logo-link{
         height: 120px;
         position: relative;
@@ -23,7 +35,7 @@ footer.site-footer{
     justify-content: space-between;
     padding-left: 50px;
     padding-right: 50px;
-    background-color:$primary;
+    background-color:#111;
     ul.footerbottom{
         list-style:none;
         display:inline-flex;

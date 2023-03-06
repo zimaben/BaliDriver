@@ -4,12 +4,12 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package <!HUMANREADABLE->
+ * @package Daily Driver Bali
  * @subpackage TPT
  */
 
- use <!PLUGINPATH->\<!PLUGINNAME-> as Theme;
-use <!PLUGINPATH->\Config as Config;
+ use rbtddb\DDBali as Theme;
+use rbtddb\Config as Config;
 
 
 global $post;
@@ -19,7 +19,7 @@ if(Theme::StaticHeaderExists( $post->ID )){
 	Theme::TemplatePart('static/header-' . $post->ID);
 } else {
 	get_header();
-#	Theme::TemplatePart('page-header');
+	Theme::TemplatePart('page-header');
 }
 
 ?>
@@ -37,9 +37,9 @@ if(Theme::StaticHeaderExists( $post->ID )){
 			Theme::TemplatePart('archive');
 		}
 	else : ?>
-		<div class="content-wrap">
+
 			<?php the_content(); ?>
-		</div><!-- .entry-content -->
+			<!-- .entry-content -->
 	<?php 
 	endif; ?>
 	

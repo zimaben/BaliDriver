@@ -1,6 +1,6 @@
 <?php 
-namespace <!PLUGINPATH->\setup;
-use \<!PLUGINPATH->\Config as Config;
+namespace rbtddb\setup;
+use \rbtddb\Config as Config;
 
 class ColorPalette {
     #this is the structure for our default color palette

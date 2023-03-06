@@ -3,7 +3,8 @@ ul.menu-wrapper{
         padding-top:0;
         padding-bottom:0;
         a{
-            color:$accent;
+            font-family:Righteous;
+            color:$primary;
             text-decoration:none;
             white-space: nowrap;
         }
@@ -15,11 +16,18 @@ ul.menu-wrapper{
 #site-header{
     &.sticky{
         /* sticky header */
+        width: 80%;
+        align-self: center;
+        margin-top: 15px;
+        padding: 8px;
+        border-radius: 12px;
         top:0;
         position: fixed;
-        z-index: 2;
+        z-index: 3;
+        border: 1px solid rgba(255,255,255,.1);
+        background-color:black;
         & + * {
-            padding-top: 64px;
+            padding-top: 101px;
           }
     }
     .mobile-menu-container{
@@ -53,6 +61,117 @@ ul.menu-wrapper{
         }
 
     }
+    /* currency picker */
+    .currency-picker{
+        display: flex;
+        justify-content: flex-start;
+        width: 100%;
+        position: relative;
+        cursor:pointer;
+        .currency-label{
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            font-size:11px;
+            text-transform:uppercase;
+            color:$light-half;
+            .innertext{
+
+                &:after{
+                    content: "";
+                    position: relative;
+                    display: inline-flex;
+                    align-self: center;
+                    background-image: url(/theme/assets/icons/arrow-down-grey.svg);
+                    background-size: contain;
+                    width: 12px;
+                    height: 8px;
+                    right:-3px;
+                    color:$light-neutral;
+                    background-repeat: no-repeat;
+                    transition: all 0.2s ease;
+                    background-position: center center;
+                    transform-origin: center;
+                    transform:rotate(-90deg);
+                }
+            }
+        }
+        &.active .currency-label .innertext::after{
+            transform:none;
+        }
+
+        .money{
+            width:18px;
+            height:18px;
+            background-image:url(/theme/assets/icons/money-bill-1-wave-solid.svg);
+            background-repeat:no-repeat;
+            background-position:center center;
+        }
+    }
+    ul.currency-list,
+    .top.menu-container ul.currency-list {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        background-color: #111;
+        margin: 0;
+        top: 55px;
+        padding: 0px;
+        border-radius: 0 0 10px 10px;
+        font-size: 11px;
+        width:fit-content;
+        gap:0;
+        max-height:0px;
+        overflow:hidden;
+        transition: max-height .33s ease;
+        transition: all .33s ease;
+        li {
+            cursor:pointer;
+            display:flex;
+            padding:0;
+            padding: 11px 20px;
+            border-bottom: 1px solid #222;
+            .currency{
+                display: inline-flex;
+                align-items: center;
+                gap: 12px;
+                &:before{
+                    content:'';
+                    display: inline-flex;
+                    width:32px;
+                    height:32px;
+                    border-radius:50%;
+                    background-size:contain;
+                    background-position:center center;
+                    background-repeat:no-repeat;
+                }
+                &.idr::before{
+                    background-image:url(/theme/assets/icons/flags/id-1-1.svg)
+                }
+                &.usd::before{
+                    background-image:url(/theme/assets/icons/flags/us-1-1.svg)
+                }
+                &.eur::before{
+                    background-image:url(/theme/assets/icons/flags/eu-1-1.svg)
+                }
+                &.aud::before{
+                    background-image:url(/theme/assets/icons/flags/au-1-1.svg)
+                }
+                &.ru::before{
+                    background-image:url(/theme/assets/icons/flags/ru-1-1.svg)
+                }
+            }
+            &:last-of-type{
+                border-bottom:none;
+                padding-bottom:20px;
+            }
+            &:first-of-type{
+                padding-top:20px;
+            }
+        }
+    }
+    
+
 }
 ul#footer-one-menu-list,
 ul#footer-two-menu-list, 

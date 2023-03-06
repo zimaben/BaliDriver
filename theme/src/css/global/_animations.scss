@@ -30,12 +30,12 @@ $slideout: slideOut $animationspeed ease;
     100% { opacity: 1; }
 }
 @keyframes fadeOut {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    0% { opacity: 1; }
+    100% { opacity: 0; }
 }
 @-webkit-keyframes fadeOut {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    0% { opacity: 1; }
+    100% { opacity: 0; }
 }
 @keyframes slideIn {
     0% { left: -101vw; }

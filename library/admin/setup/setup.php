@@ -1,10 +1,10 @@
 <?php
-namespace <!PLUGINPATH->\admin;
-use \<!PLUGINPATH->\<!PLUGINNAME-> as Theme;
-use \<!PLUGINPATH->\admin\setup\PostTypes as PostTypes;
-use \<!PLUGINPATH->\admin\setup\Page as Page;
-use \<!PLUGINPATH->\admin\setup\Taxonomy as Taxonomy;
-use \<!PLUGINPATH->\Config as Config;
+namespace rbtddb\admin;
+use \rbtddb\DDBali as Theme;
+use \rbtddb\admin\setup\PostTypes as PostTypes;
+use \rbtddb\admin\setup\Page as Page;
+use \rbtddb\admin\setup\Taxonomy as Taxonomy;
+use \rbtddb\Config as Config;
 
 /**
  * The setup file does two things. Class Setup runs on every page load and 
@@ -20,7 +20,7 @@ use \<!PLUGINPATH->\Config as Config;
  *  new site pages.
  * 
  * @package TPT
- * @subpackage <!PLUGINNAME->
+ * @subpackage DDBali
  */
 class Setup extends Theme {
 
@@ -65,12 +65,11 @@ class Setup extends Theme {
             }
        }
     }
-    public static function set_up_home_page( $archetype = null){
+    public static function set_up_home_page( $archetype = null){ 
         $HomeContentString = '<!-- wp:latest-posts {"postsToShow":3,"displayPostContent":true,"excerptLength":30,"displayPostDate":true,"postLayout":"grid","displayFeaturedImage":true,"featuredImageSizeSlug":"large","align":"wide","className":"tw-mt-8 tw-img-ratio-3-2 tw-stretched-link is-style-default"} /-->';
         $HomePageContent = \do_blocks($HomeContentString);
-        if($HomePageContent) echo $HomePageContent;
         #add the new page if it doesn't already exist
-        $HomePage = new Page( array('title'=>'Home', 'type'=>'page', 'content'=>$HomePageContent ));
+        $HomePage = new Page( 'home', array('title'=>'Home', 'type'=>'page', 'content'=>$HomePageContent ));
         #set the new page to home page;
         $HomePage->setToHomePage();
         #return the home page ID or false;

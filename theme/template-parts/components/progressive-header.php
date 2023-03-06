@@ -1,6 +1,6 @@
 <?php
-namespace rbt;
-use \<!PLUGINPATH->\template\View as View;
+namespace rbtddb;
+use \rbtddb\template\View as View;
 
 class ProgressiveHeader {
     public function __construct( $post, $w, $h, int $minHeight){

@@ -1,6 +1,6 @@
 <?php
-use <!PLUGINPATH->\<!PLUGINNAME-> as Theme;
-use <!PLUGINPATH->\Config as Config;
+use rbtddb\DDBali as Theme;
+use rbtddb\Config as Config;
 global $post;
 
 #BG-PAGE-FULL is the full size of the hero image in the designs, #FULL is the full size of the image in the media library

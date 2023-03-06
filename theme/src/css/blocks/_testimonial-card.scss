@@ -1,0 +1,44 @@
+.rbt-testimonial-card {
+    width: 320px;
+    padding: 80px 40px 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: content-box;
+    border-radius: 10px;
+    border: 12px solid white;
+    box-shadow: inset 0 0 10px rgba(0,0,0,.86);
+    background-color: #76fd77;
+    background-repeat: repeat;
+    background-size: 244px;
+    background-image: url(/theme/assets/icons/bananas-01.svg);
+    .rbt-avatar-wrap{
+        width: 135px;
+        height: 135px;
+        border-radius: 50%;
+        border: 4px solid white;
+        box-shadow: 6px 6px 8px rgb(0,0,0,.16);
+        overflow: hidden;
+        position: absolute;
+        top: -67.5px;
+        left: calc(50% - 67.5px);
+        display: flex;
+        padding: 0;
+        align-self: center;
+        img{
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .rbt-testimonial-text{
+        color:black;
+    }
+}
+
+@media screen and (max-width:991px){
+    .rbt-testimonial-card {
+
+    }
+}

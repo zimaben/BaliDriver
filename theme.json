@@ -20,7 +20,7 @@
                 {
                     "name": "Dark Neutral",
                     "slug": "dark-neutral",
-                    "color": "#7b8fb7"
+                    "color": "#242e42"
                 },
                 {
                     "name": "Dark Half",
@@ -45,7 +45,7 @@
                 {
                     "name": "Primary",
                     "slug": "primary",
-                    "color": "#242e42"
+                    "color": "#16db93"
                 },
                 {
                     "name": "Accent",
@@ -60,7 +60,7 @@
                 {
                     "name": "Dark",
                     "slug": "dark",
-                    "color": "#242e42"
+                    "color": "#000011"
                 }
             ]
         },

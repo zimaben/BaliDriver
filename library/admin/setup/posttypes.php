@@ -1,6 +1,6 @@
 <?php
-namespace <!PLUGINPATH->\admin\setup;
-use \<!PLUGINPATH->\Config as Config;
+namespace rbtddb\admin\setup;
+use \rbtddb\Config as Config;
 
 /**
  * Class PostTypes accepts $plural, (optional) $singular, (optional) $args.
@@ -12,7 +12,7 @@ use \<!PLUGINPATH->\Config as Config;
  *
  *
  * @package TPT
- * @subpackage <!PLUGINNAME->
+ * @subpackage DDBali
  */
 class PostType {
     public static function add_posttype( $plural, $singular, $args = null ){

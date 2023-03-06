@@ -1,0 +1,36 @@
+.wp-block-rbt-testimonials {
+    background-image: linear-gradient(to top, black, transparent);
+    padding-top:clamp(30px, 0.5em, 60px);
+    padding-bottom:clamp(40px, 5.55vw, 80px);
+    .layout{
+        width: 100%;
+        display: flex;
+        flex-wrap:wrap;
+        .top{
+            width:100%;
+            padding-bottom:80px;
+        }
+        .bottom{
+            width:100%;
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+
+        }
+    }
+}
+
+@media screen and (max-width:991px){
+    .wp-block-rbt-testimonials {
+        .layout{
+            width: 100%;
+            display: flex;
+            .leftcol{
+                width:100%;
+            }
+            .rightcol{
+                width:00%;
+            }
+        }
+    }
+}
