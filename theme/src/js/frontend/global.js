@@ -144,3 +144,78 @@ export const doDismiss = (event) => {
         return e;
     } 
   }
+/* SCROLL */
+
+/* Throttle & Debounce */
+export const scrollThrottle = (callback, time) => {
+  var throttleTimer;
+  const throttle = (callback, time) => {
+      if (throttleTimer) return;
+    
+      throttleTimer = true;
+  
+      setTimeout(() => {
+      callback();
+          throttleTimer = false;
+      }, time);
+  }
+  window.addEventListener("scroll", () => { 
+      throttle(() => { callback() }, time);
+  });
+}
+/* Scroll Trigger Functions */
+
+function getCoords(elem) { // crossbrowser version
+  //https://stackoverflow.com/questions/5598743/finding-elements-position-relative-to-the-document
+  var box = elem.getBoundingClientRect();
+
+  var body = document.body;
+  var docEl = document.documentElement;
+
+  var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+  var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+
+  var clientTop = docEl.clientTop || body.clientTop || 0;
+  var clientLeft = docEl.clientLeft || body.clientLeft || 0;
+
+  var top  = box.top +  scrollTop - clientTop;
+  var left = box.left + scrollLeft - clientLeft;
+
+  return { top: Math.round(top), left: Math.round(left), height: elem.clientHeight };
+}
+
+
+/*
+takes element and function as arguments. If no function is included it will add an "active" class
+*/
+export const addObserver = (el, options = {} ) => {
+  //https://css-tricks.com/scroll-triggered-animation-vanilla-javascript/
+  // Check if `IntersectionObserver` is supported
+  if(!('IntersectionObserver' in window)) {
+      // Simple fallback
+      // The animation/callback will be called immediately so
+      // the scroll animation doesn't happen on unsupported browsers
+      if(options.cb){
+      options.cb(el)
+      } else{
+      entry.target.classList.add('active')
+      }
+      // We don't need to execute the rest of the code
+      return
+  }
+  let observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+
+          if(entry.isIntersecting) {
+
+              if(options.cb) {
+                  options.cb(el)
+              } else {
+                  entry.target.classList.add('active')
+              }
+              observer.unobserve(entry.target)
+          }
+      })
+  }, options)
+  observer.observe(el)
+}

@@ -207,10 +207,14 @@ export const loadImages = (array, canvas, blurlevel) => new Promise((resolve, re
 
 })
 export const loadImage = ( url ) => new Promise((resolve, reject) => {
-  const img = new Image();
-  img.addEventListener('load', () => resolve(img));
-  img.addEventListener('error', (err) => reject(err));
-  img.src = url;
+  if(!url) { reject("missing progressive header image");
+  } else {
+    const img = new Image();
+    img.addEventListener('load', () => resolve(img));
+    img.addEventListener('error', (err) => reject(err));
+    img.src = url;
+  }
+
 
 });
 

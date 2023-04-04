@@ -143,7 +143,7 @@ if ( ! class_exists( '\rbtddb\customizer\Theme_Customizer' ) ) {
 										case "login" : 
 										break;
 										case "phone" :
-											error_log("HIT FOR PHONE: " . $setting);
+											
 											$wp_customize->add_setting( 'header_telephone', array(
 												'default'           => '',
 												'sanitize_callback' => 'wp_filter_nohtml_kses',

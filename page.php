@@ -1,5 +1,8 @@
 <?php
-/* Template Name: Page Template */
+/**
+ * Template Name: Page Template
+*/
+
 use rbtddb\DDBali as Theme;
 use rbtddb\Config as Config;
 global $post;

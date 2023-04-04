@@ -125,6 +125,7 @@ ul.menu-wrapper{
         overflow:hidden;
         transition: max-height .33s ease;
         transition: all .33s ease;
+        z-index: 1;
         li {
             cursor:pointer;
             display:flex;

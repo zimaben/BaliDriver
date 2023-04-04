@@ -1,2 +1,2 @@
-const list = ["simple-cta","left-right","xaccordions","carousel-slide","carousel-slidert","testimonial-card","testimonials","xaccordion","carousel-slider"] 
+const list = ["featured-trips","scrollreveal-header","card-section","card-section-card","simple-cta","left-right","xaccordion","xaccordions","carousel-slide","carousel-slider","testimonial-card","testimonials"] 
 exports.list = list

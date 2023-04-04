@@ -79,7 +79,8 @@
                 max-width: 80%;
                 z-index: 3;
                 font-size: 61px;
-                font-family: 'Acme';
+              //  font-family: 'Acme';
+                font-family: "Luckiest Guy", Luckiest Guy, sans-serif;
                 color: black;
             }
             .header {
@@ -112,7 +113,8 @@
                 -webkit-background-clip: text;
             }
             .price-pop{
-                font-family: Acme, 'Acme';
+               // font-family: Acme, 'Acme';
+                font-family: "Luckiest Guy", Luckiest Guy, sans-serif;
                 font-size: clamp(45px, 4.69vw, 90px);
                 color: $primary;
                 white-space: nowrap;

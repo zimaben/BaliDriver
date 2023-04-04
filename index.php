@@ -1,4 +1,7 @@
 <?php
+/** 
+ *  Template Name: Index Template 
+*/
 use rbtddb\DDBali as Theme;
 use \rbtddb\Config as Config;
 /**

@@ -3,11 +3,12 @@ namespace rbtddb;
 use \rbtddb\template\View as View;
 
 class ProgressiveHeader {
-    public function __construct( $post, $w, $h, int $minHeight){
+    public function __construct( $post, $w, $h, int $minHeight, $filters){
         $this->post = $post;
         $this->w = $w;
         $this->h = $h;
         $this->min_height = $minHeight;
+        $this->filters = $filters;
         $this->featured_img_id = \get_post_thumbnail_id( $post->ID );
         $this->mobile_img_id = \carbon_get_post_meta($post->ID, 'crb_mobile_image');
         $this->full = $this->featured_img_id ? \wp_get_attachment_image_src( $this->featured_img_id, 'full', false )[0] : false;
@@ -20,7 +21,7 @@ class ProgressiveHeader {
         // $this->mobile_video = \carbon_get_post_meta($post->ID, 'crb_mobile_featured_video');
 ;
         $this->html = $this->getHTML();
-        error_log(print_r($this, true));
+        #error_log(print_r($this, true));
     }
     private function getHTML(){
         $view = new View('progressive-header-view.php', $this);

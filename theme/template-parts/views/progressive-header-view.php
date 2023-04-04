@@ -1,9 +1,10 @@
-<div class="aspectRatioPlaceholder <?php echo \is_front_page($this->post->ID) ? 'home' : $this->post->post_type; ?> is-locked hero-holder" alt="<?php the_title() ?> banner" data-process="doProgressiveHeader">
-    <!-- <div class="aspect-ratio-fill" data-aspect-width="<?php echo $this->w ?>" data-aspect-height="<?php echo $this->h ?>">
-        </div> -->
+<div class="aspectRatioPlaceholder <?php echo \is_front_page($this->post->ID) ? 'home' : $this->post->post_type; ?> is-locked hero-holder texture" alt="<?php the_title() ?> banner" data-process="doProgressiveHeader">
+    <?php $filtertext = '';
+    if(is_array($this->filters)) {foreach($this->filters as $f) $filtertext.= $f;} else {$filtertext.= $this->filters;} ?>
+    <span class="filters <?php echo $filtertext ?>"></span>
         <canvas id="placeholder-<?php echo $this->featured_img_id ?>"  
-            data-img-sm-mobile="<?php  echo $this->sm_mobile ?>" 
-            data-img-lg-mobile="<?php  echo $this->lg_mobile ?>" 
+            data-img-sm-mobile="<?php echo $this->sm_mobile ?>" 
+            data-img-lg-mobile="<?php echo $this->lg_mobile ?>" 
             data-img-sm-desktop="<?php echo $this->sm_landscape ?>"
             data-img-md-desktop="<?php echo $this->md_landscape ?>"
             data-img-lg-desktop="<?php echo $this->lg_landscape ?>"

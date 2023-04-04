@@ -1,5 +1,6 @@
 form.conditional-form,
-.rbt-form {
+.rbt-form, 
+form.woocommerce-checkout {
     padding: 22px;
     border: 1px solid $dark-half;
     border-radius: $borderradius;
@@ -138,9 +139,26 @@ form.conditional-form,
         outline: none;
         border: 1px solid $dark-half;
         border-radius: calc($borderradius / 2);
-        padding: 4px;
+        padding: 4px 14px;
         width: 100%;
         font-size: 13px;
+        color: $dark-half;
+        &:-webkit-input-placeholder,
+        &:-ms-input-placeholder,
+        &:placeholder{
+            color:$light-half;
+        }
+
+    }
+    textarea{
+        width: 100%;
+        aspect-ratio: 4/1;
+        background-color: transparent;
+        border: 1px solid $dark-half;
+        border-radius: calc($borderradius / 2);
+        color:$dark-half;
+        font-size: 13px;
+
     }
 }
 /* animations */
@@ -183,5 +201,168 @@ form.conditional-form,
     .flatpickr-day.endRange.inRange, 
     .flatpickr-day.selected:focus, .flatpickr-day.startRange:focus, .flatpickr-day.endRange:focus, .flatpickr-day.selected:hover, .flatpickr-day.startRange:hover, .flatpickr-day.endRange:hover, .flatpickr-day.selected.prevMonthDay, .flatpickr-day.startRange.prevMonthDay, .flatpickr-day.endRange.prevMonthDay, .flatpickr-day.selected.nextMonthDay, .flatpickr-day.startRange.nextMonthDay, .flatpickr-day.endRange.nextMonthDay{
         background:$primary;
+    }
+}
+
+/* WooCommerce */
+.woocommerce{
+    margin-top:80px;
+}
+form.woocommerce-checkout {
+    width:100%;
+    .col2-set{
+        width:100%;
+        display:flex;
+        flex-direction:row;
+        flex-wrap:wrap;
+        gap:28px;
+        .col-1{
+            width:calc(50% - 14px);
+        }
+        .col-2{
+            width:calc(50% - 14px);
+        }
+    }
+}
+.woocommerce-billing-fields__field-wrapper,
+.woocommerce-additional-fields__field-wrapper,
+.woocommerce-checkout-review-order {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: $dark;
+    margin: 40px 0;
+    padding: 20px;
+    border: 1px solid rgba(4, 110, 196, .2);
+    border-radius: 10px;
+    gap:14px;
+    input{
+        min-height: 30px;
+    }
+    .form-row{
+        margin:0;
+        width:calc(50% - 7px);
+    }
+    #billing_address_1_field,
+    #billing_address_2_field, 
+    #order_comments_field{
+        width:100%;
+    }
+
+    #billing_last_name_field{
+        width:calc(50% - 7px);
+    }
+    #billing_country_field{
+        width:calc(50% - 7px);
+    }
+}
+@media screen and (min-width:991px){
+    //fix two column width here for fields 
+}
+/* Your Order */
+.woocommerce-checkout-review-order-table{
+    width:calc(50% - 20px);
+    height: fit-content;
+    font-size: 13px;
+    tr, td {
+        text-align:left;
+        padding: 4px;
+        border-top: 1px solid $dark-half;
+    }
+    th,
+    th td {
+        border:none;
+        font-weight:600;
+        text-align:center;
+        color:$primary;
+    }
+    tfoot > tr > th {
+        text-align:right;
+        padding-right:2vw;
+    }
+}
+div.blockOverlay {
+    background-color: transparent !important;
+  }
+.woocommerce-checkout-payment,
+#payment{
+    width:calc(50% - 20px);
+    background:transparent !important;
+    background-image:transparent !important;
+    background-color:transparent !important;
+    font-size: 13px;
+    padding:20px;
+    .wc_payment_methods{
+        list-style:none;
+        padding-left: 0;
+        li{
+            cursor:pointer;
+        }
+    }
+}
+@media screen and (min-width:991px){
+    //fix two column width here
+}
+/* Select2 BS */
+.select2-dropdown {
+    background-color:#111 !important;
+    font-size:12px;
+    border:1px solid $dark-half;
+    color:$dark-half;
+    font-size: 13px;
+}
+.select2-container .select2-selection--single{
+    height:34px;
+}
+@media screen and (min-width:991px){
+    //@BENNY Do Select2 responsive height here
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected], .select2-container--default .select2-results__option--highlighted[data-selected]{
+    background-color:#222;
+    color:$light-half;
+}
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 1px solid #222;
+    background-color: rgba(255,255,255,.01);
+}
+.select2-container--default .select2-results__option[aria-selected=true], .select2-container--default .select2-results__option[data-selected=true]{
+    background-color: rgba(255,255,255,.05);
+}
+.select2-container--default .select2-selection--single{
+    border: 1px solid $dark-half;
+}
+.select2-container--default .select2-results__option[aria-selected=true], .select2-container--default .select2-results__option[data-selected=true] {
+    background-color: rgba(255,255,255, 0.1);
+}
+.select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple, .select2-container--default.select2-container--open.select2-container--below .select2-selection--single{
+    background-color:transparent !important;
+}
+.select2-container--default .select2-selection--single {
+    background-color: transparent;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+    //color:$light-half;
+    color:$dark-half;
+    font-size: 13px;
+    line-height: 34px;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow{
+    height:32px;
+}
+/* CHECKOUT */
+.wc_payment_method.payment_method_ppcp-gateway{
+    background-image:url(/theme/assets/logos/PayPal_logo.svg);
+    background-repeat:no-repeat;
+    background-size:130px;
+    label{
+        visibility:hidden;
+    }
+}
+.wc_payment_method.payment_method_cod{
+    background-image:url(/theme/assets/logos/cod-graphic.png);
+    background-repeat:no-repeat;
+    background-size:130px;
+    label{
+        visibility:hidden;
     }
 }

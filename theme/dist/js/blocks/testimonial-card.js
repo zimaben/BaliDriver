@@ -358,7 +358,8 @@ registerBlockType('rbt/testimonial-card', {
         }, trip);
         return /*#__PURE__*/React.createElement("a", {
           href: base_url + "/trips/" + tripurl,
-          target: "_blank"
+          target: "_blank",
+          rel: "noopener"
         }, trip);
       }
       return trip ? /*#__PURE__*/React.createElement("span", {

@@ -30,8 +30,7 @@ class Blocks {
         \add_filter( 'image_size_names_choose', array($this, 'custom_image_sizes' ));
 
         #REGISTER BLOCKS HERE
-        
-          #  $this->registerBlock('my-dope-block', array('wp-dependencies'), 'optional_callback_function' );
+
             $this->registerBlock('simple-cta', array('wp-editor', 'wp-components', 'wp-blocks','wp-i18n'));
             $this->registerBlock('left-right', array('wp-i18n', 'wp-blocks', 'wp-editor', 'wp-components' ));
             $this->registerBlock('xaccordion', array('wp-i18n', 'wp-blocks', 'wp-editor', 'wp-components' ));
@@ -42,6 +41,10 @@ class Blocks {
             $this->registerBlock('carousel-slider', array('wp-i18n', 'wp-blocks', 'wp-editor', 'wp-components' ));
             $this->registerBlock('testimonial-card', array('wp-i18n', 'wp-blocks', 'wp-editor', 'wp-components' ));
             $this->registerBlock('testimonials', array('wp-i18n', 'wp-blocks', 'wp-editor', 'wp-components' ));
+            $this->registerBlock('featured-trips', array('wp-i18n', 'wp-blocks', 'wp-editor', 'wp-components' ));
+            $this->registerBlock( 'scrollreveal-header', array('wp-i18n', 'wp-blocks', 'wp-components'));
+            $this->registerBlock( 'card-section', array('wp-i18n', 'wp-blocks', 'wp-editor', 'wp-components'));
+            $this->registerBlock( 'card-section-card', array('wp-i18n', 'wp-blocks', 'wp-editor', 'wp-components')); 
     }
 
     public static function register_theme_blocktype( $categories ){
@@ -62,11 +65,14 @@ class Blocks {
     public function registerBlock( $handle, $dependencies = array('wp-blocks', 'wp-editor', 'wp-i18n'), $callback = null ){
         #if you don't register through wp_enqueue_scripts hook you get a warning but it doesn't work 
         #this double-enqueue bypasses the warning but will probably be fixed in the future
+        $v =Config::MODE == "development" ? (string) bin2hex(random_bytes(2)) : Config::VERSION;
+
         \add_action('enqueue_block_assets', function() use ($handle, $dependencies){
             \wp_register_script(
                 $handle, 
                 \get_template_directory_uri() . '/theme/dist/js/blocks/' . $handle . '.js', 
-                $dependencies
+                $dependencies,
+                $v,
             );
             
         });

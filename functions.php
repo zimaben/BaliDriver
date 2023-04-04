@@ -60,6 +60,9 @@ if( !class_exists( '\rbtddb\DDBali')) {
                 if($bsmenu) require_once( \get_template_directory() . '/library/admin/setup/bootstrap_navwalker.php');
             }
 
+            /* WooCommerce */
+            \add_filter( 'woocommerce_checkout_redirect_empty_cart', '__return_false' );
+            \add_filter( 'woocommerce_return_to_shop_redirect', array($this, 'wc_empty_cart_redirect_url' ));
             #custom theme actions
             \add_action( 'wp_head', array($this, 'theme_wp_head'));
             \add_action( 'wp_footer', array($this, 'theme_wp_footer'));
@@ -144,7 +147,10 @@ if( !class_exists( '\rbtddb\DDBali')) {
             
             
         } /* END THEME INSTANTIATE */
-
+        public static function wc_empty_cart_redirect_url(){
+            $empty_message = 'Your cart is empty.';
+            return get_site_url(). '?err_message=' . urlencode($empty_message);
+        }
 
         /* THEME STATIC METHODS - MOST OF THESE ARE JUST SYNTAX SUGAR FOR INCLUDING FROM DIFFERENT
         FOLDERS  */
@@ -228,6 +234,8 @@ if( !class_exists( '\rbtddb\DDBali')) {
         public static function theme_admin_enqueue(){
             $v = bin2hex(random_bytes(2)); #never cache any javascript in admin view
             \wp_enqueue_script( 'theme-admin-js', \get_template_directory_uri() . '/theme/dist/js/admin.js', array(), $v, false);
+            \wp_enqueue_style( 'flatpickr', 'https://npmcdn.com/flatpickr/dist/themes/dark.css', array(), $v, 'all');
+            \wp_enqueue_style( 'theme-admin-css', \get_template_directory_uri() . '/theme/dist/admin_css.css', array('flatpickr'), $v, 'all');
         }   
 
         public static function theme_route_templates( $template ){
@@ -291,6 +299,9 @@ if( !class_exists( '\rbtddb\DDBali')) {
 
         
         public static function svg_support($filetypes){
+            if( !current_user_can('administrator')){
+                return $filetypes;
+            }
             return array_merge($filetypes, [
                 'svg' => 'image/svg+xml'
                 ] );

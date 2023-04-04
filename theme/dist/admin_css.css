@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css2?family=Acme&family=Righteous&family=Merriweather&display=swap&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Righteous&family=Merriweather&display=swap&display=swap);
 /* UTILITY */ /*<! START COLORS !>*/
 /*<! END COLORS !>*/
 /*<! START TYPOGRAPHY !>*/
@@ -120,38 +120,154 @@ body {
 /* Please put custom global variables beneath this comment. 
    Styles above this line may be overwritten */
 /* CUSTOM */
-.simple-cta-wrap {
-  padding-left: clamp(33px, 13.23vw, 200px);
-  padding-right: clamp(33px, 13.23vw, 200px);
+.rbt-featured-trips {
+  width: 100%;
+  height: auto;
+  position: relative;
+  padding-top: 80px;
+  padding-bottom: 60px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+.rbt-featured-trips .underlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: block;
+  z-index: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.rbt-featured-trips .filters {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: block;
+  z-index: 1;
+}
+.rbt-featured-trips .layout {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  position: relative;
+  z-index: 1;
 }
-.simple-cta-wrap h2 {
-  text-align: center;
-  margin-top: 0;
-  margin-bottom: 7px;
+.rbt-featured-trips .layout.reversed {
+  flex-direction: row-reverse;
 }
-.simple-cta-wrap p {
-  font-family: inherit;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 24.51px;
-  max-width: 45.83vw;
-  margin-top: 0;
-  text-align: center;
-  color: #202227;
+.rbt-featured-trips .layout .leftcol {
+  width: calc(60% - 15px);
+}
+.rbt-featured-trips .layout .leftcol .featured-trips {
+  width: 100%;
+  margin: 20px auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 5%;
+}
+.rbt-featured-trips .layout .leftcol .featured-trips .trip-card {
+  background-image: linear-gradient(-46deg, #222, rgba(255, 255, 255, 0.1) 20%, transparent 40%);
+  width: calc(50% - 10px);
+  padding: 0;
+  border: 1px solid #222;
+  border-radius: 15px;
+  box-shadow: 4px 2px 6px black;
+  overflow: hidden;
+}
+.rbt-featured-trips .layout .leftcol .featured-trips .trip-card .trip-img {
+  width: 100%;
+  aspect-ratio: 2/1;
+}
+.rbt-featured-trips .layout .leftcol .featured-trips .trip-card .trip-img .trip-img-tag {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+.rbt-featured-trips .layout .leftcol .featured-trips .trip-card .trip-details {
+  padding: 5%;
+  margin-bottom: 40px;
+}
+.rbt-featured-trips .layout .leftcol .featured-trips .trip-card .trip-details.rbt-cta {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+.rbt-featured-trips .layout .rightcol {
+  width: calc(40% - 15px);
+  padding: 30px;
+}
+.rbt-featured-trips .layout .components-button.rbt-editor-remove {
+  display: flex;
+  background-color: white;
+  margin: 3%;
+  border-radius: 500px;
 }
 
-@media screen and (max-width: 991px) {
-  .simple-cta-wrap {
-    padding-left: 33px;
-    padding-right: 33px;
-  }
-  .simple-cta-wrap p {
-    max-width: unset;
-  }
+.rbt-scrollreveal-header h1, .rbt-scrollreveal-header h2, .rbt-scrollreveal-header h3, .rbt-scrollreveal-header h4, .rbt-scrollreveal-header h5, .rbt-scrollreveal-header h6 {
+  font-family: Luckiest Guy, "Luckiest Guy", sans-serif;
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
+.rbt-scrollreveal-header h1.stroked, .rbt-scrollreveal-header h2.stroked, .rbt-scrollreveal-header h3.stroked, .rbt-scrollreveal-header h4.stroked, .rbt-scrollreveal-header h5.stroked, .rbt-scrollreveal-header h6.stroked {
+  -webkit-text-stroke-width: 0.1px;
+  -webkit-text-stroke-color: #ff6700;
+}
+.rbt-scrollreveal-header h1 .scrollRevealChar, .rbt-scrollreveal-header h2 .scrollRevealChar, .rbt-scrollreveal-header h3 .scrollRevealChar, .rbt-scrollreveal-header h4 .scrollRevealChar, .rbt-scrollreveal-header h5 .scrollRevealChar, .rbt-scrollreveal-header h6 .scrollRevealChar {
+  display: inline-block;
+  min-width: 2vw;
+}
+.rbt-scrollreveal-header h1 {
+  font-size: 15vw;
+  line-height: 16vw;
+}
+.rbt-scrollreveal-header h2 {
+  font-size: 12vw;
+  line-height: 13vw;
+}
+.rbt-scrollreveal-header h3 {
+  font-size: 9vw;
+  line-height: 10vw;
+}
+.rbt-scrollreveal-header h4 {
+  font-size: 7.5vw;
+  line-height: 8vw;
+}
+.rbt-scrollreveal-header h5 {
+  font-size: 5vw;
+  line-height: 6vw;
+}
+.rbt-scrollreveal-header h6 {
+  font-size: 3vw;
+  line-height: 4vw;
+}
+
+.rbt-card-section .rbt-cardwrap {
+  display: flex;
+  gap: 3vw;
+}
+
+.rbt-card-section-card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Block editor globals */
+.block-editor-block-breadcrumb li {
+  padding-bottom: 0;
+}
+
+.editor-styles-wrapper {
+  padding: 20px !important;
+}
+
+.block-editor-block-types-list__item-title {
+  white-space: normal;
+}
+
 .editor-styles-wrapper {
   padding: 3%;
 }

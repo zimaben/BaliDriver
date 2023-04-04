@@ -1,5 +1,5 @@
-@import url(https://fonts.googleapis.com/css2?family=Acme&family=Righteous&family=Merriweather&display=swap&display=swap);
-@import url(https://fonts.googleapis.com/css2?family=Acme&family=Righteous&family=Merriweather&display=swap&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Righteous&family=Merriweather&display=swap&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Righteous&family=Merriweather&display=swap&display=swap);
 @charset "UTF-8";
 /* UTILITY */ /*<! START COLORS !>*/
 /*<! END COLORS !>*/
@@ -608,25 +608,29 @@ button.accent-color {
 }
 
 form.conditional-form,
-.rbt-form {
+.rbt-form,
+form.woocommerce-checkout {
   padding: 22px;
   border: 1px solid #2d2f34;
   border-radius: 8px;
   background-color: #242529;
 }
 form.conditional-form label,
-.rbt-form label {
+.rbt-form label,
+form.woocommerce-checkout label {
   color: #54555a;
   font-size: 14px;
   display: block;
 }
 form.conditional-form h4,
-.rbt-form h4 {
+.rbt-form h4,
+form.woocommerce-checkout h4 {
   font-size: clamp(12px, 1.11vw, 16px);
   letter-spacing: 0.1rem;
 }
 form.conditional-form .switchgroup,
-.rbt-form .switchgroup {
+.rbt-form .switchgroup,
+form.woocommerce-checkout .switchgroup {
   display: flex;
   justify-content: flex-start;
   gap: 2vw;
@@ -634,27 +638,32 @@ form.conditional-form .switchgroup,
   align-items: center;
 }
 form.conditional-form .switchgroup label.active,
-.rbt-form .switchgroup label.active {
+.rbt-form .switchgroup label.active,
+form.woocommerce-checkout .switchgroup label.active {
   color: #ff6700;
 }
 form.conditional-form .switchgroup.icons,
-.rbt-form .switchgroup.icons {
+.rbt-form .switchgroup.icons,
+form.woocommerce-checkout .switchgroup.icons {
   justify-content: center;
   margin-top: 2.5vw;
 }
 form.conditional-form .switchgroup.icons .icon-group,
-.rbt-form .switchgroup.icons .icon-group {
+.rbt-form .switchgroup.icons .icon-group,
+form.woocommerce-checkout .switchgroup.icons .icon-group {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 form.conditional-form .switchgroup.icons .iconswitch-text,
-.rbt-form .switchgroup.icons .iconswitch-text {
+.rbt-form .switchgroup.icons .iconswitch-text,
+form.woocommerce-checkout .switchgroup.icons .iconswitch-text {
   font-size: 14px;
   line-height: 28px;
 }
 form.conditional-form .switchgroup.icons .iconswitch,
-.rbt-form .switchgroup.icons .iconswitch {
+.rbt-form .switchgroup.icons .iconswitch,
+form.woocommerce-checkout .switchgroup.icons .iconswitch {
   width: 60px;
   height: 60px;
   border: 2px solid #ff6700;
@@ -664,51 +673,61 @@ form.conditional-form .switchgroup.icons .iconswitch,
   transition: all 0.3s ease;
 }
 form.conditional-form .switchgroup.icons .iconswitch.active,
-.rbt-form .switchgroup.icons .iconswitch.active {
+.rbt-form .switchgroup.icons .iconswitch.active,
+form.woocommerce-checkout .switchgroup.icons .iconswitch.active {
   background-color: #ff6700;
 }
 form.conditional-form .switchgroup.icons .iconswitch.airplane,
-.rbt-form .switchgroup.icons .iconswitch.airplane {
+.rbt-form .switchgroup.icons .iconswitch.airplane,
+form.woocommerce-checkout .switchgroup.icons .iconswitch.airplane {
   background-image: url(../../theme/assets/icons/airplane.svg);
   background-size: 75%;
 }
 form.conditional-form .switchgroup.icons .iconswitch.airplane:hover,
-.rbt-form .switchgroup.icons .iconswitch.airplane:hover {
+.rbt-form .switchgroup.icons .iconswitch.airplane:hover,
+form.woocommerce-checkout .switchgroup.icons .iconswitch.airplane:hover {
   animation: flyaround 0.5s ease-in-out forwards;
 }
 form.conditional-form .switchgroup.icons .iconswitch.car,
-.rbt-form .switchgroup.icons .iconswitch.car {
+.rbt-form .switchgroup.icons .iconswitch.car,
+form.woocommerce-checkout .switchgroup.icons .iconswitch.car {
   background-image: url(../../theme/assets/icons/car.svg);
   background-size: 85%;
 }
 form.conditional-form .switchgroup.icons .iconswitch.car:hover,
-.rbt-form .switchgroup.icons .iconswitch.car:hover {
+.rbt-form .switchgroup.icons .iconswitch.car:hover,
+form.woocommerce-checkout .switchgroup.icons .iconswitch.car:hover {
   animation: ridearound 0.5s ease-in-out forwards;
 }
 form.conditional-form .switchgroup.icons .iconswitch:hover,
-.rbt-form .switchgroup.icons .iconswitch:hover {
+.rbt-form .switchgroup.icons .iconswitch:hover,
+form.woocommerce-checkout .switchgroup.icons .iconswitch:hover {
   cursor: pointer;
 }
 form.conditional-form .switch,
-.rbt-form .switch {
+.rbt-form .switch,
+form.woocommerce-checkout .switch {
   position: relative;
   display: inline-block;
   width: 60px;
   height: 34px;
 }
 form.conditional-form .switch.hidden,
-.rbt-form .switch.hidden {
+.rbt-form .switch.hidden,
+form.woocommerce-checkout .switch.hidden {
   visibility: hidden;
   width: 1px;
 }
 form.conditional-form .switch input,
-.rbt-form .switch input {
+.rbt-form .switch input,
+form.woocommerce-checkout .switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 form.conditional-form .switch .slider,
-.rbt-form .switch .slider {
+.rbt-form .switch .slider,
+form.woocommerce-checkout .switch .slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -721,7 +740,8 @@ form.conditional-form .switch .slider,
   transition: 0.4s;
 }
 form.conditional-form .switch .slider:before,
-.rbt-form .switch .slider:before {
+.rbt-form .switch .slider:before,
+form.woocommerce-checkout .switch .slider:before {
   position: absolute;
   content: "";
   height: 26px;
@@ -734,35 +754,62 @@ form.conditional-form .switch .slider:before,
   transition: 0.4s;
 }
 form.conditional-form .switch input:checked + .slider:before,
-.rbt-form .switch input:checked + .slider:before {
+.rbt-form .switch input:checked + .slider:before,
+form.woocommerce-checkout .switch input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
 form.conditional-form .form-entry.conditional,
-.rbt-form .form-entry.conditional {
+.rbt-form .form-entry.conditional,
+form.woocommerce-checkout .form-entry.conditional {
   display: none;
 }
 form.conditional-form .form-entry.conditional.active,
-.rbt-form .form-entry.conditional.active {
+.rbt-form .form-entry.conditional.active,
+form.woocommerce-checkout .form-entry.conditional.active {
   display: block;
 }
 form.conditional-form .form-section.conditional,
-.rbt-form .form-section.conditional {
+.rbt-form .form-section.conditional,
+form.woocommerce-checkout .form-section.conditional {
   display: none;
 }
 form.conditional-form .form-section.conditional.active,
-.rbt-form .form-section.conditional.active {
+.rbt-form .form-section.conditional.active,
+form.woocommerce-checkout .form-section.conditional.active {
   display: block;
 }
 form.conditional-form input,
-.rbt-form input {
+.rbt-form input,
+form.woocommerce-checkout input {
   background-color: transparent;
   outline: none;
   border: 1px solid #2d2f34;
   border-radius: 4px;
-  padding: 4px;
+  padding: 4px 14px;
   width: 100%;
+  font-size: 13px;
+  color: #2d2f34;
+}
+form.conditional-form input:-webkit-input-placeholder, form.conditional-form input:-ms-input-placeholder, form.conditional-form input:placeholder,
+.rbt-form input:-webkit-input-placeholder,
+.rbt-form input:-ms-input-placeholder,
+.rbt-form input:placeholder,
+form.woocommerce-checkout input:-webkit-input-placeholder,
+form.woocommerce-checkout input:-ms-input-placeholder,
+form.woocommerce-checkout input:placeholder {
+  color: #54555a;
+}
+form.conditional-form textarea,
+.rbt-form textarea,
+form.woocommerce-checkout textarea {
+  width: 100%;
+  aspect-ratio: 4/1;
+  background-color: transparent;
+  border: 1px solid #2d2f34;
+  border-radius: 4px;
+  color: #2d2f34;
   font-size: 13px;
 }
 
@@ -827,6 +874,192 @@ form.conditional-form input,
 .flatpickr-calendar .flatpickr-day.endRange.inRange,
 .flatpickr-calendar .flatpickr-day.selected:focus, .flatpickr-calendar .flatpickr-day.startRange:focus, .flatpickr-calendar .flatpickr-day.endRange:focus, .flatpickr-calendar .flatpickr-day.selected:hover, .flatpickr-calendar .flatpickr-day.startRange:hover, .flatpickr-calendar .flatpickr-day.endRange:hover, .flatpickr-calendar .flatpickr-day.selected.prevMonthDay, .flatpickr-calendar .flatpickr-day.startRange.prevMonthDay, .flatpickr-calendar .flatpickr-day.endRange.prevMonthDay, .flatpickr-calendar .flatpickr-day.selected.nextMonthDay, .flatpickr-calendar .flatpickr-day.startRange.nextMonthDay, .flatpickr-calendar .flatpickr-day.endRange.nextMonthDay {
   background: #ff6700;
+}
+
+/* WooCommerce */
+.woocommerce {
+  margin-top: 80px;
+}
+
+form.woocommerce-checkout {
+  width: 100%;
+}
+form.woocommerce-checkout .col2-set {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 28px;
+}
+form.woocommerce-checkout .col2-set .col-1 {
+  width: calc(50% - 14px);
+}
+form.woocommerce-checkout .col2-set .col-2 {
+  width: calc(50% - 14px);
+}
+
+.woocommerce-billing-fields__field-wrapper,
+.woocommerce-additional-fields__field-wrapper,
+.woocommerce-checkout-review-order {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #202227;
+  margin: 40px 0;
+  padding: 20px;
+  border: 1px solid rgba(4, 110, 196, 0.2);
+  border-radius: 10px;
+  gap: 14px;
+}
+.woocommerce-billing-fields__field-wrapper input,
+.woocommerce-additional-fields__field-wrapper input,
+.woocommerce-checkout-review-order input {
+  min-height: 30px;
+}
+.woocommerce-billing-fields__field-wrapper .form-row,
+.woocommerce-additional-fields__field-wrapper .form-row,
+.woocommerce-checkout-review-order .form-row {
+  margin: 0;
+  width: calc(50% - 7px);
+}
+.woocommerce-billing-fields__field-wrapper #billing_address_1_field,
+.woocommerce-billing-fields__field-wrapper #billing_address_2_field,
+.woocommerce-billing-fields__field-wrapper #order_comments_field,
+.woocommerce-additional-fields__field-wrapper #billing_address_1_field,
+.woocommerce-additional-fields__field-wrapper #billing_address_2_field,
+.woocommerce-additional-fields__field-wrapper #order_comments_field,
+.woocommerce-checkout-review-order #billing_address_1_field,
+.woocommerce-checkout-review-order #billing_address_2_field,
+.woocommerce-checkout-review-order #order_comments_field {
+  width: 100%;
+}
+.woocommerce-billing-fields__field-wrapper #billing_last_name_field,
+.woocommerce-additional-fields__field-wrapper #billing_last_name_field,
+.woocommerce-checkout-review-order #billing_last_name_field {
+  width: calc(50% - 7px);
+}
+.woocommerce-billing-fields__field-wrapper #billing_country_field,
+.woocommerce-additional-fields__field-wrapper #billing_country_field,
+.woocommerce-checkout-review-order #billing_country_field {
+  width: calc(50% - 7px);
+}
+
+/* Your Order */
+.woocommerce-checkout-review-order-table {
+  width: calc(50% - 20px);
+  height: fit-content;
+  font-size: 13px;
+}
+.woocommerce-checkout-review-order-table tr, .woocommerce-checkout-review-order-table td {
+  text-align: left;
+  padding: 4px;
+  border-top: 1px solid #2d2f34;
+}
+.woocommerce-checkout-review-order-table th,
+.woocommerce-checkout-review-order-table th td {
+  border: none;
+  font-weight: 600;
+  text-align: center;
+  color: #ff6700;
+}
+.woocommerce-checkout-review-order-table tfoot > tr > th {
+  text-align: right;
+  padding-right: 2vw;
+}
+
+div.blockOverlay {
+  background-color: transparent !important;
+}
+
+.woocommerce-checkout-payment,
+#payment {
+  width: calc(50% - 20px);
+  background: transparent !important;
+  background-image: transparent !important;
+  background-color: transparent !important;
+  font-size: 13px;
+  padding: 20px;
+}
+.woocommerce-checkout-payment .wc_payment_methods,
+#payment .wc_payment_methods {
+  list-style: none;
+  padding-left: 0;
+}
+.woocommerce-checkout-payment .wc_payment_methods li,
+#payment .wc_payment_methods li {
+  cursor: pointer;
+}
+
+/* Select2 BS */
+.select2-dropdown {
+  background-color: #111 !important;
+  font-size: 12px;
+  border: 1px solid #2d2f34;
+  color: #2d2f34;
+  font-size: 13px;
+}
+
+.select2-container .select2-selection--single {
+  height: 34px;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected], .select2-container--default .select2-results__option--highlighted[data-selected] {
+  background-color: #222;
+  color: #54555a;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+  border: 1px solid #222;
+  background-color: rgba(255, 255, 255, 0.01);
+}
+
+.select2-container--default .select2-results__option[aria-selected=true], .select2-container--default .select2-results__option[data-selected=true] {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.select2-container--default .select2-selection--single {
+  border: 1px solid #2d2f34;
+}
+
+.select2-container--default .select2-results__option[aria-selected=true], .select2-container--default .select2-results__option[data-selected=true] {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple, .select2-container--default.select2-container--open.select2-container--below .select2-selection--single {
+  background-color: transparent !important;
+}
+
+.select2-container--default .select2-selection--single {
+  background-color: transparent;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: #2d2f34;
+  font-size: 13px;
+  line-height: 34px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 32px;
+}
+
+/* CHECKOUT */
+.wc_payment_method.payment_method_ppcp-gateway {
+  background-image: url(../../theme/assets/logos/PayPal_logo.svg);
+  background-repeat: no-repeat;
+  background-size: 130px;
+}
+.wc_payment_method.payment_method_ppcp-gateway label {
+  visibility: hidden;
+}
+
+.wc_payment_method.payment_method_cod {
+  background-image: url(../../theme/assets/logos/cod-graphic.png);
+  background-repeat: no-repeat;
+  background-size: 130px;
+}
+.wc_payment_method.payment_method_cod label {
+  visibility: hidden;
 }
 
 ul.menu-wrapper li {
@@ -943,6 +1176,7 @@ ul.menu-wrapper li a {
   overflow: hidden;
   transition: max-height 0.33s ease;
   transition: all 0.33s ease;
+  z-index: 1;
 }
 #site-header ul.currency-list li,
 #site-header .top.menu-container ul.currency-list li {
@@ -1144,7 +1378,7 @@ a:has(> h1), a:has(> h2), a:has(> h3), a:has(> h4), a:has(> h5), a:has(> h6) {
   position: relative;
   padding-left: clamp(25px, 10vw, 146px);
   padding-right: clamp(25px, 10vw, 146px);
-  background-color: #242529;
+  background-color: black;
   transition: width 0.2s ease, border-radius 0.2s ease, opacity 0.2s ease;
   border: 1px solid #2d2f34;
 }
@@ -1318,6 +1552,14 @@ canvas#placeholder-0 {
   display: none;
 }
 
+/* Checkout Page */
+.site.checkout .aspectRatioPlaceholder .overlay-text h1 {
+  -webkit-text-stroke: 0.2vw #f8ed62;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  font-size: 6vw;
+}
+
 .aspectRatioPlaceholder .overlay-text {
   padding-left: clamp(25px, 10vw, 146px);
   padding-right: clamp(25px, 10vw, 146px);
@@ -1328,6 +1570,8 @@ canvas#placeholder-0 {
 .aspectRatioPlaceholder .overlay-text h1 {
   font-size: clamp(44px, 4.68vw, 90px);
   margin-bottom: 22px;
+  position: relative;
+  z-index: 1;
 }
 .aspectRatioPlaceholder .overlay-text h5.headertext {
   font-family: Merriweather, serif;
@@ -1373,6 +1617,177 @@ canvas#placeholder-0 {
   justify-content: center;
 }
 
+/* POST TYPE Page header filter texture options */
+.aspectRatioPlaceholder {
+  position: relative;
+}
+.aspectRatioPlaceholder .filters {
+  width: 100%;
+  height: 100%;
+  display: block;
+  content: "";
+  z-index: 0;
+  position: absolute;
+}
+.aspectRatioPlaceholder .filters.filmgrain:after {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  background-image: url(../../theme/assets/textures/FilmGrain.svg);
+  animation: grainyfilm 2s infinite;
+}
+.aspectRatioPlaceholder .filters.darken:before {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  opacity: 0.35;
+  background-color: black;
+}
+
+@keyframes grainyfilm {
+  0% {
+    background-position: -30%;
+    opacity: 0.2;
+  }
+  5% {
+    background-position: -30%;
+    opacity: 0;
+  }
+  9% {
+    background-position: -30%;
+    opacity: 0.3;
+  }
+  11% {
+    background-position: -30%;
+    opacity: 0;
+  }
+  13% {
+    background-position: -20%;
+    opacity: 0.2;
+  }
+  15% {
+    background-position: -20%;
+    opacity: 0;
+  }
+  16% {
+    background-position: -30%;
+    opacity: 0;
+  }
+  17% {
+    background-position: -30%;
+    opacity: 0.3;
+  }
+  20% {
+    opacity: 0;
+  }
+  22% {
+    opacity: 0.7;
+  }
+  24% {
+    opacity: 0.3;
+  }
+  25% {
+    opacity: 0;
+  }
+  33% {
+    opacity: 0;
+    background-position: -30%;
+  }
+  34% {
+    opacity: 0.2;
+    background-position: -28%;
+  }
+  38% {
+    background-position: -31%;
+  }
+  39% {
+    opacity: 0.4;
+    background-position: -30%;
+  }
+  42% {
+    opacity: 0.2;
+    background-position: -30%;
+  }
+  43% {
+    opacity: 0;
+    background-position: -20%;
+  }
+  46% {
+    opacity: 0.4;
+    background-position: -20%;
+  }
+  49% {
+    opacity: 0;
+    background-position: -20%;
+  }
+  50% {
+    opacity: 0.7;
+    background-position: -20%;
+  }
+  60% {
+    opacity: 0.1;
+    background-position: -20%;
+  }
+  61% {
+    opacity: 0;
+    background-position: -30%;
+  }
+  66% {
+    opacity: 0.2;
+    background-position: -32%;
+  }
+  70% {
+    opacity: 0.3;
+    background-position: -30%;
+  }
+  71% {
+    opacity: 0;
+    background-position: -30%;
+  }
+  75% {
+    opacity: 0.1;
+    background-position: -25%;
+  }
+  78% {
+    opacity: 0;
+    background-position: -25%;
+  }
+  80% {
+    opacity: 0.2;
+    background-position: -30%;
+  }
+  88% {
+    opacity: 0.1;
+    background-position: -30%;
+  }
+  90% {
+    opacity: 0.2;
+    background-position: -25%;
+  }
+  94% {
+    opacity: 0;
+    background-position: -25%;
+  }
+  95% {
+    opacity: 0.2;
+    background-position: -25%;
+  }
+  100% {
+    opacity: 0;
+    background-position: -30%;
+  }
+}
+@keyframes flickerjump2 {}
 .simple-cta-wrap {
   padding-left: clamp(25px, 10vw, 146px);
   padding-right: clamp(25px, 10vw, 146px);
@@ -1520,7 +1935,7 @@ canvas#placeholder-0 {
   flex-direction: column;
   gap: 0;
   border-right: 4px solid #046ec4;
-  border-radius: 10px;
+  border-radius: 0px;
   background-color: #242529;
 }
 .rbt-accordionslist .rbt-accordion .accordion {
@@ -1536,7 +1951,7 @@ canvas#placeholder-0 {
   display: flex;
   position: relative;
   margin: 0;
-  border-radius: 10px;
+  border-radius: 10px 0 0 10px;
 }
 .rbt-accordionslist .rbt-accordion .accordion:after {
   content: "";
@@ -1555,7 +1970,7 @@ canvas#placeholder-0 {
   transform-origin: center;
 }
 .rbt-accordionslist .rbt-accordion .accordion.expanded {
-  border-radius: 10px 10px 0 0;
+  border-radius: 10px 0 0 0;
 }
 .rbt-accordionslist .rbt-accordion .accordion.expanded:after {
   transform: rotate(180deg);
@@ -1581,7 +1996,7 @@ canvas#placeholder-0 {
   position: relative;
   font-size: clamp(15px, 1.39vw, 20px);
   line-height: clamp(21px, 1.94vw, 28px);
-  border-radius: 0 0 10px 10px;
+  border-radius: 0 0 0 10px;
 }
 .rbt-accordionslist .rbt-accordion .rbt-accordion-panel.expanded {
   border-bottom: 1px solid #2d2f34;
@@ -1728,7 +2143,7 @@ canvas#placeholder-0 {
   max-width: 80%;
   z-index: 3;
   font-size: 61px;
-  font-family: "Acme";
+  font-family: "Luckiest Guy", Luckiest Guy, sans-serif;
   color: black;
 }
 .wp-block-rbt-carousel-slider .rbt-carousel-background .rbt-carousel-right .header {
@@ -1761,7 +2176,7 @@ canvas#placeholder-0 {
   -webkit-background-clip: text;
 }
 .wp-block-rbt-carousel-slider .rbt-carousel-background .rbt-carousel-right .price-pop {
-  font-family: Acme, "Acme";
+  font-family: "Luckiest Guy", Luckiest Guy, sans-serif;
   font-size: clamp(45px, 4.69vw, 90px);
   color: #ff6700;
   white-space: nowrap;
@@ -1968,6 +2383,166 @@ canvas#placeholder-0 {
   .wp-block-rbt-testimonials .layout .rightcol {
     width: 0%;
   }
+}
+.wp-block-rbt-featured-trips {
+  width: 100%;
+  height: auto;
+  position: relative;
+  padding-top: 80px;
+  padding-bottom: 60px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+.wp-block-rbt-featured-trips .underlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: block;
+  z-index: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.wp-block-rbt-featured-trips .filters {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: block;
+  z-index: 1;
+}
+.wp-block-rbt-featured-trips .layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  position: relative;
+  z-index: 1;
+}
+.wp-block-rbt-featured-trips .layout.reversed {
+  flex-direction: row-reverse;
+}
+.wp-block-rbt-featured-trips .layout .leftcol {
+  width: calc(60% - 15px);
+}
+.wp-block-rbt-featured-trips .layout .leftcol .featured-trips {
+  width: 100%;
+  margin: 20px auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 5%;
+}
+.wp-block-rbt-featured-trips .layout .leftcol .featured-trips .trip-card {
+  background-image: linear-gradient(-46deg, #222, rgba(255, 255, 255, 0.1) 20%, transparent 40%);
+  width: calc(50% - 10px);
+  padding: 0;
+  border: 1px solid #222;
+  border-radius: 15px;
+  box-shadow: 4px 2px 6px black;
+  overflow: hidden;
+  position: relative;
+}
+.wp-block-rbt-featured-trips .layout .leftcol .featured-trips .trip-card .trip-img {
+  width: 100%;
+  aspect-ratio: 2/1;
+}
+.wp-block-rbt-featured-trips .layout .leftcol .featured-trips .trip-card .trip-img .trip-img-tag {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+.wp-block-rbt-featured-trips .layout .leftcol .featured-trips .trip-card .trip-details {
+  padding: 5%;
+  margin-bottom: 40px;
+}
+.wp-block-rbt-featured-trips .layout .leftcol .featured-trips .trip-card .trip-details .rbt-cta {
+  color: #ff6700;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size: 11px;
+  width: 75px;
+  height: 75px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100%;
+  background-image: url(../../theme/assets/icons/pow-small.svg);
+}
+.wp-block-rbt-featured-trips .layout .rightcol {
+  width: calc(40% - 15px);
+  padding: 30px;
+}
+
+.wp-block-rbt-scrollreveal-header h1, .wp-block-rbt-scrollreveal-header h2, .wp-block-rbt-scrollreveal-header h3, .wp-block-rbt-scrollreveal-header h4, .wp-block-rbt-scrollreveal-header h5, .wp-block-rbt-scrollreveal-header h6 {
+  font-family: Luckiest Guy, "Luckiest Guy", sans-serif;
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.wp-block-rbt-scrollreveal-header h1.stroked, .wp-block-rbt-scrollreveal-header h2.stroked, .wp-block-rbt-scrollreveal-header h3.stroked, .wp-block-rbt-scrollreveal-header h4.stroked, .wp-block-rbt-scrollreveal-header h5.stroked, .wp-block-rbt-scrollreveal-header h6.stroked {
+  -webkit-text-stroke-width: 0.1px;
+  -webkit-text-stroke-color: #ff6700;
+}
+.wp-block-rbt-scrollreveal-header h1 .scrollRevealChar, .wp-block-rbt-scrollreveal-header h2 .scrollRevealChar, .wp-block-rbt-scrollreveal-header h3 .scrollRevealChar, .wp-block-rbt-scrollreveal-header h4 .scrollRevealChar, .wp-block-rbt-scrollreveal-header h5 .scrollRevealChar, .wp-block-rbt-scrollreveal-header h6 .scrollRevealChar {
+  display: inline-block;
+  min-width: 2vw;
+}
+.wp-block-rbt-scrollreveal-header h1 {
+  font-size: 15vw;
+  line-height: 16vw;
+}
+.wp-block-rbt-scrollreveal-header h2 {
+  font-size: 12vw;
+  line-height: 13vw;
+}
+.wp-block-rbt-scrollreveal-header h3 {
+  font-size: 9vw;
+  line-height: 10vw;
+}
+.wp-block-rbt-scrollreveal-header h4 {
+  font-size: 7.5vw;
+  line-height: 8vw;
+}
+.wp-block-rbt-scrollreveal-header h5 {
+  font-size: 5vw;
+  line-height: 6vw;
+}
+.wp-block-rbt-scrollreveal-header h6 {
+  font-size: 3vw;
+  line-height: 4vw;
+}
+
+.rbt-card-section .rbt-cardwrap {
+  display: flex;
+  gap: 3vw;
+}
+
+.rbt-card-section-card {
+  display: flex;
+  flex-direction: column;
+}
+.rbt-card-section-card .rbt-card-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3%;
+  width: 100%;
+  height: 100%;
+}
+.rbt-card-section-card .rbt-card-image .imgwrap {
+  max-width: 250px;
+  width: 100%;
+  height: 100%;
+}
+.rbt-card-section-card .rbt-card-image img {
+  max-width: 100%;
+}
+.rbt-card-section-card .rbt-title {
+  text-align: center;
 }
 
 /*# sourceMappingURL=style.css.map*/

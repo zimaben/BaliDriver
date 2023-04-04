@@ -45,6 +45,142 @@ Class Config {
             'type'=> 'page',
             'menu' => array('primary', 'mobile', 'footer_two' )
         ),
+        'trips' => array(
+            'title'=> 'Popular Trips',
+            'type'=> 'page',
+            'menu' => array('primary', 'mobile', 'footer_two' )
+        ),
+        'monkey-forest-ubud' => array(
+            'title'=> 'Monkey Forest Ubud',
+            'type'=> 'trips', 
+            'content'=> 'Monkeys. Lots and lots of monkeys.',
+        ),
+        'campuhan-ridge-walk' => array(
+            'title'=> 'Campuhan Ridge Walk',
+            'type'=> 'trips', 
+            'content'=> 'Sunrise and Sunset trekking with scenic forests',
+        ),
+        'saraswati-temple' => array(
+            'title'=> 'Saraswati Temple',
+            'type'=> 'trips', 
+            'content'=> 'Scenic Hindu temple with a lotus pond',
+        ),
+        'tegallalang-rice-terrace' => array(
+            'title'=> 'Tegallalang Rice Terrace',
+            'type'=> 'trips', 
+            'content'=> 'Traditionally farmed terraces carved into a scenic hillside',
+        ),
+        'goa-gajah' => array(
+            'title'=> 'Goa Gajah',
+            'type'=> 'trips', 
+            'content'=> 'Cave famed for its ancient carvings',
+        ),
+        'ubud-palace' => array(
+            'title'=> 'Ubud Palace',
+            'type'=> 'trips', 
+            'content'=> 'Ancient temple in the center of Ubud',
+        ),
+        'blanco-renaissance-museum' => array(
+            'title'=> 'The Blanco Renaissance Museaum',
+            'type'=> 'trips', 
+            'content'=> 'Public garden with exotic birds',
+        ),
+        'hidden-canyon' => array(
+            'title'=> 'Hidden Canyon Trek',
+            'type'=> 'trips', 
+            'content'=> 'An amazing seasonal trek of the narrow canyon with white water running through rocky cliffs',
+        ),
+        'waterfall-tegenungan' => array(
+            'title'=> 'Tegenungan Waterfall',
+            'type'=> 'trips', 
+            'content'=> 'Popular waterfall with a temple and swimming area',
+        ),
+        'kanto-lampo-waterfall' => array(
+            'title'=> 'Kanto Lampo Waterfall',
+            'type'=> 'trips', 
+            'content'=> 'Rocky waterfall in the forests of central Bali.',
+        ),
+        'singsing-waterfall' => array(
+            'title'=> 'Singsing Waterfall',
+            'type'=> 'trips', 
+            'content'=> '',
+        ),
+        'banjar-hot-springs' => array(
+            'title'=> 'Banjar Hot Springs',
+            'type'=> 'trips', 
+            'content'=> '',
+        ),
+        'layana-waterfall' => array(
+            'title'=> 'Layana Waterfall',
+            'type'=> 'trips', 
+            'content'=> '',
+        ),
+        'tibumana-waterfall' => array(
+            'title'=> 'Tibumana Waterfall',
+            'type'=> 'trips', 
+            'content'=> '',
+        ),
+        'pengibul-waterfall' => array(
+            'title'=> 'Pengibul Waterfall',
+            'type'=> 'trips', 
+            'content'=> '',
+        ),
+        'taman-sari-waterfall' => array(
+            'title'=> 'Taman Sari Waterfall',
+            'type'=> 'trips', 
+            'content'=> '',
+        ),
+        'suwat-waterfall' => array(
+            'title'=> 'Suwat Waterfall',
+            'type'=> 'trips', 
+            'content'=> '',
+        ),
+        'sumampan-waterfall' => array(
+            'title'=> 'Sumampan Waterfall',
+            'type'=> 'trips', 
+            'content'=> '',
+        ),
+        'beji-griya-waterfall' => array(
+            'title'=> 'Beji Griya Waterfall',
+            'type'=> 'trips', 
+            'content'=> '',
+        ),
+        'nungnung-waterfall' => array(
+            'title'=> 'Nungnung Waterfall',
+            'type'=> 'trips', 
+            'content'=> '',
+        ),
+        'tanah-lot-temple' => array(
+            'title'=> 'Tanah Lot Temple',
+            'type'=> 'trips', 
+            'content'=> '',
+        ),
+        'berawa-beach' => array(
+            'title'=> 'Berawa Beach',
+            'type'=> 'trips', 
+            'content'=> '',
+        ),
+        'kuta-beach' => array(
+            'title'=> 'Kuta Beach',
+            'type'=> 'trips', 
+            'content'=> '',
+        ),
+        'jimbaran-beach' => array(
+            'title'=> 'Jimbaran Beach',
+            'type'=> 'trips', 
+            'content'=> '',
+        ),
+        'sanur-beach' => array(
+            'title'=> 'Sanur Beach',
+            'type'=> 'trips', 
+            'content'=> '',
+        ),
+        'tabanan-beach' => array(
+            'title'=> 'Tabanan Beach',
+            'type'=> 'trips', 
+            'content'=> '',
+        ),
+
     );
     const INTEGRATIONS = array( 
         'ActiveCampaign' => false,
@@ -55,6 +191,7 @@ Class Config {
         'ContactForm7' => true,
         'Figma' => true,
         'WhatsApp'=> true,
+        'WooCommerce' => true,
     );
 
     #Progressive Header needs aspect ratio w & h and minimum mobile height
@@ -65,6 +202,7 @@ Class Config {
         'progressive_header' => array(
             'home' => array('w' =>480, 'h'=>227, 'minHeight'=>400),
             'page' => array('w'=>480, 'h'=>161, 'minHeight'=>200),
+            'custom' => array('slug'=>'checkout','w'=>40, 'h'=>9 , 'minHeight'=>100, 'filters'=>'darken'),
             'default' => array('w'=>480, 'h'=>'auto', 'minHeight'=>400),
         )
     );

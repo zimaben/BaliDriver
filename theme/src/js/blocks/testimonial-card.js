@@ -158,7 +158,7 @@ registerBlockType('rbt/testimonial-card', {
                 let base_url = theme_admin.siteurl ? theme_admin.siteurl : false;
                 if(!base_url) return (<span className="rbt-trip">{trip}</span>);
 
-                return (<a href={base_url + "/trips/" + tripurl} target="_blank">{trip}</a> );
+                return (<a href={base_url + "/trips/" + tripurl} target="_blank" rel="noopener">{trip}</a> );
             }
             return trip ? (<span className="rbt-trip">{trip}</span>) : '';
         }

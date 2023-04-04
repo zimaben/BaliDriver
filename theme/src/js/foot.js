@@ -2,6 +2,7 @@ import * as global from './frontend/global.js';
 import { setUpCanvas, setUpSlide } from './frontend/animated-canvas.js';
 import { setUpCarousel, doBookingFormInit } from './frontend/carousel.js';
 import { doCurrencyPicker } from './frontend/currency-picker.js';
+import { setScrollReveal, doScrollReveal } from './frontend/scroll.js';
 
 window.addEventListener('DOMContentLoaded', (event) => {
     
@@ -28,6 +29,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
             case "doCurrencyPicker" : 
                 doCurrencyPicker(item);
                 break;
+            case "doScrollReveal" : 
+                setScrollReveal(item);
+                break;
             default: 
                 //she doesn't even go here
                 break;
@@ -53,4 +57,8 @@ window.addEventListener('resize', (event) =>{
         }      
     });
 });
-window.onscroll = function(){global.stickyNav();}
+//window.onscroll = function(){global.stickyNav();}
+//do scroll reveal
+document.addEventListener("scroll", (event) => {
+    global.stickyNav();
+  });

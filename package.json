@@ -23,6 +23,7 @@
         "dev": "webpack --mode development --watch"
     },
     "dependencies": {
+        "@wordpress/html-entities": "^3.28.0",
         "flatpickr": "^4.6.13"
     }
 }

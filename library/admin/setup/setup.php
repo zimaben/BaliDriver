@@ -37,6 +37,9 @@ class Setup extends Theme {
     }
     public static function theme_setup(){
         # \add_theme_support( 'custom-header' );
+        if(isset(Config::INTEGRATIONS['WooCommerce']) && Config::INTEGRATIONS['WooCommerce']) :
+            \add_theme_support('woocommerce');
+        endif;
         \add_theme_support( 'menus' );
         \add_theme_support( 'align-wide' );
         # do dimensions

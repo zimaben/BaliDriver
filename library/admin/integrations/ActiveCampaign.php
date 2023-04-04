@@ -130,7 +130,7 @@ Class ActiveCampaignIntegration {
             CURLOPT_POSTFIELDS => $payload
         ));
         $response = curl_exec($curl);
-        if(Config::MODE === "development")  error_log(print_r($response, true));
+        #if(Config::MODE === "development")  error_log(print_r($response, true));
         curl_close($curl);
         $response_array = json_decode($response, true);
        

@@ -1,0 +1,29 @@
+.rbt-scrollreveal-header {
+    h1,h2,h3,h4,h5,h6 {
+        font-family:Luckiest Guy, "Luckiest Guy", sans-serif;
+        background-size: 100%;
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        &.stroked{
+            -webkit-text-stroke-width: .1px;
+            -webkit-text-stroke-color: $primary;
+        }
+        .scrollRevealChar{
+            display:inline-block;
+            min-width:2vw;
+        }
+    }
+    h1 {font-size:15vw;line-height:16vw;}
+    h2 {font-size:12vw;line-height:13vw;}
+    h3 {font-size:9vw;line-height:10vw;}
+    h4 {font-size:7.5vw;line-height:8vw; }
+    h5 {font-size:5vw;line-height:6vw;}
+    h6 {font-size:3vw;line-height:4vw;}
+}
+
+@media screen and (max-width:991px){
+    .wp-block-rbt-scrollreveal-header {
+
+    }
+}

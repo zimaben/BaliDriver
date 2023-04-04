@@ -9,3 +9,18 @@
 @import './blocks/sales-form-editor';
 @import './blocks/testimonial-card-editor';
 @import './blocks/testimonials-editor';
+@import './blocks/featured-trips-editor';
+@import './blocks/scrollreveal-header-editor';
+@import './blocks/card-section-editor';
+@import './blocks/card-section-card-editor';
+
+/* Block editor globals */
+.block-editor-block-breadcrumb li {
+    padding-bottom:0;
+}
+.editor-styles-wrapper{
+    padding:20px !important;
+}
+.block-editor-block-types-list__item-title{
+    white-space:normal;
+}

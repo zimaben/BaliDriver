@@ -2,7 +2,18 @@
 canvas#placeholder-0 {
     display: none;
 }
-
+/* Checkout Page */
+.site.checkout{
+    .aspectRatioPlaceholder .overlay-text{
+        h1{
+           // -webkit-text-stroke: 4px $primary;
+           -webkit-text-stroke: 0.2vw #f8ed62;
+           -webkit-text-fill-color: transparent;
+           -webkit-background-clip: text;
+           font-size: 6vw;
+        }
+    }
+}
 .aspectRatioPlaceholder{
     .overlay-text{
         padding-left:$edgeclamp;
@@ -13,6 +24,8 @@ canvas#placeholder-0 {
         h1{
             font-size: clamp(44px, 4.68vw, 90px);
             margin-bottom:22px;
+            position: relative;
+            z-index: 1;
         }
         h5.headertext{
             font-family:Merriweather, serif;
@@ -64,4 +77,181 @@ canvas#placeholder-0 {
 
         }
     }
+}
+/* POST TYPE Page header filter texture options */
+.aspectRatioPlaceholder{
+    position:relative;
+    .filters{
+        width: 100%;
+        height: 100%;
+        display: block;
+        content: '';
+        z-index: 0;
+        position: absolute;
+        &.filmgrain{
+            &:after{
+                position: absolute;
+                content: '';
+                display: block;
+                width: 100%;
+                height: 100%;
+                z-index: 2;
+                top: 0;
+                left: 0;
+                background-image: url(/theme/assets/textures/FilmGrain.svg);
+               // animation: flickerjump 4s, flickerjump2 2s infinite 2s alternate;
+               animation:grainyfilm 2s infinite;
+            }
+        }
+        &.darken{
+            &:before{
+                position: absolute;
+                content: '';
+                display: block;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                opacity: .35;
+                background-color:black;
+            }
+        }
+    }
+}
+@keyframes grainyfilm{
+    0%{
+        background-position:-30%;
+        opacity: .2;
+    }
+    5%{
+        background-position:-30%;
+        opacity: 0;
+    }
+    9%{
+        background-position:-30%;
+        opacity: .3;
+    }
+    11%{
+        background-position:-30%;
+        opacity: 0;
+    }
+    13%{
+        background-position:-20%;
+        opacity: 0.2;
+    }
+    15%{
+        background-position:-20%;
+        opacity: 0;
+    }
+    16%{
+        background-position:-30%;
+        opacity: 0;
+    }
+    17%{
+        background-position:-30%;
+        opacity: 0.3;
+    }
+    20%{
+        opacity: 0;
+    }
+    22%{
+        opacity: .7;
+    }
+    24%{
+        opacity: .3;
+    }
+    25%{
+        opacity:0;
+    }
+    33%{
+        opacity:0;
+        background-position:-30%;
+    }
+    34%{
+        opacity: 0.2;
+        background-position: -28%;
+    }
+    38%{
+        background-position: -31%;
+    }
+    39%{
+        opacity: .4;
+        background-position: -30%;
+    }
+    42%{
+        opacity: .2;
+        background-position: -30%;
+    }
+    43%{
+        opacity: 0;
+        background-position: -20%;
+    }
+    46%{
+        opacity: 0.4;
+        background-position: -20%;
+    }
+    49%{
+        opacity: 0;
+        background-position: -20%;
+    }
+    50%{
+        opacity: .7;
+        background-position: -20%;
+    }
+    60%{
+        opacity: .1;
+        background-position: -20%;
+    }
+    61%{
+        opacity: 0;
+        background-position: -30%;
+    }
+    66%{
+        opacity: .2;
+        background-position: -32%;
+    }
+    70%{
+        opacity: .3;
+        background-position: -30%;
+    }    
+    71%{
+        opacity: 0;
+        background-position: -30%;
+    }
+    75%{
+        opacity: 0.1;
+        background-position: -25%;
+    }
+    78%{
+        opacity: 0;
+        background-position: -25%;
+    }
+    80%{
+        opacity: 0.2;
+        background-position: -30%;
+    }
+    88%{
+        opacity: 0.1;
+        background-position: -30%;
+    }
+    90%{
+        opacity: 0.2;
+        background-position: -25%;
+    }
+    94%{
+        opacity: 0;
+        background-position: -25%;
+    }
+    95%{
+        opacity: 0.2;
+        background-position: -25%;
+    }
+    100%{
+        opacity: 0;
+        background-position: -30%;
+    }
+}
+@keyframes flickerjump2{
+
 }

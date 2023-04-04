@@ -15,7 +15,7 @@
         flex-direction:column;
         gap:0;
         border-right: 4px solid $accent;
-        border-radius:10px;
+        border-radius:0px;
         background-color: $dark-neutral;
         .accordion {
             color: white;
@@ -30,7 +30,7 @@
             display:flex;
             position:relative;
             margin:0;
-            border-radius:10px;
+            border-radius: 10px 0 0 10px;
             &:after{
                 content:'';
                 position:absolute;
@@ -49,8 +49,8 @@
                 transform-origin: center;
             }
             &.expanded{
-                border-radius:10px 10px 0 0;
-                
+               // border-radius:10px 10px 0 0;
+                  border-radius:10px 0 0 0;
                 &:after{
                     transform:rotate(180deg);
                 }
@@ -79,7 +79,8 @@
             position:relative;
             font-size:clamp(15px, 1.39vw, 20px);
             line-height:clamp(21px, 1.94vw, 28px);
-            border-radius:0 0 10px 10px;
+            //border-radius:0 0 10px 10px;
+            border-radius: 0 0 0 10px;
             &.expanded{
                 border-bottom:1px solid $dark-half;
                 border-left:1px solid $dark-half;

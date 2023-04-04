@@ -10,7 +10,8 @@ $mobileheaderheight:52px;
     position: relative;
     padding-left:$edgeclamp;
     padding-right:$edgeclamp;
-    background-color:$dark-neutral;
+    //background-color:$dark-neutral;
+    background-color:black;
     transition: width .2s ease, border-radius .2s ease, opacity .2s ease;
     border: 1px solid $dark-half;
     .mobile-menu-button{
