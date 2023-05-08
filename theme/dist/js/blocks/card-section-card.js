@@ -113,7 +113,11 @@ registerBlockType('rbt/card-section-card', {
   category: 'friendlyrobot',
   //attributes
   attributes: {
-    image: {
+    lightimage: {
+      type: 'object',
+      "default": {}
+    },
+    darkimage: {
       type: 'object',
       "default": {}
     },
@@ -141,7 +145,8 @@ registerBlockType('rbt/card-section-card', {
   edit: function edit(_ref) {
     var attributes = _ref.attributes,
       setAttributes = _ref.setAttributes;
-    var image = attributes.image,
+    var darkimage = attributes.darkimage,
+      lightimage = attributes.lightimage,
       title = attributes.title,
       text = attributes.text,
       ctatype = attributes.ctatype,
@@ -157,9 +162,14 @@ registerBlockType('rbt/card-section-card', {
         title: newtitle
       });
     }
-    function onSelectMedia(newimage) {
+    function onSelectDark(newimage) {
       setAttributes({
-        image: newimage
+        darkimage: newimage
+      });
+    }
+    function onSelectLight(newimage) {
+      setAttributes({
+        lightimage: newimage
       });
     }
     function renderSrcSet(img, array) {
@@ -173,14 +183,13 @@ registerBlockType('rbt/card-section-card', {
     }
     return [/*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
       title: "Card Image"
-    }, /*#__PURE__*/React.createElement(MediaUploadCheck, null, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Upload Image")), /*#__PURE__*/React.createElement(MediaUpload, {
+    }, /*#__PURE__*/React.createElement(MediaUploadCheck, null, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Dark/Light Images")), /*#__PURE__*/React.createElement(MediaUpload, {
       label: "Image",
       onSelect: function onSelect(media) {
-        return onSelectMedia(media);
+        return onSelectDark(media);
       },
       allowedTypes: ['image'],
-      accept: ["image/*", "image/svg"],
-      value: image.id,
+      value: darkimage.id,
       render: function render(_ref2) {
         var open = _ref2.open;
         return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
@@ -189,21 +198,37 @@ registerBlockType('rbt/card-section-card', {
             event.stopPropagation();
             open();
           }
-        }, image.id > 0 ? 'Edit Image' : 'Upload Image'));
+        }, darkimage.id > 0 ? 'Edit Dark Image' : 'Upload Dark Image'));
+      }
+    })), /*#__PURE__*/React.createElement(MediaUploadCheck, null, /*#__PURE__*/React.createElement(MediaUpload, {
+      label: "Image",
+      onSelect: function onSelect(media) {
+        return onSelectLight(media);
+      },
+      allowedTypes: ['image'],
+      value: lightimage.id,
+      render: function render(_ref3) {
+        var open = _ref3.open;
+        return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
+          isPrimary: true,
+          onClick: function onClick(event) {
+            event.stopPropagation();
+            open();
+          }
+        }, lightimage.id > 0 ? 'Edit Light Image' : 'Upload Light Image'));
       }
     })))), /*#__PURE__*/React.createElement("div", {
-      className: "rbt-card"
+      className: "rbt-card-section-card"
     }, /*#__PURE__*/React.createElement("div", {
       "class": "rbt-card-image"
-    }, image.id && /*#__PURE__*/React.createElement("div", {
-      className: "imgwrap"
-    }, /*#__PURE__*/React.createElement("img", {
-      className: "bm-module-img",
-      key: image.id,
-      src: image.url,
-      srcset: renderSrcSet(image, ['medium', 'large']),
-      alt: image.alt ? image.alt : image.caption
-    }))), /*#__PURE__*/React.createElement("div", {
+    }, darkimage && darkimage.id && /*#__PURE__*/React.createElement("div", {
+      className: "imgwrap",
+      style: {
+        backgroundImage: "url(" + darkimage.url + ")"
+      },
+      "data-image-light": lightimage.url,
+      "data-image-dark": darkimage.url
+    })), /*#__PURE__*/React.createElement("div", {
       "class": "card-text"
     }, /*#__PURE__*/React.createElement(RichText, {
       tagName: "h3",
@@ -222,9 +247,10 @@ registerBlockType('rbt/card-section-card', {
       placeholder: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
     }))))];
   },
-  save: function save(_ref3) {
-    var attributes = _ref3.attributes;
-    var image = attributes.image,
+  save: function save(_ref4) {
+    var attributes = _ref4.attributes;
+    var darkimage = attributes.darkimage,
+      lightimage = attributes.lightimage,
       title = attributes.title,
       text = attributes.text,
       ctatype = attributes.ctatype,
@@ -243,15 +269,14 @@ registerBlockType('rbt/card-section-card', {
       className: "rbt-card-section-card"
     }, /*#__PURE__*/React.createElement("div", {
       "class": "rbt-card-image"
-    }, image.id && /*#__PURE__*/React.createElement("div", {
-      className: "imgwrap"
-    }, /*#__PURE__*/React.createElement("img", {
-      className: "bm-module-img",
-      key: image.id,
-      src: image.url,
-      srcset: renderSrcSet(image, ['medium', 'large']),
-      alt: image.alt ? image.alt : image.caption
-    }))), /*#__PURE__*/React.createElement("div", {
+    }, darkimage && darkimage.id && /*#__PURE__*/React.createElement("div", {
+      className: "imgwrap",
+      style: {
+        backgroundImage: "url(" + darkimage.url + ")"
+      },
+      "data-image-light": lightimage.url,
+      "data-image-dark": darkimage.url
+    })), /*#__PURE__*/React.createElement("div", {
       className: "rbt-card-info"
     }, /*#__PURE__*/React.createElement(RichText.Content, {
       tagName: "h3",

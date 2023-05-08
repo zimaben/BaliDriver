@@ -7,6 +7,55 @@
 @import './components/buttons';
 @import './components/links';
 @import './components/forms';
+@import './components/spinner';
 // #nav
 @import './components/navigation';
 
+/* CHECKOUT */
+.site-main.checkout{
+    .woocommerce-order{
+        display:flex;
+        flex-wrap:wrap;
+        h2{
+            margin-bottom:1.5rem;       
+        }  
+        .woocommerce-notice{
+            width:100%;
+        }
+        .woocommerce-order-overview{
+            width:50%;
+            margin: 3rem 0;
+        }
+        .woocommerce-order-details{
+            width:50%;
+            margin: 3rem 0;
+            .woocommerce-table{
+                width: 100%;
+                padding-right: 40px;
+                text-align: left;
+                margin: 0;
+            }
+        }
+        .woocommerce-customer-details{
+            width:50%;
+            margin: 3rem 0;
+        }
+    }
+}
+@media screen and (max-width:756px){
+    .site-main.checkout{
+        .woocommerce-order{
+ 
+            .woocommerce-order-overview{
+                width:100%;
+            }
+            .woocommerce-order-details{
+                width:100%;
+
+            }
+            .woocommerce-customer-details{
+                width:100%;
+            }
+        }
+    }
+}

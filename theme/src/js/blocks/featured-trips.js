@@ -137,7 +137,6 @@ registerBlockType('rbt/featured-trips', {
                     expandAdder: !expandAdder
                 });
             } else {
-                console.log( pageobject._embedded )
                 const sizes = pageobject._embedded.hasOwnProperty('wp:featuredmedia') ? pageobject._embedded['wp:featuredmedia'][0].media_details.sizes : false;
                 if(sizes){
                     setAttributes({
@@ -231,10 +230,13 @@ registerBlockType('rbt/featured-trips', {
                     {
                         selectedTrips.map( trip => (
                             
-                            <div className="trip-card">{console.log(trip)}
+                            <div className="trip-card">{ /*console.log(trip) */}
                                 <div className="trip-img">
                                     {(trip.featuredImage !== 0) &&
                                         <img className="trip-img-tag" src={trip.featuredImage.medium.source_url} />
+                                    }
+                                    {
+
                                     }
                                 </div>
                                 <div className="trip-details">

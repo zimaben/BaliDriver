@@ -105,7 +105,8 @@ var _wp$blockEditor = wp.blockEditor,
   InnerBlocks = _wp$blockEditor.InnerBlocks;
 var _wp$components = wp.components,
   ColorPicker = _wp$components.ColorPicker,
-  ToggleControl = _wp$components.ToggleControl;
+  ToggleControl = _wp$components.ToggleControl,
+  TextControl = _wp$components.TextControl;
 var ALLOWED = ['rbt/carousel-slide'];
 registerBlockType('rbt/carousel-slider', {
   title: 'Form With Slides',
@@ -146,6 +147,10 @@ registerBlockType('rbt/carousel-slider', {
     innerBlockLength: {
       type: 'number',
       "default": 0
+    },
+    scrollLink: {
+      type: 'string',
+      "default": null
     }
   },
   edit: function edit(_ref) {
@@ -157,7 +162,8 @@ registerBlockType('rbt/carousel-slider', {
       direction = attributes.direction,
       innerBlockLength = attributes.innerBlockLength,
       isstripe = attributes.isstripe,
-      stripe = attributes.stripe;
+      stripe = attributes.stripe,
+      scrollLink = attributes.scrollLink;
     var parentBlock = wp.data.select('core/editor').getBlocksByClientId(clientId)[0];
     var childBlocks = parentBlock.innerBlocks;
 
@@ -180,6 +186,11 @@ registerBlockType('rbt/carousel-slider', {
         title: newtitle
       });
     }
+    function onUpdateScrollLink(newtext) {
+      setAttributes({
+        scrollLink: newtext
+      });
+    }
     function renderIndicators() {
       var counter = innerBlockLength;
       var markup = '';
@@ -200,6 +211,11 @@ registerBlockType('rbt/carousel-slider', {
       help: direction ? 'Image Right' : 'Image Left',
       checked: direction,
       onChange: onChangeDirection
+    }), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Add a Scroll Link?")), /*#__PURE__*/React.createElement("p", null, "(No # character please)"), /*#__PURE__*/React.createElement(TextControl, {
+      label: "Scroll Link",
+      value: scrollLink,
+      onChange: onUpdateScrollLink,
+      placeholder: "scroll-here"
     })), /*#__PURE__*/React.createElement("div", {
       className: "rbt-carousel",
       "data-process": "CarouselControls"
@@ -379,7 +395,8 @@ registerBlockType('rbt/carousel-slider', {
       direction = attributes.direction,
       innerBlockLength = attributes.innerBlockLength,
       isstripe = attributes.isstripe,
-      stripe = attributes.stripe;
+      stripe = attributes.stripe,
+      scrollLink = attributes.scrollLink;
     function renderIndicators() {
       var counter = innerBlockLength;
       var markup = '';
@@ -398,7 +415,9 @@ registerBlockType('rbt/carousel-slider', {
     return /*#__PURE__*/React.createElement("div", {
       className: "rbt-carousel",
       "data-process": "CarouselControls"
-    }, /*#__PURE__*/React.createElement("div", {
+    }, scrollLink && /*#__PURE__*/React.createElement("a", {
+      id: scrollLink
+    }), /*#__PURE__*/React.createElement("div", {
       className: "rbt-carousel-background " + direction
     }, isstripe && /*#__PURE__*/React.createElement("span", {
       className: "rbt-carousel-stripe",
@@ -453,14 +472,50 @@ registerBlockType('rbt/carousel-slider', {
     }, "Day Trip")))), /*#__PURE__*/React.createElement("div", {
       className: "form-entry normal"
     }, /*#__PURE__*/React.createElement("label", {
-      "for": "name-airport"
+      "for": "client_name"
     }, "My Name:"), /*#__PURE__*/React.createElement("input", {
       type: "text",
-      name: "name-airport",
-      id: "name-airport",
+      name: "client_name",
+      id: "client_name",
       value: "",
       "data-required": "true"
     }), /*#__PURE__*/React.createElement("label", {
+      "for": "client_email"
+    }, "My Email:"), /*#__PURE__*/React.createElement("input", {
+      type: "text",
+      name: "client_email",
+      id: "client_email",
+      value: "",
+      "data-required": "true"
+    }), /*#__PURE__*/React.createElement("label", {
+      "for": "client_phone"
+    }, "My Phone:"), /*#__PURE__*/React.createElement("input", {
+      type: "text",
+      name: "client_phone",
+      id: "client_phone",
+      value: "",
+      "data-required": "true"
+    }), /*#__PURE__*/React.createElement("section", {
+      className: "form-section"
+    }, /*#__PURE__*/React.createElement("h4", null, "I would rather be reached:"), /*#__PURE__*/React.createElement("div", {
+      className: "switchgroup"
+    }, /*#__PURE__*/React.createElement("label", {
+      "for": "prefer_email",
+      className: "service-type section",
+      "data-show-on": "0"
+    }, "By Phone"), /*#__PURE__*/React.createElement("label", {
+      className: "switch"
+    }, /*#__PURE__*/React.createElement("input", {
+      type: "checkbox",
+      name: "prefer_email",
+      checked: "checked"
+    }), /*#__PURE__*/React.createElement("span", {
+      "class": "slider"
+    })), /*#__PURE__*/React.createElement("label", {
+      "for": "prefer_email",
+      className: "service-type section active",
+      "data-show-on": "1"
+    }, "By Email"))), /*#__PURE__*/React.createElement("label", {
       "for": "pickupdate"
     }, "Pickup date:"), /*#__PURE__*/React.createElement("input", {
       type: "text",
@@ -476,7 +531,7 @@ registerBlockType('rbt/carousel-slider', {
     }, /*#__PURE__*/React.createElement("h4", null, "Service Type:"), /*#__PURE__*/React.createElement("div", {
       className: "switchgroup"
     }, /*#__PURE__*/React.createElement("label", {
-      "for": "is_airport",
+      "for": "from_to",
       className: "service-type section",
       "data-show-on": "0"
     }, "To Airport"), /*#__PURE__*/React.createElement("label", {
@@ -488,15 +543,15 @@ registerBlockType('rbt/carousel-slider', {
     }), /*#__PURE__*/React.createElement("span", {
       "class": "slider"
     })), /*#__PURE__*/React.createElement("label", {
-      "for": "is_airport",
+      "for": "from_to",
       className: "service-type section active",
       "data-show-on": "1"
     }, "From Airport")), /*#__PURE__*/React.createElement("label", {
       "for": "radio-to"
     }, "My Hotel or Address:"), /*#__PURE__*/React.createElement("input", {
       type: "text",
-      name: "airport-fromto",
-      id: "airport-address",
+      name: "tofrom_airport_address",
+      id: "tofrom_airport_address",
       value: "",
       "data-required": "true"
     }), /*#__PURE__*/React.createElement("label", {
@@ -506,7 +561,7 @@ registerBlockType('rbt/carousel-slider', {
       name: "flightnumber",
       id: "flightnumber",
       value: "",
-      placeholder: "including your flight number helps us help you"
+      placeholder: "(optional) This helps us keep up with delays or changes"
     })), /*#__PURE__*/React.createElement("section", {
       className: "form-section conditional",
       "data-depends-on": "service-type",
@@ -516,18 +571,18 @@ registerBlockType('rbt/carousel-slider', {
       "data-depends-on": "radio-from",
       "data-show-on": "address"
     }, /*#__PURE__*/React.createElement("label", {
-      "for": "startaddress"
+      "for": "pickup_address"
     }, "My Hotel or Address:"), /*#__PURE__*/React.createElement("input", {
       type: "text",
-      name: "daytrip-startaddress",
-      id: "daytrip-startaddress",
+      name: "pickup_address",
+      id: "pickup_address",
       value: "",
       "data-required": "true"
     })), /*#__PURE__*/React.createElement("h4", null, "How Long:"), /*#__PURE__*/React.createElement("label", {
       "for": "select-service"
     }, "Select Dropdown Choice:"), /*#__PURE__*/React.createElement("select", {
-      name: "select-choice",
-      id: "select-choice"
+      name: "select_service",
+      id: "select_service"
     }, /*#__PURE__*/React.createElement("option", {
       value: "single-ride"
     }, "Quick Ride (under 2 hours)"), /*#__PURE__*/React.createElement("option", {
@@ -537,7 +592,25 @@ registerBlockType('rbt/carousel-slider', {
       value: "full-day"
     }, "Full Day (4 - 8 hours)"), /*#__PURE__*/React.createElement("option", {
       value: "all-day"
-    }, "All Day (8+ hours)")))), /*#__PURE__*/React.createElement("div", {
+    }, "All Day (8+ hours)")), /*#__PURE__*/React.createElement("label", {
+      "for": "select_service_days"
+    }, "More than one day?"), /*#__PURE__*/React.createElement("select", {
+      name: "select_service_days",
+      id: "select_service_days"
+    }, /*#__PURE__*/React.createElement("option", {
+      value: "1"
+    }, "1 day"), /*#__PURE__*/React.createElement("option", {
+      value: "2"
+    }, "2 days"), /*#__PURE__*/React.createElement("option", {
+      value: "3"
+    }, "3 days"), /*#__PURE__*/React.createElement("option", {
+      value: "4+"
+    }, "More than 3 days"))), /*#__PURE__*/React.createElement("div", {
+      id: "booking-form-response"
+    }), /*#__PURE__*/React.createElement("button", {
+      className: "btn button submit",
+      onclick: "submitBookingForm(event)"
+    }, "Submit")), /*#__PURE__*/React.createElement("div", {
       className: "control-indicators"
     }, renderIndicators())), /*#__PURE__*/React.createElement("div", {
       className: "rbt-carousel-right"

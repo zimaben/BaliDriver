@@ -2,7 +2,7 @@ import * as global from './frontend/global.js';
 import { setUpCanvas, setUpSlide } from './frontend/animated-canvas.js';
 import { setUpCarousel, doBookingFormInit } from './frontend/carousel.js';
 import { doCurrencyPicker } from './frontend/currency-picker.js';
-import { setScrollReveal, doScrollReveal } from './frontend/scroll.js';
+import { scrollSVG, removeScrollSVG, addObserver } from './frontend/scroll.js';
 
 window.addEventListener('DOMContentLoaded', (event) => {
     
@@ -29,8 +29,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
             case "doCurrencyPicker" : 
                 doCurrencyPicker(item);
                 break;
-            case "doScrollReveal" : 
-                setScrollReveal(item);
+            case "scrollTrigger" : 
+                let functionname = item.getAttribute('data-scroll-function');
+                switch (functionname){
+                    case "scrollSVG" : 
+                        //add scrolltrigger (intersection observer)
+                        console.log("adding observer");
+                        addObserver(item, {
+                            cb: scrollSVG,
+                            unbind: removeScrollSVG
+                        });
+                    break;
+                    default: break;
+                }
                 break;
             default: 
                 //she doesn't even go here

@@ -3,7 +3,7 @@ import theme_icons from './icons.js';
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks; 
 const {RichText, InspectorControls, InnerBlocks } = wp.blockEditor; 
-const { ColorPicker, ToggleControl } = wp.components;
+const { ColorPicker, ToggleControl, TextControl } = wp.components;
 const ALLOWED = ['rbt/carousel-slide'];
 
 
@@ -45,12 +45,16 @@ registerBlockType('rbt/carousel-slider', {
         innerBlockLength:{
             type: 'number',
             default: 0,
+        },
+        scrollLink: {
+            type: 'string',
+            default:null
         }
 
     },   
 
 	edit({clientId, attributes, setAttributes}){
-		const { title, text, direction, innerBlockLength, isstripe, stripe } = attributes;
+		const { title, text, direction, innerBlockLength, isstripe, stripe, scrollLink } = attributes;
 
         const parentBlock = wp.data.select( 'core/editor' ).getBlocksByClientId( clientId )[ 0 ];
         const childBlocks = parentBlock.innerBlocks;
@@ -66,6 +70,9 @@ registerBlockType('rbt/carousel-slider', {
         }
         function onTitleChange(newtitle){
             setAttributes({title:newtitle});
+        }
+        function onUpdateScrollLink(newtext){
+            setAttributes({scrollLink:newtext});
         }
         function renderIndicators(){
             let counter = innerBlockLength;
@@ -88,6 +95,14 @@ registerBlockType('rbt/carousel-slider', {
                     help={ direction ? 'Image Right' : 'Image Left' }
                     checked={direction}
                     onChange={onChangeDirection}
+                />
+                <p><strong>Add a Scroll Link?</strong></p>
+                <p>(No # character please)</p>
+                <TextControl 
+                    label="Scroll Link"
+                    value={scrollLink}
+                    onChange={onUpdateScrollLink}
+                    placeholder="scroll-here"
                 />
             </InspectorControls>,
             <div className="rbt-carousel" data-process="CarouselControls">
@@ -194,7 +209,7 @@ registerBlockType('rbt/carousel-slider', {
         ]);
 	},
 	save({attributes}) {
-		const { title, text, direction, innerBlockLength, isstripe, stripe } = attributes;
+		const { title, text, direction, innerBlockLength, isstripe, stripe, scrollLink } = attributes;
         function renderIndicators(){
             let counter = innerBlockLength;
             let markup = '';
@@ -207,6 +222,7 @@ registerBlockType('rbt/carousel-slider', {
         }
 		return (
             <div className="rbt-carousel" data-process="CarouselControls">
+                {scrollLink && <a id={scrollLink}></a> }
                 <div className={"rbt-carousel-background " + direction }>
                     { isstripe && <span className="rbt-carousel-stripe" style={{backgroundColor:stripe}} ></span> }
                     <div className="rbt-carousel-control left">
@@ -247,43 +263,68 @@ registerBlockType('rbt/carousel-slider', {
 
                             </div>
                             <div className="form-entry normal">
-                                <label for="name-airport">My Name:</label>
-                                <input type="text" name="name-airport" id="name-airport" value="" data-required="true"/>
+                                <label for="client_name">My Name:</label>
+                                <input type="text" name="client_name" id="client_name" value="" data-required="true"/>
+                                <label for="client_email">My Email:</label>
+                                <input type="text" name="client_email" id="client_email" value="" data-required="true"/>
+                                <label for="client_phone">My Phone:</label>
+                                <input type="text" name="client_phone" id="client_phone" value="" data-required="true"/>
+                                <section className="form-section">
+                                    <h4>I would rather be reached:</h4>
+                                    <div className="switchgroup">
+                                        <label for="prefer_email" className="service-type section" data-show-on="0">By Phone</label>
+                                        <label className="switch">
+                                            <input type="checkbox" name="prefer_email" checked="checked"/>
+                                            <span class="slider"></span>
+                                        </label>
+                                        <label for="prefer_email" className="service-type section active" data-show-on="1">By Email</label>
+                                    </div>
+                                </section>
                                 <label for="pickupdate">Pickup date:</label>
                                 <input type="text" name="pickupdate" id="pickupdate" value="" tabindex="3" placeholder="Select Date.." data-input/>
                             </div>
                             <section className="form-section conditional active" data-show-on="1">
                             <h4>Service Type:</h4>
                                 <div className="switchgroup">
-                                    <label for="is_airport" className="service-type section" data-show-on="0">To Airport</label>
+                                    <label for="from_to" className="service-type section" data-show-on="0">To Airport</label>
                                     <label className="switch">
                                         <input type="checkbox" name="from_to" checked="checked"/>
                                         <span class="slider"></span>
                                     </label>
-                                    <label for="is_airport" className="service-type section active" data-show-on="1">From Airport</label>
+                                    <label for="from_to" className="service-type section active" data-show-on="1">From Airport</label>
                                 </div>
 
                                 <label for="radio-to">My Hotel or Address:</label>
-                                <input type="text" name="airport-fromto" id="airport-address" value="" data-required="true"/>
+                                <input type="text" name="tofrom_airport_address" id="tofrom_airport_address" value="" data-required="true"/>
                                 <label for="radio-to">Flight Number:</label>
-                                <input type="text" name="flightnumber" id="flightnumber" value="" placeholder="including your flight number helps us help you"/>
+                                <input type="text" name="flightnumber" id="flightnumber" value="" placeholder="(optional) This helps us keep up with delays or changes"/>
                             </section>
                             <section className="form-section conditional" data-depends-on="service-type" data-show-on="0">
                                 <h4>Pick Me Up From:</h4>
                                 <div className="form-entry" data-depends-on="radio-from" data-show-on="address">
-                                    <label for="startaddress">My Hotel or Address:</label>
-                                    <input type="text" name="daytrip-startaddress" id="daytrip-startaddress" value="" data-required="true"/>
+                                    <label for="pickup_address">My Hotel or Address:</label>
+                                    <input type="text" name="pickup_address" id="pickup_address" value="" data-required="true"/>
                                 </div>
 
                                 <h4>How Long:</h4>
                                 <label for="select-service">Select Dropdown Choice:</label>
-                                <select name="select-choice" id="select-choice">
+                                <select name="select_service" id="select_service">
                                     <option value="single-ride">Quick Ride (under 2 hours)</option>
                                     <option selected="selected" value="half-day">Half Day (4 hours)</option>
                                     <option value="full-day">Full Day (4 - 8 hours)</option>
                                     <option value="all-day">All Day (8+ hours)</option>
                                 </select>
+                                <label for="select_service_days">More than one day?</label>
+                                <select name="select_service_days" id="select_service_days">
+                                    <option value="1">1 day</option>
+                                    <option value="2">2 days</option>
+                                    <option value="3">3 days</option>
+                                    <option value="4+">More than 3 days</option>
+                                </select>
                             </section>
+                            <div id="booking-form-response"></div>
+                            <button className="btn button submit" onclick="submitBookingForm(event)">Submit</button>
+
                         </form>
                         <div className="control-indicators">
                             { renderIndicators() }

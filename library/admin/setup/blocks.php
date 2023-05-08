@@ -65,9 +65,9 @@ class Blocks {
     public function registerBlock( $handle, $dependencies = array('wp-blocks', 'wp-editor', 'wp-i18n'), $callback = null ){
         #if you don't register through wp_enqueue_scripts hook you get a warning but it doesn't work 
         #this double-enqueue bypasses the warning but will probably be fixed in the future
-        $v =Config::MODE == "development" ? (string) bin2hex(random_bytes(2)) : Config::VERSION;
+        $v = Config::MODE == "development" ? (string) bin2hex(random_bytes(2)) : Config::VERSION;
 
-        \add_action('enqueue_block_assets', function() use ($handle, $dependencies){
+        \add_action('enqueue_block_assets', function() use ($handle, $dependencies, $v){
             \wp_register_script(
                 $handle, 
                 \get_template_directory_uri() . '/theme/dist/js/blocks/' . $handle . '.js', 

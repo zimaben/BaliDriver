@@ -81,6 +81,7 @@ canvas#placeholder-0 {
 /* POST TYPE Page header filter texture options */
 .aspectRatioPlaceholder{
     position:relative;
+    overflow:hidden;
     .filters{
         width: 100%;
         height: 100%;
@@ -88,6 +89,8 @@ canvas#placeholder-0 {
         content: '';
         z-index: 0;
         position: absolute;
+        top:0;
+        left:0;
         &.filmgrain{
             &:after{
                 position: absolute;

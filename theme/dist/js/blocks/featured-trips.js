@@ -286,7 +286,6 @@ registerBlockType('rbt/featured-trips', {
           expandAdder: !expandAdder
         });
       } else {
-        console.log(pageobject._embedded);
         var sizes = pageobject._embedded.hasOwnProperty('wp:featuredmedia') ? pageobject._embedded['wp:featuredmedia'][0].media_details.sizes : false;
         if (sizes) {
           setAttributes({
@@ -380,7 +379,7 @@ registerBlockType('rbt/featured-trips', {
       }, selectedTrips.map(function (trip) {
         return /*#__PURE__*/React.createElement("div", {
           className: "trip-card"
-        }, console.log(trip), /*#__PURE__*/React.createElement("div", {
+        }, /*#__PURE__*/React.createElement("div", {
           className: "trip-img"
         }, trip.featuredImage !== 0 && /*#__PURE__*/React.createElement("img", {
           className: "trip-img-tag",

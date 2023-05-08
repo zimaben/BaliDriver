@@ -76,6 +76,13 @@ class AddFields extends Theme {
             ))
         ));
 
+        Container::make( 'post_meta', 'Booking Fields' )
+        ->show_on_post_type(array('product'))
+        ->add_fields( array(
+            Field::make( 'text', 'service_duration', 'Service Duration (in minutes)' )
+            ->set_help_text('Ex: "60" for one hour'),
+        ));
+
 
     }
     public static function add_options_menu_cf(){

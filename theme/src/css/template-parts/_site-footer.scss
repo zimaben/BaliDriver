@@ -6,7 +6,7 @@ footer.site-footer{
     padding-top:$space * .75px;
     padding-bottom:$space * 1px;
     justify-content:space-between;
-
+    color: #54555a;
     div.prefooter{
         padding-left:$edgeclamp;
         padding-right:$edgeclamp;
@@ -24,8 +24,20 @@ footer.site-footer{
         flex:1;
         padding:1%;
         ul.menu-wrapper{
-            list-style:none;        
+            list-style: none;
+            display: flex;
+            gap: 4vw;
+            height: 100%;
+            align-items: center;
+            margin: 0;
+            justify-content: center; 
+               
         }
+    }
+    .footer-text{
+        margin-top: 1vw;
+        font-size: 13px;
+        line-height: 20px;
     }
     
 }
@@ -40,6 +52,9 @@ footer.site-footer{
         list-style:none;
         display:inline-flex;
         gap:$gap * .5px;
+        padding: 0;
+        margin: 10px auto;
+        color: #54555a;
     }
     ul.menu-wrapper{
         list-style:none;

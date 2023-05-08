@@ -311,7 +311,7 @@ endif;
     <ul class="footerbottom">
         <?php 
         if( \get_theme_mod('footer_bottom_add_copyright')){
-            echo '<li>Copyright ©' . Date('Y') . ' Starter</li>';
+            echo '<li>Copyright ©' . Date('Y') . ' Daily Drivers Bali</li>';
             # bloginfo( 'name' );
         }
         
@@ -328,6 +328,7 @@ endif;
             }
         }
         echo '</ul>';
+        
         #Check for Menus
         if(isset(Config::FOOTER['bottom']) && is_array(Config::FOOTER['bottom']) ){
             foreach(Config::FOOTER['bottom'] as $section ){

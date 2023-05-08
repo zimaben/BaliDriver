@@ -1,6 +1,7 @@
 import { menuClick, doMenuClicks, mobileExpand, accordionClick, doAccordionClicks } from './frontend/global.js';
 import { do_generic_post_category, do_post_cat_pagination } from './frontend/query.js';
 import * as header from './frontend/progressive-header.js';
+import { rbtSpinner, removeSpinner } from './frontend/global.js';
 
 
 const onload_data_fetch = () => {
@@ -53,6 +54,47 @@ const postit = async(location, senddata ) => {
       console.log(e);
       return e;
   } 
+}
+const submitBookingForm = async (e) => {
+  e.preventDefault();
+  let submit_button = e.target;
+  let form = e.target.closest('FORM');
+  let url = theme_vars.ajaxurl + '?action=submit_booking_form';
+  let nonce = theme_vars.nonce;
+  let inputs = form.querySelectorAll('input, textarea, select');
+  let response_target = document.getElementById('booking-form-response');
+  let senddata = Array.from(inputs).map( (input) => {
+    return input.name + '=' + encodeURIComponent(input.value);
+  }).join('&');
+  senddata+= '&nonce=' + nonce;
+  console.log(senddata)
+  submit_button.innerHTML = "Sending...";
+  submit_button.style.pointerEvents = 'none';
+ // rbtSpinner(submit_button);
+  postit(url, senddata).then( (r)=>{
+      if(r.status === 200){
+          console.log(r);
+          submit_button.innerHTML = "Submit";
+          submit_button.style.pointerEvents = 'auto';
+          if(!r.payload && r.message) {
+            response_target.innerHTML = r.message;
+            return false;
+          }
+          try {
+            new URL(r.payload);
+            window.location.replace(r.payload);
+          } catch (err) {
+            console.log(err);
+            response_target.innerHTML = r.payload;
+          }
+
+      } else {
+          console.log(r);
+          submit_button.innerHTML = "Submit";
+          submit_button.style.pointerEvents = 'auto';
+          response_target.innerHTML = r.response;
+      }
+  });
 }
 
 const setupModals = () => {
@@ -113,3 +155,6 @@ window.doProgressiveHeader = header.doProgressiveHeader;
 window.do_generic_post_category = do_generic_post_category;
 window.do_post_cat_pagination = do_post_cat_pagination;
 //window.doMobileMenuClick = doMobileMenuClick;
+window.rbtSpinner = rbtSpinner;
+window.endSpinner = removeSpinner;
+window.submitBookingForm = submitBookingForm;

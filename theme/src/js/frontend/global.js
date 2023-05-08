@@ -52,7 +52,37 @@ export const doDismiss = (event) => {
       }
     } 
   }
-  
+  export const removeSpinner = (target) => {
+    let spinner = target.querySelector('.rbt-spinner');
+    if(spinner) spinner.remove();
+  }
+  export const rbtSpinner = (target) => {
+    let markup = 
+    `<div class="lds-spinner">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>`;
+    let div = document.createElement('DIV');
+    div.classList.add('rbt-spinner');
+    div.innerHTML = markup;
+    console.log(typeof target);
+    if(typeof target === "string"){
+       let targetEl = document.getElementById(target);
+       if(!targetEl) targetEl = document.querySelector(target);
+       if(targetEl) target = targetEl;
+    }
+    if(typeof target === "object") target.appendChild(div);
+  }
   export const menuClick = (event) => {
     let li = event.target.tagName === "LI" ? event.target : event.target.closest("LI");
     let menuitems = document.getElementsByClassName('menu-item');
@@ -182,40 +212,4 @@ function getCoords(elem) { // crossbrowser version
   var left = box.left + scrollLeft - clientLeft;
 
   return { top: Math.round(top), left: Math.round(left), height: elem.clientHeight };
-}
-
-
-/*
-takes element and function as arguments. If no function is included it will add an "active" class
-*/
-export const addObserver = (el, options = {} ) => {
-  //https://css-tricks.com/scroll-triggered-animation-vanilla-javascript/
-  // Check if `IntersectionObserver` is supported
-  if(!('IntersectionObserver' in window)) {
-      // Simple fallback
-      // The animation/callback will be called immediately so
-      // the scroll animation doesn't happen on unsupported browsers
-      if(options.cb){
-      options.cb(el)
-      } else{
-      entry.target.classList.add('active')
-      }
-      // We don't need to execute the rest of the code
-      return
-  }
-  let observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-
-          if(entry.isIntersecting) {
-
-              if(options.cb) {
-                  options.cb(el)
-              } else {
-                  entry.target.classList.add('active')
-              }
-              observer.unobserve(entry.target)
-          }
-      })
-  }, options)
-  observer.observe(el)
 }

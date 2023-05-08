@@ -207,7 +207,10 @@ var _wp$blockEditor = wp.blockEditor,
 var _wp$components = wp.components,
   ColorPicker = _wp$components.ColorPicker,
   PanelBody = _wp$components.PanelBody,
-  ToggleControl = _wp$components.ToggleControl;
+  ToggleControl = _wp$components.ToggleControl,
+  SelectControl = _wp$components.SelectControl,
+  Button = _wp$components.Button,
+  TextControl = _wp$components.TextControl;
 var ALLOWED = ['rbt/testimonial-card'];
 registerBlockType('rbt/testimonials', {
   title: 'Testimonials',
@@ -223,14 +226,28 @@ registerBlockType('rbt/testimonials', {
       type: 'string',
       "default": ''
     },
-    isGradient: {
-      type: 'Boolean',
+    /* Background */
+    bgType: {
+      type: 'string',
+      "default": 'None'
+    },
+    isLinearGradient: {
+      type: 'boolean',
       "default": true
     },
-    backgroundColor: {
+    gradientArg: {
       type: 'string',
-      "default": ''
+      "default": 'to left'
     },
+    bgColor: {
+      type: 'string',
+      "default": '#000000'
+    },
+    bgColorTwo: {
+      type: 'string',
+      "default": 'transparent'
+    },
+    /* innerBlocks Helper */
     innerBlockLength: {
       type: 'number',
       "default": 0
@@ -242,9 +259,11 @@ registerBlockType('rbt/testimonials', {
       setAttributes = _ref.setAttributes;
     var title = attributes.title,
       text = attributes.text,
-      direction = attributes.direction,
-      isGradient = attributes.isGradient,
-      backgroundColor = attributes.backgroundColor,
+      isLinearGradient = attributes.isLinearGradient,
+      gradientArg = attributes.gradientArg,
+      bgType = attributes.bgType,
+      bgColor = attributes.bgColor,
+      bgColorTwo = attributes.bgColorTwo,
       innerBlockLength = attributes.innerBlockLength;
     var parentBlock = wp.data.select('core/editor').getBlocksByClientId(clientId)[0];
     var childBlocks = parentBlock.innerBlocks;
@@ -263,12 +282,144 @@ registerBlockType('rbt/testimonials', {
         title: newtitle
       });
     }
-    function onChangeDirection() {
+    function setColorOne(newcolor) {
       setAttributes({
-        direction: !direction
+        bgColor: newcolor
       });
     }
-    return /*#__PURE__*/React.createElement("div", {
+    function setColorTwo(newcolor) {
+      setAttributes({
+        bgColorTwo: newcolor
+      });
+    }
+    function onSelectMedia(media) {
+      setAttributes({
+        image: media
+      });
+    }
+    function RenderBackgroundDetails(_ref2) {
+      var type = _ref2.type;
+      switch (type) {
+        case "Image":
+          return /*#__PURE__*/React.createElement(MediaUploadCheck, null, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Upload Image:")), /*#__PURE__*/React.createElement(MediaUpload, {
+            label: "Image",
+            onSelect: function onSelect(media) {
+              onSelectMedia(media);
+            },
+            allowedTypes: ['image'],
+            accept: ["image/*", "image/svg"],
+            value: image.id,
+            render: function render(_ref3) {
+              var open = _ref3.open;
+              return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
+                isPrimary: true,
+                onClick: function onClick(event) {
+                  event.stopPropagation();
+                  open();
+                }
+              }, image.id > 0 ? 'Edit Image' : 'Upload Image'));
+            }
+          }));
+          break;
+        case "Color":
+          return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Background Color:")), /*#__PURE__*/React.createElement(ColorPicker, {
+            color: bgColor,
+            onChange: function onChange(color) {
+              return setColorOne(color);
+            },
+            enableAlpha: true
+          }));
+          break;
+        case "Gradient":
+          return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Gradient Style")), /*#__PURE__*/React.createElement(ToggleControl, {
+            help: isLinearGradient ? 'Linear' : 'Radial',
+            checked: isLinearGradient,
+            onChange: function onChange() {
+              setAttributes({
+                isLinearGradient: !isLinearGradient
+              });
+            }
+          }), isLinearGradient ? /*#__PURE__*/React.createElement(TextControl, {
+            label: "(optional) First Linear Gradient Argument (Ex: 'to top, 45deg, etc.')",
+            placeholder: "to left",
+            value: gradientArg,
+            onChange: function onChange(text) {
+              setAttributes({
+                gradientArg: text
+              });
+            }
+          }) : null, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Gradient Start Color:")), /*#__PURE__*/React.createElement(ColorPicker, {
+            color: bgColor,
+            onChange: function onChange(color) {
+              return setColorOne(color);
+            },
+            enableAlpha: true
+          }), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Gradient End Color:")), /*#__PURE__*/React.createElement(ColorPicker, {
+            color: bgColorTwo,
+            onChange: function onChange(color) {
+              return setColorTwo(color);
+            },
+            enableAlpha: true
+          }));
+          break;
+      }
+    }
+    function renderStyle() {
+      switch (bgType) {
+        case "None":
+          return null;
+          break;
+        case "Image":
+          return {
+            backgroundImage: 'url(' + image.url + ')'
+          };
+          break;
+        case "Color":
+          return {
+            backgroundColor: bgColor
+          };
+          break;
+        case "Gradient":
+          if (isLinearGradient) {
+            var argOne = gradientArg ? gradientArg : 'to left';
+            return {
+              backgroundImage: 'linear-gradient(' + argOne + ', ' + bgColor + ', ' + bgColorTwo + ')'
+            };
+          } else {
+            var _argOne = gradientArg ? gradientArg : 'to left';
+            return {
+              backgroundImage: 'radial-gradient(' + bgColor + ', ' + bgColorTwo + ')'
+            };
+          }
+          break;
+      }
+    }
+    return [/*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
+      title: "Background"
+    }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Background Settings:")), /*#__PURE__*/React.createElement(SelectControl, {
+      label: "Background Type",
+      value: bgType,
+      onChange: function onChange(selected) {
+        setAttributes({
+          bgType: selected
+        });
+      },
+      options: [{
+        label: 'None',
+        value: 'None'
+      }, {
+        label: 'Image',
+        value: "Image"
+      }, {
+        label: 'Color',
+        value: 'Color'
+      }, {
+        label: 'Gradient',
+        value: 'Gradient'
+      }]
+    }), bgType === 'None' ? '' : /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Details")), bgType === 'None' ? '' : /*#__PURE__*/React.createElement(RenderBackgroundDetails, {
+      type: bgType
+    }))), /*#__PURE__*/React.createElement("div", {
       className: "rbt-testimonials"
     }, /*#__PURE__*/React.createElement(RichText, {
       tagName: "h2",
@@ -284,20 +435,55 @@ registerBlockType('rbt/testimonials', {
       placeholder: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
     }), /*#__PURE__*/React.createElement(InnerBlocks, {
       allowedBlocks: ALLOWED
-    }));
+    }))];
   },
-  save: function save(_ref2) {
-    var attributes = _ref2.attributes;
+  save: function save(_ref4) {
+    var attributes = _ref4.attributes;
     var title = attributes.title,
       text = attributes.text,
-      direction = attributes.direction,
-      isGradient = attributes.isGradient,
-      backgroundColor = attributes.backgroundColor,
+      isLinearGradient = attributes.isLinearGradient,
+      gradientArg = attributes.gradientArg,
+      bgType = attributes.bgType,
+      bgColor = attributes.bgColor,
+      bgColorTwo = attributes.bgColorTwo,
       innerBlockLength = attributes.innerBlockLength;
+    function renderStyle() {
+      switch (bgType) {
+        case "None":
+          return null;
+          break;
+        case "Image":
+          return {
+            backgroundImage: 'url(' + image.url + ')'
+          };
+          break;
+        case "Color":
+          return {
+            backgroundColor: bgColor
+          };
+          break;
+        case "Gradient":
+          if (isLinearGradient) {
+            var argOne = gradientArg ? gradientArg : 'to left';
+            return {
+              backgroundImage: 'linear-gradient(' + argOne + ', ' + bgColor + ', ' + bgColorTwo + ')'
+            };
+          } else {
+            var _argOne2 = gradientArg ? gradientArg : 'to left';
+            return {
+              backgroundImage: 'radial-gradient(' + bgColor + ', ' + bgColorTwo + ')'
+            };
+          }
+          break;
+      }
+    }
     return /*#__PURE__*/React.createElement("div", {
       className: "rbt-testimonials",
       "data-process": "doTestimonials"
     }, /*#__PURE__*/React.createElement("div", {
+      className: "underlay",
+      style: renderStyle()
+    }), /*#__PURE__*/React.createElement("div", {
       className: "layout"
     }, /*#__PURE__*/React.createElement("div", {
       className: "top"

@@ -12,7 +12,11 @@ registerBlockType('rbt/card-section-card', {
     category: 'friendlyrobot', 
     //attributes
     attributes: {
-        image: {
+        lightimage: {
+            type: 'object',
+            default: {},
+        },
+        darkimage: {
             type: 'object',
             default: {},
         },
@@ -40,7 +44,7 @@ registerBlockType('rbt/card-section-card', {
     },   
 
 	edit({attributes, setAttributes}){
-		const { image, title, text, ctatype, ctatarget, ctatext } = attributes;
+		const { darkimage, lightimage, title, text, ctatype, ctatarget, ctatext } = attributes;
 
         function onTextChange(newtext){
         	setAttributes({ text: newtext });
@@ -48,8 +52,11 @@ registerBlockType('rbt/card-section-card', {
         function onTitleChange(newtitle){
             setAttributes({title:newtitle});
         }
-        function onSelectMedia(newimage){
-            setAttributes({image: newimage})
+        function onSelectDark(newimage){
+            setAttributes({darkimage: newimage})
+        }
+        function onSelectLight(newimage){
+            setAttributes({lightimage: newimage})
         }
         function renderSrcSet(img, array){
             const rows = [];
@@ -67,13 +74,12 @@ registerBlockType('rbt/card-section-card', {
             <InspectorControls>
                 <PanelBody title="Card Image">
                     <MediaUploadCheck>
-                        <p><strong>Upload Image</strong></p>
+                        <p><strong>Dark/Light Images</strong></p>
                         <MediaUpload
                             label="Image"
-                            onSelect={ (media) => onSelectMedia(media) }
+                            onSelect={ (media) => onSelectDark(media) }
                             allowedTypes={ ['image'] }
-                            accept={["image/*", "image/svg"]}
-                            value={ image.id }
+                            value={ darkimage.id }
 
                             render={ ({open}) => {
                                 return (
@@ -85,7 +91,31 @@ registerBlockType('rbt/card-section-card', {
                                                 open();
                                             } }
                                         >
-                                            { image.id > 0 ? 'Edit Image': 'Upload Image'}
+                                            { darkimage.id > 0 ? 'Edit Dark Image': 'Upload Dark Image'}
+                                        </Button>
+                                    </>
+                                )
+                            } }
+                        />
+                    </MediaUploadCheck>
+                    <MediaUploadCheck>
+                    <MediaUpload
+                            label="Image"
+                            onSelect={ (media) => onSelectLight(media) }
+                            allowedTypes={ ['image'] }
+                            value={ lightimage.id }
+
+                            render={ ({open}) => {
+                                return (
+                                    <>
+                                        <Button
+                                            isPrimary={ true }
+                                            onClick={ (event) => {
+                                                event.stopPropagation();
+                                                open();
+                                            } }
+                                        >
+                                            { lightimage.id > 0 ? 'Edit Light Image': 'Upload Light Image'}
                                         </Button>
                                     </>
                                 )
@@ -94,17 +124,21 @@ registerBlockType('rbt/card-section-card', {
                     </MediaUploadCheck>
                 </PanelBody>
             </InspectorControls>,
-            <div className="rbt-card">
+            <div className="rbt-card-section-card">
                 <div class="rbt-card-image">
-                    { image.id && 
+                    { darkimage && darkimage.id && 
                         
-                        <div className="imgwrap">
-                            <img className="bm-module-img"   
+                        <div className="imgwrap" 
+                             style={{backgroundImage: "url(" + darkimage.url + ")"}}
+                             data-image-light={lightimage.url}
+                             data-image-dark={darkimage.url}
+                        >
+                            {/* <img className="bm-module-img"   
                                 key={ image.id }
                                 src={ image.url }
                                 srcset={renderSrcSet(image, ['medium', 'large'])}
                                 alt={ image.alt ? image.alt : image.caption }
-                            />
+                            /> */}
                         </div>
                         
                     }
@@ -133,7 +167,7 @@ registerBlockType('rbt/card-section-card', {
         ]);
 	},
 	save({attributes}) {
-		const { image, title, text, ctatype, ctatarget, ctatext } = attributes;
+		const { darkimage, lightimage, title, text, ctatype, ctatarget, ctatext } = attributes;
         function renderSrcSet(img, array){
             const rows = [];
             Object.keys(img.sizes).forEach(function(key, idx){
@@ -146,15 +180,19 @@ registerBlockType('rbt/card-section-card', {
 		return (
             <div className="rbt-card-section-card">
                 <div class="rbt-card-image">
-                    { image.id && 
+                    { darkimage && darkimage.id && 
                         
-                        <div className="imgwrap">
-                            <img className="bm-module-img"   
+                        <div className="imgwrap" 
+                        style={{backgroundImage: "url(" + darkimage.url + ")"}}
+                        data-image-light={lightimage.url}
+                        data-image-dark={darkimage.url}
+                        >
+                            {/* <img className="bm-module-img"   
                                 key={ image.id }
                                 src={ image.url }
                                 srcset={renderSrcSet(image, ['medium', 'large'])}
                                 alt={ image.alt ? image.alt : image.caption }
-                            />
+                            /> */}
                         </div>
                         
                     }

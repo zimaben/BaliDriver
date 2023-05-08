@@ -1,7 +1,32 @@
 .rbt-card-section {
+    background-image:url(/theme/assets/icons/map-background.svg);
+    background-size:102%;
+    background-repeat:no-repeat;
+    position:relative;
+    padding-top:80px;
+    padding-bottom:60px;
+    .underlay{
+        background:linear-gradient(to top, black 33%, transparent);
+        width:100%;
+        height:100%;
+        display:block;
+        position:absolute;
+        left:0;
+        top: 0;
+        svg{
+            position: absolute;
+            left: 10%;
+            top: 0;
+            width: 80%;
+        }
+    }
+    h2{
+        position:relative;
+    }
     .rbt-cardwrap{
         display: flex;
         gap: 3vw;
+        position:relative;
     }
 }
 
