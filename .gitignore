@@ -1,8 +1,7 @@
+.DS_Store
 node_modules
 *.zip
 *.sql
 *.log
 
-#the wp-content folder is the generated product of this automation
-#we keep it out of version control
-/wp-content
+
